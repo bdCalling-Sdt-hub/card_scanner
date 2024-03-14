@@ -1,9 +1,11 @@
-import 'package:dialogi_app/utils/app_colors.dart';
-import 'package:dialogi_app/utils/app_icons.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_icons.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField(
@@ -22,11 +24,11 @@ class CustomTextField extends StatefulWidget {
       this.validator,
       this.hintText,
       this.hintStyle,
-      this.fillColor = Colors.white,
+      this.fillColor = AppColors.primaryColor,
       this.suffixIcon,
       this.suffixIconColor,
       this.fieldBorderRadius = 8,
-      this.fieldBorderColor = const Color(0xffE7F0FD),
+      this.fieldBorderColor = AppColors.black_400,
       this.isPassword = false,
       this.isPrefixIcon = true,
       this.readOnly = false,
@@ -104,9 +106,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   padding: const EdgeInsets.only(
                       left: 16, right: 16, top: 16, bottom: 16),
                   child: SvgPicture.asset(
-                      obscureText ? AppIcons.eyeOff : AppIcons.eye,
-                      height: 22,
-                      width: 22),
+                      obscureText ? AppIcons.eyeOff : AppIcons.eyeOn, color: AppColors.black_400,
+                      height: obscureText ? 22 : 20,
+                      width: obscureText ? 22 : 20),
                 ),
               )
             : widget.suffixIcon,
