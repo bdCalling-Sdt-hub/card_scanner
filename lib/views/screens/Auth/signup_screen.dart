@@ -3,7 +3,7 @@ import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/Auth/forget_password_screen.dart';
+import 'package:card_scanner/views/screens/Auth/forgot_password_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
@@ -31,7 +31,9 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 60.h, width: Get.width),
+              SizedBox(height: 48.h, width: Get.width),
+
+              ///<<<============= Logo ======================>>>
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: SizedBox(
@@ -44,15 +46,12 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20.h,
+                height: 12.h,
               ),
               CustomText(
                 text: AppStrings.signUpNOw,
                 fontWeight: FontWeight.w600,
                 fontSize: 32,
-              ),
-              SizedBox(
-                height: 8.h,
               ),
               CustomText(
                 text: AppStrings.fillTheDetails,
@@ -61,8 +60,9 @@ class SignUpScreen extends StatelessWidget {
                 color: AppColors.black_400,
               ),
 
+              ///<<<=============== Social Account Login =====================>>>
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 72.w, vertical: 20.h),
+                padding: EdgeInsets.symmetric(horizontal: 72.w, vertical: 16.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -109,6 +109,36 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
 
+
+              ///<<<==================== Name Field ============================>>>
+
+              CustomTextField(
+                textEditingController: signUpController.nameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return AppStrings.enterFullName.tr;
+                  }
+                  else {
+                    return null;
+                  }
+                },
+                keyboardType: TextInputType.text,
+                textAlign: TextAlign.start,
+                hintText: AppStrings.name.tr,
+                hintStyle: GoogleFonts.prompt(
+                    fontSize: 14.h,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.black_300),
+                inputTextStyle: GoogleFonts.prompt(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16.h,
+                    color: AppColors.black_500),
+                fieldBorderColor: AppColors.black_500,
+                fieldBorderRadius: 8,
+                isPrefixIcon: false,
+              ),
+              SizedBox(height: 8.h,),
+
               ///<<<====================Email Field=================================>>>
 
               CustomTextField(
@@ -142,7 +172,7 @@ class SignUpScreen extends StatelessWidget {
                 // ),
               ),
               SizedBox(
-                height: 24.h,
+                height: 8.h,
               ),
 
               ///<<<=================Password field==============================>>>
@@ -182,10 +212,10 @@ class SignUpScreen extends StatelessWidget {
                 // ),
               ),
               SizedBox(
-                height: 24.h,
+                height: 8.h,
               ),
 
-              ///<<<===================Re-enter password field========================>>>
+              ///<<<=================== Re-enter password field========================>>>
 
               CustomTextField(
                 textEditingController:
@@ -292,7 +322,7 @@ class SignUpScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 54.h,),
+              SizedBox(height: 48.h,),
 
               ///<<<================== Sign In Buttons =======================>>>
               Row(

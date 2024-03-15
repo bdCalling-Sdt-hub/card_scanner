@@ -59,37 +59,6 @@ class SignInScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.h,),
 
-              ///<<<==================== Name Field ============================>>>
-
-              CustomTextField(
-                textEditingController: signInController.nameController,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return AppStrings.enterFullName.tr;
-                  }
-                  else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.text,
-                textAlign: TextAlign.start,
-                hintText: AppStrings.name.tr,
-                hintStyle: GoogleFonts.prompt(
-                    fontSize: 14.h,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.black_300),
-                inputTextStyle: GoogleFonts.prompt(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16.h,
-                    color: AppColors.black_500),
-                fieldBorderColor: AppColors.black_500,
-                fieldBorderRadius: 8,
-                isPrefixIcon: false,
-              ),
-              SizedBox(height: 24.h,),
-
-
-
               ///<<<====================Email Field ============================>>>
 
               CustomTextField(
@@ -123,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                 // ),
               ),
               SizedBox(
-                height: 24.h,
+                height: 12.h,
               ),
 
               ///<<<=================Password field==============================>>>
@@ -163,7 +132,7 @@ class SignInScreen extends StatelessWidget {
                 // ),
               ),
 
-              SizedBox(height: 120.h,),
+              SizedBox(height: 150.h,),
               CustomElevatedButton(
                 height: 50.h,
                 width: Get.width,

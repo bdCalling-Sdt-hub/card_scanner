@@ -28,6 +28,30 @@ class AppStrings{
   static String contactNumber = "Contact Number";
   static String enterMobileNumber = "Enter Mobile Number";
   static String getOtp = "Get OTP";
+  static String enterOtpCode = "Enter 6 Digit OTP Code";
+  static String didNotReceiveOtp = "Did not receive an OTP ?";
+  static String resendCode = "Resend Code";
+  static String resetPassword = "Reset Password";
+  static String passwordLength = "Password must have 6 characters.";
+  static String enterNewPassword = "Enter New Password";
+  static String confirmPassword = "Confirm Password";
+  static String reEnterPassword = "Re-enter password";
+
+  ///<<<=================== Home Page Texts =================================>>>
+  static String search = "Search";
+  static String shareWithAnyone = "Share with anyone, even if they don’t have the app.";
+  static String createMyCard = "Crete My Digital Card";
+  static String cardSync = "Card Sync";
+  static String cardExport = "Card Export";
+  static String emailSign = "Email Sign";
+  static String artificialProofreading = "Artificial Proofreading";
+  static String accurateIndentification = "100% Accurate Indentification";
+  static String cards = "Cards";
+  static String noCards = "No Cards";
+  static String useBusinessCardRecognitionFunction = "You can use the business card recognition function to upload business cards and efficiently manage your contacts";
+  static String team = "Team";
+  static String searchCompany = "Search Company";
+  static String dashboard = "Dashboard";
 
 
   ///<<<=================== Buttons Texts ===================================>>>
@@ -35,6 +59,8 @@ class AppStrings{
   static String skipBtn = "Skip";
   static String signInBtn = "Sign In";
   static String signUpBtn = "Sign UP";
+  static String submitBtn = "Submit";
+  static String resetBtn = "Reset Password";
 
   ///<<<================ Text Field Validation Texts ========================>>>
   static const enterEmail = "Email is required";

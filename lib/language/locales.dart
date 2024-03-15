@@ -63,6 +63,7 @@ class Locales extends Translations{
       "Sign In" : "Sign In",
 
       ///<<<==================== Home Page Texts ============================>>>
+      "Search" : "Search",
       "Share with anyone, even if they don’t have the app." : "Share with anyone, even if they don’t have the app.",
       "Crete My Digital Card" : "Crete My Digital Card",
       "Card Sync" : "Card Sync",
