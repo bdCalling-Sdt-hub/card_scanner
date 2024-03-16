@@ -19,7 +19,6 @@ class CustomText extends StatelessWidget {
         this.color = AppColors.black_500,
         this.text = "",
         this.overflow,
-
       });
 
   final double left;
@@ -45,7 +44,7 @@ class CustomText extends StatelessWidget {
         textAlign: textAlign,
         text,
         maxLines: maxLines,
-        style: GoogleFonts.roboto(
+        style: GoogleFonts.kumbhSans(
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,

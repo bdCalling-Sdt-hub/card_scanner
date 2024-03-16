@@ -23,4 +23,13 @@ class AppIcons{
   static String building = "$iconsBasePath/building.svg";
   static String dashboard = "$iconsBasePath/dashboard.svg";
   static String team = "$iconsBasePath/team.svg";
+  static String groupIcon = "$iconsBasePath/groupIcon.svg";
+  static String lineIcon = "$iconsBasePath/lineIcon.svg";
+  static String manageIcon = "$iconsBasePath/manageIcon.svg";
+  static String threeDotIcon = "$iconsBasePath/threeDotIcon.svg";
+  static String manageGroupIcon = "$iconsBasePath/manageGroupIcon.svg";
+  static String addNoteVisitLogIcon = "$iconsBasePath/addNoteVisitLogIcon.svg";
+  static String shareCardIcon = "$iconsBasePath/shareCardIcon.svg";
+  static String removeCardIcon = "$iconsBasePath/removeCardIcon.svg";
+  static String crossIcon = "$iconsBasePath/crossIcon.svg";
 }

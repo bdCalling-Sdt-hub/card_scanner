@@ -52,6 +52,13 @@ class AppStrings{
   static String team = "Team";
   static String searchCompany = "Search Company";
   static String dashboard = "Dashboard";
+  static String group = "Group";
+  static String manage = "Manage";
+  static String moreOptions = "More Options";
+  static String manageGroup = "Management group";
+  static String addNotesOrVisitLog = "Add Notes/ Visit Log";
+  static String shareBusinessCard = "Share business card";
+  static String removeCard = "Remove Card";
 
 
   ///<<<=================== Buttons Texts ===================================>>>
