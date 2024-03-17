@@ -1,7 +1,7 @@
 
 
 class AppIcons{
-  ///<<<=====================Icons Paths =================================>>>
+  ///<<<===================== Icons Paths =================================>>>
   static String iconsBasePath = "assets/icons";
 
   static String rightArrow = "$iconsBasePath/rightArrow.svg";
@@ -11,14 +11,9 @@ class AppIcons{
   static String eyeOn = "$iconsBasePath/eye.svg";
   static String eyeOff = "$iconsBasePath/eyeOff.svg";
   static String checkMark = "$iconsBasePath/checkMark.svg";
-  static String chatIcon = "$iconsBasePath/chatIcon.svg";
-  static String bottomNavIcon = "$iconsBasePath/bottomNavIcon.svg";
-  static String cardIcon = "$iconsBasePath/cardIcon.svg";
   static String cardSyncIcon = "$iconsBasePath/cardSyncIcon.svg";
   static String emailIcon = "$iconsBasePath/emailIcon.svg";
   static String excelIcon = "$iconsBasePath/excelIcon.svg";
-  static String globeIcon = "$iconsBasePath/globeIcon.svg";
-  static String personIcon = "$iconsBasePath/personIcon.svg";
   static String targetIcon = "$iconsBasePath/targetIcon.svg";
   static String building = "$iconsBasePath/building.svg";
   static String dashboard = "$iconsBasePath/dashboard.svg";
@@ -32,4 +27,24 @@ class AppIcons{
   static String shareCardIcon = "$iconsBasePath/shareCardIcon.svg";
   static String removeCardIcon = "$iconsBasePath/removeCardIcon.svg";
   static String crossIcon = "$iconsBasePath/crossIcon.svg";
+
+  ///<<<======================= Enterprise Icons ===========================>>>
+
+  static String availableIcon = "$iconsBasePath/availableIcon.svg";
+  static String dataLists = "$iconsBasePath/dataLists.svg";
+  static String dollarIcon = "$iconsBasePath/dollarIcon.svg";
+  static String importExportIcon = "$iconsBasePath/importExportIcon.svg";
+  static String networkIcon = "$iconsBasePath/networkIcon.svg";
+  static String safeData = "$iconsBasePath/safeData.svg";
+  static String saveNSecurity = "$iconsBasePath/saveNSecurity.svg";
+  static String saveTime = "$iconsBasePath/saveTime.svg";
+  static String setRole = "$iconsBasePath/setRole.svg";
+
+
+  ///<<<======================= Nav Bar Icons ===============================>>>
+  static String personIcon = "$iconsBasePath/personIcon.svg";
+  static String cardIcon = "$iconsBasePath/cardIcon.svg";
+  static String chatIcon = "$iconsBasePath/chatIcon.svg";
+  static String ocrCameraIcon = "$iconsBasePath/ocrCameraIcon.svg";
+  static String globeIcon = "$iconsBasePath/globeIcon.svg";
 }

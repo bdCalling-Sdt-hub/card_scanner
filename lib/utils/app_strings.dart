@@ -60,6 +60,35 @@ class AppStrings{
   static String shareBusinessCard = "Share business card";
   static String removeCard = "Remove Card";
 
+  ///<<<==================== Contacts Screen Texts ===========================>>>
+  static String contacts = "Contacts";
+  static String currentlyNoContacts = "There are currently no contacts available";
+  static String noContactsFoundTryAgain = "No contacts found. Please try again later for updated information or check back soon.";
+
+  ///<<<==================== Enterprise Screen Texts ========================>>>
+  static String nameCardScanner = "Name Card Scanner";
+  static String saveTime = "Save Time";
+  static String saveAndSecurity = "Save And Security";
+  static String valueForMoney = "Value For Money";
+  static String alwaysAvailable = "Always Available";
+  static String fastNAccurateDataEntry = "Fast & Accurate Data Entry";
+  static String nameCardScannerEfficientlyDigitizes = "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.";
+  static String quicklyEnterBusinessCardsToSales = "Quickly enter business cards to sales people's smartphone and company database, generating highly accurate information";
+  static String roleBasedAccessControl = "Role Based Access Control";
+  static String secureCompanyDataWithAppropriateRole = "Secure company data by assigning appropriate roles to all users to access different levels of information";
+  static String smartCollaboration = "Smart Collaboration";
+  static String facilitateTeamCollaboration = "Facilitate team collaboration by setting company- wide or department-wide card sharing, and assigning tasks to others.";
+  static String dataIntegration = "Data Integration With Other CRMS";
+  static String integrateYourCustomerDataWithOtherCRM = "Integrate your customer data with other CRM applications you might be using: Salesforce, Sugar CRM, Google Contacts, Outlook Contacts or Excel.";
+  static String allFeatures = "ALL FEATURES";
+  static String fastInputBusinessCards = "Fast input business cards, precise data for sales.";
+  static String exchangeEcardsSeamlessly = "Exchange e-cards seamlessly at meetings, seminars, trade shows.";
+  static String centralizeAllEmployeesBusinessCards = "Centralize all employees' business cards and customer data.";
+  static String setRoleForEachUser = "Set role for each user to access to the master database securely";
+  static String exportCustomerData = "Export customer data to Salesforce, SugarCRM, Outlook and Excel.";
+  static String dataIsAlwaysSafeAndSecure = "Data is always safe and secure behind our military-grade encryption.";
+  static String overTheBusinessesAreLove = "OVER 3000+ BUSINESSES ARE LOVING NAME CARD SCANNED BUSINESS";
+
 
   ///<<<=================== Buttons Texts ===================================>>>
   static String backToSignInBtn = "Back to Sign In";
@@ -68,6 +97,13 @@ class AppStrings{
   static String signUpBtn = "Sign UP";
   static String submitBtn = "Submit";
   static String resetBtn = "Reset Password";
+  static String goSearch = "Go Search";
+  static String tryItFree = "Try it free";
+
+  ///<<<===================== Nav Bar Texts =================================>>>
+  static String enterprise = "Enterprise";
+  static String signIn = "Sign In";
+  static String me = "Me";
 
   ///<<<================ Text Field Validation Texts ========================>>>
   static const enterEmail = "Email is required";

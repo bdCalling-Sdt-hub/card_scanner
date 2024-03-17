@@ -1,6 +1,7 @@
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
+import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/custom_text_field/custom_text_field.dart';
@@ -51,6 +52,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      bottomNavigationBar: BottomNavBar(currentIndex: 0),
+
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SafeArea(

@@ -11,4 +11,15 @@ class AppImages{
   static String otpScreenImg = "$imagesBasePath/otpScreenImg.png";
   static String cardLogo = "$imagesBasePath/cardLogo.png";
   static String homePageLogo = "$imagesBasePath/homePageLogo.png";
+  static String qr1Img = "$imagesBasePath/qr1.png";
+  static String contactsImage = "$imagesBasePath/contactsImage.png";
+  static String enterpriseImage = "$imagesBasePath/enterpriseImage.png";
+  static String enterpriseImg2 = "$imagesBasePath/enterpriseImg2.png";
+  static String enterprise3 = "$imagesBasePath/enterprise3.png";
+  static String meetUp = "$imagesBasePath/meetUp.png";
+  static String pstCompany = "$imagesBasePath/pstCompany.png";
+  static String recurly = "$imagesBasePath/recurly.png";
+  static String total = "$imagesBasePath/total.png";
+  static String xing = "$imagesBasePath/xing.png";
+  static String heritage = "$imagesBasePath/heritage.png";
 }
