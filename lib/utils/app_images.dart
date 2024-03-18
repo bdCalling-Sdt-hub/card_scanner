@@ -17,7 +17,7 @@ class AppImages{
   static String enterpriseImg2 = "$imagesBasePath/enterpriseImg2.png";
   static String enterprise3 = "$imagesBasePath/enterprise3.png";
   static String meetUp = "$imagesBasePath/meetUp.png";
-  static String pstCompany = "$imagesBasePath/pstCompany.png";
+  static String fastCompany = "$imagesBasePath/fastCompany.png";
   static String recurly = "$imagesBasePath/recurly.png";
   static String total = "$imagesBasePath/total.png";
   static String xing = "$imagesBasePath/xing.png";

@@ -26,9 +26,6 @@ class HomeScreen extends StatelessWidget {
     {"icon": AppIcons.cardSyncIcon, "service": AppStrings.cardSync},
     {"icon": AppIcons.excelIcon, "service": AppStrings.cardExport},
     {"icon": AppIcons.emailIcon, "service": AppStrings.emailSign},
-    {"icon": AppIcons.team, "service": AppStrings.team},
-    {"icon": AppIcons.building, "service": AppStrings.searchCompany},
-    {"icon": AppIcons.dashboard, "service": AppStrings.dashboard},
   ];
 
   List cardsList = [
@@ -70,7 +67,6 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(AppIcons.chatIcon),
                   Expanded(
                       child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 36.w),
@@ -193,28 +189,28 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 4.h,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: AppColors.black_500),
-                          ),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Container(
-                            height: 4.h,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: AppColors.black_500),
-                          )
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //       height: 4.h,
+                      //       width: 20.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(4),
+                      //           color: AppColors.black_500),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 4.w,
+                      //     ),
+                      //     Container(
+                      //       height: 4.h,
+                      //       width: 20.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(4),
+                      //           color: AppColors.black_500),
+                      //     )
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 16.h,
                       ),
