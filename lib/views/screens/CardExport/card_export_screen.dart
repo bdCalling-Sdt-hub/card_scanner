@@ -1,17 +1,13 @@
 
 import 'package:card_scanner/utils/app_colors.dart';
-import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/CustomCrossButton/custom_cross_button.dart';
+import '../../widgets/CustomBackButton/custom_back_button.dart';
 
 class CardExportScreen extends StatelessWidget {
   CardExportScreen({super.key});
@@ -32,7 +28,7 @@ class CardExportScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CustomCrossButton(),
+                  CustomBackButton(onTap: () {Get.back();},),
                   CustomText(
                     text: AppStrings.cardExport,
                     color: AppColors.black_500,
@@ -42,9 +38,10 @@ class CardExportScreen extends StatelessWidget {
                   SizedBox(width: 30.w,)
                 ],
               ),
+
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                  padding: EdgeInsets.only(top: 32.h, left: 16.w, right: 16.w),
                   child: ListView.builder(
                     itemCount: cardQrList.length,
                     itemBuilder: (context, index) {
@@ -57,7 +54,7 @@ class CardExportScreen extends StatelessWidget {
                               children: [
                                 Image.asset(cardQrList[index]["qrImg"]),
                                 SizedBox(width: 8.w,),
-                                CustomText(text: cardQrList[index]["title"])
+                                CustomText(text: cardQrList[index]["title"], fontSize: 20,)
                               ],
                             ),
                           ),

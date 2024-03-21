@@ -4,7 +4,6 @@ import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
-import 'package:card_scanner/views/widgets/CustomCrossButton/custom_cross_button.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,16 +56,9 @@ class EnterpriseScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 child: Column(
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomCrossButton(),
-
-                        ///<<<--------------- Language Change Icon ------------------->>>
-
-                        Icon(Icons.language, color: AppColors.green_500,),
-                      ],
-                    ),
+                    const Align(
+                      alignment: Alignment.centerRight,
+                        child: Icon(Icons.language, color: AppColors.green_500,)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 24.h),
                         child: Image.asset(AppImages.enterpriseImage)),
@@ -187,7 +179,7 @@ class EnterpriseScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: enterpriseThirdList.length,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               mainAxisExtent: 200,
                               crossAxisSpacing: 16,
                                 crossAxisCount: 2),

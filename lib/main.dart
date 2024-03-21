@@ -1,6 +1,7 @@
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
-import 'package:card_scanner/views/screens/CardExport/card_export.dart';
+import 'package:card_scanner/views/screens/CardExport/card_export_screen.dart';
 import 'package:card_scanner/views/screens/SplashScreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,8 +28,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: AppColors.primaryColor,
           ),
-
-          home: HomeScreen(),
+          initialRoute: AppRoutes.homeScreen,
+          getPages: AppRoutes.routes,
           // home: const SplashScreen(),
           // home: SignUpScreen(),
           // home: CardExportScreen(),

@@ -1,20 +1,16 @@
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:card_scanner/views/widgets/custom_text_field/custom_text_field.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/app_strings.dart';
 
@@ -80,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                         // onChanged: widget.onChanged,
                         maxLines: 1,
                         cursorColor: AppColors.green_200,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.green_500,
                         ),
                         decoration: InputDecoration(
@@ -142,7 +138,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () =>  Get.toNamed(AppRoutes.allCardsScreen),
                   text: AppStrings.createMyCard,
                   textColor: AppColors.black_500,
                   fontSize: 20,
@@ -171,18 +167,27 @@ class HomeScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                        serviceList[index]["icon"]),
-                                    SizedBox(
-                                      height: 4.h,
-                                    ),
-                                    CustomText(
-                                      text: serviceList[index]["service"],
-                                    )
-                                  ],
+                                child: GestureDetector(
+                                  onTap: (){
+                                    if(index == 0){
+                                      Get.toNamed(AppRoutes.cardSyncScreen);
+                                    }else if(index == 1){
+                                      Get.toNamed(AppRoutes.cardExportScreen);
+                                    }
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                          serviceList[index]["icon"]),
+                                      SizedBox(
+                                        height: 4.h,
+                                      ),
+                                      CustomText(
+                                        text: serviceList[index]["service"],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -190,28 +195,28 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 8.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 4.h,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: AppColors.black_500),
-                          ),
-                          SizedBox(
-                            width: 4.w,
-                          ),
-                          Container(
-                            height: 4.h,
-                            width: 20.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: AppColors.black_500),
-                          )
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //       height: 4.h,
+                      //       width: 20.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(4),
+                      //           color: AppColors.black_500),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 4.w,
+                      //     ),
+                      //     Container(
+                      //       height: 4.h,
+                      //       width: 20.w,
+                      //       decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(4),
+                      //           color: AppColors.black_500),
+                      //     )
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 16.h,
                       ),
@@ -231,39 +236,50 @@ class HomeScreen extends StatelessWidget {
                                         horizontal: 12.w, vertical: 16.h),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          children: [
-                                            CustomText(
-                                              text: AppStrings.cards,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColors.black_500,
-                                              fontSize: 16,
-                                            ),
-                                            CustomText(
-                                              text: "(${cardsList.length})",
-                                            ),
-                                          ],
+                                        CustomText(
+                                          text: AppStrings.cards,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.black_500,
+                                          fontSize: 16,
                                         ),
-                                        Row(
-                                          children: [
-                                            SvgPicture.asset(
-                                                AppIcons.groupIcon),
-                                            SizedBox(width: 4.w),
-                                            CustomText(
-                                              text: AppStrings.group,
-                                            ),
-                                            SizedBox(width: 8.w),
-                                            SvgPicture.asset(AppIcons.lineIcon),
-                                            SizedBox(width: 8.w),
-                                            SvgPicture.asset(
-                                                AppIcons.manageIcon),
-                                            SizedBox(width: 4.w),
-                                            CustomText(
-                                              text: AppStrings.manage,
-                                            ),
-                                          ],
+                                        CustomText(
+                                          text: "(${cardsList.length})",
+                                        ),
+                                        const Spacer(),
+                                        InkWell(
+                                          onTap: (){
+                                            Get.toNamed(AppRoutes.groupScreen);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                                  AppIcons.groupIcon),
+                                              SizedBox(width: 4.w),
+                                              CustomText(
+                                                text: AppStrings.group,
+                                              ),
+                                              SizedBox(width: 8.w),
+                                            ],
+                                          ),
+                                        ),
+                                        SvgPicture.asset(AppIcons.lineIcon),
+                                        InkWell(
+                                          onTap: (){
+
+                                          },
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: 8.w),
+                                              SvgPicture.asset(
+                                                  AppIcons.manageIcon),
+                                              SizedBox(width: 4.w),
+                                              CustomText(
+                                                text: AppStrings.manage,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

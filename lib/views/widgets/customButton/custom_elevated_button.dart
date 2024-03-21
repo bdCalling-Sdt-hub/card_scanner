@@ -46,9 +46,7 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onTap();
-      },
+      onTap: onTap,
       child: Container(
         margin:
         EdgeInsets.only(top: top, left: left, right: right, bottom: bottom),

@@ -22,4 +22,5 @@ class AppImages{
   static String total = "$imagesBasePath/total.png";
   static String xing = "$imagesBasePath/xing.png";
   static String heritage = "$imagesBasePath/heritage.png";
+  static String mobileSmartSync = "$imagesBasePath/mobileSmartSync.png";
 }

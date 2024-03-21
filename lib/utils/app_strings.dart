@@ -40,7 +40,7 @@ class AppStrings{
   ///<<<=================== Home Page Texts =================================>>>
   static String search = "Search";
   static String shareWithAnyone = "Share with anyone, even if they don’t have the app.";
-  static String createMyCard = "Crete My Digital Card";
+  static String createMyCard = "My Digital Cards";
   static String cardSync = "Card Sync";
   static String cardExport = "Card Export";
   static String emailSign = "Email Sign";
@@ -88,6 +88,19 @@ class AppStrings{
   static String exportCustomerData = "Export customer data to Salesforce, SugarCRM, Outlook and Excel.";
   static String dataIsAlwaysSafeAndSecure = "Data is always safe and secure behind our military-grade encryption.";
   static String overTheBusinessesAreLove = "OVER 3000+ BUSINESSES ARE LOVING NAME CARD SCANNED BUSINESS";
+
+  ///<<<=================== Card Sync =======================================>>>
+  static String smartSync = "Smart Sync";
+  static String mobileBackup = "Mobile backup";
+  static String batchExportCards = "Batch export cards information.";
+
+  ///<<<=================== Group Screen Texts ==============================>>>
+  static String short = "Short";
+  static String enterGroupName = "Enter your group name";
+  static String createNewGroup = "Create new group";
+  static String recentlyAdded = "Recently added";
+  static String unGrouped = "Ungrouped";
+  static String alpha = "Alpha";
 
 
   ///<<<=================== Buttons Texts ===================================>>>
