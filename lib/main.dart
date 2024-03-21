@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: AppColors.primaryColor,
           ),
+
           home: HomeScreen(),
           // home: const SplashScreen(),
           // home: SignUpScreen(),

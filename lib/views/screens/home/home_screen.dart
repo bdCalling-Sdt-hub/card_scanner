@@ -190,28 +190,28 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 8.h,
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-                      //     Container(
-                      //       height: 4.h,
-                      //       width: 20.w,
-                      //       decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           color: AppColors.black_500),
-                      //     ),
-                      //     SizedBox(
-                      //       width: 4.w,
-                      //     ),
-                      //     Container(
-                      //       height: 4.h,
-                      //       width: 20.w,
-                      //       decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           color: AppColors.black_500),
-                      //     )
-                      //   ],
-                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 4.h,
+                            width: 20.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: AppColors.black_500),
+                          ),
+                          SizedBox(
+                            width: 4.w,
+                          ),
+                          Container(
+                            height: 4.h,
+                            width: 20.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: AppColors.black_500),
+                          )
+                        ],
+                      ),
                       SizedBox(
                         height: 16.h,
                       ),

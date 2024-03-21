@@ -41,12 +41,13 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 90.h,
       width: Get.height,
       padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
       alignment: Alignment.center,
-      color: AppColors.green_600,
+      color: AppColors.primaryColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
