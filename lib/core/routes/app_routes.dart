@@ -3,6 +3,7 @@ import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart'
 import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
 import 'package:card_scanner/views/screens/Group/group_screen.dart';
+import 'package:card_scanner/views/screens/Group/selected_group_cards.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import '../../views/screens/Auth/forgot_password_screen.dart';
 import '../../views/screens/Auth/reset_password_screen.dart';
 import '../../views/screens/CardExport/card_export_screen.dart';
 import '../../views/screens/CardSync/card_sync_screen.dart';
+import '../../views/screens/Group/create_group_screen.dart';
 import '../../views/screens/SplashScreen/splash_screen.dart';
 
 class AppRoutes {
@@ -26,6 +28,8 @@ class AppRoutes {
   static String cardSyncScreen = "/card_sync_screen";
   static String cardExportScreen = "/card_export";
   static String groupScreen = "/group_screen";
+  static String createGroupScreen = "/create_group_screen";
+  static String selectedGroupCards = "/selected_group_cards";
 
 
   static List<GetPage> routes = [
@@ -41,5 +45,7 @@ class AppRoutes {
     GetPage(name: cardSyncScreen, page: () => CardSyncScreen()),
     GetPage(name: cardExportScreen, page: () => CardExportScreen()),
     GetPage(name: groupScreen, page: () => GroupScreen()),
+    GetPage(name: createGroupScreen, page: () => CreateGroupScreen()),
+    GetPage(name: selectedGroupCards, page: () => SelectedGroupCards()),
   ];
 }

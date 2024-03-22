@@ -23,4 +23,5 @@ class AppImages{
   static String xing = "$imagesBasePath/xing.png";
   static String heritage = "$imagesBasePath/heritage.png";
   static String mobileSmartSync = "$imagesBasePath/mobileSmartSync.png";
+  static String noData = "$imagesBasePath/noData.png";
 }

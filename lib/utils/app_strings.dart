@@ -56,9 +56,12 @@ class AppStrings{
   static String manage = "Manage";
   static String moreOptions = "More Options";
   static String manageGroup = "Management group";
-  static String addNotesOrVisitLog = "Add Notes/ Visit Log";
   static String shareBusinessCard = "Share business card";
   static String removeCard = "Remove Card";
+  static String areYouSure = "Are you sure?";
+  static String yes = "Yes";
+  static String no = "No";
+  static String shareWith = "Share With";
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";
@@ -94,13 +97,16 @@ class AppStrings{
   static String mobileBackup = "Mobile backup";
   static String batchExportCards = "Batch export cards information.";
 
-  ///<<<=================== Group Screen Texts ==============================>>>
+  ///<<<=================== Group Screens Texts ==============================>>>
   static String short = "Short";
   static String enterGroupName = "Enter your group name";
   static String createNewGroup = "Create new group";
+  static String createGroup = "Create Group";
+  static String selectCards = "Select Cards";
   static String recentlyAdded = "Recently added";
   static String unGrouped = "Ungrouped";
   static String alpha = "Alpha";
+  static String noCardsSelected= "No Cards Selected";
 
 
   ///<<<=================== Buttons Texts ===================================>>>

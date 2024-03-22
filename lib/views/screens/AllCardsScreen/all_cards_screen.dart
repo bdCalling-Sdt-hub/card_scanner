@@ -1,9 +1,7 @@
 
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +36,9 @@ class AllCardsScreen extends StatelessWidget {
                   ),
               ),
               SizedBox(height: 20.h),
+
+              ///<<<================== Digital Card List ===================>>>
+
               Expanded(
                 child: ListView.builder(
                   itemCount: cardDetailsList.length,
