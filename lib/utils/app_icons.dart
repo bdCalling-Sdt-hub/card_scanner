@@ -27,6 +27,7 @@ class AppIcons{
   static String shareCardIcon = "$iconsBasePath/shareCardIcon.svg";
   static String removeCardIcon = "$iconsBasePath/removeCardIcon.svg";
   static String crossIcon = "$iconsBasePath/crossIcon.svg";
+  static String sendIcon = "$iconsBasePath/send.svg";
 
   ///<<<======================= Enterprise Icons ===========================>>>
 

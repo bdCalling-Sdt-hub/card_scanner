@@ -108,6 +108,21 @@ class AppStrings{
   static String alpha = "Alpha";
   static String noCardsSelected= "No Cards Selected";
 
+  ///<<<==================== Profile Screen Texts ============================>>>
+  static String myProfile = "My Profile";
+  static String edit = "Edit";
+  static String view = "View";
+  static String cardStyle = "Card Style";
+  static String cardCode = "Card Code";
+  static String contactsBackup = "Contacts backup";
+  static String recommendToFriends = "Recommend to Friends";
+  static String helpAndFeedback = "Help and Feedback";
+  static String settings = "Settings";
+
+  ///<<<===================== Profile Details Texts =========================>>>
+  static String eCard = "E-Card";
+  static String shareCard = "Share Card";
+
 
   ///<<<=================== Buttons Texts ===================================>>>
   static String backToSignInBtn = "Back to Sign In";
