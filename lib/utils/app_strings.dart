@@ -118,6 +118,7 @@ class AppStrings{
   static String recommendToFriends = "Recommend to Friends";
   static String helpAndFeedback = "Help and Feedback";
   static String settings = "Settings";
+  static String cardInformation = "Card information";
 
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";

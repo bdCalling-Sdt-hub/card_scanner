@@ -24,4 +24,5 @@ class AppImages{
   static String heritage = "$imagesBasePath/heritage.png";
   static String mobileSmartSync = "$imagesBasePath/mobileSmartSync.png";
   static String noData = "$imagesBasePath/noData.png";
+  static String nameCardLogo = "$imagesBasePath/nameCardLogo.png";
 }

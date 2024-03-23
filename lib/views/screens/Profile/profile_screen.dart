@@ -1,4 +1,6 @@
 
+import 'dart:ui';
+
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -6,10 +8,14 @@ import 'package:card_scanner/views/screens/Profile/view_profile_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import 'IneerWidget/custom_container_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -82,29 +88,13 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(width: 60.w),
-                    Container(
-                      height: 25.h,
-                      width: 55.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.green_900
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.border_color_outlined,
-                            color: AppColors.green_50,
-                            size: 14,
-                          ),
-                          SizedBox(width: 4.w),
-                          CustomText(
-                            text: AppStrings.edit,
-                            color: AppColors.green_50,
-                          )
-                        ],
-                      ),
-                    )
+
+                    ///<<<============== Edit Card ==========================>>>
+
+                    CustomContainerButton(
+                        onTap: (){},
+                        text: AppStrings.edit
+                    ),
                   ],
                 ),
               ),
@@ -195,3 +185,5 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
+
