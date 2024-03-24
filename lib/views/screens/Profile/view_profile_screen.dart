@@ -4,6 +4,7 @@ import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Profile/IneerWidget/custom_container_button.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
+import 'package:card_scanner/views/screens/Profile/share_profile_card_screen.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
@@ -188,7 +189,9 @@ class ViewProfileScreen extends StatelessWidget {
                   ///<<<================= Share Card Button ================>>>
 
                   CustomContainerButton(
-                    onTap: (){},
+                    onTap: (){
+                      Get.to(ShareProfileCardScreen());
+                    },
                     text: AppStrings.shareCard,
                     ifImage: true,
                     svgIcon: AppIcons.sendIcon,

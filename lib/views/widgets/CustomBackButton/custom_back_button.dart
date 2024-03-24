@@ -16,7 +16,7 @@ class CustomBackButton extends StatelessWidget {
     this.radius = 4,
     this.height = 24,
     this.width = 24,
-    this.iconSize = 16,
+    this.iconSize = 18,
     this.iconColor = AppColors.green_50,
     this.color = AppColors.black_400,
     required this.onTap

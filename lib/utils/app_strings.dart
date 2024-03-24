@@ -119,10 +119,19 @@ class AppStrings{
   static String helpAndFeedback = "Help and Feedback";
   static String settings = "Settings";
   static String cardInformation = "Card information";
+  static String selectCardBackground = "Select card background";
+  static String moreSelect = "More select";
+  static String displayCompany = "Display company";
+  static String displayProfilePhoto = "Display Profile Photo";
+  static String saveAndPreview = "Save and preview";
 
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";
   static String shareCard = "Share Card";
+  static String pointYourCamera = "Point your camera at the QR code.";
+  static String share = "Share";
+  static String download = "Download";
+  static String toPreventYourPhoneContactsLos = "You have not backed up contacts to the cloud. To prevent your phone contacts los, we recommend backing up now";
 
 
   ///<<<=================== Buttons Texts ===================================>>>
