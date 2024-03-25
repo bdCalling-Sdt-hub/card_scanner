@@ -23,10 +23,27 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: Column(
           children: [
-            SizedBox(height: 32.h,),
+            SizedBox(height: 20.h,),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  height: 32.h,
+                  width: 32.w,
+                  decoration: BoxDecoration(
+                      color: AppColors.black_400,
+                      borderRadius: BorderRadius.circular(4)
+                  ),
+                  child: const Icon(Icons.arrow_back_ios_rounded, color: AppColors.whiteColor, size: 14,),
+                ),
+              ),
+            ),
             Image.asset(AppImages.otpScreenImg),
             SizedBox(height: 24.h,),
             Row(

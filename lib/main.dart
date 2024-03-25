@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: AppColors.primaryColor,
           ),
-          // initialRoute: AppRoutes.homeScreen,
-          // getPages: AppRoutes.routes,
+          initialRoute: AppRoutes.splashScreen,
+          getPages: AppRoutes.routes,
           // home: const SplashScreen(),
           // home: SignUpScreen(),
           // home: CardExportScreen(),
-          home: ProfileScreen(),
+          // home: ProfileScreen(),
         );
       },
     );

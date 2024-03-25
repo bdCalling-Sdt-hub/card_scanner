@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -182,7 +183,8 @@ class ResetPasswordScreen extends StatelessWidget {
           width: Get.width,
           isFillColor: true,
           onTap: () {
-
+            Get.toNamed(AppRoutes.homeScreen);
+            Get.snackbar("Password reset successfully", "");
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,

@@ -1,3 +1,4 @@
+import 'package:card_scanner/views/screens/home/InnerWidgets/manage_modal_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -47,6 +48,9 @@ class CardHolder extends StatelessWidget {
                   text: "(${cardsList.length})",
                 ),
                 const Spacer(),
+
+                ///<<<==================== Group Text =======================>>>
+
                 InkWell(
                   onTap: (){
                     Get.toNamed(AppRoutes.groupScreen);
@@ -64,10 +68,18 @@ class CardHolder extends StatelessWidget {
                   ),
                 ),
                 SvgPicture.asset(AppIcons.lineIcon),
-                InkWell(
-                  onTap: (){
 
-                  },
+                ///<<<=============== Manage Text ===========================>>>
+
+                InkWell(
+                  onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return ManageModalSheet();
+                        },
+                      );
+                    },
                   child: Row(
                     children: [
                       SizedBox(width: 8.w),

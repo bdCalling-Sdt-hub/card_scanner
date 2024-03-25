@@ -52,7 +52,7 @@ class EditProfileScreen extends StatelessWidget {
                       },
                     ),
                     CustomText(
-                      text: AppStrings.myProfile,
+                      text: AppStrings.editProfile,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -68,7 +68,9 @@ class EditProfileScreen extends StatelessWidget {
                     ///<<<=================== Card Information Button ===========>>>
 
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 4.w, vertical: 4.h),

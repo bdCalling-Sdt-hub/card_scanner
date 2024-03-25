@@ -1,4 +1,5 @@
 import 'package:card_scanner/controllers/auth/sign_up_controller.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -348,6 +349,8 @@ class SignUpScreen extends StatelessWidget {
                    child: ElevatedButton(
                      onPressed: () {
                        // Add your button's onPressed logic here
+                       Get.toNamed(AppRoutes.homeScreen);
+                       Get.snackbar("Your new account has been created", "");
                      },
                      style: ButtonStyle(
                        backgroundColor: const MaterialStatePropertyAll(AppColors.black_500),

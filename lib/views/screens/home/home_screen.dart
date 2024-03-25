@@ -71,7 +71,9 @@ class HomeScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 40,
                       child: TextFormField(
-                        onTap: () {},
+                        onTap: () {
+
+                        },
                         // controller: widget.textEditingController,
                         keyboardType: TextInputType.text,
                         // onChanged: widget.onChanged,
@@ -109,16 +111,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                   )),
                   Container(
-                    height: 24.h,
-                    width: 24.w,
+                    height: 40.h,
+                    width: 40.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(8),
                         color: AppColors.black_500),
                     child: Center(
-                        child: Icon(
-                      Icons.add,
-                      color: AppColors.whiteColor,
-                    )),
+                        child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
                   )
                 ],
               ),
@@ -140,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomElevatedButton(
                   onTap: () =>  Get.toNamed(AppRoutes.allCardsScreen),
-                  text: AppStrings.createMyCard,
+                  text: AppStrings.createDigitalCards,
                   textColor: AppColors.black_500,
                   fontSize: 20,
                   fontWeight: FontWeight.w400,

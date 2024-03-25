@@ -53,7 +53,7 @@ class ContactsScreen extends StatelessWidget {
                   onTap: (){},
                 height: 42.h,
                 width: 130.w,
-                text: AppStrings.goSearch,
+                text: AppStrings.addContacts,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
                 backgroundColor: AppColors.green_900,

@@ -197,6 +197,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           isFillColor: true,
           onTap: () {
             Get.to(OtpScreen());
+            Get.snackbar("Otp sent to your email", "");
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,

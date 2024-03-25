@@ -4,7 +4,9 @@ import 'dart:ui';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
 import 'package:card_scanner/views/screens/Profile/view_profile_screen.dart';
+import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'IneerWidget/custom_container_button.dart';
+import 'card_style.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -35,6 +38,7 @@ class ProfileScreen extends StatelessWidget {
       {"icon" : Icon(Icons.settings_outlined), "text" : AppStrings.settings},
     ];
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(currentIndex: 4),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -92,7 +96,9 @@ class ProfileScreen extends StatelessWidget {
                     ///<<<============== Edit Card ==========================>>>
 
                     CustomContainerButton(
-                        onTap: (){},
+                        onTap: (){
+                          Get.to(EditProfileScreen());
+                        },
                         text: AppStrings.edit
                     ),
                   ],
@@ -112,6 +118,8 @@ class ProfileScreen extends StatelessWidget {
                             onTap: (){
                               if(index == 0){
                                 Get.to(ViewProfileScreen());
+                              } else if(index == 1){
+                                Get.to(CardStyleScreen());
                               }
                             },
                             child: Container(

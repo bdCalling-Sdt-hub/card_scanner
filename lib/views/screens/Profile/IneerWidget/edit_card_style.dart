@@ -230,7 +230,7 @@ class EditCardStyle extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 42.w),
           child: CustomElevatedButton(
             onTap: (){
-
+              Get.back();
             },
             width: Get.width,
             height: 42.h,

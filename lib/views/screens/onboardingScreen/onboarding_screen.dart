@@ -1,3 +1,4 @@
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -20,6 +21,7 @@ class OnBoardingScreen extends StatelessWidget {
   OnBoardScrollController onBoardScrollController =
       Get.put(OnBoardScrollController());
   PageController pageController = PageController();
+  int pageNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,9 @@ class OnBoardingScreen extends StatelessWidget {
               itemCount: onBoardScrollController.imageList.length,
               onPageChanged: (value) {
                 onBoardScrollController.currentPosition.value = value;
+                print("===============$value");
               },
-              itemBuilder: (context, index) {
+              itemBuilder: (context, pageNumber) {
                 var imageList = onBoardScrollController.imageList;
                 var titleText = onBoardScrollController.titles;
                 var subTitleText = onBoardScrollController.subTitles;
@@ -50,7 +53,7 @@ class OnBoardingScreen extends StatelessWidget {
                         height: 300.h,
                         width: 300.w,
                         child: SvgPicture.asset(
-                          imageList[index],
+                          imageList[pageNumber],
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -59,7 +62,7 @@ class OnBoardingScreen extends StatelessWidget {
                       CustomText(
                         bottom: 8.h,
                         maxLines: 2,
-                        text: titleText[index],
+                        text: titleText[pageNumber],
                         color: AppColors.black_500,
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
@@ -69,7 +72,7 @@ class OnBoardingScreen extends StatelessWidget {
                         right: 10.w,
                         bottom: 8.h,
                         maxLines: 3,
-                        text: subTitleText[index],
+                        text: subTitleText[pageNumber],
                         color: AppColors.black_400,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -97,25 +100,25 @@ class OnBoardingScreen extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(bottom: Get.height * 0.15),
             child: Obx(() => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    indicatorContainer(
-                        onBoardScrollController.currentPosition.value == 0
-                            ? AppColors.black_500
-                            : AppColors.black_300),
-                    SizedBox(width: 8.w),
-                    indicatorContainer(
-                        onBoardScrollController.currentPosition.value == 1
-                            ? AppColors.black_500
-                            : AppColors.black_300),
-                    SizedBox(width: 8.w),
-                    indicatorContainer(
-                        onBoardScrollController.currentPosition.value == 2
-                            ? AppColors.black_500
-                            : AppColors.black_300),
-                  ],
-                )),
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                indicatorContainer(
+                    onBoardScrollController.currentPosition.value == 0
+                        ? AppColors.black_500
+                        : AppColors.black_300),
+                SizedBox(width: 8.w),
+                indicatorContainer(
+                    onBoardScrollController.currentPosition.value == 1
+                        ? AppColors.black_500
+                        : AppColors.black_300),
+                SizedBox(width: 8.w),
+                indicatorContainer(
+                    onBoardScrollController.currentPosition.value == 2
+                        ? AppColors.black_500
+                        : AppColors.black_300),
+              ],
+            )),
           ),
         ],
       ),
@@ -132,7 +135,9 @@ class OnBoardingScreen extends StatelessWidget {
                 isFillColor: false,
                 width: 75.w,
                 height: 40.h,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.signInScreen);
+                },
                 text: onBoardScrollController.currentPosition.value == 2? AppStrings.signInBtn : AppStrings.skipBtn,
                 textColor: AppColors.black_400,
               ),
@@ -148,12 +153,19 @@ class OnBoardingScreen extends StatelessWidget {
                   isFillColor: true,
                   width: 75.w,
                   height: 40.h,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(AppRoutes.signUpScreen);
+                  },
                   text: AppStrings.signUpBtn,
                   textColor: AppColors.whiteColor,
                 )
                     : ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(onBoardScrollController.currentPosition <=2 ){
+                      onBoardScrollController.currentPosition.value ++;
+                      pageNumber ++;
+                    }
+                  },
                   style: const ButtonStyle(
                     padding: MaterialStatePropertyAll(EdgeInsets.zero),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(

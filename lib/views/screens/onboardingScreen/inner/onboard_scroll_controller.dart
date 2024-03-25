@@ -11,5 +11,4 @@ class OnBoardScrollController extends GetxController{
 
   RxInt currentPosition = 0.obs;
 
-
 }

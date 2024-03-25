@@ -1,4 +1,6 @@
 
+import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +23,18 @@ class AllCardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(currentIndex: 1),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           child: Column(
             children: [
               Align(
-                alignment: Alignment.centerLeft,
-                  child:CustomBackButton(
-                    onTap: (){
-                      Get.back();
-                    },
-                    icon: Icons.arrow_back,
+                alignment: Alignment.center,
+                  child: CustomText(
+                    text: AppStrings.contacts,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
                   ),
               ),
               SizedBox(height: 20.h),

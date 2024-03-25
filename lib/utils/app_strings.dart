@@ -40,7 +40,7 @@ class AppStrings{
   ///<<<=================== Home Page Texts =================================>>>
   static String search = "Search";
   static String shareWithAnyone = "Share with anyone, even if they don’t have the app.";
-  static String createMyCard = "My Digital Cards";
+  static String createDigitalCards = "Create Digital Cards";
   static String cardSync = "Card Sync";
   static String cardExport = "Card Export";
   static String emailSign = "Email Sign";
@@ -62,6 +62,13 @@ class AppStrings{
   static String yes = "Yes";
   static String no = "No";
   static String shareWith = "Share With";
+  static String createCard = "Create \ncard";
+  static String scanQrCode = "Scan QR \ncode";
+  static String duplicateCards = "Duplicate \nCards";
+  static String changeShortType = "Change short type";
+  static String shortByCreateDate = "Short by create date";
+  static String shortByName = "Short by name";
+  static String shortByCompanyName = "Short by company name";
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";
@@ -110,6 +117,7 @@ class AppStrings{
 
   ///<<<==================== Profile Screen Texts ============================>>>
   static String myProfile = "My Profile";
+  static String editProfile = "Edit Profile";
   static String edit = "Edit";
   static String view = "View";
   static String cardStyle = "Card Style";
@@ -142,6 +150,7 @@ class AppStrings{
   static String submitBtn = "Submit";
   static String resetBtn = "Reset Password";
   static String goSearch = "Go Search";
+  static String addContacts = "Add Contacts";
   static String tryItFree = "Try it free";
 
   ///<<<===================== Nav Bar Texts =================================>>>

@@ -1,6 +1,9 @@
 
 import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
+import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -22,6 +25,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(currentIndex: 4),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -32,8 +36,8 @@ class SignInScreen extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: SizedBox(
-                  height: 170.h,
-                  width: 170.w,
+                  height: 150.h,
+                  width: 150.w,
                   child: SvgPicture.asset(
                     AppImages.logo,
                     fit: BoxFit.fill,
@@ -132,12 +136,14 @@ class SignInScreen extends StatelessWidget {
                 // ),
               ),
 
-              SizedBox(height: 150.h,),
+              SizedBox(height: 140.h,),
               CustomElevatedButton(
                 height: 50.h,
                 width: Get.width,
                 isFillColor: true,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.homeScreen);
+                },
                 borderRadius: 12,
                 borderColor: AppColors.black_500,
                 text: AppStrings.signInBtn,
@@ -157,11 +163,16 @@ class SignInScreen extends StatelessWidget {
                     color: AppColors.black_400,
                   ),
                   SizedBox(width: 8.w,),
-                  CustomText(
-                    text: AppStrings.signUp,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: AppColors.black_500,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(AppRoutes.signUpScreen);
+                    },
+                    child: CustomText(
+                      text: AppStrings.signUp,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                      color: AppColors.black_500,
+                    ),
                   )
                 ],
               )

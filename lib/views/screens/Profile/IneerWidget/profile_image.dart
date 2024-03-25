@@ -55,13 +55,14 @@ class ProfileImage extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(6),
                   decoration: const BoxDecoration(
+                    color: AppColors.black_500,
                        shape: BoxShape.circle),
                   child: Icon(
                     Icons.photo_camera_outlined,
                     size: 18.sp,
-                    color: AppColors.whiteColor,
+                    color: AppColors.whitishColor,
                   ),
                 ),
               ),
