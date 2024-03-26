@@ -1,9 +1,7 @@
 
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/Profile/IneerWidget/custom_container_button.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +10,6 @@ import 'package:get/get.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../widgets/customText/custom_text.dart';
-import 'IneerWidget/profile_image.dart';
 
 class CardStyleScreen extends StatelessWidget {
   CardStyleScreen({super.key});

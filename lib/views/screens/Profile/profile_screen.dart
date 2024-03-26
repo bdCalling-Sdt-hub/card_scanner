@@ -4,8 +4,12 @@ import 'dart:ui';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/FAQ/faq_screen.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
+import 'package:card_scanner/views/screens/Profile/my_qrcode_screen.dart';
 import 'package:card_scanner/views/screens/Profile/view_profile_screen.dart';
+import 'package:card_scanner/views/screens/RecommendedNameCard/recommended_name_card.dart';
+import 'package:card_scanner/views/screens/Settings/settings_screen_main.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,9 +36,8 @@ class ProfileScreen extends StatelessWidget {
     ];
 
     List servicesList = [
-      {"icon" : Icon(Icons.contacts_outlined), "text" : AppStrings.contactsBackup},
       {"icon" : SvgPicture.asset(AppIcons.sendIcon, height: 18), "text" : AppStrings.recommendToFriends},
-      {"icon" : Icon(Icons.swap_vert_circle_outlined), "text" : AppStrings.helpAndFeedback},
+      {"icon" : Icon(Icons.swap_vert_circle_outlined), "text" : AppStrings.faq},
       {"icon" : Icon(Icons.settings_outlined), "text" : AppStrings.settings},
     ];
     return Scaffold(
@@ -120,6 +123,8 @@ class ProfileScreen extends StatelessWidget {
                                 Get.to(ViewProfileScreen());
                               } else if(index == 1){
                                 Get.to(CardStyleScreen());
+                              } else if(index == 2){
+                                Get.to(MyQrCodeScreen());
                               }
                             },
                             child: Container(
@@ -159,7 +164,13 @@ class ProfileScreen extends StatelessWidget {
                       servicesList.length, (index) =>
                       InkWell(
                         onTap: (){
-
+                          if(index == 2 ){
+                            Get.to(SettingsScreenMain());
+                          } else if(index == 0 ){
+                            Get.to(RecommendNameCardScreen());
+                          } else if(index == 1 ){
+                            Get.to(FAQScreen());
+                          }
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),

@@ -3,6 +3,7 @@ import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
 import 'package:card_scanner/views/screens/CardExport/card_export_screen.dart';
 import 'package:card_scanner/views/screens/Profile/profile_screen.dart';
+import 'package:card_scanner/views/screens/QrCodeScanner/qr_code_screen.dart';
 import 'package:card_scanner/views/screens/SplashScreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           // home: SignUpScreen(),
           // home: CardExportScreen(),
           // home: ProfileScreen(),
+          // home: QrCodeScreen(),
         );
       },
     );

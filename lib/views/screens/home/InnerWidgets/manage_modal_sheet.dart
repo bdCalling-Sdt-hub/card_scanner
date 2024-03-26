@@ -1,6 +1,9 @@
-
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
+import 'package:card_scanner/views/screens/DuplicateCards/duplicate_cards_screen.dart';
+import 'package:card_scanner/views/screens/QrCodeScanner/qr_code_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,12 +12,14 @@ import '../../../../utils/app_colors.dart';
 import '../../../widgets/CustomBackButton/custom_back_button.dart';
 
 class ManageModalSheet extends StatelessWidget {
-  const ManageModalSheet({super.key});
+  ManageModalSheet({super.key});
+
+  RxInt selectedOption = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      height: 320.h,
       width: Get.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -24,7 +29,7 @@ class ManageModalSheet extends StatelessWidget {
           color: AppColors.green_50),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        child: Column(
+        child: Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
@@ -34,21 +39,46 @@ class ManageModalSheet extends StatelessWidget {
                   Get.back();
                 },
                 child: CustomBackButton(
-                  onTap: (){
+                  onTap: () {
                     Get.back();
                   },
                   radius: 100,
                 ),
               ),
             ),
-            SizedBox(height: 24.h,),
+            SizedBox(
+              height: 24.h,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(),
-                manageCards(Icons.add, AppStrings.createCard),
-                manageCards(Icons.filter_center_focus_outlined, AppStrings.scanQrCode),
-                manageCards(Icons.credit_card_outlined, AppStrings.duplicateCards),
+
+                ///<<<================ Manage Card Items ====================>>>
+
+                InkWell(
+                  onTap: (){
+                    Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCardTitle));
+                  },
+                    child: manageCards(
+                        Icons.add,
+                        AppStrings.createCard
+                    ),
+                ),
+                InkWell(
+                  onTap: (){
+                    Get.to(QrCodeScreen());
+                  },
+                  child: manageCards(
+                      Icons.filter_center_focus_outlined, AppStrings.scanQrCode),
+                ),
+                InkWell(
+                  onTap: (){
+                    Get.to(DuplicateCardsScreen());
+                  },
+                  child: manageCards(
+                      Icons.credit_card_outlined, AppStrings.duplicateCards),
+                ),
                 SizedBox()
               ],
             ),
@@ -58,47 +88,77 @@ class ManageModalSheet extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             CustomText(
-              text: AppStrings.changeShortType,
+              text: AppStrings.changeSortType,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
-            Row(
-              children: [
-                // RadioMenuButton(value: value, groupValue: groupValue, onChanged: onChanged, child: child)
-              ],
-            )
+
+            ///<<<================= Card sorting type =======================>>>
+
+            cardShortSelection(1, AppStrings.sortByCreateDate),
+            cardShortSelection(2, AppStrings.sortByName),
+            cardShortSelection(3, AppStrings.sortByCompanyName),
           ],
-        ),
+        )),
       ),
     );
   }
 
+  ///<<<======================= Card Sort Selections ======================>>>
+
+  Row cardShortSelection(int value, String text) {
+    return Row(
+            children: [
+              Radio<int>(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: value,
+                groupValue: selectedOption.value,
+                activeColor: AppColors.black_400,
+                fillColor: MaterialStateProperty.all(AppColors.black_400),
+                splashRadius: 20,
+                onChanged: (value) {
+                  selectedOption.value = value!.toInt();
+                },
+                  visualDensity: VisualDensity(horizontal: -4, vertical: -2)
+              ),
+              CustomText(
+                text: text,
+              )
+            ],
+          );
+  }
+
+  ///<<<========================= Manage Cards Methods ====================>>>
+
   Container manageCards(IconData icon, String text) {
     return Container(
-                padding: EdgeInsets.only(top: 8),
-                height: 72.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: AppColors.green_600)
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 25.h,
-                      width: 25.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: AppColors.black_500),
-                      ),
-                      child: Center(child: Icon(icon, size: 20,)),
-                    ),
-                    CustomText(
-                      maxLines: 2,
-                      text: text,
-                      fontSize: 12,
-                    )
-                  ],
-                ),
-              );
+      padding: EdgeInsets.only(top: 8),
+      height: 72.h,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: AppColors.green_600)),
+      child: Column(
+        children: [
+          Container(
+            height: 25.h,
+            width: 25.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: AppColors.black_500),
+            ),
+            child: Center(
+                child: Icon(
+              icon,
+              size: 20,
+            )),
+          ),
+          CustomText(
+            maxLines: 2,
+            text: text,
+            fontSize: 12,
+          )
+        ],
+      ),
+    );
   }
 }

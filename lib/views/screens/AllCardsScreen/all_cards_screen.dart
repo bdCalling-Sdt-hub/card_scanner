@@ -1,11 +1,15 @@
 
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/app_colors.dart';
 
 class AllCardsScreen extends StatelessWidget {
   AllCardsScreen({super.key});
@@ -81,7 +85,24 @@ class AllCardsScreen extends StatelessWidget {
                                  ),
                                ],
                              ),
-                           )
+                           ),
+                            Spacer(),
+
+                            ///<<<================ Edit Icon ================>>>
+
+                            InkWell(
+                              onTap: (){
+                                Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));
+                              },
+                              child: Container(
+                                height: 30.h,
+                                width: 30.w,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: Icon(Icons.border_color_outlined, size: 18,color: AppColors.black_500),
+                              ),
+                            ),
                           ],
                         ),
                       );

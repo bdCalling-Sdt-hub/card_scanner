@@ -2,6 +2,7 @@ import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
+import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/app_strings.dart';
+import '../../widgets/CustomBackButton/custom_back_button.dart';
 import 'InnerWidgets/card_holder.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -138,7 +140,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomElevatedButton(
-                  onTap: () =>  Get.toNamed(AppRoutes.allCardsScreen),
+                  onTap: () =>  Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCardTitle)),
                   text: AppStrings.createDigitalCards,
                   textColor: AppColors.black_500,
                   fontSize: 20,
@@ -173,6 +175,48 @@ class HomeScreen extends StatelessWidget {
                                       Get.toNamed(AppRoutes.cardSyncScreen);
                                     }else if(index == 1){
                                       Get.toNamed(AppRoutes.cardExportScreen);
+                                    } else if(index == 2){
+                                      
+                                      ///<<<=============== Email Sign In ==========>>>
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            surfaceTintColor:  AppColors.green_900,
+                                            contentPadding: EdgeInsets.zero,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(8)),
+                                            content: Container(
+                                              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                                              width: Get.width,
+                                              height: 180.h,
+                                              child: Column(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.centerRight,
+                                                      child: CustomBackButton(
+                                                          radius: 100,
+                                                          onTap: (){Get.back();})),
+                                                  CustomText(
+                                                    text: AppStrings.signInWithEmail,
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  SizedBox(height: 30.h),
+                                                  Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.black_400,
+                                                      borderRadius: BorderRadius.circular(100)
+                                                    ),
+                                                      child: SvgPicture.asset(AppIcons.googleIcon))
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
                                     }
                                   },
                                   child: Column(

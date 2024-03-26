@@ -29,6 +29,9 @@ class AppIcons{
   static String crossIcon = "$iconsBasePath/crossIcon.svg";
   static String sendIcon = "$iconsBasePath/send.svg";
   static String donateIcon = "$iconsBasePath/donation.svg";
+  static String googleColorfulIcon = "$iconsBasePath/google.svg";
+  static String barCodeScanIcon = "$iconsBasePath/barCodeScanIcon.svg";
+  static String aboutIcon = "$iconsBasePath/aboutIcon.svg";
 
   ///<<<======================= Enterprise Icons ===========================>>>
 

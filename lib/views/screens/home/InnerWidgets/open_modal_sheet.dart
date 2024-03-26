@@ -39,9 +39,9 @@ class OpenModalSheet extends StatelessWidget {
                   Get.back();
                 },
                 child: CustomBackButton(
-                    onTap: (){
-                      Get.back();
-                    },
+                  onTap: (){
+                    Get.back();
+                  },
                   radius: 100,
                 ),
               ),
@@ -76,9 +76,9 @@ class OpenModalSheet extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: CustomBackButton(
-                                  onTap: (){
-                                    Get.back();
-                                  },
+                                onTap: (){
+                                  Get.back();
+                                },
                                 radius: 100.r,
                               ),
                             ),
@@ -97,8 +97,8 @@ class OpenModalSheet extends StatelessWidget {
                                     height: 40.h,
                                     width: 40.w,
                                     decoration: BoxDecoration(
-                                      color: AppColors.black_500,
-                                      borderRadius: BorderRadius.circular(12.r)
+                                        color: AppColors.black_500,
+                                        borderRadius: BorderRadius.circular(12.r)
                                     ),
                                     child: Center(child: SvgPicture.asset(AppIcons.linkedinIcon)),
                                   ),
