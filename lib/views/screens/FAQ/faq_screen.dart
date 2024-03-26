@@ -19,6 +19,7 @@ class FAQScreen extends StatelessWidget {
     AppStrings.phoneWiFiConnectionSyncFailed,
   ];
   RxBool isTapped = false.obs;
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +65,10 @@ class FAQScreen extends StatelessWidget {
                             InkWell(
                               onTap: (){
                                 isTapped.value = !isTapped.value;
+                                selectedIndex = index;
                               },
                               child: Icon(
-                                isTapped.value? Icons.keyboard_arrow_down : Icons.arrow_forward_ios ,
+                                isTapped.value && index == selectedIndex? Icons.keyboard_arrow_down : Icons.arrow_forward_ios ,
                                 size: 20,
                               ),
                             )
@@ -75,7 +77,7 @@ class FAQScreen extends StatelessWidget {
                         SizedBox(height: 8.h,),
                         Divider(),
                         SizedBox(height: 8.h,),
-                        if(isTapped.value)
+                        if(isTapped.value && index == selectedIndex)
                           Container(
                             margin: EdgeInsets.only(bottom: 12.h),
                             padding: EdgeInsets.all(16.w),
@@ -86,7 +88,6 @@ class FAQScreen extends StatelessWidget {
                             child: CustomText(
                               maxLines: 10,
                               text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",),)
-            
                       ],
                     );
                   }),
