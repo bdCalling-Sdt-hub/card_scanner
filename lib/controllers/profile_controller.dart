@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 class ProfileController extends GetxController{
 
   RxBool isStyle = false.obs;
-  RxBool isInformation = false.obs;
+  RxBool isInformation = true.obs;
+
+  RxInt selectedColor = 50.obs;
 
   String? image;
 

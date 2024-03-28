@@ -165,6 +165,11 @@ class AppStrings{
   static String supportForProblemsQuestions = "Support for Problems/Questions";
   static String syncPhoneCardsCamCardCloud = "Sync Phone Cards CamCard Cloud?";
   static String phoneWiFiConnectionSyncFailed = "Phone WiFi Connection sync Failed?";
+  static String basicInfo = "Basic Info";
+  static String contactInfo = "Contact Info";
+  static String experience = "Experience";
+  static String education = "Education";
+  static String mobileNumber = "Mobile Number";
 
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";
