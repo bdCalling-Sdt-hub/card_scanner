@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../views/screens/Auth/forgot_password_screen.dart';
 import '../../views/screens/Auth/reset_password_screen.dart';
+import '../../views/screens/Auth/signin_screen.dart';
 import '../../views/screens/CardExport/card_export_screen.dart';
 import '../../views/screens/CardSync/card_sync_screen.dart';
 import '../../views/screens/Group/create_group_screen.dart';
@@ -37,7 +38,7 @@ class AppRoutes {
     GetPage(name: onBoardScreen, page: () => OnBoardingScreen()),
     GetPage(name: homeScreen, page: () => HomeScreen()),
     GetPage(name: signUpScreen, page: () => SignUpScreen()),
-    GetPage(name: signInScreen, page: () => SignUpScreen()),
+    GetPage(name: signInScreen, page: () => SignInScreen()),
     GetPage(name: resetPasswordScreen, page: () => ResetPasswordScreen()),
     GetPage(name: otpScreen, page: () => OtpScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPasswordScreen()),
