@@ -139,7 +139,7 @@ class CardHolder extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                             Spacer(),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
 
                                 ///<<<================== Bottom Modal Sheet =========================>>>

@@ -2,6 +2,7 @@
 
 
 
+import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -16,8 +17,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+import '../../../core/routes/app_routes.dart';
+
+class SignupOtpScreen extends StatelessWidget {
+  SignupOtpScreen({super.key});
+
+  SignInController signInController = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -100,16 +105,16 @@ class OtpScreen extends StatelessWidget {
             ),
 
             Align(
-              alignment: Alignment.centerLeft,
+                alignment: Alignment.centerLeft,
                 child: CustomText(text: AppStrings.didNotReceiveOtp,)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("00:29"),
                 CustomElevatedButton(
-                    onTap: (){
-                      Get.snackbar("OTp is resent", "");
-                    },
+                  onTap: (){
+                    Get.snackbar("OTp is resent", "");
+                  },
                   text: AppStrings.resendCode,
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
@@ -125,10 +130,12 @@ class OtpScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
         child: CustomElevatedButton(
           onTap: (){
-            Get.to(ResetPasswordScreen());
+            Get.toNamed(AppRoutes.homeScreen);
+            Get.snackbar("Your new account has been created", "");
+            signInController.ifSignIn.value = true;
           },
           text: AppStrings.submitBtn,
           backgroundColor: AppColors.black_500,

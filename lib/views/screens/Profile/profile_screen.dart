@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/FAQ/faq_screen.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
 import 'package:card_scanner/views/screens/Profile/my_qrcode_screen.dart';
@@ -11,6 +12,7 @@ import 'package:card_scanner/views/screens/Profile/view_profile_screen.dart';
 import 'package:card_scanner/views/screens/RecommendedNameCard/recommended_name_card.dart';
 import 'package:card_scanner/views/screens/Settings/settings_screen_main.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
+import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ class ProfileScreen extends StatelessWidget {
       {"icon" : SvgPicture.asset(AppIcons.sendIcon, height: 18), "text" : AppStrings.recommendToFriends},
       {"icon" : Icon(Icons.swap_vert_circle_outlined), "text" : AppStrings.faq},
       {"icon" : Icon(Icons.settings_outlined), "text" : AppStrings.settings},
+      {"icon" : Icon(Icons.logout_outlined), "text" : AppStrings.signOut},
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavBar(currentIndex: 4),
@@ -170,6 +173,33 @@ class ProfileScreen extends StatelessWidget {
                             Get.to(RecommendNameCardScreen());
                           } else if(index == 1 ){
                             Get.to(FAQScreen());
+                          } else if(index == 3 ){
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: CustomText(text: "Are you sure to sign out?", fontSize: 20, color: AppColors.black_500,),
+                                    actions: [
+                                      CustomElevatedButton(
+                                        onTap: (){
+                                          Get.to(SignInScreen());
+                                        },
+                                        width: 120,
+                                        text: "Yes",
+                                        backgroundColor: AppColors.green_900,
+                                      ),
+                                      CustomElevatedButton(
+                                        onTap: (){
+                                          Get.back();
+                                        },
+                                        width: 120,
+                                        text: "No",
+                                        backgroundColor: AppColors.green_900,
+                                      ),
+                                    ],
+                                  );
+                                },
+                            );
                           }
                         },
                         child: Container(

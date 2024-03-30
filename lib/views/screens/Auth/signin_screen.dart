@@ -16,6 +16,7 @@ import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 import '../../widgets/customText/custom_text.dart';
 import '../../widgets/custom_text_field/custom_text_field.dart';
+import 'forgot_password_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -25,7 +26,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(currentIndex: 4),
+      bottomNavigationBar: signInController.ifSignIn.value? BottomNavBar(currentIndex: 4) : null,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -136,13 +137,94 @@ class SignInScreen extends StatelessWidget {
                 // ),
               ),
 
-              SizedBox(height: 140.h,),
+              SizedBox(height: 8.h,),
+
+              ///<<<================ Forgot Password ==========================>>>
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Obx(
+                        () => Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            signInController.isChecked.value =
+                            !signInController.isChecked.value;
+                          },
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 20.w,
+                                height: 20.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border:
+                                  Border.all(color: AppColors.black_400),
+                                  color: signInController.isChecked.value
+                                      ? AppColors.black_400
+                                      : AppColors.primaryColor,
+                                ),
+                                child: signInController.isChecked.value
+                                    ? Center(
+                                  child: SvgPicture.asset(
+                                      AppIcons.checkMark,
+                                      fit: BoxFit.contain,
+                                      height: 10,
+                                      width: 10),
+                                )
+                                    : const Text(""),
+                                // child: Checkbox(
+                                //   autofocus: false,
+                                //   activeColor: AppColors.black_400,
+                                //   side: const BorderSide(color: AppColors.black_400),
+                                //   checkColor: AppColors.whiteColor,
+                                //   value: signUpController.isChecked.value,
+                                //   onChanged: (value) {
+                                //     signUpController.isChecked.value = value!;
+                                //   },
+                                // ),
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              CustomText(
+                                text: AppStrings.rememberMe,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                                color: AppColors.black_400,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(ForgotPasswordScreen());
+                    },
+                    child: CustomText(
+                      text: AppStrings.forgotPassword,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: AppColors.black_400,
+                    ),
+                  )
+                ],
+              ),
+
+              SizedBox(height: 120.h,),
+
+              ///<<<========================== Sign In Button ================>>>
+
               CustomElevatedButton(
                 height: 50.h,
                 width: Get.width,
                 isFillColor: true,
                 onTap: () {
                   Get.toNamed(AppRoutes.homeScreen);
+                  signInController.ifSignIn.value = true;
                 },
                 borderRadius: 12,
                 borderColor: AppColors.black_500,

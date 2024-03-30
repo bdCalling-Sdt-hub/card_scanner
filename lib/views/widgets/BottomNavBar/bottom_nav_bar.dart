@@ -1,5 +1,6 @@
 
 
+import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
@@ -27,6 +28,7 @@ class BottomNavBar extends StatelessWidget {
 
   BottomNavBar({required this.currentIndex, super.key});
   ProfileController profileController = Get.put(ProfileController());
+  SignInController signInController = Get.put(SignInController());
 
   List<String> navBarIcons =[
     AppIcons.cardIcon,
@@ -45,7 +47,6 @@ class BottomNavBar extends StatelessWidget {
   ];
 
   bool ifContacts = true;
-  bool ifSignIn = true;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +121,7 @@ class BottomNavBar extends StatelessWidget {
       }
     }else if(index == 4){
       if(!(currentIndex == 4)){
-        if(ifSignIn){
+        if(signInController.ifSignIn.value){
           Get.offAll(()=> ProfileScreen(),
               transition: Transition.noTransition
           );

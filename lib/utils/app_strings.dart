@@ -137,6 +137,7 @@ class AppStrings{
   static String helpAndFeedback = "Help and Feedback";
   static String faq = "FAQ";
   static String settings = "Settings";
+  static String signOut = "Sign out";
   static String cardInformation = "Card information";
   static String selectCardBackground = "Select card background";
   static String moreSelect = "More select";
@@ -184,7 +185,7 @@ class AppStrings{
   static String backToSignInBtn = "Back to Sign In";
   static String skipBtn = "Skip";
   static String signInBtn = "Sign In";
-  static String signUpBtn = "Sign UP";
+  static String signUpBtn = "Sign Up";
   static String submitBtn = "Submit";
   static String resetBtn = "Reset Password";
   static String goSearch = "Go Search";

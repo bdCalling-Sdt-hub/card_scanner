@@ -112,14 +112,30 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   )),
-                  Container(
-                    height: 40.h,
-                    width: 40.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.black_500),
-                    child: Center(
-                        child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                  InkWell(
+                    onTap: (){
+                      showDialog(
+                          context: context, 
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Text(
+                                "Payment method will be defined at development period",
+                                style: TextStyle(
+                                  fontSize: 16
+                                ),
+                              ),
+                            );
+                          },);
+                    },
+                    child: Container(
+                      height: 40.h,
+                      width: 40.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.black_500),
+                      child: Center(
+                          child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                    ),
                   )
                 ],
               ),

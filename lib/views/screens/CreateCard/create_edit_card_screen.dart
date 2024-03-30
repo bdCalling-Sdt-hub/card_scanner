@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart';
@@ -14,6 +15,7 @@ import '../../widgets/customText/custom_text.dart';
 
 class CreateOrEditCardScreen extends StatelessWidget {
   CreateOrEditCardScreen({super.key, required this.screenTitle});
+  ProfileController profileController = Get.put(ProfileController());
   
   final String screenTitle;
 
@@ -60,14 +62,19 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   Positioned(
                     bottom: 5.h,
                     right: 5.w,
-                    child: Container(
-                      height: 30.h,
-                      width: 30.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: AppColors.green_300
+                    child: InkWell(
+                      onTap: (){
+                        profileController.selectImageGallery();
+                      },
+                      child: Container(
+                        height: 30.h,
+                        width: 30.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: AppColors.green_300
+                        ),
+                        child: Icon(Icons.border_color_outlined, size: 20),
                       ),
-                      child: Icon(Icons.border_color_outlined, size: 20),
                     ),
                   )
                 ],

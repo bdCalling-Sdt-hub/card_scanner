@@ -6,6 +6,7 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Auth/forgot_password_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
+import 'package:card_scanner/views/screens/Auth/signup_otp_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:get/get_navigation/src/routes/get_transition_mixin.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/custom_text_field/custom_text_field.dart';
+import 'otp_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -251,79 +253,8 @@ class SignUpScreen extends StatelessWidget {
                 // ),
               ),
               SizedBox(height: 8.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Obx(
-                    () => Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            signUpController.isChecked.value =
-                                !signUpController.isChecked.value;
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 20.w,
-                                height: 20.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  border:
-                                      Border.all(color: AppColors.black_400),
-                                  color: signUpController.isChecked.value
-                                      ? AppColors.black_400
-                                      : AppColors.primaryColor,
-                                ),
-                                child: signUpController.isChecked.value
-                                    ? Center(
-                                        child: SvgPicture.asset(
-                                            AppIcons.checkMark,
-                                            fit: BoxFit.contain,
-                                            height: 10,
-                                            width: 10),
-                                      )
-                                    : const Text(""),
-                                // child: Checkbox(
-                                //   autofocus: false,
-                                //   activeColor: AppColors.black_400,
-                                //   side: const BorderSide(color: AppColors.black_400),
-                                //   checkColor: AppColors.whiteColor,
-                                //   value: signUpController.isChecked.value,
-                                //   onChanged: (value) {
-                                //     signUpController.isChecked.value = value!;
-                                //   },
-                                // ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              CustomText(
-                                text: AppStrings.rememberMe,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                color: AppColors.black_400,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(ForgotPasswordScreen());
-                    },
-                    child: CustomText(
-                      text: AppStrings.forgotPassword,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black_400,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 48.h,),
+
+              SizedBox(height: 60.h,),
 
               ///<<<================== Sign In Buttons =======================>>>
               Row(
@@ -349,8 +280,8 @@ class SignUpScreen extends StatelessWidget {
                    child: ElevatedButton(
                      onPressed: () {
                        // Add your button's onPressed logic here
-                       Get.toNamed(AppRoutes.homeScreen);
-                       Get.snackbar("Your new account has been created", "");
+                       Get.to(SignupOtpScreen());
+                       Get.snackbar("Otp sent to your email", "");
                      },
                      style: ButtonStyle(
                        backgroundColor: const MaterialStatePropertyAll(AppColors.black_500),
