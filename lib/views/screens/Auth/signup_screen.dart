@@ -196,7 +196,7 @@ class SignUpScreen extends StatelessWidget {
                 isPassword: true,
                 keyboardType: TextInputType.text,
                 textAlign: TextAlign.start,
-                hintText: AppStrings.newPassword.tr,
+                hintText: AppStrings.password.tr,
                 hintStyle: GoogleFonts.prompt(
                     fontSize: 16.h,
                     fontWeight: FontWeight.w400,
@@ -233,7 +233,7 @@ class SignUpScreen extends StatelessWidget {
                 isPassword: true,
                 keyboardType: TextInputType.text,
                 textAlign: TextAlign.start,
-                hintText: AppStrings.confirmNewPassword.tr,
+                hintText: AppStrings.confirmPassword.tr,
                 hintStyle: GoogleFonts.prompt(
                     fontSize: 16.h,
                     fontWeight: FontWeight.w400,
@@ -256,7 +256,7 @@ class SignUpScreen extends StatelessWidget {
 
               SizedBox(height: 60.h,),
 
-              ///<<<================== Sign In Buttons =======================>>>
+              ///<<<================== Sign In Texts =======================>>>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [

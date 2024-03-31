@@ -40,11 +40,20 @@ class CardSyncScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: (){
-
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: CustomText(
+                          maxLines: 2,
+                          text: AppStrings.getService,
+                          fontSize: 16,
+                        )
+                      );
+                    },);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-                  height: 236,
                   width: Get.width,
                   decoration: BoxDecoration(
                     border: Border.all(color: AppColors.green_900),
@@ -58,7 +67,7 @@ class CardSyncScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: CustomText(
                           text: AppStrings.mobileBackup,
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -67,6 +76,53 @@ class CardSyncScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: CustomText(
                           text: AppStrings.batchExportCards,
+                          fontSize: 16,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 20.h,),
+              GestureDetector(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                          content: CustomText(
+                            maxLines: 2,
+                            text: AppStrings.getService,
+                            fontSize: 16,
+                          )
+                      );
+                    },);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.green_900),
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                  child: Column(
+                    children: [
+                      Image.asset(AppImages.emailBackUpImg, height: 130.h, width: 168.w,),
+                      SizedBox(height: 20.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          text: AppStrings.emailBackup,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          text: AppStrings.dataBackupEmailsSecurely,
                           fontSize: 16,
                         ),
                       )

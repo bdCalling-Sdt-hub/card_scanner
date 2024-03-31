@@ -1,5 +1,6 @@
 
 import 'package:card_scanner/utils/app_images.dart';
+import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class CreateGroupScreen extends StatelessWidget {
               ),
               SizedBox(height: 16.h),
 
-              ///<<<================== Group Name Editing Field =================>>>
+              ///<<<================== Group Name Field =================>>>
 
               TextFormField(
                 decoration: InputDecoration(
@@ -53,7 +54,7 @@ class CreateGroupScreen extends StatelessWidget {
               ///<<<=================== Select Cards Button ==================>>>
               GestureDetector(
                 onTap: (){
-
+                  Get.to(CardSelectionScreen());
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: Get.width - 150),
@@ -90,7 +91,10 @@ class CreateGroupScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
-            onTap: (){},
+            onTap: (){
+              Get.back();
+              Get.snackbar(AppStrings.groupIsCreated, "");
+            },
           text: AppStrings.createGroup,
           backgroundColor: AppColors.black_500,
         ),

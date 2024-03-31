@@ -186,6 +186,9 @@ class OnBoardingScreen extends StatelessWidget {
           ),
         ],
       )),
+
+      ///<<<==================== Buttons =========================>>>
+
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 24.h),
         child: Obx(() {

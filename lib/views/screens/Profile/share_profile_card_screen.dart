@@ -39,7 +39,12 @@ class ShareProfileCardScreen extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
-                  Icon(Icons.file_download_outlined, size: 30,),
+                  InkWell(
+                    onTap: (){
+                      Get.snackbar("Qr code downloaded", "");
+                    },
+                      child: Icon(Icons.file_download_outlined, size: 30,),
+                  ),
                 ],
               ),
               SizedBox(height: 50.h),
@@ -66,7 +71,9 @@ class ShareProfileCardScreen extends StatelessWidget {
                     ///<<<=============== Qr Code Link Copy Icon ==============>>>
                     
                     InkWell(
-                      onTap: (){},
+                        onTap: (){
+                          Get.snackbar("Share link copied", "");
+                        },
                         child: Icon(Icons.content_copy_outlined))
                   ],
                 ),

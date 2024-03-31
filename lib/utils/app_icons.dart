@@ -32,6 +32,7 @@ class AppIcons{
   static String googleColorfulIcon = "$iconsBasePath/google.svg";
   static String barCodeScanIcon = "$iconsBasePath/barCodeScanIcon.svg";
   static String aboutIcon = "$iconsBasePath/aboutIcon.svg";
+  static String editNote = "$iconsBasePath/editNote.svg";
 
   ///<<<======================= Enterprise Icons ===========================>>>
 

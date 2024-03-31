@@ -1,3 +1,5 @@
+import 'package:card_scanner/controllers/profile_controller.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,9 +14,13 @@ import '../../../../utils/app_strings.dart';
 import '../../../widgets/customText/custom_text.dart';
 
 class OpenModalSheet extends StatelessWidget {
-  const OpenModalSheet({
+  OpenModalSheet({
     super.key,
+    required this.index
   });
+
+  int index;
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +182,13 @@ class OpenModalSheet extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(),
+
+                                ///<<<=============== Yes Button ================>>>
+
                                 CustomElevatedButton(
                                   onTap: () {
-                                    Get.back();
+                                    profileController.captureImage.remove(index);
+                                    Get.toNamed(AppRoutes.homeScreen);
                                   },
                                   text: AppStrings.yes,
                                   height: 38,
@@ -189,6 +199,9 @@ class OpenModalSheet extends StatelessWidget {
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
                                 ),
+
+                                ///<<<=============== No Button ================>>>
+
                                 CustomElevatedButton(
                                   onTap: () {
                                     Get.back();

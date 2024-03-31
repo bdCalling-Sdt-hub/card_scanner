@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
@@ -225,6 +226,8 @@ class SignInScreen extends StatelessWidget {
                 onTap: () {
                   Get.toNamed(AppRoutes.homeScreen);
                   signInController.ifSignIn.value = true;
+                  PrefsHelper.setBool(AppStrings.signedIn, true);
+                  PrefsHelper.signedIn = true;
                 },
                 borderRadius: 12,
                 borderColor: AppColors.black_500,
@@ -245,6 +248,9 @@ class SignInScreen extends StatelessWidget {
                     color: AppColors.black_400,
                   ),
                   SizedBox(width: 8.w,),
+
+                  ///<<<================ Sign up Text =====================>>>
+
                   GestureDetector(
                     onTap: (){
                       Get.toNamed(AppRoutes.signUpScreen);
@@ -257,7 +263,28 @@ class SignInScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
+              SizedBox(height: 8.h,),
+              Align(
+                alignment: Alignment.centerRight,
+
+                ///<<<================== Skip Button =====================>>>
+
+                child: CustomElevatedButton(
+
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  borderRadius: 26.r,
+                  isFillColor: false,
+                  width: 75.w,
+                  height: 40.h,
+                  onTap: () {
+                    Get.toNamed(AppRoutes.homeScreen);
+                  },
+                  text: AppStrings.skipBtn,
+                  textColor: AppColors.black_400,
+                ),
+              ),
             ],
           ),
         ),

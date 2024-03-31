@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/utils/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,11 +11,15 @@ class PrefsHelper extends GetxController {
   static bool isStyle = false;
   static String localizationLanguageCode = 'en';
   static String localizationCountryCode = 'US';
+  static String cameraImage = '';
+  static bool signedIn = false;
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
+    signedIn = preferences.getBool(AppStrings.signedIn) ?? false;
+    cameraImage = preferences.getString("cameraImage") ?? "";
   }
 
   ///<<<======================== Get Data Form Shared Preference ==============>
@@ -26,7 +31,6 @@ class PrefsHelper extends GetxController {
 
   static Future<bool?> getBool(String key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    isStyle = preferences.getBool("isStyle") ?? false;
     return preferences.getBool(key);
   }
 
@@ -65,7 +69,10 @@ class PrefsHelper extends GetxController {
     await preferences.clear();
     preferences.setString("clientId", "");
     preferences.setString("myEmail", "");
+    preferences.setString("cameraImage", "");
     preferences.setBool("isProvider", false);
+    preferences.setBool(AppStrings.signedIn, false);
+    signedIn = false;
     token = "";
   }
 }

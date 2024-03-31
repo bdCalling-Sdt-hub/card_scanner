@@ -23,9 +23,13 @@ class SettingsScreenMain extends StatelessWidget {
     {"icon": Icon(Icons.language), "text": AppStrings.language},
     {
       "icon": SvgPicture.asset(AppIcons.aboutIcon, height: 18),
-      "text": AppStrings.about
+      "text": AppStrings.aboutUs
     },
   ];
+  
+  RxBool isDefault = false.obs;
+  RxBool isFirstLast = false.obs;
+  RxBool isLastFirst = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +129,7 @@ class SettingsScreenMain extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         width: Get.width,
         height: 220.h,
-        child: index == 0? Column(
+        child: index == 0? Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
@@ -138,32 +142,71 @@ class SettingsScreenMain extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.h),
-            Row(
-              children: [
-                CustomText(
-                  text: AppStrings.setAsDefault,
-                  fontSize: 16,
-                ),
-                Spacer(),
-                Icon(
-                  Icons.check,
-                  size: 20,
-                ),
-              ],
+            InkWell(
+              onTap: (){
+                isDefault.value = true;
+                isFirstLast.value = false;
+                isLastFirst.value = false;
+              },
+              child: Row(
+                children: [
+                  CustomText(
+                    text: AppStrings.setAsDefault,
+                    fontSize: 16,
+                  ),
+                  Spacer(),
+                  Icon(
+                    isDefault.value? Icons.check : null,
+                    size: 20,
+                  ),
+                ],
+              ),
             ),
             Divider(),
-            CustomText(
-              text: AppStrings.firstLast,
-              fontSize: 16,
+            InkWell(
+              onTap: (){
+                isDefault.value = false;
+                isFirstLast.value = true;
+                isLastFirst.value = false;
+              },
+              child: Row(
+                children: [
+                  CustomText(
+                    text: AppStrings.firstLast,
+                    fontSize: 16,
+                  ),
+                  Spacer(),
+                  Icon(
+                    isFirstLast.value? Icons.check : null,
+                    size: 20,
+                  ),
+                ],
+              ),
             ),
             Divider(),
-            CustomText(
-              text: AppStrings.lastFirst,
-              fontSize: 16,
+            InkWell(
+              onTap: (){
+                isDefault.value = false;
+                isFirstLast.value = false;
+                isLastFirst.value = true;
+              },
+              child: Row(
+                children: [
+                  CustomText(
+                    text: AppStrings.lastFirst,
+                    fontSize: 16,
+                  ),
+                  Spacer(),
+                  Icon(
+                    isLastFirst.value? Icons.check : null,
+                    size: 20,
+                  ),
+                ],
+              ),
             ),
             Divider(),
           ],
-        ) : Column(
+        )) : Column(
           children: [
             Align(
               alignment: Alignment.centerRight,

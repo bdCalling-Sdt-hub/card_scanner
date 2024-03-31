@@ -162,7 +162,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       return null;
                     }
                   },
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.phone,
                   textAlign: TextAlign.start,
                   hintText: AppStrings.enterMobileNumber.tr,
                   hintStyle: GoogleFonts.prompt(

@@ -17,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../Helpers/prefs_helper.dart';
 import '../../../core/routes/app_routes.dart';
 
 class SignupOtpScreen extends StatelessWidget {
@@ -129,6 +130,9 @@ class SignupOtpScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      ///<<<================== Submit Button ======================>>>
+
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
         child: CustomElevatedButton(
@@ -136,6 +140,8 @@ class SignupOtpScreen extends StatelessWidget {
             Get.toNamed(AppRoutes.homeScreen);
             Get.snackbar("Your new account has been created", "");
             signInController.ifSignIn.value = true;
+            PrefsHelper.setBool(AppStrings.signedIn, true);
+            PrefsHelper.signedIn = true;
           },
           text: AppStrings.submitBtn,
           backgroundColor: AppColors.black_500,

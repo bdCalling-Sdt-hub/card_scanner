@@ -25,4 +25,5 @@ class AppImages{
   static String mobileSmartSync = "$imagesBasePath/mobileSmartSync.png";
   static String noData = "$imagesBasePath/noData.png";
   static String nameCardLogo = "$imagesBasePath/nameCardLogo.png";
+  static String emailBackUpImg = "$imagesBasePath/emailBackUPImg.png";
 }

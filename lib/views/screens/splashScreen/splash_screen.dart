@@ -1,6 +1,8 @@
 
 import 'dart:async';
 
+import 'package:card_scanner/Helpers/prefs_helper.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     Timer(const Duration(seconds: 3), () {
-      Get.to(OnBoardingScreen());
+      if(PrefsHelper.signedIn){
+        Get.toNamed(AppRoutes.homeScreen);
+      }else{
+        Get.to(OnBoardingScreen());
+      }
     });
     super.initState();
   }

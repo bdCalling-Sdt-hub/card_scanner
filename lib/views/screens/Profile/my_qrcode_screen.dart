@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
+import '../QrCodeScanner/qr_code_screen.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
   const MyQrCodeScreen({super.key});
@@ -78,19 +79,24 @@ class MyQrCodeScreen extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Container(
-                          height: 50.h,
-                          width: 50.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: AppColors.green_50
-                          ),
-                          child: Center(
-                              child: SvgPicture.asset(
-                                AppIcons.barCodeScanIcon,
-                                height: 24,
-                                width: 24,
-                              ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(QrCodeScreen());
+                          },
+                          child: Container(
+                            height: 50.h,
+                            width: 50.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: AppColors.green_50
+                            ),
+                            child: Center(
+                                child: SvgPicture.asset(
+                                  AppIcons.barCodeScanIcon,
+                                  height: 24,
+                                  width: 24,
+                                ),
+                            ),
                           ),
                         ),
                         SizedBox(height: 8.h,),
@@ -102,17 +108,22 @@ class MyQrCodeScreen extends StatelessWidget {
                     Spacer(),
                     Column(
                       children: [
-                        Container(
-                          height: 50.h,
-                          width: 50.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: AppColors.green_50
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.file_download_outlined,
-                              size: 24,
+                        InkWell(
+                          onTap: () {
+                            Get.snackbar("Qr code downloaded", "");
+                          },
+                          child: Container(
+                            height: 50.h,
+                            width: 50.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: AppColors.green_50
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.file_download_outlined,
+                                size: 24,
+                              ),
                             ),
                           ),
                         ),

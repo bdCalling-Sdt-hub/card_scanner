@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 
+import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -177,12 +179,16 @@ class ProfileScreen extends StatelessWidget {
                             showDialog(
                                 context: context,
                                 builder: (context) {
+
+                                  ///<<<==================== Sign out pop up =========================>>>
+
                                   return AlertDialog(
                                     content: CustomText(text: "Are you sure to sign out?", fontSize: 20, color: AppColors.black_500,),
                                     actions: [
                                       CustomElevatedButton(
                                         onTap: (){
-                                          Get.to(SignInScreen());
+                                          Get.offAll(SignInScreen());
+                                          PrefsHelper.removeAllPrefData();
                                         },
                                         width: 120,
                                         text: "Yes",

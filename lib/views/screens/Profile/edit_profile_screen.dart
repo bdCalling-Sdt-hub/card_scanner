@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/app_icons.dart';
 import 'IneerWidget/edit_card_style.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -139,10 +141,95 @@ class EditProfileScreen extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                             child: InkWell(
                               onTap: (){
-                                profileController.selectImageCamera();
+                                showDialog(context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      backgroundColor: AppColors.green_700,
+                                      content: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                        height: 100.h,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                profileController.selectImageGallery();
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                width: 70,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: AppColors.green_600,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: const [
+                                                    Icon(Icons.image_outlined),
+                                                    CustomText(text: "Gallery", fontSize: 16,)
+                                                  ],
+                                                ),),
+                                            ),
+                                            SizedBox(width: 8,),
+                                            InkWell(
+                                              onTap: () {
+                                                profileController.selectImageCamera();
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                width: 70,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: AppColors.green_600,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
+                                                    CustomText(text: "Camera", fontSize: 16,)
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 8,),
+                                            InkWell(
+                                              onTap: () {
+
+                                              },
+                                              child: Container(
+                                                height: 70,
+                                                width: 75,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: AppColors.green_600,
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
+                                                    CustomText(text: "LinkedIn", fontSize: 16,)
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
-                                child: Icon(
-                                    Icons.camera_alt_outlined))),
+                                child: Container(
+                                  height: 30.h,
+                                  width: 30.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: AppColors.black_500
+                                  ),
+                                  child: Icon(Icons.border_color_outlined, size: 20, color: AppColors.green_500,),
+                                ),
+                            ),
+                        ),
                       ),
                       CustomText(
                         text: "${AppStrings.basicInfo}:",

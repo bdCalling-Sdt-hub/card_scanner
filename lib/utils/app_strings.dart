@@ -73,6 +73,7 @@ class AppStrings{
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";
+  static String selectContacts = "Select Contacts";
   static String currentlyNoContacts = "There are currently no contacts available";
   static String noContactsFoundTryAgain = "No contacts found. Please try again later for updated information or check back soon.";
 
@@ -104,6 +105,8 @@ class AppStrings{
   static String smartSync = "Smart Sync";
   static String mobileBackup = "Mobile backup";
   static String batchExportCards = "Batch export cards information.";
+  static String emailBackup = "Email backup";
+  static String dataBackupEmailsSecurely = "Protect your data backup emails securely.";
 
 
   ///<<<==================== Create Card Screen =============================>>>
@@ -115,7 +118,7 @@ class AppStrings{
   static String manageDuplicateCards = "Manage Duplicate Cards";
 
   ///<<<=================== Group Screens Texts ==============================>>>
-  static String short = "Short";
+  static String sort = "Sort";
   static String enterGroupName = "Enter your group name";
   static String createNewGroup = "Create new group";
   static String createGroup = "Create Group";
@@ -123,7 +126,9 @@ class AppStrings{
   static String recentlyAdded = "Recently added";
   static String unGrouped = "Ungrouped";
   static String alpha = "Alpha";
-  static String noCardsSelected= "No Cards Selected";
+  static String noCardsSelected = "No Cards Selected";
+  static String groupIsCreated = "Group is created";
+  static String save = "Save";
 
   ///<<<==================== Profile Screen Texts ============================>>>
   static String myProfile = "My Profile";
@@ -150,16 +155,16 @@ class AppStrings{
   static String general = "General";
   static String notifications = "Notifications";
   static String language = "Language";
-  static String about = "About";
+  static String aboutUs = "About Us";
   static String setAsDefault = "Set as default";
   static String lastFirst = "Last, First";
   static String firstLast = "First, Last";
   static String receiveNotifications = "Receive  notifications";
   static String changeLanguage = "Change Language";
-  static String contactUs = "Contact us";
-  static String followUs = "Follow us";
+  static String contactUs = "Contact";
+  static String followUs = "Follow";
   static String toInstallNameCardScanner = "Scan the code to install Name Card Scanner";
-  static String recommendNameCard = "Recommend Name Card";
+  static String recommendNameCard = "Recommend Name Card \nScanner";
   static String redeemPremiumCode = "How to redeem premium code?";
   static String resetMyLoginPassword = "How to reset my login password?";
   static String setTheRecognitionLanguages = "How to set the recognition languages?";
@@ -171,6 +176,8 @@ class AppStrings{
   static String experience = "Experience";
   static String education = "Education";
   static String mobileNumber = "Mobile Number";
+  static String signedIn = "signedIn";
+  static String getService = "You will get service after developing phase";
 
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";

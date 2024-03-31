@@ -78,14 +78,14 @@ class EnterpriseScreen extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    CustomElevatedButton(
-                      width: 165.w,
-                      height: 42.h,
-                      onTap: (){},
-                      text: AppStrings.tryItFree,
-                      backgroundColor: AppColors.black_500,
-                      textColor: AppColors.green_400,
-                    ),
+                    // CustomElevatedButton(
+                    //   width: 165.w,
+                    //   height: 42.h,
+                    //   onTap: (){},
+                    //   text: AppStrings.tryItFree,
+                    //   backgroundColor: AppColors.black_500,
+                    //   textColor: AppColors.green_400,
+                    // ),
                     SizedBox(
                       height: 42.h,
                     ),

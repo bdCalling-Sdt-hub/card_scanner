@@ -37,22 +37,7 @@ class GroupScreen extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
-                  Container(
-                    height: 26.h,
-                    width: 65.w,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.black_400
-                      ),
-                      borderRadius: BorderRadius.circular(4.r)
-                    ),
-                    child: Center(
-                      child: CustomText(
-                        text: AppStrings.short,
-                        fontSize: 16,
-                      ),
-                    ),
-                  )
+                  SizedBox(width: 30.h,),
                 ],
               ),
               SizedBox(height: 22.h,),
@@ -98,13 +83,13 @@ class GroupScreen extends StatelessWidget {
               ///<<<================== Recently Added Text ===================>>>
               SizedBox(height: 16.h),
               CustomText(
-                text: "${AppStrings.recentlyAdded}(5)",
+                text: "${AppStrings.recentlyAdded}(0)",
                 fontSize: 16,
                 color: AppColors.black_400 ,
               ),
               const Divider(color: AppColors.black_400,),
               CustomText(
-                text: "${AppStrings.unGrouped}(3)",
+                text: "${AppStrings.unGrouped}(0)",
                 fontSize: 16,
                 color: AppColors.black_400 ,
               ),

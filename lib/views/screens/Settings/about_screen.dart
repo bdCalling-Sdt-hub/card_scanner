@@ -1,5 +1,6 @@
 
 import 'package:card_scanner/utils/app_colors.dart';
+import 'package:card_scanner/utils/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,7 +33,7 @@ class AboutScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.about,
+                    text: AppStrings.aboutUs,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -40,31 +41,16 @@ class AboutScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 40.h),
-              GestureDetector(
-                onTap: (){
-
-                },
-                child: CustomText(
-                  text: AppStrings.followUs,
-                  fontSize: 16,
-                  color: AppColors.black_500,
-                ),
-              ),
+              Image.asset(AppImages.nameCardLogo),
               SizedBox(height: 8.h),
               Divider(),
+
+              CustomText(
+                maxLines: 10,
+                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",),
+
               SizedBox(height: 20.h),
-              GestureDetector(
-                onTap: (){
 
-                },
-                child: CustomText(
-                  text: AppStrings.contactUs,
-                  fontSize: 16,
-                  color: AppColors.black_500,
-                ),
-              ),
-              SizedBox(height: 8.h),
-              Divider(),
             ],
           ),
         ),

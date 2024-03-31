@@ -1,5 +1,6 @@
 
 
+import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -22,13 +23,21 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/app_strings.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
 
   final int currentIndex;
 
   BottomNavBar({required this.currentIndex, super.key});
+
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
   ProfileController profileController = Get.put(ProfileController());
+
   SignInController signInController = Get.put(SignInController());
+
 
   List<String> navBarIcons =[
     AppIcons.cardIcon,
@@ -38,19 +47,25 @@ class BottomNavBar extends StatelessWidget {
     AppIcons.personIcon
   ];
 
-  List<String> navBarTexts = [
-    AppStrings.cards,
-    AppStrings.contacts,
-    "",
-    AppStrings.enterprise,
-    AppStrings.signIn
-  ];
-
   bool ifContacts = true;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    PrefsHelper.getBool(AppStrings.signedIn);
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    String profileText = PrefsHelper.signedIn? AppStrings.me : AppStrings.signIn;
+    List<String> navBarTexts = [
+      AppStrings.cards,
+      AppStrings.contacts,
+      "",
+      AppStrings.enterprise,
+      profileText
+    ];
     return Container(
       height: 90.h,
       width: Get.height,
@@ -72,7 +87,7 @@ class BottomNavBar extends StatelessWidget {
                         Center(
                           child: SvgPicture.asset(
                             navBarIcons[index],
-                            color: index == currentIndex? AppColors.black_500 : AppColors.black_300,
+                            color: index == widget.currentIndex? AppColors.black_500 : AppColors.black_300,
                             height: 24.h,
                             width: 24.w,
                           ),
@@ -82,7 +97,7 @@ class BottomNavBar extends StatelessWidget {
                           text: navBarTexts[index],
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
-                          color: index == currentIndex? AppColors.black_500 : AppColors.black_300,
+                          color: index == widget.currentIndex? AppColors.black_500 : AppColors.black_300,
                         ),
                       ],
                     ),
@@ -94,13 +109,13 @@ class BottomNavBar extends StatelessWidget {
 
   void onTap(int index) {
     if(index == 0){
-      if(!(currentIndex == 0)){
+      if(!(widget.currentIndex == 0)){
         Get.offAll(()=> HomeScreen(),
           transition: Transition.noTransition
         );
       }
     }else if(index == 1){
-      if(!(currentIndex == 1)){
+      if(!(widget.currentIndex == 1)){
         if(ifContacts){
           Get.offAll(()=> AllCardsScreen(), transition: Transition.noTransition);
         }else{
@@ -110,18 +125,18 @@ class BottomNavBar extends StatelessWidget {
         }
       }
     }else if(index == 2){
-      if(!(currentIndex == 2)){
+      if(!(widget.currentIndex == 2)){
         profileController.selectImageCamera();
       }
     }else if(index == 3){
-      if(!(currentIndex == 3)){
+      if(!(widget.currentIndex == 3)){
         Get.offAll(()=> EnterpriseScreen(),
             transition: Transition.noTransition
         );
       }
     }else if(index == 4){
-      if(!(currentIndex == 4)){
-        if(signInController.ifSignIn.value){
+      if(!(widget.currentIndex == 4)){
+        if(PrefsHelper.signedIn){
           Get.offAll(()=> ProfileScreen(),
               transition: Transition.noTransition
           );

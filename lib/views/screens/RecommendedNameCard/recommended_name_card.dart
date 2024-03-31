@@ -32,6 +32,7 @@ class RecommendNameCardScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
+                    maxLines: 2,
                     text: AppStrings.recommendNameCard,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,

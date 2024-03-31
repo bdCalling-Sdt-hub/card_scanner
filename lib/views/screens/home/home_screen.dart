@@ -1,3 +1,4 @@
+import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
@@ -27,23 +28,47 @@ class HomeScreen extends StatelessWidget {
     {"icon": AppIcons.emailIcon, "service": AppStrings.emailSign},
   ];
 
-  List cardsList = [
-    {
-      'cardImage':
-      "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-      'cardHolderName': "Richard",
-    },
-    {
-      'cardImage':
-      "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-      'cardHolderName': "",
-    },
-    {
-      'cardImage':
-      "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-      'cardHolderName': "Nicholas",
-    },
-  ];
+  // List cardsList = [
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Richard",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Nicholas",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Fardin",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Kabir",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Suhana",
+  //   },
+  //   {
+  //     'cardImage':
+  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+  //     'cardHolderName': "Nicholas",
+  //   },
+  //
+  // ];
+
+  ProfileController profileController = Get.put(ProfileController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +160,13 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.black_500),
                       child: Center(
                           child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                      // child: Column(
+                      //   children: [
+                      //     Center(
+                      //         child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                      //     // CustomText(text: "Donate", fontSize: 12, color: AppColors.green_500,),
+                      //   ],
+                      // ),
                     ),
                   )
                 ],
@@ -153,10 +185,67 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
               ),
+
+              ///<<<==================== Create Card Button ===================>>>
+
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomElevatedButton(
-                  onTap: () =>  Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCardTitle)),
+                  onTap: (){
+                    showDialog(context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: AppColors.green_700,
+                            content: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                              height: 100.h,
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCardTitle));
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: AppColors.green_600,
+                                      ),
+                                      child: Row(
+                                      children: [
+                                        SvgPicture.asset(AppIcons.editNote, height: 26, width: 20,),
+                                        SizedBox(width: 8.w,),
+                                        CustomText(text: "Create cards manually", fontSize: 16,)
+                                      ],
+                                    ),),
+                                  ),
+                                  Spacer(),
+                                  InkWell(
+                                    onTap: () {
+                                      profileController.selectImageCamera();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: AppColors.green_600,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
+                                          SizedBox(width: 8.w,),
+                                          CustomText(text: "Create cards using OCR", fontSize: 16,)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                    );
+                  },
                   text: AppStrings.createDigitalCards,
                   textColor: AppColors.black_500,
                   fontSize: 20,
@@ -223,10 +312,17 @@ class HomeScreen extends StatelessWidget {
                                                     height: 50,
                                                     width: 50,
                                                     decoration: BoxDecoration(
-                                                      color: AppColors.black_400,
+                                                      color: AppColors.black_500,
                                                       borderRadius: BorderRadius.circular(100)
                                                     ),
-                                                      child: SvgPicture.asset(AppIcons.googleIcon))
+                                                      child: Center(
+                                                        child: SvgPicture.asset(
+                                                          AppIcons.emailIcon,
+                                                          color: AppColors.whiteColor,
+                                                          height: 30,
+                                                          width: 30,
+                                                          fit: BoxFit.contain,),
+                                                      ))
                                                 ],
                                               ),
                                             ),
@@ -282,7 +378,7 @@ class HomeScreen extends StatelessWidget {
                       ),
 
                       ///<<<=============== Card Holder =============================>>>
-                      CardHolder(cardsList: cardsList),
+                      CardHolder( profileController: profileController, context: context,),
 
                     ],
                   ),

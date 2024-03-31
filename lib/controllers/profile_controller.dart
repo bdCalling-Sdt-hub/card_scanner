@@ -1,5 +1,7 @@
 
 
+import 'package:card_scanner/core/routes/app_routes.dart';
+import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -13,6 +15,8 @@ class ProfileController extends GetxController{
   RxInt selectedColor = 50.obs;
 
   String? image;
+  String? cameraImage;
+  List captureImage = [];
 
   selectImageGallery() async {
     final ImagePicker picker = ImagePicker();
@@ -29,8 +33,11 @@ class ProfileController extends GetxController{
     final XFile? getImages =
     await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (getImages != null) {
-      image = getImages.path;
+      cameraImage = getImages.path;
+      captureImage.add(cameraImage);
       update();
+      Get.to(HomeScreen());
+
     }
   }
 

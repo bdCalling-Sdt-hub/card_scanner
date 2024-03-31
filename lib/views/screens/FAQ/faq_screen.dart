@@ -55,24 +55,24 @@ class FAQScreen extends StatelessWidget {
                   children: List.generate(questionList.length, (index) {
                     return Column(
                       children: [
-                        Row(
-                          children: [
-                            CustomText(
-                              text: questionList[index],
-                              fontSize: 16,
-                            ),
-                            Spacer(),
-                            InkWell(
-                              onTap: (){
-                                isTapped.value = !isTapped.value;
-                                selectedIndex = index;
-                              },
-                              child: Icon(
+                        InkWell(
+                          onTap: (){
+                            isTapped.value = !isTapped.value;
+                            selectedIndex = index;
+                          },
+                          child: Row(
+                            children: [
+                              CustomText(
+                                text: questionList[index],
+                                fontSize: 16,
+                              ),
+                              Spacer(),
+                              Icon(
                                 isTapped.value && index == selectedIndex? Icons.keyboard_arrow_down : Icons.arrow_forward_ios ,
                                 size: 20,
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                         SizedBox(height: 8.h,),
                         Divider(),

@@ -1,17 +1,16 @@
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
-import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
-import 'package:card_scanner/views/screens/CardExport/card_export_screen.dart';
-import 'package:card_scanner/views/screens/Profile/profile_screen.dart';
-import 'package:card_scanner/views/screens/QrCodeScanner/qr_code_screen.dart';
-import 'package:card_scanner/views/screens/SplashScreen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'Helpers/prefs_helper.dart';
 import 'views/screens/home/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefsHelper.getAllPrefData();
   runApp(const MyApp());
 }
 
@@ -21,6 +20,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
@@ -33,10 +36,6 @@ class MyApp extends StatelessWidget {
           initialRoute: AppRoutes.splashScreen,
           getPages: AppRoutes.routes,
           // home: const SplashScreen(),
-          // home: SignUpScreen(),
-          // home: CardExportScreen(),
-          // home: ProfileScreen(),
-          // home: QrCodeScreen(),
         );
       },
     );
