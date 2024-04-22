@@ -78,7 +78,7 @@ class SignInScreen extends StatelessWidget {
                     return null;
                   }
                 },
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
                 hintText: AppStrings.email,
                 hintStyle: GoogleFonts.kumbhSans(
@@ -119,7 +119,7 @@ class SignInScreen extends StatelessWidget {
                 isPassword: true,
                 keyboardType: TextInputType.text,
                 textAlign: TextAlign.start,
-                hintText: AppStrings.newPassword.tr,
+                hintText: AppStrings.password.tr,
                 hintStyle: GoogleFonts.prompt(
                     fontSize: 16.h,
                     fontWeight: FontWeight.w400,

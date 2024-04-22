@@ -2,12 +2,12 @@
 class AppStrings{
 
   ///<<<================== OnBoarding Screen Texts ==========================>>>
-  static String onBoardTitle1 = "Scanning Solutions for Shopping Success";
-  static String onBoardTitle2 = "Simplified E-Commerce via Card Scanner ";
-  static String onBoardTitle3 = "Scan and Shop with Ease";
-  static String onBoardSubTitle1 = "Pioneering success through seamless scanning solutions for shoppers.";
-  static String onBoardSubTitle2 = "Simplify e-commerce with a card scanner for effortless transactions and convenience.";
-  static String onBoardSubTitle3 = "Scan products effortlessly and shop conveniently with our user-friendly system.";
+  static String onBoardTitle1 = "Scan, Save, and Share Effortlessly";
+  static String onBoardTitle2 = "Effortless Name Card Scanner Tool";
+  static String onBoardTitle3 = "Capture and Organize Name Cards Fast";
+  static String onBoardSubTitle1 = "Effortlessly scan, save, and share name cards with our intuitive mobile app.";
+  static String onBoardSubTitle2 = "Seamlessly digitize contacts with precision, simplicity, and efficiency.";
+  static String onBoardSubTitle3 = "Efficiently capture, organize name cards with our fast, intuitive scanning feature.";
 
   ///<<<=================== Auth Texts ======================================>>>
   static String signUpNOw = "Sign Up Now";
@@ -44,7 +44,7 @@ class AppStrings{
   static String createDigitalCards = "Create Digital Cards";
   static String cardSync = "Card Sync";
   static String cardExport = "Card Export";
-  static String emailSign = "Email Sign";
+  static String emailSign = "Email SignIn";
   static String artificialProofreading = "Artificial Proofreading";
   static String accurateIndentification = "100% Accurate Indentification";
   static String cards = "Cards";

@@ -69,7 +69,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Container(
       height: 90.h,
       width: Get.height,
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
+      padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w, top: 20.h),
       alignment: Alignment.center,
       color: AppColors.primaryColor,
       child: Row(

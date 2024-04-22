@@ -155,7 +155,7 @@ class SignUpScreen extends StatelessWidget {
                     return null;
                   }
                 },
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
                 hintText: AppStrings.email,
                 hintStyle: GoogleFonts.kumbhSans(

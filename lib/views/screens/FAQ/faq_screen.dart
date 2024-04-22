@@ -18,8 +18,7 @@ class FAQScreen extends StatelessWidget {
     AppStrings.syncPhoneCardsCamCardCloud,
     AppStrings.phoneWiFiConnectionSyncFailed,
   ];
-  RxBool isTapped = false.obs;
-  int selectedIndex = -1;
+  RxInt selectedIndex = 20.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +56,7 @@ class FAQScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: (){
-                            isTapped.value = !isTapped.value;
-                            selectedIndex = index;
+                            selectedIndex.value = index;
                           },
                           child: Row(
                             children: [
@@ -68,7 +66,7 @@ class FAQScreen extends StatelessWidget {
                               ),
                               Spacer(),
                               Icon(
-                                isTapped.value && index == selectedIndex? Icons.keyboard_arrow_down : Icons.arrow_forward_ios ,
+                                index == selectedIndex.value? Icons.keyboard_arrow_down : Icons.arrow_forward_ios ,
                                 size: 20,
                               )
                             ],
@@ -77,7 +75,7 @@ class FAQScreen extends StatelessWidget {
                         SizedBox(height: 8.h,),
                         Divider(),
                         SizedBox(height: 8.h,),
-                        if(isTapped.value && index == selectedIndex)
+                        if(index == selectedIndex.value)
                           Container(
                             margin: EdgeInsets.only(bottom: 12.h),
                             padding: EdgeInsets.all(16.w),

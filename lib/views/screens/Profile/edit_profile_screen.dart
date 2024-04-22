@@ -237,6 +237,9 @@ class EditProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: AppColors.green_900,
                       ),
+
+                      ///<<<================ Full Name ========================>>>
+
                       TextFormField(
                         decoration: InputDecoration(
                             hintText: AppStrings.fullName,
@@ -253,7 +256,11 @@ class EditProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: AppColors.green_900,
                       ),
+
+                      ///<<<=================== Mobile Number =================>>>
+
                       TextFormField(
+                        keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                             hintText: AppStrings.mobileNumber,
                             hintStyle: TextStyle(
@@ -261,7 +268,11 @@ class EditProfileScreen extends StatelessWidget {
                             )
                         ),
                       ),
+
+                      ///<<<================= Email Address ===================>>>
+
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: AppStrings.email,
                             hintStyle: TextStyle(

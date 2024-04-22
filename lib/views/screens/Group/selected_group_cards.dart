@@ -84,15 +84,17 @@ class SelectedGroupCards extends StatelessWidget {
                                 SizedBox(height: 8.h,),
                                 CustomText(
                                   text: cardDetailsList[index]["name"],
-                                  fontSize: 24,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 SizedBox(height: 4.h,),
                                 CustomText(
                                   text: cardDetailsList[index]["companyName"],
+                                  fontSize: 12,
                                 ),
                                 CustomText(
                                   text: cardDetailsList[index]["designation"],
+                                  fontSize: 12,
                                 ),
                               ],
                             ),

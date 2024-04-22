@@ -56,9 +56,6 @@ class EnterpriseScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 child: Column(
                   children: [
-                    const Align(
-                      alignment: Alignment.centerRight,
-                        child: Icon(Icons.language, color: AppColors.green_500,)),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 24.h),
                         child: Image.asset(AppImages.enterpriseImage)),

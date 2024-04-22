@@ -13,9 +13,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
+import '../Profile/share_profile_card_screen.dart';
 import 'InnerWidgets/card_holder.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,57 +27,55 @@ class HomeScreen extends StatelessWidget {
   List serviceList = [
     {"icon": AppIcons.cardSyncIcon, "service": AppStrings.cardSync},
     {"icon": AppIcons.excelIcon, "service": AppStrings.cardExport},
-    {"icon": AppIcons.emailIcon, "service": AppStrings.emailSign},
+    {"icon": AppIcons.shareCard, "service": AppStrings.shareCard},
   ];
 
-  // List cardsList = [
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Richard",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Nicholas",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Fardin",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Kabir",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Suhana",
-  //   },
-  //   {
-  //     'cardImage':
-  //     "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-  //     'cardHolderName': "Nicholas",
-  //   },
-  //
-  // ];
+  String link = "https://cf88BYf=name-card-scanner";
+
+  List cardsList = [
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Richard",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Nicholas",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Fardin",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Kabir",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Suhana",
+    },
+    {
+      'cardImage':
+          "https://plus.unsplash.com/premium_photo-1710030733154-16b30a0f944f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+      'cardHolderName': "Nicholas",
+    },
+  ];
 
   ProfileController profileController = Get.put(ProfileController());
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       bottomNavigationBar: BottomNavBar(currentIndex: 0),
-
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SafeArea(
@@ -98,9 +98,7 @@ class HomeScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 40,
                       child: TextFormField(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         // controller: widget.textEditingController,
                         keyboardType: TextInputType.text,
                         // onChanged: widget.onChanged,
@@ -138,19 +136,18 @@ class HomeScreen extends StatelessWidget {
                     ),
                   )),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       showDialog(
-                          context: context, 
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Text(
-                                "Payment method will be defined at development period",
-                                style: TextStyle(
-                                  fontSize: 16
-                                ),
-                              ),
-                            );
-                          },);
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            content: Text(
+                              "Payment method will be defined at development period",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          );
+                        },
+                      );
                     },
                     child: Container(
                       height: 40.h,
@@ -159,7 +156,11 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: AppColors.black_500),
                       child: Center(
-                          child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                          child: SvgPicture.asset(
+                        AppIcons.donateIcon,
+                        height: 30,
+                        width: 30,
+                      )),
                       // child: Column(
                       //   children: [
                       //     Center(
@@ -191,59 +192,81 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomElevatedButton(
-                  onTap: (){
-                    showDialog(context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            backgroundColor: AppColors.green_700,
-                            content: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                              height: 100.h,
-                              child: Column(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCardTitle));
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: AppColors.green_600,
-                                      ),
-                                      child: Row(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: AppColors.green_700,
+                          content: Container(
+                            padding: EdgeInsets.only(top: 12.h, left: 8.w),
+                            height: 120.h,
+                            child: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Get.to(CreateOrEditCardScreen(
+                                        screenTitle:
+                                            AppStrings.createCardTitle));
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(8.w),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      color: AppColors.green_600,
+                                    ),
+                                    child: Row(
                                       children: [
-                                        SvgPicture.asset(AppIcons.editNote, height: 26, width: 20,),
-                                        SizedBox(width: 8.w,),
-                                        CustomText(text: "Create cards manually", fontSize: 16,)
+                                        SvgPicture.asset(
+                                          AppIcons.editNote,
+                                          height: 26.h,
+                                          width: 20.w,
+                                        ),
+                                        SizedBox(
+                                          width: 8.w,
+                                        ),
+                                        CustomText(
+                                          text: "Create cards manually",
+                                          fontSize: 16,
+                                        )
                                       ],
-                                    ),),
-                                  ),
-                                  Spacer(),
-                                  InkWell(
-                                    onTap: () {
-                                      profileController.selectImageCamera();
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: AppColors.green_600,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
-                                          SizedBox(width: 8.w,),
-                                          CustomText(text: "Create cards using OCR", fontSize: 16,)
-                                        ],
-                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    profileController.selectImageCamera();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.all(8.w),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      color: AppColors.green_600,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          AppIcons.ocrCameraIcon,
+                                          height: 20.h,
+                                          width: 20.w,
+                                        ),
+                                        SizedBox(
+                                          width: 8.w,
+                                        ),
+                                        CustomText(
+                                          text: "Create cards using OCR",
+                                          fontSize: 16,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                          ),
+                        );
+                      },
                     );
                   },
                   text: AppStrings.createDigitalCards,
@@ -263,91 +286,40 @@ class HomeScreen extends StatelessWidget {
                       ///<<<============== Services List ============================>>>
 
                       Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.black_500),
-                              borderRadius: BorderRadius.circular(8.r)),
-                          width: Get.width,
-                          height: 76.h,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: serviceList.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: GestureDetector(
-                                  onTap: (){
-                                    if(index == 0){
-                                      Get.toNamed(AppRoutes.cardSyncScreen);
-                                    }else if(index == 1){
-                                      Get.toNamed(AppRoutes.cardExportScreen);
-                                    } else if(index == 2){
-                                      
-                                      ///<<<=============== Email Sign In ==========>>>
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            surfaceTintColor:  AppColors.green_900,
-                                            contentPadding: EdgeInsets.zero,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(8)),
-                                            content: Container(
-                                              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-                                              width: Get.width,
-                                              height: 180.h,
-                                              child: Column(
-                                                children: [
-                                                  Align(
-                                                    alignment: Alignment.centerRight,
-                                                      child: CustomBackButton(
-                                                          radius: 100,
-                                                          onTap: (){Get.back();})),
-                                                  CustomText(
-                                                    text: AppStrings.signInWithEmail,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                  SizedBox(height: 30.h),
-                                                  Container(
-                                                    height: 50,
-                                                    width: 50,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors.black_500,
-                                                      borderRadius: BorderRadius.circular(100)
-                                                    ),
-                                                      child: Center(
-                                                        child: SvgPicture.asset(
-                                                          AppIcons.emailIcon,
-                                                          color: AppColors.whiteColor,
-                                                          height: 30,
-                                                          width: 30,
-                                                          fit: BoxFit.contain,),
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    }
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          serviceList[index]["icon"]),
-                                      SizedBox(
-                                        height: 4.h,
-                                      ),
-                                      CustomText(
-                                        text: serviceList[index]["service"],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          )),
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.black_500),
+                            borderRadius: BorderRadius.circular(8.r)),
+                        width: Get.width,
+                        height: 76.h,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            buildServiceItems(
+                              onTap: () {
+                                Get.toNamed(AppRoutes.cardSyncScreen);
+                              },
+                              icon: AppIcons.cardSyncIcon,
+                              title: AppStrings.cardSync,
+                            ),
+                            buildServiceItems(
+                              onTap: () {
+                                Get.toNamed(AppRoutes.cardExportScreen);
+                              },
+                              icon: AppIcons.excelIcon,
+                              title: AppStrings.cardExport,
+                            ),
+                            buildServiceItems(
+                              onTap: () {
+                                Get.to(ShareProfileCardScreen());
+                              },
+                              icon: AppIcons.shareCard,
+                              title: AppStrings.shareCard,
+                            ),
+                          ],
+                        ),
+                      ),
+
                       SizedBox(
                         height: 8.h,
                       ),
@@ -378,8 +350,10 @@ class HomeScreen extends StatelessWidget {
                       ),
 
                       ///<<<=============== Card Holder =============================>>>
-                      CardHolder( profileController: profileController, context: context,),
-
+                      CardHolder(
+                        profileController: profileController,
+                        context: context,
+                      ),
                     ],
                   ),
                 ),
@@ -428,8 +402,28 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  ///<<<============== Services List Method ============================>>>
+
+  Padding buildServiceItems(
+      {required VoidCallback onTap,
+      required String icon,
+      required String title}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(icon),
+            SizedBox(
+              height: 4.h,
+            ),
+            CustomText(text: title)
+          ],
+        ),
+      ),
+    );
+  }
 }
-
-
-
-

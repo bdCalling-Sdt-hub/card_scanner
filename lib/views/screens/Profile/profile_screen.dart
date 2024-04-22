@@ -125,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
                           (index) => InkWell(
                             onTap: (){
                               if(index == 0){
-                                Get.to(ViewProfileScreen());
+                                Get.to(ViewECardScreen());
                               } else if(index == 1){
                                 Get.to(CardStyleScreen());
                               } else if(index == 2){
@@ -185,22 +185,30 @@ class ProfileScreen extends StatelessWidget {
                                   return AlertDialog(
                                     content: CustomText(text: "Are you sure to sign out?", fontSize: 20, color: AppColors.black_500,),
                                     actions: [
-                                      CustomElevatedButton(
-                                        onTap: (){
-                                          Get.offAll(SignInScreen());
-                                          PrefsHelper.removeAllPrefData();
-                                        },
-                                        width: 120,
-                                        text: "Yes",
-                                        backgroundColor: AppColors.green_900,
-                                      ),
-                                      CustomElevatedButton(
-                                        onTap: (){
-                                          Get.back();
-                                        },
-                                        width: 120,
-                                        text: "No",
-                                        backgroundColor: AppColors.green_900,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: CustomElevatedButton(
+                                              onTap: (){
+                                                Get.offAll(SignInScreen());
+                                                PrefsHelper.removeAllPrefData();
+                                              },
+                                              text: "Yes",
+                                              backgroundColor: AppColors.green_900,
+                                            ),
+                                          ),
+                                          SizedBox(width: 12,),
+                                          Expanded(
+                                            child: CustomElevatedButton(
+                                              onTap: (){
+                                                Get.back();
+                                              },
+                                              text: "No",
+                                              backgroundColor: AppColors.green_900,
+                                            ),
+                                          ),
+
+                                        ],
                                       ),
                                     ],
                                   );

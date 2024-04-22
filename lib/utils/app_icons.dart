@@ -33,6 +33,7 @@ class AppIcons{
   static String barCodeScanIcon = "$iconsBasePath/barCodeScanIcon.svg";
   static String aboutIcon = "$iconsBasePath/aboutIcon.svg";
   static String editNote = "$iconsBasePath/editNote.svg";
+  static String shareCard = "$iconsBasePath/shareCard.svg";
 
   ///<<<======================= Enterprise Icons ===========================>>>
 

@@ -6,6 +6,7 @@ import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.d
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -47,6 +48,7 @@ class AllCardsScreen extends StatelessWidget {
 
               Expanded(
                 child: ListView.builder(
+                  scrollDirection: Axis.vertical,
                   itemCount: cardDetailsList.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -66,30 +68,32 @@ class AllCardsScreen extends StatelessWidget {
                               ),
                             ),
                            Padding(
-                             padding: EdgeInsets.symmetric(horizontal: 16.w),
+                             padding: EdgeInsets.only(left: 16.w),
                              child: Column(
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  SizedBox(height: 8.h,),
                                  CustomText(
+                                   overflow: TextOverflow.ellipsis,
                                    text: cardDetailsList[index]["name"],
-                                   fontSize: 24,
+                                   fontSize: 20,
                                    fontWeight: FontWeight.w500,
                                  ),
                                  SizedBox(height: 4.h,),
                                  CustomText(
                                    text: cardDetailsList[index]["companyName"],
+                                   fontSize: 12,
                                  ),
                                  CustomText(
                                    text: cardDetailsList[index]["designation"],
+                                   fontSize: 12,
                                  ),
                                ],
                              ),
                            ),
-                            Spacer(),
-
+                
                             ///<<<================ Edit Icon ================>>>
-
+                            Spacer(),
                             InkWell(
                               onTap: (){
                                 Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));

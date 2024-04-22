@@ -133,7 +133,6 @@ class OnBoardingScreen extends StatelessWidget {
                         CustomText(
                           left: 10.w,
                           right: 10.w,
-                          bottom: 8.h,
                           maxLines: 3,
                           text: subTitleText[index],
                           color: AppColors.black_400,
@@ -162,7 +161,7 @@ class OnBoardingScreen extends StatelessWidget {
             },),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: Get.height * 0.15),
+            margin: EdgeInsets.only(bottom: Get.height * 0.1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
