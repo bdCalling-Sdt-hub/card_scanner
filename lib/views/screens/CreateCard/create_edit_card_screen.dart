@@ -79,6 +79,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         profileController.selectImageGallery();
+                                        Get.back();
                                       },
                                       child: Container(
                                         height: 70,
@@ -99,6 +100,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         profileController.selectImageCamera();
+                                        Get.back();
                                       },
                                       child: Container(
                                         height: 70,

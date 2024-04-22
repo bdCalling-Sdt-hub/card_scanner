@@ -70,6 +70,10 @@ class AppStrings{
   static String sortByCreateDate = "Sort by create date";
   static String sortByName = "Sort by name";
   static String sortByCompanyName = "Sort by company name";
+  static String donate = "Donate";
+  static String currency = "Currency";
+  static String amount = "Amount";
+  static String send = "Send";
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";

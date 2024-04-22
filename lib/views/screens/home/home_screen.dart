@@ -1,3 +1,4 @@
+import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -8,8 +9,10 @@ import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -71,6 +74,7 @@ class HomeScreen extends StatelessWidget {
   ];
 
   ProfileController profileController = Get.put(ProfileController());
+  PaymentController paymentController = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {
@@ -93,74 +97,82 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SizedBox(width: 30.w),
                   Expanded(
-                      child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 36.w),
-                    child: SizedBox(
-                      height: 40,
-                      child: TextFormField(
-                        onTap: () {},
-                        // controller: widget.textEditingController,
-                        keyboardType: TextInputType.text,
-                        // onChanged: widget.onChanged,
-                        maxLines: 1,
-                        cursorColor: AppColors.green_200,
-                        style: const TextStyle(
-                          color: AppColors.green_500,
+                      child: SizedBox(
+                    height: 40,
+                    child: TextFormField(
+                      onTap: () {},
+                      // controller: widget.textEditingController,
+                      keyboardType: TextInputType.text,
+                      // onChanged: widget.onChanged,
+                      maxLines: 1,
+                      cursorColor: AppColors.green_200,
+                      style: const TextStyle(
+                        color: AppColors.green_500,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 8.w, vertical: 0.h),
+                        hintText: "${AppStrings.search}...",
+                        hintStyle: const TextStyle(
+                          color: AppColors.green_50,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 8.w, vertical: 0.h),
-                          hintText: "${AppStrings.search}...",
-                          hintStyle: const TextStyle(
-                            color: AppColors.green_50,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          fillColor: AppColors.green_900,
-                          filled: true,
-                          suffixIcon: Icon(
-                            Icons.search,
-                            color: AppColors.green_50,
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
-                              gapPadding: 0),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
-                              gapPadding: 0),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
-                              gapPadding: 0),
+                        fillColor: AppColors.green_900,
+                        filled: true,
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.green_50,
                         ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
                       ),
                     ),
                   )),
+                  SizedBox(
+                    width: 8.w,
+                  ),
                   InkWell(
                     onTap: () {
+                      print("Payment Controller Called");
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            content: Text(
-                              "Payment method will be defined at development period",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          );
+                          return paymentAlertDialog(context);
                         },
                       );
                     },
                     child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
                       height: 40.h,
-                      width: 40.w,
+                      width: 100.w,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(12.r),
                           color: AppColors.black_500),
                       child: Center(
-                          child: SvgPicture.asset(
-                        AppIcons.donateIcon,
-                        height: 30,
-                        width: 30,
-                      )),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.monetization_on_outlined,
+                              color: AppColors.green_500,
+                            ),
+                            CustomText(
+                              text: AppStrings.donate,
+                              color: AppColors.green_500,
+                              fontWeight: FontWeight.w600,
+                              left: 4,
+                            ),
+                          ],
+                        ),
+                      ),
                       // child: Column(
                       //   children: [
                       //     Center(
@@ -398,6 +410,58 @@ class HomeScreen extends StatelessWidget {
               // )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  AlertDialog paymentAlertDialog(BuildContext context) {
+    return AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      content: Container(
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.r),
+          color: AppColors.green_500,
+        ),
+        height: 250,
+        width: Get.width,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: CustomBackButton(
+                  radius: 100,
+                  onTap: () {
+                    Get.back();
+                  }),
+            ),
+            TextFormField(
+              controller: paymentController.amountController,
+              decoration: InputDecoration(hintText: AppStrings.amount),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            TextFormField(
+              controller: paymentController.currencyController,
+              decoration: InputDecoration(hintText: AppStrings.currency),
+            ),
+            SizedBox(
+              height: 24.h,
+            ),
+            CustomElevatedButton(
+              onTap: () {
+                Get.to(paymentController.buildPaypalCheckout(
+                    subscriptionName: "Donation",
+                    context: context,
+                    amount: paymentController.amountController.text,
+                    currency: paymentController.currencyController.text));
+              },
+              text: AppStrings.send,
+              backgroundColor: AppColors.black_500,
+            )
+          ],
         ),
       ),
     );
