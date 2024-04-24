@@ -204,24 +204,23 @@ class HomeScreen extends StatelessWidget {
 
               ///<<<==================== Create Card Button ===================>>>
 
-              GetBuilder<OCRCreateCardController>(
-                builder: (controller) {
-                  return controller.isLoading
-                      ? Center(child: CircularProgressIndicator())
-                      : Padding(
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          child: CustomElevatedButton(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    backgroundColor: AppColors.green_700,
-                                    content: Container(
-                                      padding:
-                                          EdgeInsets.only(top: 12.h, left: 8.w),
-                                      height: 120.h,
-                                      child: Column(
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.h),
+                child: CustomElevatedButton(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: AppColors.green_700,
+                          content: Container(
+                            padding: EdgeInsets.only(top: 12.h, left: 8.w),
+                            height: 120.h,
+                            child: GetBuilder<OCRCreateCardController>(
+                              builder: (controller) {
+                                return controller.isLoading
+                                    ? Center(child: CircularProgressIndicator())
+                                    : Column(
                                         children: [
                                           InkWell(
                                             onTap: () {
@@ -259,7 +258,8 @@ class HomeScreen extends StatelessWidget {
                                           InkWell(
                                             onTap: () {
                                               ocrCreateCardController
-                                                  .selectImageCamera(isOcr: true);
+                                                  .selectImageCamera(
+                                                      isOcr: true);
                                             },
                                             child: Container(
                                               padding: EdgeInsets.all(8.w),
@@ -288,22 +288,22 @@ class HomeScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                            text: AppStrings.createDigitalCards,
-                            textColor: AppColors.black_500,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            borderRadius: 41,
-                            borderColor: AppColors.green_900,
-                            isFillColor: false,
+                                      );
+                              },
+                            ),
                           ),
                         );
-                },
+                      },
+                    );
+                  },
+                  text: AppStrings.createDigitalCards,
+                  textColor: AppColors.black_500,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  borderRadius: 41,
+                  borderColor: AppColors.green_900,
+                  isFillColor: false,
+                ),
               ),
 
               Expanded(
