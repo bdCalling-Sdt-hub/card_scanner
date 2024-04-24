@@ -246,8 +246,7 @@ class HomeScreen extends StatelessWidget {
                                                     width: 8.w,
                                                   ),
                                                   CustomText(
-                                                    text:
-                                                        "Create cards manually",
+                                                    text: AppStrings.cardCreateManually,
                                                     fontSize: 16,
                                                   )
                                                 ],
@@ -279,8 +278,7 @@ class HomeScreen extends StatelessWidget {
                                                     width: 8.w,
                                                   ),
                                                   CustomText(
-                                                    text:
-                                                        "Create cards using OCR",
+                                                    text: AppStrings.cardCreateOcr,
                                                     fontSize: 16,
                                                   )
                                                 ],

@@ -10,6 +10,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/customButton/custom_elevated_button.dart';
+
 class CardSyncScreen extends StatelessWidget {
   const CardSyncScreen({super.key});
 
@@ -45,10 +47,38 @@ class CardSyncScreen extends StatelessWidget {
                     builder: (context) {
                       return AlertDialog(
                         content: CustomText(
-                          maxLines: 2,
-                          text: AppStrings.getService,
-                          fontSize: 16,
-                        )
+                          maxLines: 5,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          text: AppStrings.sureToSaveInMobile,
+                        ),
+                        actions: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  onTap: (){
+                                    Get.back();
+                                  },
+                                  text: "No",
+                                  textColor: AppColors.green_900,
+                                  isFillColor: false,
+                                  borderColor: AppColors.green_900,
+                                ),
+                              ),
+                              SizedBox(width: 12,),
+                              Expanded(
+                                child: CustomElevatedButton(
+                                  onTap: (){
+
+                                  },
+                                  text: "Yes",
+                                  backgroundColor: AppColors.green_900,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       );
                     },);
                 },
@@ -93,7 +123,7 @@ class CardSyncScreen extends StatelessWidget {
                       return AlertDialog(
                           content: CustomText(
                             maxLines: 2,
-                            text: AppStrings.getService,
+                            text: AppStrings.sureToSaveInEmail,
                             fontSize: 16,
                           )
                       );

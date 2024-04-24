@@ -75,6 +75,8 @@ class AppStrings{
   static String currency = "Currency";
   static String amount = "Amount";
   static String send = "Send";
+  static String cardCreateManually = "Create cards manually";
+  static String cardCreateOcr = "Create cards using OCR";
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";
@@ -112,6 +114,8 @@ class AppStrings{
   static String batchExportCards = "Batch export cards information.";
   static String emailBackup = "Email backup";
   static String dataBackupEmailsSecurely = "Protect your data backup emails securely.";
+  static String sureToSaveInMobile = "Are you sure to back up your contacts information in your mobile local storage?";
+  static String sureToSaveInEmail = "Are you sure to back up your contacts information in your google drive? Log in with Google";
 
 
   ///<<<==================== Create Card Screen =============================>>>
