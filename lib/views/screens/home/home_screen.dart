@@ -1,3 +1,4 @@
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
@@ -75,6 +76,8 @@ class HomeScreen extends StatelessWidget {
 
   ProfileController profileController = Get.put(ProfileController());
   PaymentController paymentController = Get.put(PaymentController());
+  OCRCreateCardController ocrCreateCardController =
+      Get.put(OCRCreateCardController());
 
   @override
   Widget build(BuildContext context) {
@@ -201,94 +204,106 @@ class HomeScreen extends StatelessWidget {
 
               ///<<<==================== Create Card Button ===================>>>
 
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                child: CustomElevatedButton(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          backgroundColor: AppColors.green_700,
-                          content: Container(
-                            padding: EdgeInsets.only(top: 12.h, left: 8.w),
-                            height: 120.h,
-                            child: Column(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.to(CreateOrEditCardScreen(
-                                        screenTitle:
-                                            AppStrings.createCardTitle));
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(8.w),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                      color: AppColors.green_600,
+              GetBuilder<OCRCreateCardController>(
+                builder: (controller) {
+                  return controller.isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          child: CustomElevatedButton(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: AppColors.green_700,
+                                    content: Container(
+                                      padding:
+                                          EdgeInsets.only(top: 12.h, left: 8.w),
+                                      height: 120.h,
+                                      child: Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Get.to(CreateOrEditCardScreen(
+                                                  screenTitle: AppStrings
+                                                      .createCardTitle));
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(8.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                color: AppColors.green_600,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    AppIcons.editNote,
+                                                    height: 26.h,
+                                                    width: 20.w,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8.w,
+                                                  ),
+                                                  CustomText(
+                                                    text:
+                                                        "Create cards manually",
+                                                    fontSize: 16,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          InkWell(
+                                            onTap: () {
+                                              ocrCreateCardController
+                                                  .selectImageCamera(isOcr: true);
+                                            },
+                                            child: Container(
+                                              padding: EdgeInsets.all(8.w),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                color: AppColors.green_600,
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    AppIcons.ocrCameraIcon,
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 8.w,
+                                                  ),
+                                                  CustomText(
+                                                    text:
+                                                        "Create cards using OCR",
+                                                    fontSize: 16,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          AppIcons.editNote,
-                                          height: 26.h,
-                                          width: 20.w,
-                                        ),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        CustomText(
-                                          text: "Create cards manually",
-                                          fontSize: 16,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    profileController.selectImageCamera();
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(8.w),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                      color: AppColors.green_600,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          AppIcons.ocrCameraIcon,
-                                          height: 20.h,
-                                          width: 20.w,
-                                        ),
-                                        SizedBox(
-                                          width: 8.w,
-                                        ),
-                                        CustomText(
-                                          text: "Create cards using OCR",
-                                          fontSize: 16,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                                  );
+                                },
+                              );
+                            },
+                            text: AppStrings.createDigitalCards,
+                            textColor: AppColors.black_500,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            borderRadius: 41,
+                            borderColor: AppColors.green_900,
+                            isFillColor: false,
                           ),
                         );
-                      },
-                    );
-                  },
-                  text: AppStrings.createDigitalCards,
-                  textColor: AppColors.black_500,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  borderRadius: 41,
-                  borderColor: AppColors.green_900,
-                  isFillColor: false,
-                ),
+                },
               ),
 
               Expanded(

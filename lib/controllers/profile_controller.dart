@@ -1,6 +1,4 @@
 
-
-import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';

@@ -26,6 +26,7 @@ class AppStrings{
   static String enterYourEmail = "Please enter your email address to reset your password.";
   static String or = "OR";
   static String contactNumber = "Contact Number";
+  static String address = "Address";
   static String enterMobileNumber = "Enter Mobile Number";
   static String getOtp = "Get OTP";
   static String enterOtpCode = "Enter 6 Digit OTP Code";

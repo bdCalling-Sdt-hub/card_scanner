@@ -53,8 +53,8 @@ dependencies:
   firebase_storage: ^11.7.2
   cloud_firestore: ^4.17.0
   flutter_paypal_checkout: ^1.0.1
-
-
+  google_mlkit_text_recognition: ^0.12.1
+  mnc_identifier_ocr: ^1.0.20
 
 
 dev_dependencies:
