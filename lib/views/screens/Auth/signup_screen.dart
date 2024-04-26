@@ -1,4 +1,4 @@
-import 'package:card_scanner/controllers/auth/sign_up_controller.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
@@ -14,16 +14,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/get_transition_mixin.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../widgets/custom_text_field/custom_text_field.dart';
-import 'otp_screen.dart';
+
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  SignUpController signUpController = Get.put(SignUpController());
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
               ///<<<==================== Name Field ============================>>>
 
               CustomTextField(
-                textEditingController: signUpController.nameController,
+                textEditingController: authController.nameController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return AppStrings.enterFullName.tr;
@@ -145,7 +143,7 @@ class SignUpScreen extends StatelessWidget {
               ///<<<====================Email Field=================================>>>
 
               CustomTextField(
-                textEditingController: signUpController.emailController,
+                textEditingController: authController.emailController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return AppStrings.enterEmail.tr;
@@ -181,7 +179,7 @@ class SignUpScreen extends StatelessWidget {
               ///<<<=================Password field==============================>>>
 
               CustomTextField(
-                textEditingController: signUpController.passwordController,
+                textEditingController: authController.passwordController,
                 validator: (value) {
                   if (value.isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
@@ -222,9 +220,9 @@ class SignUpScreen extends StatelessWidget {
 
               CustomTextField(
                 textEditingController:
-                    signUpController.confirmPasswordController,
+                    authController.confirmPasswordController,
                 validator: (value) {
-                  if (value != signUpController.passwordController.text) {
+                  if (value != authController.passwordController.text) {
                     return AppStrings.passDoesNotMatch.tr;
                   } else {
                     return null;

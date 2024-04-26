@@ -1,6 +1,6 @@
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
-import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +22,12 @@ import 'forgot_password_screen.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  SignInController signInController = Get.put(SignInController());
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: signInController.ifSignIn.value? BottomNavBar(currentIndex: 4) : null,
+      bottomNavigationBar: authController.ifSignIn.value? BottomNavBar(currentIndex: 4) : null,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -68,7 +68,7 @@ class SignInScreen extends StatelessWidget {
               ///<<<====================Email Field ============================>>>
 
               CustomTextField(
-                textEditingController: signInController.emailController,
+                textEditingController: authController.emailController,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return AppStrings.enterEmail.tr;
@@ -104,7 +104,7 @@ class SignInScreen extends StatelessWidget {
               ///<<<=================Password field==============================>>>
 
               CustomTextField(
-                textEditingController: signInController.passwordController,
+                textEditingController: authController.passwordController,
                 validator: (value) {
                   if (value.isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
@@ -150,8 +150,8 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            signInController.isChecked.value =
-                            !signInController.isChecked.value;
+                            authController.isChecked.value =
+                            !authController.isChecked.value;
                           },
                           child: Row(
                             children: [
@@ -162,11 +162,11 @@ class SignInScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(4.r),
                                   border:
                                   Border.all(color: AppColors.black_400),
-                                  color: signInController.isChecked.value
+                                  color: authController.isChecked.value
                                       ? AppColors.black_400
                                       : AppColors.primaryColor,
                                 ),
-                                child: signInController.isChecked.value
+                                child: authController.isChecked.value
                                     ? Center(
                                   child: SvgPicture.asset(
                                       AppIcons.checkMark,
@@ -225,7 +225,7 @@ class SignInScreen extends StatelessWidget {
                 isFillColor: true,
                 onTap: () {
                   Get.toNamed(AppRoutes.homeScreen);
-                  signInController.ifSignIn.value = true;
+                  authController.ifSignIn.value = true;
                   PrefsHelper.setBool(AppStrings.signedIn, true);
                   PrefsHelper.signedIn = true;
                 },

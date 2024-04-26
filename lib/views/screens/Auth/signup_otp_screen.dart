@@ -2,7 +2,7 @@
 
 
 
-import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -23,7 +23,7 @@ import '../../../core/routes/app_routes.dart';
 class SignupOtpScreen extends StatelessWidget {
   SignupOtpScreen({super.key});
 
-  SignInController signInController = Get.put(SignInController());
+ AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class SignupOtpScreen extends StatelessWidget {
           onTap: (){
             Get.toNamed(AppRoutes.homeScreen);
             Get.snackbar("Your new account has been created", "");
-            signInController.ifSignIn.value = true;
+            authController.ifSignIn.value = true;
             PrefsHelper.setBool(AppStrings.signedIn, true);
             PrefsHelper.signedIn = true;
           },

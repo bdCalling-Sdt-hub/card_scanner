@@ -1,7 +1,7 @@
 
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
-import 'package:card_scanner/controllers/auth/sign_in_controller.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
@@ -36,7 +36,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   ProfileController profileController = Get.put(ProfileController());
 
-  SignInController signInController = Get.put(SignInController());
+  AuthController authController = Get.put(AuthController());
 
 
   List<String> navBarIcons =[

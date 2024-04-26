@@ -1,5 +1,6 @@
 
 import 'package:card_scanner/views/screens/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -11,7 +12,6 @@ class ProfileController extends GetxController{
   RxBool isInformation = true.obs;
 
   RxInt selectedColor = 50.obs;
-
   String? image;
   String? cameraImage;
   List captureImage = [];
