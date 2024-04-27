@@ -224,7 +224,7 @@ class SignInScreen extends StatelessWidget {
                 width: Get.width,
                 isFillColor: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.homeScreen);
+                  authController.signInRepo();
                   authController.ifSignIn.value = true;
                   PrefsHelper.setBool(AppStrings.signedIn, true);
                   PrefsHelper.signedIn = true;

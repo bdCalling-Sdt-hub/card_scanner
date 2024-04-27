@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/auth/forgotPasswordController.dart';
 import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
@@ -19,7 +20,8 @@ import '../../widgets/customButton/custom_elevated_button.dart';
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 
-  ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
+
+  AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +85,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ///<<<====================Email Field=================================>>>
 
                 CustomTextField(
-                  // textEditingController: signUpController.emailController,
+                  textEditingController: authController.emailController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return AppStrings.enterEmail.tr;
@@ -196,8 +198,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           width: Get.width,
           isFillColor: true,
           onTap: () {
-            Get.to(OtpScreen());
-            Get.snackbar("Otp sent to your email", "");
+            authController.resetPassRepo();
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,

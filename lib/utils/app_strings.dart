@@ -13,6 +13,7 @@ class AppStrings{
   static String signUpNOw = "Sign Up Now";
   static String fillTheDetails = "Please  fill the details and create account.";
   static String email = "Email";
+  static String phoneNumber = "Phone Number";
   static String newPassword = "New Password";
   static String confirmNewPassword = "Confirm New Password";
   static String rememberMe = "Remember Me";
@@ -80,6 +81,7 @@ class AppStrings{
 
   ///<<<==================== Contacts Screen Texts ===========================>>>
   static String contacts = "Contacts";
+  static String contactDetails = "Contact Details";
   static String selectContacts = "Select Contacts";
   static String currentlyNoContacts = "There are currently no contacts available";
   static String noContactsFoundTryAgain = "No contacts found. Please try again later for updated information or check back soon.";
@@ -215,8 +217,11 @@ class AppStrings{
 
   ///<<<================ Text Field Validation Texts ========================>>>
   static const enterEmail = "Email is required";
+  static const enterPhone = "Phone number is required";
   static RegExp emailRegexp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  static RegExp phoneRegexp = RegExp(r"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$");
   static const String enterValidEmail = "Enter valid email";
+  static const String enterValidPhoneNumber = "Enter valid phone number";
   static const String fieldCantBeEmpty = "Field can't be empty";
   static const name = "Name";
   static const enterFullName = "Name is required";

@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -29,7 +30,9 @@ import 'IneerWidget/custom_container_button.dart';
 import 'card_style.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -190,20 +193,21 @@ class ProfileScreen extends StatelessWidget {
                                           Expanded(
                                             child: CustomElevatedButton(
                                               onTap: (){
-                                                Get.offAll(SignInScreen());
-                                                PrefsHelper.removeAllPrefData();
+                                                Get.back();
                                               },
-                                              text: "Yes",
-                                              backgroundColor: AppColors.green_900,
+                                              text: "No",
+                                              textColor: AppColors.black_500,
+                                              isFillColor: false,
+                                              borderColor: AppColors.green_900,
                                             ),
                                           ),
                                           SizedBox(width: 12,),
                                           Expanded(
                                             child: CustomElevatedButton(
                                               onTap: (){
-                                                Get.back();
+                                                authController.signOutRepo();
                                               },
-                                              text: "No",
+                                              text: "Yes",
                                               backgroundColor: AppColors.green_900,
                                             ),
                                           ),

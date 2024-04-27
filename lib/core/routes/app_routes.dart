@@ -2,6 +2,7 @@
 import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart';
 import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/contact_details_screen.dart';
 import 'package:card_scanner/views/screens/Group/group_screen.dart';
 import 'package:card_scanner/views/screens/Group/selected_group_cards.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
   static String groupScreen = "/group_screen";
   static String createGroupScreen = "/create_group_screen";
   static String selectedGroupCards = "/selected_group_cards";
+  static String contactDetailsScreen = "/contact_details_screen";
 
 
   static List<GetPage> routes = [
@@ -48,5 +50,6 @@ class AppRoutes {
     GetPage(name: groupScreen, page: () => GroupScreen()),
     GetPage(name: createGroupScreen, page: () => CreateGroupScreen()),
     GetPage(name: selectedGroupCards, page: () => SelectedGroupCards()),
+    GetPage(name: contactDetailsScreen, page: () => ContactDetailsScreen()),
   ];
 }

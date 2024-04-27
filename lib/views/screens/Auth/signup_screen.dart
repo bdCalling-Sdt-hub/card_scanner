@@ -15,6 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../widgets/custom_text_field/custom_text_field.dart';
 
 
@@ -176,6 +177,73 @@ class SignUpScreen extends StatelessWidget {
                 height: 8.h,
               ),
 
+              ///<<<====================Phone Number Field=================================>>>
+
+              IntlPhoneField(
+                controller: authController.phoneNumberController,
+                initialCountryCode: 'BD',
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 14.w),
+                  hintText: AppStrings.phoneNumber,
+                  hintStyle: GoogleFonts.kumbhSans(
+                      fontSize: 16.h,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.black_300),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: AppColors.black_500, width: 1),
+                      gapPadding: 0),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: AppColors.black_500, width: 1),
+                      gapPadding: 0),
+                ),
+                languageCode: "en",
+                onChanged: (phone) {
+                  print(phone.completeNumber);
+                },
+                onCountryChanged: (country) {
+                  print('Country changed to: ' + country.name);
+                },
+              ),
+
+              // CustomTextField(
+              //   textEditingController: authController.phoneNumberController,
+              //   validator: (value) {
+              //     if (value!.isEmpty) {
+              //       return AppStrings.enterPhone.tr;
+              //     } else if (!AppStrings.phoneRegexp.hasMatch("")) {
+              //       return AppStrings.enterValidPhoneNumber;
+              //     } else {
+              //       return null;
+              //     }
+              //   },
+              //   keyboardType: TextInputType.emailAddress,
+              //   textAlign: TextAlign.start,
+              //   hintText: AppStrings.phoneNumber,
+              //   hintStyle: GoogleFonts.kumbhSans(
+              //       fontSize: 16.h,
+              //       fontWeight: FontWeight.w400,
+              //       color: AppColors.black_300),
+              //   inputTextStyle: GoogleFonts.prompt(
+              //       fontWeight: FontWeight.w400,
+              //       fontSize: 16.h,
+              //       color: AppColors.black_500),
+              //   fieldBorderRadius: 8,
+              //   isPrefixIcon: false,
+              //   // prefixIcon: Icon(
+              //   //   Icons.mail_outline,
+              //   //   size: 24.h,
+              //   //   color: AppColors.black_400,
+              //   // ),
+              // ),
+              SizedBox(
+                height: 8.h,
+              ),
+
               ///<<<=================Password field==============================>>>
 
               CustomTextField(
@@ -250,52 +318,53 @@ class SignUpScreen extends StatelessWidget {
                 //   color: AppColors.black_400,
                 // ),
               ),
-              SizedBox(height: 8.h),
-
-              SizedBox(height: 60.h,),
-
-              ///<<<================== Sign In Texts =======================>>>
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                 CustomElevatedButton(
-                   height: 42.h,
-                   width: 158.w,
-                   isFillColor: false,
-                   onTap: () {
-                     Get.to(SignInScreen());
-                   },
-                   borderRadius: 12,
-                   borderColor: AppColors.black_500,
-                   text: AppStrings.backToSignInBtn,
-                   textColor: AppColors.black_500,
-                   fontSize: 16,
-                   fontWeight: FontWeight.w400,
-                 ),
-                 SizedBox(
-                   height: 42.h, // Set the height
-                   width: 74.w, // Set the width
-                   child: ElevatedButton(
-                     onPressed: () {
-                       // Add your button's onPressed logic here
-                       Get.to(SignupOtpScreen());
-                       Get.snackbar("Otp sent to your email", "");
-                     },
-                     style: ButtonStyle(
-                       backgroundColor: const MaterialStatePropertyAll(AppColors.black_500),
-                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                         RoundedRectangleBorder(
-                           borderRadius: BorderRadius.circular(12.0), // Set the radius
-                         ),
-                       ),
-                     ),
-                     child: SvgPicture.asset(AppIcons.rightArrow),
-                   ),
-                 ),
-               ],
-              )
+              SizedBox(height: 20.h),
             ],
           ),
+        ),
+      ),
+
+      ///<<<================== Sign In $ Forward Button =======================>>>
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomElevatedButton(
+              height: 42.h,
+              width: 158.w,
+              isFillColor: false,
+              onTap: () {
+                Get.toNamed(AppRoutes.signInScreen);
+              },
+              borderRadius: 12,
+              borderColor: AppColors.black_500,
+              text: AppStrings.backToSignInBtn,
+              textColor: AppColors.black_500,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            SizedBox(
+              height: 42.h, // Set the height
+              width: 74.w, // Set the width
+              child: ElevatedButton(
+                onPressed: () {
+                  // Add your button's onPressed logic here
+                  authController.signUpRepo();
+                  // Get.snackbar("Otp sent to your email", "");
+                },
+                style: ButtonStyle(
+                  backgroundColor: const MaterialStatePropertyAll(AppColors.black_500),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0), // Set the radius
+                    ),
+                  ),
+                ),
+                child: SvgPicture.asset(AppIcons.rightArrow),
+              ),
+            ),
+          ],
         ),
       ),
     );
