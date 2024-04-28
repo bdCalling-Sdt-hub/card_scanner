@@ -2,11 +2,12 @@
 import 'dart:io';
 
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
+import 'package:card_scanner/controllers/phone_storage_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ import '../../widgets/customText/custom_text.dart';
 
 class CreateOrEditCardScreen extends StatelessWidget {
   CreateOrEditCardScreen({super.key, required this.screenTitle});
+
   ProfileController profileController = Get.put(ProfileController());
+  PhoneStorageController phoneStorageController = Get.put(PhoneStorageController());
   OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   
   final String screenTitle;
@@ -29,9 +32,9 @@ class CreateOrEditCardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GetBuilder<OCRCreateCardController>(
-          builder: (controller) {
-          return controller.isLoading
+        child: GetBuilder<PhoneStorageController>(
+          builder: (phoneStorageController) {
+          return phoneStorageController.isLoading
               ? Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -63,9 +66,9 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       width: 150.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.r),
-                        image: controller.imagePath != null
-                            ? DecorationImage(image: FileImage(File("${controller.imagePath}")), fit: BoxFit.cover)
-                            : DecorationImage(fit: BoxFit.cover,image: NetworkImage("https://img.freepik.com/free-photo/smiling-young-man-with-crossed-arms-outdoors_1140-255.jpg?t=st=1711008499~exp=1711012099~hmac=c12dca7e167d885c574847a9de6a9207f4733664cef37d5780e582715b6340ad&w=826")),
+                        image: phoneStorageController.imagePath != null && phoneStorageController.imagePath!.isNotEmpty
+                            ? DecorationImage(image: FileImage(File("${phoneStorageController.imagePath}")), fit: BoxFit.cover)
+                            : DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/images/blankProfileImage.png")),
                       ),
                     ),
 
@@ -88,7 +91,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          profileController.selectImageGallery();
+                                          phoneStorageController.getGalleryImage();
                                           Get.back();
                                         },
                                         child: Container(
@@ -109,7 +112,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       SizedBox(width: 8,),
                                       InkWell(
                                         onTap: () {
-                                          controller.selectImageCamera();
+                                          // controller.selectImageCamera();
                                           Get.back();
                                         },
                                         child: Container(
@@ -170,8 +173,10 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   ],
                 ),
 
+                SizedBox(height: 20.h,),
+
                 TextFormField(
-                  controller: controller.nameController,
+                  controller: phoneStorageController.nameController,
                   decoration: InputDecoration(
                       hintText: AppStrings.fullName,
                     hintStyle: TextStyle(color: AppColors.black_200)
@@ -179,7 +184,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h,),
                 TextFormField(
-                  controller: controller.designationController,
+                  controller: phoneStorageController.designationController,
                   decoration: InputDecoration(
                       hintText: AppStrings.designation,
                       hintStyle: TextStyle(color: AppColors.black_200)
@@ -187,7 +192,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h,),
                 TextFormField(
-                  controller: controller.companyNameController,
+                  controller: phoneStorageController.companyController,
                   decoration: InputDecoration(
                       hintText: AppStrings.companyName,
                       hintStyle: TextStyle(color: AppColors.black_200)
@@ -195,7 +200,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h,),
                 TextFormField(
-                  controller: controller.emailController,
+                  controller: phoneStorageController.emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       hintText: AppStrings.email,
@@ -204,7 +209,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h,),
                 TextFormField(
-                  controller: controller.contactController,
+                  controller: phoneStorageController.phoneController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       hintText: AppStrings.contactNumber,
@@ -213,7 +218,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 12.h,),
                 TextFormField(
-                  controller: controller.addressController,
+                  controller: phoneStorageController.addressController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       hintText: AppStrings.address,
@@ -228,7 +233,21 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: CustomElevatedButton(
                     onTap:( ){
-                      Get.to(AllCardsScreen());
+                      if(screenTitle == AppStrings.editCard){
+                        phoneStorageController.updateContact();
+                      }else{
+                        phoneStorageController.addContact();
+                      }
+                      phoneStorageController.imagePath = "";
+                      phoneStorageController.id = "";
+                      phoneStorageController.nameController.text = "";
+                      phoneStorageController.designationController.text = "";
+                      phoneStorageController.companyController.text = "";
+                      phoneStorageController.emailController.text = "";
+                      phoneStorageController.phoneController.text = "";
+                      phoneStorageController.addressController.text = "";
+                      Get.toNamed(AppRoutes.allCardsScreen);
+                      // Get.to(AllCardsScreen());
                     },
                     text: AppStrings.done,
                     backgroundColor: AppColors.black_500,

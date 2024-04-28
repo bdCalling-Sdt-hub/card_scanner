@@ -64,6 +64,7 @@ class AppStrings{
   static String areYouSure = "Are you sure?";
   static String yes = "Yes";
   static String no = "No";
+  static String noData = "No data";
   static String shareWith = "Share With";
   static String createCard = "Create \ncard";
   static String scanQrCode = "Scan QR \ncode";

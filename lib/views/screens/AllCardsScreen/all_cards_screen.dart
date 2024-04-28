@@ -1,13 +1,15 @@
 
+import 'dart:io';
+
+import 'package:card_scanner/Models/contacts_model.dart';
+import 'package:card_scanner/controllers/phone_storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
-import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:card_scanner/views/widgets/no_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -17,14 +19,16 @@ import '../../widgets/customButton/custom_elevated_button.dart';
 class AllCardsScreen extends StatelessWidget {
   AllCardsScreen({super.key});
 
-  List cardDetailsList = [
-    {"image": "https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826", "name" : "Michael Chen", "companyName" : "XYZ Tech Solutions", "designation" : "Senior Software Engineer" },
-    {"image": "https://img.freepik.com/free-photo/portrait-young-businesswoman-holding-eyeglasses-hand-against-gray-backdrop_23-2148029483.jpg?t=st=1711008375~exp=1711011975~hmac=511516ca747144f164ba632e645a5e64ec5b83132241f31a387017b30764cff6&w=826", "name" : "Emily Rodriguez", "companyName" : "Global Finance Group Bangladesh Ltd.", "designation" : "Financial Analyst" },
-    {"image": "https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?t=st=1711008418~exp=1711012018~hmac=0e5c69783af897de4032dee9e55d26366c4a747abe603bbdf93c1d64cd208b47&w=1380", "name" : "Lisa Nguyen", "companyName" : "Stellar Designs LLC", "designation" : "Creative Director" },
-    {"image": "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1711008542~exp=1711012142~hmac=afea31d365b7fa53a9d58b0ec23eea74c9345bd7f5f47a3dccb3d3da3875d1cc&w=1380", "name" : "Jason Patel", "companyName" : "Dynamic Innovations", "designation" : "Product Manager" },
-    {"image": "https://img.freepik.com/free-photo/smiling-young-man-with-crossed-arms-outdoors_1140-255.jpg?t=st=1711008499~exp=1711012099~hmac=c12dca7e167d885c574847a9de6a9207f4733664cef37d5780e582715b6340ad&w=826", "name" : "Kevin Miller", "companyName" : "Sparkle Marketing Agency", "designation" : "Sales Manager" },
-    {"image": "https://img.freepik.com/premium-psd/woman-with-pink-jacket-her-chest-stands-front-grid-with-words-brand-it_176841-37276.jpg?w=826", "name" : "Jessica Martinez", "companyName" : "Elite Ventures Group", "designation" : "Financial Controller" },
-  ];
+  PhoneStorageController phoneStorageController = Get.put(PhoneStorageController());
+
+  // List cardDetailsList = [
+  //   {"image": "https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826", "name" : "Michael Chen", "companyName" : "XYZ Tech Solutions", "designation" : "Senior Software Engineer" },
+  //   {"image": "https://img.freepik.com/free-photo/portrait-young-businesswoman-holding-eyeglasses-hand-against-gray-backdrop_23-2148029483.jpg?t=st=1711008375~exp=1711011975~hmac=511516ca747144f164ba632e645a5e64ec5b83132241f31a387017b30764cff6&w=826", "name" : "Emily Rodriguez", "companyName" : "Global Finance Group Bangladesh Ltd.", "designation" : "Financial Analyst" },
+  //   {"image": "https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?t=st=1711008418~exp=1711012018~hmac=0e5c69783af897de4032dee9e55d26366c4a747abe603bbdf93c1d64cd208b47&w=1380", "name" : "Lisa Nguyen", "companyName" : "Stellar Designs LLC", "designation" : "Creative Director" },
+  //   {"image": "https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1711008542~exp=1711012142~hmac=afea31d365b7fa53a9d58b0ec23eea74c9345bd7f5f47a3dccb3d3da3875d1cc&w=1380", "name" : "Jason Patel", "companyName" : "Dynamic Innovations", "designation" : "Product Manager" },
+  //   {"image": "https://img.freepik.com/free-photo/smiling-young-man-with-crossed-arms-outdoors_1140-255.jpg?t=st=1711008499~exp=1711012099~hmac=c12dca7e167d885c574847a9de6a9207f4733664cef37d5780e582715b6340ad&w=826", "name" : "Kevin Miller", "companyName" : "Sparkle Marketing Agency", "designation" : "Sales Manager" },
+  //   {"image": "https://img.freepik.com/premium-psd/woman-with-pink-jacket-her-chest-stands-front-grid-with-words-brand-it_176841-37276.jpg?w=826", "name" : "Jessica Martinez", "companyName" : "Elite Ventures Group", "designation" : "Financial Controller" },
+  // ];
 
 
   @override
@@ -34,34 +38,36 @@ class AllCardsScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.center,
+          child: GetBuilder<PhoneStorageController>(builder: (phoneStorageController) {
+            return Column(
+              children: [
+                Align(
+                  alignment: Alignment.center,
                   child: CustomText(
                     text: AppStrings.contacts,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
-              ),
-              SizedBox(height: 20.h),
+                ),
+                SizedBox(height: 20.h),
 
-              ///<<<================== Digital Card List ===================>>>
+                ///<<<================== Digital Card List ===================>>>
 
-              Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: cardDetailsList.length,
+                Expanded(
+                  child: phoneStorageController.contacts.isEmpty? Center(child: NoData()) : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: phoneStorageController.contacts.length,
                     itemBuilder: (context, index) {
+                      ContactsModel contacts = phoneStorageController.contacts[index];
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoutes.contactDetailsScreen);
+                          Get.toNamed(AppRoutes.contactDetailsScreen, arguments: {"index": index});
                         },
                         child: Container(
                           width: Get.width,
                           height: 100.h,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r)
+                              borderRadius: BorderRadius.circular(12.r)
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -71,49 +77,59 @@ class AllCardsScreen extends StatelessWidget {
                                 width: 90.w,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.r),
-                                  image: DecorationImage(fit: BoxFit.cover,image: NetworkImage(cardDetailsList[index]["image"])),
+                                  image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contacts.imageUrl))),
                                 ),
                               ),
-                             Expanded(
-                               flex: 10,
-                               child: Padding(
-                                 padding: EdgeInsets.only(left: 16.w),
-                                 child: Column(
-                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                   children: [
-                                     SizedBox(height: 8.h,),
-                                     CustomText(
-                                       overflow: TextOverflow.ellipsis,
-                                       text: cardDetailsList[index]["name"],
-                                       fontSize: 20,
-                                       fontWeight: FontWeight.w500,
-                                     ),
-                                     SizedBox(height: 4.h,),
-                                     CustomText(
-                                       overflow: TextOverflow.ellipsis,
-                                       text: cardDetailsList[index]["companyName"],
-                                       fontSize: 12,
-                                     ),
-                                     CustomText(
-                                       text: cardDetailsList[index]["designation"],
-                                       fontSize: 12,
-                                     ),
-                                   ],
-                                 ),
-                               ),
-                             ),
+                              Expanded(
+                                flex: 10,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 16.w),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 8.h,),
+                                      CustomText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: contacts.name,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      SizedBox(height: 4.h,),
+                                      CustomText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: contacts.designation,
+                                        fontSize: 14,
+                                      ),
+                                      CustomText(
+                                        text: contacts.companyName,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
 
                               ///<<<================ Edit Icon ================>>>
                               Spacer(),
                               InkWell(
                                 onTap: (){
+                                  phoneStorageController.imagePath = contacts.imageUrl;
+                                  phoneStorageController.nameController.text = contacts.name;
+                                  phoneStorageController.designationController.text = contacts.designation;
+                                  phoneStorageController.companyController.text = contacts.companyName;
+                                  phoneStorageController.emailController.text = contacts.email;
+                                  phoneStorageController.phoneController.text = contacts.phoneNumber;
+                                  phoneStorageController.addressController.text = contacts.address;
+                                  phoneStorageController.id = contacts.id;
+
                                   Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));
                                 },
                                 child: Container(
                                   height: 30.h,
                                   width: 30.w,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Icon(Icons.border_color_outlined, size: 18,color: AppColors.black_500),
                                 ),
@@ -147,6 +163,7 @@ class AllCardsScreen extends StatelessWidget {
                                                 child: CustomElevatedButton(
                                                   onTap: (){
                                                     Get.back();
+                                                    phoneStorageController.deleteContact(contacts.id);
                                                   },
                                                   text: "Yes",
                                                   backgroundColor: AppColors.green_900,
@@ -164,7 +181,7 @@ class AllCardsScreen extends StatelessWidget {
                                   height: 30.h,
                                   width: 30.w,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Icon(Icons.delete_forever_rounded, size: 18,color: AppColors.black_500),
                                 ),
@@ -174,9 +191,10 @@ class AllCardsScreen extends StatelessWidget {
                         ),
                       );
                     },),
-              )
-            ],
-          ),
+                )
+              ],
+            );
+          },),
         ),
       ),
     );
