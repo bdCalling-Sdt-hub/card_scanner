@@ -1,5 +1,5 @@
 
-import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/all_cards_screen.dart';
 import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
 import 'package:card_scanner/views/screens/ContactsScreen/contact_details_screen.dart';

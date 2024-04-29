@@ -1,12 +1,13 @@
 
-import 'package:card_scanner/views/screens/home/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
+import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController{
+
+  OCRCreateCardController ocrCreateCardController = Get.find<OCRCreateCardController>();
 
   RxBool isStyle = false.obs;
   RxBool isInformation = true.obs;
@@ -34,7 +35,7 @@ class ProfileController extends GetxController{
       cameraImage = getImages.path;
       captureImage.add(cameraImage);
       update();
-      Get.to(HomeScreen());
+      ocrCreateCardController.processImage(cameraImage!);
 
     }
   }

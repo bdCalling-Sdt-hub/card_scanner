@@ -1,4 +1,5 @@
 import 'package:card_scanner/core/routes/app_routes.dart';
+import 'package:card_scanner/global/dependency.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  DependencyInjection di = DependencyInjection();
+  di.dependencies();
   runApp(const MyApp());
 }
 

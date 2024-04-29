@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/views/screens/home/InnerWidgets/manage_modal_sheet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -19,25 +19,18 @@ import '../../../widgets/customButton/custom_elevated_button.dart';
 import '../../../widgets/customText/custom_text.dart';
 
 class CardHolder extends StatelessWidget {
-  CardHolder({
-    super.key,
-    required this.profileController,
-    required this.context,
-  });
-  BuildContext context;
-  ProfileController profileController;
-
+  CardHolder({super.key,});
   @override
   Widget build(context) {
-    return GetBuilder<ProfileController>(
-        builder:(profileController) {
+    return GetBuilder<StorageController>(
+        builder:(storageController) {
           return Container(
             width: Get.width,
             decoration: BoxDecoration(
               color: AppColors.green_50,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: profileController.captureImage.isNotEmpty
+            child: storageController.contacts.isNotEmpty
                 ? Column(
               children: [
                 Padding(
@@ -54,7 +47,7 @@ class CardHolder extends StatelessWidget {
                         fontSize: 16,
                       ),
                       CustomText(
-                        text: "(${profileController.captureImage.length})",
+                        text: "(${storageController.contacts.length})",
                       ),
                       const Spacer(),
 
@@ -108,10 +101,10 @@ class CardHolder extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: 16.w, vertical: 8.h),
                   child: SizedBox(
-                    height: (150 * profileController.captureImage.length).toDouble(),
+                    height: (150 * storageController.contacts.length).toDouble(),
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: profileController.captureImage.length,
+                      itemCount: storageController.contacts.length,
                       itemBuilder: (context, index) {
                         return GetBuilder<ProfileController>(builder: (controller) {
                           return Padding(
@@ -133,17 +126,19 @@ class CardHolder extends StatelessWidget {
                                         margin: EdgeInsets.symmetric(vertical: 8.h),
                                         height: 100.h,
                                         width: 120.w,
-                                        child: Image.file(File(profileController.captureImage[index]), fit: BoxFit.cover,)),
+                                        child: Image.file(File(storageController.contacts[index].imageUrl), fit: BoxFit.cover,)),
                                     SizedBox(
                                       width: 8.w,
                                     ),
-                                    CustomText(
-                                      text: "Unknown",
-                                      color: AppColors.black_500,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
+                                    Expanded(
+                                      child: CustomText(
+                                        overflow: TextOverflow.ellipsis,
+                                        text: storageController.contacts[index].name,
+                                        color: AppColors.black_500,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                    Spacer(),
                                     InkWell(
                                       onTap: () {
 
@@ -315,7 +310,7 @@ class CardHolder extends StatelessWidget {
 
                                                                         CustomElevatedButton(
                                                                           onTap: () {
-                                                                            profileController.captureImage.remove(index);
+                                                                            storageController.deleteContact(storageController.contacts[index].id);
                                                                             Get.toNamed(AppRoutes.homeScreen);
                                                                           },
                                                                           text: AppStrings.yes,

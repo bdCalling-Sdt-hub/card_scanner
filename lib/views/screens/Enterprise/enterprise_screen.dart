@@ -184,8 +184,8 @@ class EnterpriseScreen extends StatelessWidget {
                               return Column(
                                 children: [
                                   Container(
-                                    height: 68.h,
-                                    width: 68.h,
+                                    height: 60.h,
+                                    width: 60.h,
                                     decoration: BoxDecoration(
                                       border: Border.all(color: AppColors.black_500),
                                       borderRadius: BorderRadius.circular(100),

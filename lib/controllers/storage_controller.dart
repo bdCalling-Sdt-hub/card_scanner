@@ -12,7 +12,7 @@ import 'package:share_plus/share_plus.dart';
 import '../Models/contacts_model.dart';
 
 
-class PhoneStorageController extends GetxController{
+class StorageController extends GetxController{
   @override
   void onInit() {
     // TODO: implement onInit
@@ -36,19 +36,18 @@ class PhoneStorageController extends GetxController{
 
 
   List<ContactsModel> contacts = [];
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController designationController = TextEditingController();
-  final TextEditingController companyController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController designationController = TextEditingController();
+  static TextEditingController companyController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController phoneController = TextEditingController();
+  static TextEditingController addressController = TextEditingController();
   final picker = ImagePicker();
-  String? imagePath;
+  static String? imagePath;
   String? id;
   bool isLoading = false;
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
   ///<<<=================== Load contacts from mobile storage ===============>>>
 
@@ -75,6 +74,9 @@ class PhoneStorageController extends GetxController{
     try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/contacts.json');
+      if (kDebugMode) {
+        print("Directory:>>>>>>>>${directory.path}");
+      }
       await file.writeAsString(json.encode(contacts.map((c) => c.toJson()).toList()));
     } catch (e) {
       if (kDebugMode) {

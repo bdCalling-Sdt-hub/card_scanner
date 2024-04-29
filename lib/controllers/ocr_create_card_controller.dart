@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:card_scanner/controllers/storage_controller.dart';
+import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +14,7 @@ import '../Models/gemimi_response_model.dart';
 
 class OCRCreateCardController extends GetxController{
 
-  var apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
+  final _apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
   GeminiResponseModel? geminiResponseModel;
   TextRecognizer textRecognizer = TextRecognizer();
 
@@ -39,13 +41,13 @@ class OCRCreateCardController extends GetxController{
       print("==========>>$extractedText");
     }
     final url = Uri.parse(
-        "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=$apiKey");
+        "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=$_apiKey");
     final headers = {'Content-Type': 'application/json'};
     var bodyData = {
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, the texts make format like this(name, designation, company name, email, phone number, address) with a list"}
+            {"text": "$extractedText, 'I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated ' "}
           ]
         }
       ]
@@ -65,11 +67,11 @@ class OCRCreateCardController extends GetxController{
         geminiResponseModel = GeminiResponseModel.fromJson(jsonDecode(response.body));
         final text = geminiResponseModel?.candidates?[0].content?.parts?[0].text;
         if(text != null ){
-          var responseText = text.replaceAll(RegExp(r'(\*|-|\n)'), '');
+          var responseText = text.replaceAll(RegExp(r'([*\-\n])'), '');
           if (kDebugMode) {
             print("responseText:::: $responseText");
           }
-          List<String> parts = responseText.split(RegExp(r'[,:]')).map((e) => e.trim()).toList();
+          List<String> parts = responseText.split('/').map((e) => e.trim()).toList();
 
           // Extract values and assign them to variables
           String name = parts[0];
@@ -79,12 +81,12 @@ class OCRCreateCardController extends GetxController{
           String phoneNumber = parts[4];
           String address = parts.sublist(5).join(', '); // Join remaining parts for address
 
-          nameController.text = name;
-          designationController.text = designation;
-          companyNameController.text = companyName;
-          emailController.text = email;
-          contactController.text = phoneNumber;
-          addressController.text = address;
+          StorageController.nameController.text = name;
+          StorageController.designationController.text = designation;
+          StorageController.companyController.text = companyName;
+          StorageController.emailController.text = email;
+          StorageController.phoneController.text = phoneNumber;
+          StorageController.addressController.text = address;
 
           Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard));
 
@@ -97,9 +99,11 @@ class OCRCreateCardController extends GetxController{
 
         return response.body.toString();
       } else {
+        Get.snackbar("Invalid value", "Something went wrong", backgroundColor: AppColors.primaryColor);
         return "Something went wrong";
       }
     } catch (error) {
+      Get.snackbar("Invalid value", "Something went wrong", backgroundColor: AppColors.primaryColor);
       if (kDebugMode) {
         print("Error: $error");
       }
@@ -116,6 +120,7 @@ class OCRCreateCardController extends GetxController{
     if (getImages != null) {
       imagePath = getImages.path;
       update();
+      StorageController.imagePath = imagePath;
       if (kDebugMode) {
         print("================>>> $imagePath");
       }
@@ -146,7 +151,11 @@ class OCRCreateCardController extends GetxController{
     // TODO: implement processImage
     final image = InputImage.fromFile(File(imgPath));
     final recognized = await textRecognizer.processImage(image);
-    print("||||||${recognized.text}");
+    if (kDebugMode) {
+      print("||||||${recognized.text}");
+    }
+    StorageController.imagePath = imgPath;
+    update();
     textFormatRepo(extractedText: recognized.text);
   }
 

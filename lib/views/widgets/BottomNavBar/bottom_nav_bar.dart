@@ -2,10 +2,11 @@
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
-import 'package:card_scanner/views/screens/AllCardsScreen/all_cards_screen.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/all_cards_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
 import 'package:card_scanner/views/screens/Enterprise/enterprise_screen.dart';
@@ -35,7 +36,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   ProfileController profileController = Get.put(ProfileController());
-
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   AuthController authController = Get.put(AuthController());
 
 
@@ -126,7 +127,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       }
     }else if(index == 2){
       if(!(widget.currentIndex == 2)){
-        profileController.selectImageCamera();
+        ocrCreateCardController.selectImageCamera(isOcr: true);
       }
     }else if(index == 3){
       if(!(widget.currentIndex == 3)){
