@@ -25,6 +25,7 @@ class CardSelectionScreen extends StatelessWidget {
 
   RxList selectedContacts = [].obs;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,12 +58,15 @@ class CardSelectionScreen extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: cardDetailsList.length,
                   itemBuilder: (context, index) {
+                    List<bool> isSelect = List.generate(cardDetailsList.length, (index) => false);
                     return Obx(() => GestureDetector(
-                      onLongPress: () {
-                        selectedContacts.add(index);
-                      },
                       onTap: () {
-                        selectedContacts.remove(index);
+                        isSelect[index] = !isSelect[index];
+                        if(isSelect[index]){
+                          selectedContacts.add(index);
+                        }else{
+                          selectedContacts.remove(index);
+                        }
                       },
                       child: Container(
                         margin: EdgeInsets.only(bottom: 4.h),

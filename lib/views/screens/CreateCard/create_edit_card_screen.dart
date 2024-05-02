@@ -22,7 +22,6 @@ import '../../widgets/customText/custom_text.dart';
 class CreateOrEditCardScreen extends StatelessWidget {
   CreateOrEditCardScreen({super.key, required this.screenTitle});
 
-  ProfileController profileController = Get.put(ProfileController());
   StorageController storageController = Get.put(StorageController());
   OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   

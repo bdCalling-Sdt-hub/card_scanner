@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
-import '../QrCodeScanner/qr_code_screen.dart';
+import '../QrCodeScanner/scan_qr_code_screen.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
   const MyQrCodeScreen({super.key});
@@ -81,7 +81,7 @@ class MyQrCodeScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.to(QrCodeScreen());
+                            // Get.to(ScanQrCodeScreen());
                           },
                           child: Container(
                             height: 50.h,

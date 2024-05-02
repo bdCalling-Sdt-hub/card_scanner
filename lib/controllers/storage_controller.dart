@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../Models/contacts_model.dart';
 
@@ -17,7 +16,7 @@ class StorageController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     contacts = [];
-    loadContacts();
+    loadContacts().then((value) => initializeSelectionList());
     super.onInit();
   }
 
@@ -150,6 +149,39 @@ class StorageController extends GetxController{
       update();
       Get.snackbar("The contact is deleted","");
       saveContacts();
+  }
+
+  ///<<<========================= Card Export Section =========================>>>
+
+  int count = 0;
+  List<bool> isSelected = [];
+  List<ContactsModel> selectedContacts = [];
+  
+  initializeSelectionList(){
+    isSelected = List.generate(contacts.length, (index) => false);
+    update();
+  }
+
+  toggleSelection({required int index}){
+    isSelected[index] = !isSelected[index];
+
+    if (kDebugMode) {
+      print("Selected Items: $isSelected");
+    }
+
+    if(isSelected[index]){
+      selectedContacts.add(contacts[index]);
+      count += 1;
+    }else{
+      selectedContacts.remove(contacts[index]);
+      count -= 1;
+    }
+    update();
+  }
+  unSelectAll(){
+    isSelected = List.generate(contacts.length, (index) => false);
+    count = 0;
+    update();
   }
 
 }

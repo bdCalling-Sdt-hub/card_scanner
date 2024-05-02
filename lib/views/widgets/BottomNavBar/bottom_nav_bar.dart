@@ -35,7 +35,6 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  ProfileController profileController = Get.put(ProfileController());
   OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   AuthController authController = Get.put(AuthController());
 
@@ -111,14 +110,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void onTap(int index) {
     if(index == 0){
       if(!(widget.currentIndex == 0)){
-        Get.offAll(()=> HomeScreen(),
+        Get.to(()=> HomeScreen(),
           transition: Transition.noTransition
         );
       }
     }else if(index == 1){
       if(!(widget.currentIndex == 1)){
         if(ifContacts){
-          Get.offAll(()=> AllCardsScreen(), transition: Transition.noTransition);
+          Get.to(()=> AllCardsScreen(), transition: Transition.noTransition);
         }else{
           Get.offAll(()=> ContactsScreen(),
               transition: Transition.noTransition
