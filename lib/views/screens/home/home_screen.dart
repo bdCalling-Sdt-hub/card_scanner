@@ -194,6 +194,7 @@ class HomeScreen extends StatelessWidget {
                                           Get.to(CreateOrEditCardScreen(
                                               screenTitle: AppStrings
                                                   .createCardTitle));
+                                          StorageController.appTitle = AppStrings.createCardTitle;
                                         },
                                         child: Container(
                                           padding: EdgeInsets.all(8.w),

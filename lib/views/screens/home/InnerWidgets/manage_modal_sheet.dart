@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import '../../../../controllers/storage_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/CustomBackButton/custom_back_button.dart';
 
@@ -65,6 +66,7 @@ class ManageModalSheet extends StatelessWidget {
                       onTap: () {
                         Get.to(CreateOrEditCardScreen(
                             screenTitle: AppStrings.createCardTitle));
+                        StorageController.appTitle = AppStrings.createCardTitle;
                       },
                       child: manageCards(Icons.add, AppStrings.createCard),
                     ),

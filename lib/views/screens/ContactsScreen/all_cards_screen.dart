@@ -116,6 +116,7 @@ class AllCardsScreen extends StatelessWidget {
                                   storageController.id = contacts.id;
 
                                   Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));
+                                  StorageController.appTitle = AppStrings.editCard;
                                 },
                                 child: Container(
                                   height: 30.h,

@@ -48,7 +48,7 @@ class StorageController extends GetxController {
 
   List<ContactsModel> allContactsForGroup = [];
   RxList selectedGroupContacts = [].obs;
-
+  static String appTitle = "";
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   ///<<<--------------------- Load contacts from mobile storage --------------->>>
@@ -181,7 +181,6 @@ class StorageController extends GetxController {
       imagePath = pickedFile.path;
       cropImage(imgPath: imagePath!);
     }
-    update();
   }
 
   ///<<<---------------------- LinkedIn Image -------------------------------->>>
@@ -198,7 +197,6 @@ class StorageController extends GetxController {
       print("image path: $file");
     }
     imagePath = file?.path;
-    update();
     if(imagePath != null){
       cropImage(imgPath: imagePath!);
     }
@@ -235,8 +233,7 @@ class StorageController extends GetxController {
     if (croppedFile != null) {
       imagePath = croppedFile.path;
       update();
-      Get.back();
-      Get.back();
+      Get.offAll(CreateOrEditCardScreen(screenTitle: appTitle));
     }
   }
 

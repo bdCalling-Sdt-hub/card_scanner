@@ -42,6 +42,7 @@ class QrScannerController extends GetxController{
             // Now you can use this data as needed
             Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard))?.then((value) {
               result = "";
+              StorageController.appTitle = AppStrings.createCard;
             },);
 
           }
