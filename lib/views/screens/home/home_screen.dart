@@ -297,8 +297,8 @@ class HomeScreen extends StatelessWidget {
                             ),
                             buildServiceItems(
                               onTap: () {
-                                Get.to(AllCardsExportScreen());
-                                // Get.toNamed(AppRoutes.cardExportScreen);
+                                // Get.to(AllCardsExportScreen());
+                                Get.toNamed(AppRoutes.allCardsExportScreen);
                               },
                               icon: AppIcons.excelIcon,
                               title: AppStrings.cardExport,

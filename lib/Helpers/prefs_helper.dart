@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,6 +41,17 @@ class PrefsHelper extends GetxController {
     return preferences.getInt(key) ?? (-1);
   }
 
+  static Future<List<dynamic>> getList(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String>? stringList = prefs.getStringList(key);
+    if (stringList != null) {
+      final List<dynamic> list = stringList.map((item) => jsonDecode(item)).toList();
+      return list;
+    } else {
+      return [];
+    }
+  }
+
   ///<<<=====================Save Data To Shared Preference=====================>
 
   static Future setString(String key, value) async {
@@ -55,6 +68,14 @@ class PrefsHelper extends GetxController {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setInt(key, value);
   }
+
+  static Future<void> setList(String key, List<dynamic> list) async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> stringList = list.map((item) => item.toString()).toList();
+    await prefs.setStringList(key, stringList);
+    print(stringList);
+  }
+
 
   ///<<<==========================Remove Value==================================>
 

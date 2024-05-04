@@ -1,4 +1,7 @@
 
+import 'dart:io';
+
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
@@ -8,13 +11,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../Helpers/prefs_helper.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
 class CreateGroupScreen extends StatelessWidget {
-  const CreateGroupScreen({super.key});
+  CreateGroupScreen({super.key});
+
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +60,7 @@ class CreateGroupScreen extends StatelessWidget {
               ///<<<=================== Select Cards Button ==================>>>
               GestureDetector(
                 onTap: (){
-                  Get.to(CardSelectionScreen());
+                  storageController.loadContacts().then((value) => Get.to(CardSelectionScreen()));
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: Get.width - 150),
@@ -75,12 +81,104 @@ class CreateGroupScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-              SizedBox(height: 150.h,),
-              Image.asset(AppImages.noData, height: 100, width: 100,),
-              CustomText(
-                text: AppStrings.noCardsSelected,
-              )
+              Obx(() {
+                return storageController.selectedGroupContacts.isEmpty
+                    ? Column(
+                  children: [
+                    SizedBox(height: 150.h,),
+                    Image.asset(AppImages.noData, height: 100, width: 100,),
+                    CustomText(
+                      text: AppStrings.noCardsSelected,
+                    ),
+                  ],
+                )
+                    : Column(
+                  children: List.generate(
+                      storageController.selectedGroupContacts.length,
+                          (index) {
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 4.h),
+                          width: Get.width,
+                          height: 100.h,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: storageController.selectedGroupContacts
+                                      .contains(index)
+                                      ? AppColors.green_900
+                                      : AppColors.transparentColor),
+                              borderRadius:
+                              BorderRadius.circular(12.r)),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 90.h,
+                                width: 90.w,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(8.r),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(File(
+                                          storageController
+                                              .selectedGroupContacts[
+                                          index]
+                                              .imageUrl))),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 16.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 8.h,
+                                      ),
+                                      Expanded(
+                                        child: CustomText(
+                                          overflow: TextOverflow.ellipsis,
+                                          text: storageController
+                                              .selectedGroupContacts[
+                                          index]
+                                              .name,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4,),
+                                      Expanded(
+                                        child: CustomText(
+                                          overflow: TextOverflow.ellipsis,
+                                          text: storageController
+                                              .selectedGroupContacts[
+                                          index]
+                                              .designation,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: CustomText(
+                                          overflow: TextOverflow.ellipsis,
+                                          text: storageController
+                                              .selectedGroupContacts[
+                                          index]
+                                              .companyName,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                        
+                              ///<<<================ Edit Icon ================>>>
+                            ],
+                          ),
+                        );
+                      }),
+                );
+              },)
             ],
           ),
         ),
@@ -92,6 +190,7 @@ class CreateGroupScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
             onTap: (){
+              PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
               Get.back();
               Get.snackbar(AppStrings.groupIsCreated, "");
             },

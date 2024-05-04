@@ -86,6 +86,9 @@ class AppStrings{
   static String selectContacts = "Select Contacts";
   static String currentlyNoContacts = "There are currently no contacts available";
   static String noContactsFoundTryAgain = "No contacts found. Please try again later for updated information or check back soon.";
+  static String selectedItems = "Selected items";
+  static String unselectAll = "Unselect all";
+  static String export = "Export";
 
   ///<<<==================== Enterprise Screen Texts ========================>>>
   static String nameCardScanner = "Name Card Scanner";
@@ -141,6 +144,7 @@ class AppStrings{
   static String noCardsSelected = "No Cards Selected";
   static String groupIsCreated = "Group is created";
   static String save = "Save";
+  static String saveNBack = "Save & Back";
 
   ///<<<==================== Profile Screen Texts ============================>>>
   static String myProfile = "My Profile";

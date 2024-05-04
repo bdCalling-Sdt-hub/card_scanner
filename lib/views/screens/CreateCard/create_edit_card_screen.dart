@@ -111,6 +111,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       SizedBox(width: 8,),
                                       InkWell(
                                         onTap: () {
+                                          storageController.getCameraImage();
                                           // controller.selectImageCamera();
                                           Get.back();
                                         },
@@ -133,7 +134,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       SizedBox(width: 8,),
                                       InkWell(
                                         onTap: () {
-
+                                          Get.toNamed(AppRoutes.linkedInWebViewScreen);
                                         },
                                         child: Container(
                                           height: 70,
