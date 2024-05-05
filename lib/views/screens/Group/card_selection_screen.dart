@@ -7,6 +7,7 @@ import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +77,21 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                   onTap: () {
                                     isSelect[index] = !isSelect[index];
                                     if (isSelect[index]) {
-                                      storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                      if(storageController.selectedGroupContacts.isEmpty){
+                                        storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                      }else{
+                                        for (var element in storageController.selectedGroupContacts) {
+                                          if(element.email != storageController.allContactsForGroup[index].email){
+                                            if (kDebugMode) {
+                                              print(storageController.allContactsForGroup[index].email);
+                                            }
+                                            storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                          } else{
+                                            Get.snackbar("Already Added", "", duration: Duration(milliseconds: 700));
+                                          }
+                                        }
+                                      }
+
                                     } else {
                                       storageController.selectedGroupContacts.remove(storageController.allContactsForGroup[index]);
                                     }

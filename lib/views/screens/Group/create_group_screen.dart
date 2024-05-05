@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../Helpers/prefs_helper.dart';
+import '../../../Models/contacts_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
@@ -19,8 +20,18 @@ import '../../widgets/customText/custom_text.dart';
 
 class CreateGroupScreen extends StatelessWidget {
   CreateGroupScreen({super.key});
-
+  Map<String, List<String>> lists = {};
   StorageController storageController = Get.put(StorageController());
+  String listName = "";
+
+  void createList(String listName) {
+      lists[listName] = [];
+      listName = listName;
+  }
+  void addItemToList(String listName, String item) {
+      lists[listName]?.add(item);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +62,12 @@ class CreateGroupScreen extends StatelessWidget {
               ///<<<================== Group Name Field =================>>>
 
               TextFormField(
+                controller: storageController.groupNameController,
                 decoration: InputDecoration(
-                  hintText: AppStrings.enterGroupName,
+                  labelText: AppStrings.enterGroupName,
+                  labelStyle: TextStyle(color: AppColors.black_200),
                 ),
+                onFieldSubmitted: createList,
               ),
               SizedBox(height: 16.h,),
 
@@ -190,7 +204,13 @@ class CreateGroupScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
             onTap: (){
-              PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
+              // List<ContactGroup>groupList = [];
+              ContactGroup groupList;
+              for (int index = 0; index < storageController.selectedGroupContacts.length; index++) {
+                groupList = storageController.createGroup(index: index);
+              }
+              // storageController.groupedContactsList.add(groupList);
+              // PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
               Get.back();
               Get.snackbar(AppStrings.groupIsCreated, "");
             },

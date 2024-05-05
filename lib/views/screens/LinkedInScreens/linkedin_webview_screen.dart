@@ -54,7 +54,13 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://www.linkedin.com/'));
+      ..loadRequest(Uri.parse('https://www.linkedin.com/uas/login?fromSignIn=true&trk=cold_join_sign_in'));
+    controller.setOnConsoleMessage((message) {
+      // controller.reload();
+      // Get.snackbar(message.message, "");
+
+      print("message: =========>> ${message.message}");
+    });
     super.initState();
   }
 

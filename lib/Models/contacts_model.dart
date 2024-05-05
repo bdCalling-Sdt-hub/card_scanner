@@ -45,3 +45,10 @@ class ContactsModel {
     );
   }
 }
+
+class ContactGroup {
+  final String name ;
+  final List<ContactsModel> contactsList ;
+
+  ContactGroup({this.name = "", required this.contactsList});
+}

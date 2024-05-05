@@ -25,7 +25,7 @@ class ManageModalSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350.h,
+      height: 220.h,
       width: Get.width,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -35,7 +35,7 @@ class ManageModalSheet extends StatelessWidget {
           color: AppColors.green_50),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        child: Obx(() => Column(
+        child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
@@ -88,23 +88,23 @@ class ManageModalSheet extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 12.h),
-                Divider(
-                  color: AppColors.black_400,
-                ),
-                SizedBox(height: 8.h),
-                CustomText(
-                  text: AppStrings.changeSortType,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                // Divider(
+                //   color: AppColors.black_400,
+                // ),
+                // SizedBox(height: 8.h),
+                // CustomText(
+                //   text: AppStrings.changeSortType,
+                //   fontSize: 16,
+                //   fontWeight: FontWeight.w500,
+                // ),
 
                 ///<<<================= Card sorting type =======================>>>
-
-                cardShortSelection(1, AppStrings.sortByCreateDate),
-                cardShortSelection(2, AppStrings.sortByName),
-                cardShortSelection(3, AppStrings.sortByCompanyName),
+                //
+                // cardShortSelection(1, AppStrings.sortByCreateDate),
+                // cardShortSelection(2, AppStrings.sortByName),
+                // cardShortSelection(3, AppStrings.sortByCompanyName),
               ],
-            )),
+            ),
       ),
     );
   }

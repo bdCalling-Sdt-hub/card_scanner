@@ -46,9 +46,30 @@ class StorageController extends GetxController {
   String? id;
   bool isLoading = false;
 
+  TextEditingController groupNameController = TextEditingController();
   List<ContactsModel> allContactsForGroup = [];
+  List<ContactsModel> singleGroupContacts = [];
+  List<ContactGroup> groupedContactsList = [];
   RxList selectedGroupContacts = [].obs;
   static String appTitle = "";
+
+  ///<<<===================== Create group repo ==============================>>>
+  ContactGroup createGroup({required int index}) {
+    ContactsModel contactsModel = ContactsModel(
+        id: selectedGroupContacts[index].id,
+        imageUrl: selectedGroupContacts[index].imageUrl,
+        name: selectedGroupContacts[index].name,
+        designation: selectedGroupContacts[index].designation,
+        companyName: selectedGroupContacts[index].companyName,
+        email: selectedGroupContacts[index].email,
+        phoneNumber: selectedGroupContacts[index].phoneNumber,
+        address: selectedGroupContacts[index].address);
+    singleGroupContacts.add(contactsModel);
+    // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
+    ContactGroup group = ContactGroup(contactsList: singleGroupContacts);
+    return group;
+  }
+
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   ///<<<--------------------- Load contacts from mobile storage --------------->>>

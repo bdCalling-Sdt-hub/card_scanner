@@ -66,6 +66,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
   flutter_cache_manager: any
   image_cropper: any
+  fluttertoast: ^8.2.5
 
 
 dev_dependencies:

@@ -9,6 +9,7 @@ import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.da
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -51,6 +52,7 @@ class AllCardsScreen extends StatelessWidget {
                     itemCount: storageController.contacts.length,
                     itemBuilder: (context, index) {
                       ContactsModel contacts = storageController.contacts[index];
+                      print("contacts.companyName: ${contacts.companyName}");
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.contactDetailsScreen, arguments: {"index": index});
@@ -78,23 +80,27 @@ class AllCardsScreen extends StatelessWidget {
                                   padding: EdgeInsets.only(left: 16.w),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
+
                                     children: [
                                       SizedBox(height: 8.h,),
                                       CustomText(
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.name,
+                                        textAlign: TextAlign.start,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       SizedBox(height: 4.h,),
                                       CustomText(
                                         overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.start,
                                         text: contacts.designation,
                                         fontSize: 14,
                                       ),
                                       CustomText(
                                         text: contacts.companyName,
                                         fontSize: 14,
+                                        textAlign: TextAlign.start,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ],
@@ -103,7 +109,7 @@ class AllCardsScreen extends StatelessWidget {
                               ),
 
                               ///<<<================ Edit Icon ================>>>
-                              Spacer(),
+                              SizedBox(width: 4.w,),
                               InkWell(
                                 onTap: (){
                                   StorageController.imagePath = contacts.imageUrl;
