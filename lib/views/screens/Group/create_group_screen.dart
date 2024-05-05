@@ -204,12 +204,13 @@ class CreateGroupScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
             onTap: (){
-              // List<ContactGroup>groupList = [];
-              ContactGroup groupList;
+              List<ContactsModel> groupList = [];
+              // ContactGroup groupList;
               for (int index = 0; index < storageController.selectedGroupContacts.length; index++) {
                 groupList = storageController.createGroup(index: index);
               }
-              // storageController.groupedContactsList.add(groupList);
+              ContactGroup contactGroup = ContactGroup(name: storageController.groupNameController.text, contactsList: groupList);
+              storageController.groupedContactsList.add(contactGroup);
               // PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
               Get.back();
               Get.snackbar(AppStrings.groupIsCreated, "");

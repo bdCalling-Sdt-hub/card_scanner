@@ -54,7 +54,7 @@ class StorageController extends GetxController {
   static String appTitle = "";
 
   ///<<<===================== Create group repo ==============================>>>
-  ContactGroup createGroup({required int index}) {
+  List<ContactsModel> createGroup({required int index}) {
     ContactsModel contactsModel = ContactsModel(
         id: selectedGroupContacts[index].id,
         imageUrl: selectedGroupContacts[index].imageUrl,
@@ -66,8 +66,7 @@ class StorageController extends GetxController {
         address: selectedGroupContacts[index].address);
     singleGroupContacts.add(contactsModel);
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
-    ContactGroup group = ContactGroup(contactsList: singleGroupContacts);
-    return group;
+    return singleGroupContacts;
   }
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
