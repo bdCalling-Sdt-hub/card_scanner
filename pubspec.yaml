@@ -68,6 +68,9 @@ dependencies:
   flutter_cache_manager: any
   image_cropper: any
   fluttertoast: ^8.2.5
+  googleapis: ^13.1.0
+  googleapis_auth: ^1.6.0
+  http: ^1.2.1
 
 
 dev_dependencies:

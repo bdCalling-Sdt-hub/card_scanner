@@ -53,6 +53,7 @@ class StorageController extends GetxController {
   RxList selectedGroupContacts = [].obs;
   static String appTitle = "";
 
+
   ///<<<===================== Create group repo ==============================>>>
   List<ContactsModel> createGroup({required int index}) {
     ContactsModel contactsModel = ContactsModel(
@@ -68,6 +69,7 @@ class StorageController extends GetxController {
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
   }
+
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -290,4 +292,11 @@ class StorageController extends GetxController {
     count = 0;
     update();
   }
+
+
+
+  ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Google Drive All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
 }

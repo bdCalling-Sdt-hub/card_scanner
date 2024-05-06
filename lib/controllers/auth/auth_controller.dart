@@ -8,9 +8,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 import '../../Helpers/prefs_helper.dart';
 import '../../views/screens/Auth/signin_screen.dart';
+import 'package:googleapis/drive/v3.dart' as drive;
 
 class AuthController extends GetxController{
 
@@ -103,26 +105,51 @@ class AuthController extends GetxController{
     }
   }
 
-  ///<<<====================== Google SignIn SignOut Repo ==================>>>
+  ///<<<====================== Google SignIn/ SignOut Repo ==================>>>
+  drive.DriveApi? driveApi;
   googleSignInRepo() async {
     try{
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: ['https://www.googleapis.com/auth/drive']).signIn();
+      // final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      //
+      // final credential = GoogleAuthProvider.credential(
+      //   accessToken: googleAuth?.accessToken,
+      //   idToken: googleAuth?.idToken,
+      // );
+      // await FirebaseAuth.instance.signInWithCredential(credential);
+      // if (kDebugMode) {
+      //   print("Credential Token: ${credential.accessToken}");
+      // }
 
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      if (kDebugMode) {
-        print("Credential Token: ${credential.accessToken}");
+      if (googleUser != null) {
+        handleSignInSuccess(googleUser);
       }
+
+      if (kDebugMode) {
+        print(googleUser?.email);
+        print(googleUser?.id);
+      }
+
     }catch(e){
       if (kDebugMode) {
         print("Error: $e");
       }
     }
   }
+
+  void handleSignInSuccess(GoogleSignInAccount account) async {
+    // if (driveApi == null) {
+    //   final client = await getClient(account);
+    //   driveApi = drive.DriveApi(client);
+    // }
+  }
+  // Future<http.Client> getClient(GoogleSignInAccount account) async {
+  //   final authHeaders = await account.authHeaders;
+  //   // return http.Client()
+  //   //   ..defaultHeaders = {
+  //   //     'Authorization': authHeaders['Authorization'],
+  //   //   };
+  // }
 
   googleSignOutRepo() async{
     try{
