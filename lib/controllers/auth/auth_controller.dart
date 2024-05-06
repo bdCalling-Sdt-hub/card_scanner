@@ -1,11 +1,13 @@
 
 import 'package:card_scanner/core/routes/app_routes.dart';
+import 'package:card_scanner/views/screens/CardSync/card_sync_screen.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Helpers/prefs_helper.dart';
 import '../../views/screens/Auth/signin_screen.dart';
@@ -98,6 +100,45 @@ class AuthController extends GetxController{
       Get.snackbar("You are signed out", "");
     }catch(e){
       Get.snackbar("$e", "");
+    }
+  }
+
+  ///<<<====================== Google SignIn SignOut Repo ==================>>>
+  googleSignInRepo() async {
+    try{
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      if (kDebugMode) {
+        print("Credential Token: ${credential.accessToken}");
+      }
+    }catch(e){
+      if (kDebugMode) {
+        print("Error: $e");
+      }
+    }
+  }
+
+  googleSignOutRepo() async{
+    try{
+      final googleSignIn = GoogleSignIn();
+      await googleSignIn.signOut().then((value) {
+        if(value == null){
+          Get.snackbar("Google logout successful", "");
+          Get.offAll(CardSyncScreen());
+          if (kDebugMode) {
+            print("Value $value");
+          }
+        }
+      },
+      );
+    }catch(e){
+      Get.snackbar("Something went wrong, try again!", "");
     }
   }
 

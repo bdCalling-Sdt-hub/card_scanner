@@ -205,6 +205,7 @@ class ProfileScreen extends StatelessWidget {
                                           Expanded(
                                             child: CustomElevatedButton(
                                               onTap: (){
+                                                // SystemNavigator.pop();
                                                 authController.signOutRepo();
                                               },
                                               text: "Yes",

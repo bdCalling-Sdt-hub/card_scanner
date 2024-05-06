@@ -4,9 +4,7 @@ import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/Auth/forgot_password_screen.dart';
-import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
-import 'package:card_scanner/views/screens/Auth/signup_otp_screen.dart';
+
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/material.dart';

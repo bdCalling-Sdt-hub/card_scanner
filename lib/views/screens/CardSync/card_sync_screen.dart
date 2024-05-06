@@ -1,5 +1,7 @@
 
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
+import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
@@ -8,12 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/customButton/custom_elevated_button.dart';
 
 class CardSyncScreen extends StatelessWidget {
-  const CardSyncScreen({super.key});
+  CardSyncScreen({super.key});
+
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +45,8 @@ class CardSyncScreen extends StatelessWidget {
               SizedBox(
                 height: 36.h,
               ),
+
+              ///<<<===================== Mobile Backup ======================>>>
               GestureDetector(
                 onTap: (){
                   showDialog(
@@ -51,6 +58,7 @@ class CardSyncScreen extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           text: AppStrings.sureToSaveInMobile,
+                          color: AppColors.green_900,
                         ),
                         actions: [
                           Row(
@@ -61,19 +69,20 @@ class CardSyncScreen extends StatelessWidget {
                                     Get.back();
                                   },
                                   text: "No",
-                                  textColor: AppColors.green_900,
+                                  textColor: AppColors.black_500,
                                   isFillColor: false,
-                                  borderColor: AppColors.green_900,
+                                  borderColor: AppColors.black_500,
                                 ),
                               ),
                               SizedBox(width: 12,),
                               Expanded(
                                 child: CustomElevatedButton(
                                   onTap: (){
-
+                                    Get.back();
+                                    Get.snackbar("Your data backed up in your local storage", "");
                                   },
                                   text: "Yes",
-                                  backgroundColor: AppColors.green_900,
+                                  backgroundColor: AppColors.black_500,
                                 ),
                               ),
                             ],
@@ -115,17 +124,45 @@ class CardSyncScreen extends StatelessWidget {
               ),
 
               SizedBox(height: 20.h,),
+
+              ///<<<===================== Google backup ======================>>>
+
               GestureDetector(
                 onTap: (){
+                  // authController.googleSignInRepo();
                   showDialog(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
                           content: CustomText(
-                            maxLines: 2,
+                            maxLines: 5,
                             text: AppStrings.sureToSaveInEmail,
-                            fontSize: 16,
-                          )
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.green_900,
+                          ),
+                        actions: [
+                          CustomElevatedButton(onTap: () {
+                            authController.googleSignInRepo();
+                            },
+                            svgIcon: AppIcons.googleColorfulIcon,
+                            text: "Login",
+                            backgroundColor: AppColors.black_500,
+                            fontSize: 20,
+                          ),
+                          SizedBox(height: 8.h,),
+
+                          TextButton(onPressed: (){
+                            authController.googleSignOutRepo();
+                          }, child: Text("Logout",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.blue,
+                            ),
+                          )),
+                        ],
                       );
                     },);
                 },
@@ -152,6 +189,7 @@ class CardSyncScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: CustomText(
+                          textAlign: TextAlign.left,
                           text: AppStrings.dataBackupEmailsSecurely,
                           fontSize: 16,
                         ),

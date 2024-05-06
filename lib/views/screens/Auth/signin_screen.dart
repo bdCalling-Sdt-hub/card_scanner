@@ -238,6 +238,18 @@ class SignInScreen extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
               SizedBox(height: 8.h,),
+              CustomElevatedButton(onTap: () {
+                authController.googleSignInRepo();
+              },
+                text: "Google SignIn",
+                backgroundColor: AppColors.black_500,
+              ),SizedBox(height: 12,),
+              CustomElevatedButton(onTap: () {
+                authController.googleSignOutRepo();
+              },
+                text: "Google Sign Out",
+                backgroundColor: AppColors.black_500,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

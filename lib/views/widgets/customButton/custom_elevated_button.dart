@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:card_scanner/utils/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/app_colors.dart';
 import '../customText/custom_text.dart';
 
@@ -22,6 +25,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final bool isFillColor;
+  final String? svgIcon;
 
   const CustomElevatedButton({
     super.key,
@@ -41,6 +45,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.fontSize = 18,
     this.fontWeight = FontWeight.w600,
     this.isFillColor = true,
+    this.svgIcon,
   });
 
   @override
@@ -59,11 +64,20 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
           color: isFillColor ? backgroundColor : null,
         ),
-        child: CustomText(
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          color: textColor,
-          text: text,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (svgIcon != null) Padding(
+              padding: EdgeInsets.only(right: 8.w),
+              child: SvgPicture.asset(svgIcon!, height: 32, width: 32,),
+            ),
+            CustomText(
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+              color: textColor,
+              text: text,
+            )
+          ],
         ),
       ),
     );
