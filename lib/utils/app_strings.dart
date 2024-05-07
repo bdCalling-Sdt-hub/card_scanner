@@ -118,10 +118,10 @@ class AppStrings{
   static String smartSync = "Smart Sync";
   static String mobileBackup = "Mobile backup";
   static String batchExportCards = "Batch export cards information.";
-  static String emailBackup = "Email backup";
-  static String dataBackupEmailsSecurely = "Protect your data backup emails securely.";
+  static String emailBackup = "Google drive backup";
+  static String dataBackupEmailsSecurely = "Protect your data backup google drive securely.";
   static String sureToSaveInMobile = "Are you sure to back up your contacts information in your mobile local storage?";
-  static String sureToSaveInEmail = "Are you sure to back up your contacts information in your google drive? Log in with Google";
+  static String sureToSaveInEmail = "Backup your contacts information in google drive for safekeeping";
 
 
   ///<<<==================== Create Card Screen =============================>>>
