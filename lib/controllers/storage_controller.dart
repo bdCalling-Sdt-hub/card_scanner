@@ -415,6 +415,7 @@ class StorageController extends GetxController {
     try {
       if (accessToken == null) {
         if (kDebugMode) {
+          Get.snackbar("Upload contacts before downloading!", "");
           print('Access token is null');
         }
         return;

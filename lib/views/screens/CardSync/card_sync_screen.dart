@@ -2,6 +2,7 @@
 import 'dart:ui';
 
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -23,6 +24,7 @@ class CardSyncScreen extends StatelessWidget {
   CardSyncScreen({super.key});
 
   AuthController authController = Get.put(AuthController());
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +251,7 @@ class CardSyncScreen extends StatelessWidget {
                                     decoration: TextDecoration.underline,
                                 ),
                                 recognizer: TapGestureRecognizer()..onTap = (){
-
+                                  storageController.downloadFile(AuthController.accessToken);
                               }
                             ),
                           ],
