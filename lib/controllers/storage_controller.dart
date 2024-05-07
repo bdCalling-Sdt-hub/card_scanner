@@ -396,7 +396,6 @@ class StorageController extends GetxController {
         if (kDebugMode) {
           print('File updated successfully');
         }
-        downloadFile(accessToken);
       } else {
         if (kDebugMode) {
           print('File update failed with status code ${updateResponse.statusCode}');
