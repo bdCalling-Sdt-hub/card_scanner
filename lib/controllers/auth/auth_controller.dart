@@ -39,7 +39,7 @@ class AuthController extends GetxController{
       await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value) async{
         await firebaseFireStore.collection("users").doc(value.user?.uid).set(
           {
-            "name" : emailController.text,
+            "name" : nameController.text,
             "email" : emailController.text,
             "phone" : phoneNumberController.text
           }

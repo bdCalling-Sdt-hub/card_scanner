@@ -1,10 +1,13 @@
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
+import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
+import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/FAQ/faq_screen.dart';
@@ -53,133 +56,146 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-          child: Column(
-            children: [
-              CustomText(
-                text: AppStrings.myProfile,
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),
-              SizedBox(height: 20.h),
-
-              ///<<<====================== Profile Details ==================>>>
-
-              SizedBox(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 60.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                            image: NetworkImage("https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826")),
-                      ),
-                    ),
-                    SizedBox(width: 4.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: "Mustain Billah",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.green_900,
-                        ),
-                        CustomText(
-                          text: "Ui-Ux Designer",
-                          color: AppColors.black_400,
-                        ),
-                        SizedBox(height: 4.h),
-                        CustomText(
-                          text: "Sparktech.agency",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          color: AppColors.black_400,
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 60.w),
-
-                    ///<<<============== Edit Card ==========================>>>
-
-                    CustomContainerButton(
-                        onTap: (){
-                          Get.to(EditProfileScreen());
-                        },
-                        text: AppStrings.edit
-                    ),
-                  ],
+          child: GetBuilder<ProfileController>(builder: (profileController) {
+            return Column(
+              children: [
+                CustomText(
+                  text: AppStrings.myProfile,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
                 ),
-              ),
-              SizedBox(height: 24.h),
+                SizedBox(height: 20.h),
 
-              ///<<<===================== View Card Items ===================>>>
+                ///<<<====================== Profile Details ==================>>>
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                      cardViewList.length,
-                          (index) => InkWell(
-                            onTap: (){
-                              if(index == 0){
-                                Get.to(ViewECardScreen());
-                              } else if(index == 1){
-                                Get.to(CardStyleScreen());
-                              } else if(index == 2){
-                                Get.to(MyQrCodeScreen());
-                              }
-                            },
-                            child: Container(
-                              height: 65.h,
-                              width: 82.w,
-                              decoration: BoxDecoration(
+                SizedBox(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 60.h,
+                        width: 60.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          image: PrefsHelper.profileImagePath.isEmpty
+                              ? DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(AppImages.blankProfileImage))
+                              : DecorationImage(
+                              fit: BoxFit.fill,
+                              image: FileImage(File(PrefsHelper.profileImagePath))),
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        flex: 10,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              text: profileController.nameController.text.isEmpty? PrefsHelper.userName : profileController.nameController.text,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.green_900,
+                            ),
+                            CustomText(
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              text: profileController.designationController.text.isEmpty? "Designation: null" : profileController.designationController.text,
+                              color: AppColors.black_400,
+                            ),
+                            SizedBox(height: 4.h),
+                            CustomText(
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              text: profileController.companyController.text.isEmpty? "Company Name: null" : profileController.companyController.text,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                              color: AppColors.black_400,
+                            )
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+
+                      ///<<<============== Edit Card ==========================>>>
+
+                      CustomContainerButton(
+                          onTap: (){
+                            Get.to(EditProfileScreen());
+                          },
+                          text: AppStrings.edit
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 24.h),
+
+                ///<<<===================== View Card Items ===================>>>
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        cardViewList.length,
+                            (index) => InkWell(
+                          onTap: (){
+                            if(index == 0){
+                              Get.to(ViewECardScreen());
+                            } else if(index == 1){
+                              Get.to(CardStyleScreen());
+                            } else if(index == 2){
+                              Get.to(MyQrCodeScreen());
+                            }
+                          },
+                          child: Container(
+                            height: 65.h,
+                            width: 82.w,
+                            decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
                                 border: Border.all(color: AppColors.black_400)
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  cardViewList[index]["icon"],
-                                  CustomText(
-                                    text: cardViewList[index]["text"],
-                                  )
-                                ],
-                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                cardViewList[index]["icon"],
+                                CustomText(
+                                  text: cardViewList[index]["text"],
+                                )
+                              ],
                             ),
                           ),
-                  )
+                        ),
+                      )
+                  ),
                 ),
-              ),
-              SizedBox(height: 40.h),
+                SizedBox(height: 40.h),
 
-              ///<<<=================== Services List =======================>>>
+                ///<<<=================== Services List =======================>>>
 
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  border: Border.all(color: AppColors.black_400)
-                ),
-                child: Column(
-                  children: List.generate(
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(color: AppColors.black_400)
+                  ),
+                  child: Column(
+                    children: List.generate(
                       servicesList.length, (index) =>
-                      InkWell(
-                        onTap: (){
-                          if(index == 2 ){
-                            Get.to(SettingsScreenMain());
-                          } else if(index == 0 ){
-                            Get.to(RecommendNameCardScreen());
-                          } else if(index == 1 ){
-                            Get.to(FAQScreen());
-                          } else if(index == 3 ){
-                            showDialog(
+                        InkWell(
+                          onTap: (){
+                            if(index == 2 ){
+                              Get.to(SettingsScreenMain());
+                            } else if(index == 0 ){
+                              Get.to(RecommendNameCardScreen());
+                            } else if(index == 1 ){
+                              Get.to(FAQScreen());
+                            } else if(index == 3 ){
+                              showDialog(
                                 context: context,
                                 builder: (context) {
 
@@ -218,36 +234,37 @@ class ProfileScreen extends StatelessWidget {
                                     ],
                                   );
                                 },
-                            );
-                          }
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                          margin: EdgeInsets.symmetric(vertical: 6.h),
-                          decoration: BoxDecoration(
-                            color: AppColors.green_600,
-                            borderRadius: BorderRadius.circular(8.r)
-                          ),
-                          child: Row(
-                            children: [
-                              servicesList[index]["icon"],
-                              SizedBox(width: 8.w),
-                              CustomText(
-                                text: servicesList[index]["text"],
-                                fontSize: 16,
-                                color: AppColors.black_500,
-                              ),
-                              Spacer(),
-                              Icon(Icons.arrow_forward_ios_outlined, size: 12),
-                            ],
+                              );
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                            margin: EdgeInsets.symmetric(vertical: 6.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.green_600,
+                                borderRadius: BorderRadius.circular(8.r)
+                            ),
+                            child: Row(
+                              children: [
+                                servicesList[index]["icon"],
+                                SizedBox(width: 8.w),
+                                CustomText(
+                                  text: servicesList[index]["text"],
+                                  fontSize: 16,
+                                  color: AppColors.black_500,
+                                ),
+                                Spacer(),
+                                Icon(Icons.arrow_forward_ios_outlined, size: 12),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
+                )
+              ],
+            );
+          },),
         ),
       ),
     );

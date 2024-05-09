@@ -362,12 +362,18 @@ class StorageController extends GetxController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         fileId = responseData['id'];
-        print('File uploaded successfully $fileId');
+        if (kDebugMode) {
+          print('File uploaded successfully $fileId');
+        }
       } else {
-        print('File upload failed with status code ${response.statusCode} \n${response.contentLength}');
+        if (kDebugMode) {
+          print('File upload failed with status code ${response.statusCode} \n${response.contentLength}');
+        }
       }
     } catch (e) {
-      print('Upload failed: $e');
+      if (kDebugMode) {
+        print('Upload failed: $e');
+      }
     }
   }
 

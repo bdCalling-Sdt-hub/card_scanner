@@ -26,4 +26,5 @@ class AppImages{
   static String noData = "$imagesBasePath/noData.png";
   static String nameCardLogo = "$imagesBasePath/nameCardLogo.png";
   static String emailBackUpImg = "$imagesBasePath/emailBackUPImg.png";
+  static String blankProfileImage = "$imagesBasePath/blankProfileImage.png";
 }

@@ -5,6 +5,7 @@ import 'package:card_scanner/views/screens/Auth/signup_screen.dart';
 import 'package:card_scanner/views/screens/ContactsScreen/contact_details_screen.dart';
 import 'package:card_scanner/views/screens/Group/group_screen.dart';
 import 'package:card_scanner/views/screens/Group/selected_group_cards.dart';
+import 'package:card_scanner/views/screens/Profile/profile_screen.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/onboarding_screen.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,7 @@ class AppRoutes {
   static String contactDetailsScreen = "/contact_details_screen";
   static String allCardsExportScreen = "/all_cards_export_screen";
   static String linkedInWebViewScreen = "/linkedin_webview_screen";
+  static String profileScreen = "/profile_screen";
 
 
 
@@ -58,5 +60,6 @@ class AppRoutes {
     GetPage(name: selectedGroupCards, page: () => SelectedGroupCards()),
     GetPage(name: contactDetailsScreen, page: () => ContactDetailsScreen()),
     GetPage(name: linkedInWebViewScreen, page: () => LinkedInWebViewScreen()),
+    GetPage(name: profileScreen, page: () => ProfileScreen()),
   ];
 }

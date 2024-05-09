@@ -1,3 +1,4 @@
+import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -350,6 +351,12 @@ class SignUpScreen extends StatelessWidget {
                   // Add your button's onPressed logic here
                   authController.signUpRepo();
                   // Get.snackbar("Otp sent to your email", "");
+                  PrefsHelper.userName = authController.nameController.text;
+                  PrefsHelper.userMail = authController.emailController.text;
+                  PrefsHelper.userPhone = authController.phoneNumberController.text;
+                  PrefsHelper.setString("userName", authController.nameController.text);
+                  PrefsHelper.setString("userMail", authController.emailController.text);
+                  PrefsHelper.setString("userPhone", authController.phoneNumberController.text);
                 },
                 style: ButtonStyle(
                   backgroundColor: const MaterialStatePropertyAll(AppColors.black_500),

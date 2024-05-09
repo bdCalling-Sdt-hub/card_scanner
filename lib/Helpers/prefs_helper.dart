@@ -15,12 +15,26 @@ class PrefsHelper extends GetxController {
   static String localizationCountryCode = 'US';
   static String cameraImage = '';
   static bool signedIn = false;
+  static String userName = "";
+  static String userMail = "";
+  static String userPhone = "";
+  static String userDesignation = "";
+  static String userCompany = "";
+  static String userAddress = "";
+  static String profileImagePath = "";
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     signedIn = preferences.getBool(AppStrings.signedIn) ?? false;
+    userName = preferences.getString("userName") ?? "";
+    userMail = preferences.getString("userMail") ?? "";
+    userPhone = preferences.getString("userPhone") ?? "";
+    userDesignation = preferences.getString("userDesignation") ?? "";
+    userCompany = preferences.getString("userCompany") ?? "";
+    userAddress = preferences.getString("userAddress") ?? "";
+    profileImagePath = preferences.getString("profileImagePath") ?? "";
     cameraImage = preferences.getString("cameraImage") ?? "";
   }
 

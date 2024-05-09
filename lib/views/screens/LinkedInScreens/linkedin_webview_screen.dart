@@ -5,7 +5,10 @@ import 'dart:typed_data';
 
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
+import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
+import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -68,13 +71,17 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LinkedIn'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        title: Center(child: CustomText(text:'LinkedIn', fontSize: 20, fontWeight: FontWeight.w500,)),
+        leading: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: CustomBackButton(
+            onTap: (){Get.back();},
+            icon: Icons.arrow_back,
+          ),
         ),
+        actions: [
+          SizedBox(width: 50.w,),
+        ],
       ),
       body: Screenshot(
         controller: screenshotController,

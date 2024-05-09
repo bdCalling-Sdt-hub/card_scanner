@@ -190,6 +190,7 @@ class AppStrings{
   static String basicInfo = "Basic Info";
   static String contactInfo = "Contact Info";
   static String experience = "Experience";
+  static String workInfo = "Work Info";
   static String education = "Education";
   static String mobileNumber = "Mobile Number";
   static String signedIn = "signedIn";

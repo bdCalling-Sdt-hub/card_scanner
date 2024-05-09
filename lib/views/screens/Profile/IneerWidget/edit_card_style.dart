@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,7 @@ import 'package:get/get.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
+import '../../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../../widgets/customButton/custom_elevated_button.dart';
 import '../../../widgets/customText/custom_text.dart';
 import 'profile_image.dart';
@@ -34,59 +38,159 @@ class EditCardStyle extends StatelessWidget {
         Container(
           width: Get.width,
           color: AppColors.black_300,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 20.h),
-            child: Column(
-              children: [
-                Row(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 170.h,
+                width: 170.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(AppImages.nameCardLogo),
+                      opacity: 0.5),
+                ),
+              ),
+              Padding(
+                padding:
+                EdgeInsets.only(left: 32.w, top: 32.h, bottom: 16.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        CustomText(
-                          text: "Mostain Billah",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.green_50,
-                        ),
-                        CustomText(
-                          text: "Ui-Ux Designer",
-                          color: AppColors.green_50,
-                        ),
-                        CustomText(
-                          text: "Sparktech.agency",
-                          fontSize: 18,
-                          color: AppColors.green_50,
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-
-                    ///<<<================= Company Logo ================>>>
-
-                    Container(
-                      height: 52.h,
-                      width: 52.w,
-                      decoration: BoxDecoration(
-                        color: AppColors.green_500,
-                        borderRadius: BorderRadius.circular(4),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(AppImages.nameCardLogo),
-                        ),
+                    SizedBox(
+                      width: 200,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            textAlign: TextAlign.left,
+                            maxLines: 2,
+                            text: PrefsHelper.userName,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.green_50,
+                          ),
+                          CustomText(
+                            textAlign: TextAlign.left,
+                            maxLines: 2,
+                            text: PrefsHelper.userDesignation,
+                            color: AppColors.green_50,
+                          ),
+                          CustomText(
+                            textAlign: TextAlign.left,
+                            maxLines: 2,
+                            text: PrefsHelper.userCompany,
+                            fontSize: 18,
+                            color: AppColors.green_50,
+                          ),
+                        ],
                       ),
                     ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Row(
+                      children: [
+                        CustomBackButton(
+                          onTap: () {},
+                          icon: Icons.phone_iphone_outlined,
+                          radius: 100,
+                          color: AppColors.black_500,
+                          height: 25,
+                          width: 25,
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        CustomText(
+                          textAlign: TextAlign.left,
+                          text: PrefsHelper.userPhone,
+                          color: AppColors.green_500,
+                          fontSize: 18,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Row(
+                      children: [
+                        CustomBackButton(
+                          onTap: () {},
+                          icon: Icons.attach_email_outlined,
+                          radius: 100,
+                          color: AppColors.black_500,
+                          height: 25,
+                          width: 25,
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        CustomText(
+                          textAlign: TextAlign.left,
+                          text: PrefsHelper.userMail,
+                          color: AppColors.green_500,
+                          fontSize: 18,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Row(
+                      children: [
+                        CustomBackButton(
+                          onTap: () {},
+                          icon: Icons.location_on_outlined,
+                          radius: 100,
+                          color: AppColors.black_500,
+                          height: 25,
+                          width: 25,
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        CustomText(
+                          textAlign: TextAlign.left,
+                          maxLines: 3,
+                          text: PrefsHelper.userAddress,
+                          color: AppColors.green_500,
+                          fontSize: 18,
+                        )
+                      ],
+                    )
                   ],
                 ),
+              ),
 
-                ///<<<================= Profile Picture ================>>>
+              ///<<<================= Profile Picture ================>>>
 
-                ProfileImage(
-                  imageURl:
-                      "https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826",
-                )
-              ],
-            ),
+              Positioned(
+                top: 15,
+                right: 20,
+                child: Container(
+                  height: 130.h,
+                  width: 130.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    image: PrefsHelper.profileImagePath.isEmpty
+                        ? DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage(AppImages.blankProfileImage),
+                    )
+                        : DecorationImage(
+                      fit: BoxFit.fill,
+                      image: FileImage(
+                          File(PrefsHelper.profileImagePath)),
+                    ),
+                  ),
+                ),
+              ),
+
+              ///<<<================= Company Logo ================>>>
+            ],
           ),
         ),
 
