@@ -21,10 +21,16 @@ import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../Profile/share_profile_card_screen.dart';
 import 'InnerWidgets/card_holder.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   int currentPosition = 0;
+
   List serviceList = [
     {"icon": AppIcons.cardSyncIcon, "service": AppStrings.cardSync},
     {"icon": AppIcons.excelIcon, "service": AppStrings.cardExport},
@@ -33,10 +39,12 @@ class HomeScreen extends StatelessWidget {
 
   String link = "https://cf88BYf=name-card-scanner";
 
-
   PaymentController paymentController = Get.put(PaymentController());
+
   OCRCreateCardController ocrCreateCardController =
       Get.put(OCRCreateCardController());
+
+
 
   @override
   Widget build(BuildContext context) {
