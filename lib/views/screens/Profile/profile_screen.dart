@@ -13,7 +13,7 @@ import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/FAQ/faq_screen.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
 import 'package:card_scanner/views/screens/Profile/my_qrcode_screen.dart';
-import 'package:card_scanner/views/screens/Profile/view_profile_screen.dart';
+import 'package:card_scanner/views/screens/Profile/view_ecard_screen.dart';
 import 'package:card_scanner/views/screens/RecommendedNameCard/recommended_name_card.dart';
 import 'package:card_scanner/views/screens/Settings/settings_screen_main.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
@@ -95,7 +95,7 @@ class ProfileScreen extends StatelessWidget {
                             CustomText(
                               maxLines: 2,
                               textAlign: TextAlign.left,
-                              text: profileController.nameController.text.isEmpty? PrefsHelper.userName : profileController.nameController.text,
+                              text: profileController.nameController.text.isEmpty? "Name: null" : profileController.nameController.text,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               color: AppColors.green_900,

@@ -16,10 +16,9 @@ import '../Models/contacts_model.dart';
 
 class StorageController extends GetxController {
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
-    contacts = [];
-    loadContacts().then((value) => initializeSelectionList());
+
     super.onInit();
   }
 

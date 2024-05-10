@@ -162,9 +162,10 @@ class AppStrings{
   static String cardInformation = "Card information";
   static String selectCardBackground = "Select card background";
   static String moreSelect = "More select";
-  static String displayCompany = "Display company";
+  static String displayCompany = "Display company logo";
   static String displayProfilePhoto = "Display Profile Photo";
   static String saveAndPreview = "Save and preview";
+  static String preview = "Preview";
   static String myQrCode = "My QR Code";
   static String saveImage = "Save Image";
   static String scanQRCode = "Scan QR code";

@@ -18,6 +18,7 @@ import '../../../widgets/customText/custom_text.dart';
 
 class CardHolder extends StatelessWidget {
   CardHolder({super.key,});
+
   @override
   Widget build(context) {
     return GetBuilder<StorageController>(

@@ -45,7 +45,12 @@ class AuthController extends GetxController{
           }
         );
       });
-      Get.toNamed(AppRoutes.signInScreen);
+      await verifyEmailRepo();
+      if(user!.emailVerified){
+        Get.toNamed(AppRoutes.signInScreen);
+      }else{
+        Get.snackbar("Something went wrong:", "please check your email and password!");
+      }
       Get.snackbar("New Account Created", "");
     }catch(e){
       Get.snackbar("$e", "");
@@ -60,12 +65,8 @@ class AuthController extends GetxController{
       await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).timeout(Duration(seconds: 30));
       final user = firebaseAuth.currentUser;
       if(user?.email != null){
-        if(user!.emailVerified){
-          Get.toNamed(AppRoutes.homeScreen);
-          Get.snackbar("Successfully logged in", "");
-        }else{
-          Get.snackbar("Something went wrong:", "please check your email and password!");
-        }
+        Get.toNamed(AppRoutes.homeScreen);
+        Get.snackbar("Successfully logged in", "");
       }else{
         Get.snackbar("Something went wrong:", "please check your email and password!");
       }

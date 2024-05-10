@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/payment_controller.dart';
@@ -19,10 +18,8 @@ import 'package:get/get.dart';
 import '../../../controllers/storage_controller.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
-import '../CardExport/all_cards_export_screen.dart';
 import '../Profile/share_profile_card_screen.dart';
 import 'InnerWidgets/card_holder.dart';
-import 'InnerWidgets/manage_modal_sheet.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

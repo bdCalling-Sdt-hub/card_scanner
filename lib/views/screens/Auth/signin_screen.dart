@@ -3,6 +3,7 @@ import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -142,78 +143,93 @@ class SignInScreen extends StatelessWidget {
 
               ///<<<================ Forgot Password ==========================>>>
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Obx(
-                        () => Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            authController.isChecked.value =
-                            !authController.isChecked.value;
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 20.w,
-                                height: 20.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  border:
-                                  Border.all(color: AppColors.black_400),
-                                  color: authController.isChecked.value
-                                      ? AppColors.black_400
-                                      : AppColors.primaryColor,
-                                ),
-                                child: authController.isChecked.value
-                                    ? Center(
-                                  child: SvgPicture.asset(
-                                      AppIcons.checkMark,
-                                      fit: BoxFit.contain,
-                                      height: 10,
-                                      width: 10),
-                                )
-                                    : const Text(""),
-                                // child: Checkbox(
-                                //   autofocus: false,
-                                //   activeColor: AppColors.black_400,
-                                //   side: const BorderSide(color: AppColors.black_400),
-                                //   checkColor: AppColors.whiteColor,
-                                //   value: signUpController.isChecked.value,
-                                //   onChanged: (value) {
-                                //     signUpController.isChecked.value = value!;
-                                //   },
-                                // ),
-                              ),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              CustomText(
-                                text: AppStrings.rememberMe,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                color: AppColors.black_400,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: InkWell(
+                  onTap: () {
+                    Get.to(ForgotPasswordScreen());
+                  },
+                  child: CustomText(
+                    text: AppStrings.forgotPassword,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black_400,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(ForgotPasswordScreen());
-                    },
-                    child: CustomText(
-                      text: AppStrings.forgotPassword,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black_400,
-                    ),
-                  )
-                ],
+                ),
               ),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Obx(
+              //           () => Column(
+              //         children: [
+              //           GestureDetector(
+              //             onTap: () {
+              //               authController.isChecked.value =
+              //               !authController.isChecked.value;
+              //             },
+              //             child: Row(
+              //               children: [
+              //                 Container(
+              //                   width: 20.w,
+              //                   height: 20.h,
+              //                   decoration: BoxDecoration(
+              //                     borderRadius: BorderRadius.circular(4.r),
+              //                     border:
+              //                     Border.all(color: AppColors.black_400),
+              //                     color: authController.isChecked.value
+              //                         ? AppColors.black_400
+              //                         : AppColors.primaryColor,
+              //                   ),
+              //                   child: authController.isChecked.value
+              //                       ? Center(
+              //                     child: SvgPicture.asset(
+              //                         AppIcons.checkMark,
+              //                         fit: BoxFit.contain,
+              //                         height: 10,
+              //                         width: 10),
+              //                   )
+              //                       : const Text(""),
+              //                   // child: Checkbox(
+              //                   //   autofocus: false,
+              //                   //   activeColor: AppColors.black_400,
+              //                   //   side: const BorderSide(color: AppColors.black_400),
+              //                   //   checkColor: AppColors.whiteColor,
+              //                   //   value: signUpController.isChecked.value,
+              //                   //   onChanged: (value) {
+              //                   //     signUpController.isChecked.value = value!;
+              //                   //   },
+              //                   // ),
+              //                 ),
+              //                 SizedBox(
+              //                   width: 2.w,
+              //                 ),
+              //                 CustomText(
+              //                   text: AppStrings.rememberMe,
+              //                   fontWeight: FontWeight.w400,
+              //                   fontSize: 16,
+              //                   color: AppColors.black_400,
+              //                 )
+              //               ],
+              //             ),
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //     InkWell(
+              //       onTap: () {
+              //         Get.to(ForgotPasswordScreen());
+              //       },
+              //       child: CustomText(
+              //         text: AppStrings.forgotPassword,
+              //         fontWeight: FontWeight.w500,
+              //         fontSize: 16,
+              //         color: AppColors.black_400,
+              //       ),
+              //     )
+              //   ],
+              // ),
 
               SizedBox(height: 120.h,),
 

@@ -22,6 +22,9 @@ class PrefsHelper extends GetxController {
   static String userCompany = "";
   static String userAddress = "";
   static String profileImagePath = "";
+  static int colorIndex = 0;
+  static bool isLogoShow = true;
+  static bool isProfilePhotoShow = true;
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
@@ -36,6 +39,9 @@ class PrefsHelper extends GetxController {
     userAddress = preferences.getString("userAddress") ?? "";
     profileImagePath = preferences.getString("profileImagePath") ?? "";
     cameraImage = preferences.getString("cameraImage") ?? "";
+    colorIndex = preferences.getInt("colorIndex") ?? 0;
+    isLogoShow = preferences.getBool("isLogoShow") ?? true;
+    isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
   }
 
   ///<<<======================== Get Data Form Shared Preference ==============>

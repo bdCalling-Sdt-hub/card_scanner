@@ -23,18 +23,6 @@ class EditProfileScreen extends StatelessWidget {
 
   ProfileController profileController = Get.put(ProfileController());
 
-  List cardColorList = [
-    AppColors.ashColor,
-    AppColors.deepAshColor,
-    AppColors.greenColor,
-    AppColors.deepRedColor,
-    AppColors.blackColor,
-    AppColors.whitishColor
-  ];
-
-  final companyController = ValueNotifier<bool>(false);
-
-  final profilePhotoController = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -356,7 +344,7 @@ class EditProfileScreen extends StatelessWidget {
 
                 ///<<<=================== Card Style =========================>>>
                 if(profileController.isStyle.value)
-                  EditCardStyle(cardColorList: cardColorList, companyController: companyController, profilePhotoController: profilePhotoController),
+                  EditCardStyle(),
 
               ],
             ),

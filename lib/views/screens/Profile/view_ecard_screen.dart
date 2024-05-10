@@ -81,7 +81,7 @@ class ViewECardScreen extends StatelessWidget {
                                 text: PrefsHelper.userName,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.green_50,
+                                color: PrefsHelper.colorIndex == 2? AppColors.green_700 : AppColors.green_50,
                               ),
                               CustomText(
                                 textAlign: TextAlign.left,
@@ -130,7 +130,7 @@ class ViewECardScreen extends StatelessWidget {
                           children: [
                             CustomBackButton(
                               onTap: () {},
-                              icon: Icons.attach_email_outlined,
+                              icon: Icons.email_outlined,
                               radius: 100,
                               color: AppColors.black_500,
                               height: 25,
