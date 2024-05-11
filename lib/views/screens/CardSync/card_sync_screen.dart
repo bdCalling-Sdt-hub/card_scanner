@@ -53,92 +53,119 @@ class CardSyncScreen extends StatelessWidget {
               ),
 
               ///<<<===================== Mobile Backup ======================>>>
-              GestureDetector(
-                onTap: (){
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: CustomText(
-                          maxLines: 5,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          text: AppStrings.sureToSaveInMobile,
-                          color: AppColors.green_900,
-                        ),
-                        actions: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CustomElevatedButton(
-                                  onTap: (){
-                                    Get.back();
-                                  },
-                                  text: "No",
-                                  textColor: AppColors.black_500,
-                                  isFillColor: false,
-                                  borderColor: AppColors.black_500,
-                                ),
-                              ),
-                              SizedBox(width: 12,),
-                              Expanded(
-                                child: CustomElevatedButton(
-                                  onTap: (){
-                                    Get.back();
-                                    Get.snackbar("Your data backed up in your local storage", "");
-                                  },
-                                  text: "Yes",
-                                  backgroundColor: AppColors.black_500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },);
-                },
-                child: Container(
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.green_900),
-                    borderRadius: BorderRadius.circular(8),
-                      color: AppColors.green_600
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-                    margin: EdgeInsets.only(bottom: 56.h),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(color: AppColors.green_900)
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                        color: AppColors.green_500
-                    ),
-                    child: Column(
-                      children: [
-                        Image.asset(AppImages.mobileSmartSync, height: 130.h, width: 168.w,),
-                        SizedBox(height: 20.h),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: CustomText(
-                            text: AppStrings.mobileBackup,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: CustomText(
-                            text: AppStrings.batchExportCards,
-                            fontSize: 16,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Container(
+              //   width: Get.width,
+              //   decoration: BoxDecoration(
+              //       border: Border.all(color: AppColors.green_900),
+              //       borderRadius: BorderRadius.circular(8),
+              //       color: AppColors.green_600
+              //   ),
+              //   child: Column(
+              //     children: [
+              //       GestureDetector(
+              //         onTap: (){
+              //           showDialog(
+              //             context: context,
+              //             builder: (context) {
+              //               return AlertDialog(
+              //                 content: CustomText(
+              //                   maxLines: 5,
+              //                   fontSize: 20,
+              //                   fontWeight: FontWeight.w600,
+              //                   text: AppStrings.sureToSaveInMobile,
+              //                   color: AppColors.green_900,
+              //                 ),
+              //                 actions: [
+              //                   Row(
+              //                     children: [
+              //                       Expanded(
+              //                         child: CustomElevatedButton(
+              //                           onTap: (){
+              //                             Get.back();
+              //                           },
+              //                           text: "No",
+              //                           textColor: AppColors.black_500,
+              //                           isFillColor: false,
+              //                           borderColor: AppColors.black_500,
+              //                         ),
+              //                       ),
+              //                       SizedBox(width: 12,),
+              //                       Expanded(
+              //                         child: CustomElevatedButton(
+              //                           onTap: (){
+              //                             Get.back();
+              //                             Get.snackbar("Your data backed up in your local storage", "");
+              //                           },
+              //                           text: "Yes",
+              //                           backgroundColor: AppColors.black_500,
+              //                         ),
+              //                       ),
+              //                     ],
+              //                   ),
+              //                 ],
+              //               );
+              //             },);
+              //         },
+              //         child: Container(
+              //           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+              //           decoration: BoxDecoration(
+              //               border: Border(
+              //                   bottom: BorderSide(color: AppColors.green_900)
+              //               ),
+              //               borderRadius: BorderRadius.circular(8),
+              //               color: AppColors.green_500
+              //           ),
+              //           child: Column(
+              //             children: [
+              //               Image.asset(AppImages.mobileSmartSync, height: 130.h, width: 168.w,),
+              //               SizedBox(height: 20.h),
+              //               Align(
+              //                 alignment: Alignment.centerLeft,
+              //                 child: CustomText(
+              //                   text: AppStrings.mobileBackup,
+              //                   fontSize: 18,
+              //                   fontWeight: FontWeight.w500,
+              //                 ),
+              //               ),
+              //               SizedBox(height: 8.h),
+              //               Align(
+              //                 alignment: Alignment.centerLeft,
+              //                 child: CustomText(
+              //                   text: AppStrings.batchExportCards,
+              //                   fontSize: 16,
+              //                 ),
+              //               )
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //       Padding(
+              //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              //         child: RichText(
+              //           textAlign: TextAlign.start,
+              //           text: TextSpan(
+              //             text: 'To import back up contacts press below,  ',
+              //             style: TextStyle(fontSize: 16, color: AppColors.black_500),
+              //             children: <TextSpan>[
+              //               TextSpan(
+              //                   text: 'Import Contacts',
+              //                   style: TextStyle(
+              //                     fontWeight: FontWeight.w500,
+              //                     color: Colors.blueAccent,
+              //                     fontSize: 18,
+              //                     decoration: TextDecoration.underline,
+              //                   ),
+              //                   recognizer: TapGestureRecognizer()..onTap = (){
+              //                     storageController.downloadFile(AuthController.accessToken);
+              //                   }
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
               SizedBox(height: 20.h,),
 
@@ -160,22 +187,38 @@ class CardSyncScreen extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              content: CustomText(
-                                maxLines: 5,
-                                text: AppStrings.sureToSaveInEmail,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.green_900,
+                              content: SizedBox(
+                                height: 120.h,
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: CustomBackButton(onTap: () {
+                                        Get.back();
+                                      },),
+                                    ),
+                                    SizedBox(height: 8.h,),
+                                    CustomText(
+                                      maxLines: 5,
+                                      text: AppStrings.sureToSaveInEmail,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.green_900,
+                                    ),
+                                  ],
+                                ),
                               ),
                               actions: [
-                                CustomElevatedButton(onTap: () {
-                                  authController.googleSignInRepo();
-                                },
-                                  svgIcon: AppIcons.googleColorfulIcon,
-                                  text: "Upload",
-                                  backgroundColor: AppColors.black_500,
-                                  fontSize: 20,
-                                ),
+                                GetBuilder<StorageController>(builder: (storageController) {
+                                  return storageController.isLogin? Center(child: CircularProgressIndicator()) : CustomElevatedButton(onTap: () {
+                                    authController.googleSignInRepo();
+                                  },
+                                    svgIcon: AppIcons.googleColorfulIcon,
+                                    text: "Upload",
+                                    backgroundColor: AppColors.black_500,
+                                    fontSize: 20,
+                                  );
+                                },),
                                 SizedBox(height: 8.h,),
 
                                 CustomText(

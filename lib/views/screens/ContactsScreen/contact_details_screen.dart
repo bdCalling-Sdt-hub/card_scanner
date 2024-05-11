@@ -5,6 +5,7 @@ import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -99,20 +100,25 @@ class ContactDetailsScreen extends StatelessWidget {
     );
   }
 
-  Wrap customWrap({required String title, required String value}) {
-    return Wrap(
+  Row customWrap({required String title, required String value}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomText(
           text: "$title: ",
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
-        SizedBox(width: 8.w,),
-        CustomText(
-          maxLines: 5,
-          text: value,
-          fontSize: 16,
-          color: AppColors.green_900,
+        SizedBox(width: 12,),
+        Expanded(
+          child: CustomText(
+            textAlign: TextAlign.left,
+            maxLines: 5,
+            text: value,
+            fontSize: 18,
+            color: AppColors.green_900,
+          ),
         )
       ],
     );

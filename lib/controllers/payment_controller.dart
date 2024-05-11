@@ -7,11 +7,10 @@ import 'package:get/get.dart';
 
 class PaymentController extends GetxController{
   TextEditingController amountController = TextEditingController();
-  TextEditingController currencyController = TextEditingController();
+
 
   PaypalCheckoutView buildPaypalCheckout({required BuildContext context, required String amount, required String subscriptionName, required String currency}) {
     amountController.text = "";
-    currencyController.text = "";
     return PaypalCheckoutView(
       sandboxMode: true,
       clientId: "AX7OSyIbLHC48oMBuFctYsIwoFEK9XUeuSQqgE3Tk38QDf3X0JFgMXbLvofhf1TyYNoXNO_pwe25wVY0",

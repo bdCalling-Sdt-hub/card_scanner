@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -40,9 +41,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List cardViewList = [
-      {"icon" : Icon(Icons.visibility_outlined), "text" : AppStrings.view},
-      {"icon" : Icon(Icons.palette_outlined), "text" : AppStrings.cardStyle},
-      {"icon" : Icon(Icons.qr_code_scanner), "text" : AppStrings.cardCode},
+      {"icon" : Icon(Icons.visibility_outlined, size: 32), "text" : AppStrings.view},
+      {"icon" : Icon(Icons.qr_code_scanner, size: 32), "text" : AppStrings.cardCode},
     ];
 
     List servicesList = [
@@ -73,8 +73,8 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 60.h,
-                        width: 60.w,
+                        height: 80.h,
+                        width: 80.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           image: PrefsHelper.profileImagePath.isEmpty
@@ -97,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                               text: profileController.nameController.text.isEmpty? "Name: null" : profileController.nameController.text,
                               fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.green_900,
                             ),
                             CustomText(
@@ -105,6 +105,7 @@ class ProfileScreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                               text: profileController.designationController.text.isEmpty? "Designation: null" : profileController.designationController.text,
                               color: AppColors.black_400,
+                              fontSize: 16,
                             ),
                             SizedBox(height: 4.h),
                             CustomText(
@@ -112,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                               text: profileController.companyController.text.isEmpty? "Company Name: null" : profileController.companyController.text,
                               fontWeight: FontWeight.w400,
-                              fontSize: 16,
+                              fontSize: 18,
                               color: AppColors.black_400,
                             )
                           ],
@@ -146,14 +147,12 @@ class ProfileScreen extends StatelessWidget {
                             if(index == 0){
                               Get.to(ViewECardScreen());
                             } else if(index == 1){
-                              Get.to(CardStyleScreen());
-                            } else if(index == 2){
                               Get.to(MyQrCodeScreen());
                             }
                           },
                           child: Container(
                             height: 65.h,
-                            width: 82.w,
+                            width: 120.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.r),
                                 border: Border.all(color: AppColors.black_400)
@@ -164,6 +163,7 @@ class ProfileScreen extends StatelessWidget {
                                 cardViewList[index]["icon"],
                                 CustomText(
                                   text: cardViewList[index]["text"],
+                                  fontSize: 16,
                                 )
                               ],
                             ),

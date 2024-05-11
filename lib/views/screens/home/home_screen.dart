@@ -1,4 +1,4 @@
-
+import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
@@ -9,8 +9,10 @@ import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.da
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_currency_picker/flutter_currency_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": AppIcons.excelIcon, "service": AppStrings.cardExport},
     {"icon": AppIcons.shareCard, "service": AppStrings.shareCard},
   ];
+  Currency? currency;
 
   String link = "https://cf88BYf=name-card-scanner";
 
@@ -43,8 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   OCRCreateCardController ocrCreateCardController =
       Get.put(OCRCreateCardController());
+  StorageController storageController = Get.put(StorageController());
 
+  List filteredContacts = [];
 
+  TextEditingController searchController = TextEditingController();
+
+  void filterContacts(String query) {
+    setState(() {
+      filteredContacts = storageController.contacts
+          .where((contact) =>
+              contact.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: SizedBox(
                     height: 40,
                     child: TextFormField(
-                      onTap: () {},
+                      onChanged: filterContacts,
+                      controller: searchController,
                       // controller: widget.textEditingController,
                       keyboardType: TextInputType.text,
                       // onChanged: widget.onChanged,
@@ -157,182 +173,253 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
 
-              ///<<<================= Home Image ===========================>>>
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 20.h),
-                child: Image.asset(AppImages.homePageLogo),
-              ),
-
-              CustomText(
-                text: AppStrings.shareWithAnyone,
-                maxLines: 2,
-                color: AppColors.black_500,
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-              ),
-
-              ///<<<==================== Create Card Button ===================>>>
-
-              GetBuilder<OCRCreateCardController>(builder: (controller) {
-                return controller.isLoading? SizedBox(
-                  height: 56,
-                    child: Center(child: CircularProgressIndicator())) : Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  child: CustomElevatedButton(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            backgroundColor: AppColors.green_700,
-                            content: Container(
-                              padding: EdgeInsets.only(top: 12.h, left: 8.w),
-                              height: 120.h,
-                              child: GetBuilder<OCRCreateCardController>(
-                                builder: (controller) {
-                                  return controller.isLoading
-                                      ? Center(child: CircularProgressIndicator())
-                                      : Column(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Get.to(CreateOrEditCardScreen(
-                                              screenTitle: AppStrings
-                                                  .createCardTitle));
-                                          StorageController.appTitle = AppStrings.createCardTitle;
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.all(8.w),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            color: AppColors.green_600,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                AppIcons.editNote,
-                                                height: 26.h,
-                                                width: 20.w,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              CustomText(
-                                                text: AppStrings.cardCreateManually,
-                                                fontSize: 16,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      InkWell(
-                                        onTap: () {
-                                          ocrCreateCardController
-                                              .selectImageCamera(
-                                              isOcr: true);
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.all(8.w),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                            color: AppColors.green_600,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              SvgPicture.asset(
-                                                AppIcons.ocrCameraIcon,
-                                                height: 20.h,
-                                                width: 20.w,
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              CustomText(
-                                                text: AppStrings.cardCreateOcr,
-                                                fontSize: 16,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
+              searchController.text.isNotEmpty && filteredContacts.isNotEmpty
+                  ? Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredContacts.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            contentPadding: EdgeInsets.only(left: 42.w),
+                            title: Text(filteredContacts[index].name),
+                            onTap: () {
+                              Get.toNamed(AppRoutes.contactDetailsScreen,
+                                  arguments: {"index": index});
+                            },
                           );
                         },
-                      );
-                    },
-                    text: AppStrings.createDigitalCards,
-                    textColor: AppColors.black_500,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    borderRadius: 41,
-                    borderColor: AppColors.green_900,
-                    isFillColor: false,
-                  ),
-                );
-              },),
-
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ///<<<============== Services List ============================>>>
-
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.black_500),
-                            borderRadius: BorderRadius.circular(8.r)),
-                        width: Get.width,
-                        height: 76.h,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            buildServiceItems(
-                              onTap: () {
-                                Get.toNamed(AppRoutes.cardSyncScreen);
-                              },
-                              icon: AppIcons.cardSyncIcon,
-                              title: AppStrings.cardSync,
-                            ),
-                            buildServiceItems(
-                              onTap: () {
-                                // Get.to(AllCardsExportScreen());
-                                Get.toNamed(AppRoutes.allCardsExportScreen);
-                              },
-                              icon: AppIcons.excelIcon,
-                              title: AppStrings.cardExport,
-                            ),
-                            buildServiceItems(
-                              onTap: () {
-                                Get.to(ShareProfileCardScreen());
-                              },
-                              icon: AppIcons.shareCard,
-                              title: AppStrings.shareCard,
-                            ),
-                          ],
-                        ),
                       ),
+                    )
+                  : Expanded(
+                      child: Column(
+                        children: [
+                          ///<<<================= Home Image ===========================>>>
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 32.w, vertical: 20.h),
+                            child: Image.asset(AppImages.homePageLogo),
+                          ),
 
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      SizedBox(
-                        height: 16.h,
-                      ),
+                          CustomText(
+                            text: AppStrings.shareWithAnyone,
+                            maxLines: 2,
+                            color: AppColors.black_500,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          ),
 
-                      ///<<<=============== Card Holder =============================>>>
-                      CardHolder(),
-                    ],
-                  ),
-                ),
-              )
+                          ///<<<==================== Create Card Button ===================>>>
+
+                          GetBuilder<OCRCreateCardController>(
+                            builder: (controller) {
+                              return controller.isLoading
+                                  ? SizedBox(
+                                      height: 56,
+                                      child: Center(
+                                          child: CircularProgressIndicator()))
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 12.h),
+                                      child: CustomElevatedButton(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                backgroundColor:
+                                                    AppColors.green_700,
+                                                content: Container(
+                                                  padding: EdgeInsets.only(
+                                                      top: 12.h, left: 8.w),
+                                                  height: 120.h,
+                                                  child: GetBuilder<
+                                                      OCRCreateCardController>(
+                                                    builder: (controller) {
+                                                      return controller
+                                                              .isLoading
+                                                          ? Center(
+                                                              child:
+                                                                  CircularProgressIndicator())
+                                                          : Column(
+                                                              children: [
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    Get.to(CreateOrEditCardScreen(
+                                                                        screenTitle:
+                                                                            AppStrings.createCardTitle));
+                                                                    StorageController
+                                                                            .appTitle =
+                                                                        AppStrings
+                                                                            .createCardTitle;
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    padding: EdgeInsets
+                                                                        .all(8
+                                                                            .w),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.r),
+                                                                      color: AppColors
+                                                                          .green_600,
+                                                                    ),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        SvgPicture
+                                                                            .asset(
+                                                                          AppIcons
+                                                                              .editNote,
+                                                                          height:
+                                                                              26.h,
+                                                                          width:
+                                                                              20.w,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              8.w,
+                                                                        ),
+                                                                        CustomText(
+                                                                          text:
+                                                                              AppStrings.cardCreateManually,
+                                                                          fontSize:
+                                                                              16,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Spacer(),
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    ocrCreateCardController
+                                                                        .selectImageCamera(
+                                                                            isOcr:
+                                                                                true);
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    padding: EdgeInsets
+                                                                        .all(8
+                                                                            .w),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.r),
+                                                                      color: AppColors
+                                                                          .green_600,
+                                                                    ),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        SvgPicture
+                                                                            .asset(
+                                                                          AppIcons
+                                                                              .ocrCameraIcon,
+                                                                          height:
+                                                                              20.h,
+                                                                          width:
+                                                                              20.w,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              8.w,
+                                                                        ),
+                                                                        CustomText(
+                                                                          text:
+                                                                              AppStrings.cardCreateOcr,
+                                                                          fontSize:
+                                                                              16,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                    },
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                        text: AppStrings.createDigitalCards,
+                                        textColor: AppColors.black_500,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                        borderRadius: 41,
+                                        borderColor: AppColors.green_900,
+                                        isFillColor: false,
+                                      ),
+                                    );
+                            },
+                          ),
+
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  ///<<<============== Services List ============================>>>
+
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.w),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.black_500),
+                                        borderRadius:
+                                            BorderRadius.circular(8.r)),
+                                    width: Get.width,
+                                    height: 76.h,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        buildServiceItems(
+                                          onTap: () {
+                                            Get.toNamed(
+                                                AppRoutes.cardSyncScreen);
+                                          },
+                                          icon: AppIcons.cardSyncIcon,
+                                          title: AppStrings.cardSync,
+                                        ),
+                                        buildServiceItems(
+                                          onTap: () {
+                                            // Get.to(AllCardsExportScreen());
+                                            Get.toNamed(
+                                                AppRoutes.allCardsExportScreen);
+                                          },
+                                          icon: AppIcons.excelIcon,
+                                          title: AppStrings.cardExport,
+                                        ),
+                                        buildServiceItems(
+                                          onTap: () {
+                                            Get.to(ShareProfileCardScreen());
+                                          },
+                                          icon: AppIcons.shareCard,
+                                          title: AppStrings.shareCard,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  SizedBox(
+                                    height: 16.h,
+                                  ),
+
+                                  ///<<<=============== Card Holder =============================>>>
+                                  CardHolder(),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
             ],
           ),
         ),
@@ -349,7 +436,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(12.r),
           color: AppColors.green_500,
         ),
-        height: 250,
+        height: 270,
         width: Get.width,
         child: Column(
           children: [
@@ -363,25 +450,41 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             TextFormField(
               controller: paymentController.amountController,
-              decoration: InputDecoration(hintText: AppStrings.amount),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(left: 8.w),
+                  labelText: AppStrings.amount,
+                labelStyle: TextStyle(
+                  color: AppColors.green_900
+                )
+              ),
             ),
             SizedBox(
               height: 12.h,
             ),
-            TextFormField(
-              controller: paymentController.currencyController,
-              decoration: InputDecoration(hintText: AppStrings.currency),
+            CurrencySelector(
+              indent: EdgeInsets.only(left: 8.w),
+              value: currency?.code,
+              hintText: 'Currency Type (Code)',
+              fieldBackground: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+              update: (value) => setState(() => currency = value),
             ),
             SizedBox(
               height: 24.h,
             ),
             CustomElevatedButton(
               onTap: () {
-                Get.to(paymentController.buildPaypalCheckout(
-                    subscriptionName: "Donation",
-                    context: context,
-                    amount: paymentController.amountController.text,
-                    currency: paymentController.currencyController.text));
+                if(currency?.code != null && currency!.code.isNotEmpty){
+                  if (kDebugMode) {
+                    print("Currency Code ${currency!.code}");
+                  }
+                  Get.to(paymentController.buildPaypalCheckout(
+                      subscriptionName: "Donation",
+                      context: context,
+                      amount: paymentController.amountController.text,
+                      currency: currency!.code));
+                }else{
+                  Get.snackbar("Please, must select a currency", "");
+                }
               },
               text: AppStrings.send,
               backgroundColor: AppColors.black_500,

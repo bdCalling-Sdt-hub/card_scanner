@@ -1,6 +1,7 @@
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,7 @@ class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
   AuthController authController = Get.put(AuthController());
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -244,6 +246,7 @@ class SignInScreen extends StatelessWidget {
                   authController.ifSignIn.value = true;
                   PrefsHelper.setBool(AppStrings.signedIn, true);
                   PrefsHelper.signedIn = true;
+                  storageController.loadContacts();
                 },
                 borderRadius: 12,
                 borderColor: AppColors.black_500,

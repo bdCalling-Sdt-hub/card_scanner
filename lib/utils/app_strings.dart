@@ -225,7 +225,7 @@ class AppStrings{
   ///<<<================ Text Field Validation Texts ========================>>>
   static const enterEmail = "Email is required";
   static const enterPhone = "Phone number is required";
-  static RegExp emailRegexp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  static RegExp emailRegexp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static RegExp phoneRegexp = RegExp(r"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$");
   static const String enterValidEmail = "Enter valid email";
   static const String enterValidPhoneNumber = "Enter valid phone number";

@@ -10,6 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/storage_controller.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,10 +22,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  StorageController storageController = Get.put(StorageController());
+
   @override
   void initState() {
     // TODO: implement initState
     final user = FirebaseAuth.instance.currentUser;
+    storageController.loadContacts();
     if (kDebugMode) {
       print("=====${user?.uid}");
     }

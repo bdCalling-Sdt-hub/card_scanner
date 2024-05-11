@@ -18,7 +18,7 @@ class StorageController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-
+    loadContacts().then((value) => initializeSelectionList());
     super.onInit();
   }
 
@@ -299,9 +299,12 @@ class StorageController extends GetxController {
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Google Drive All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   String? fileId;
+  bool isLogin = false;
   ///<<<===================== save contacts repo =============================>>>
 
   Future<void> saveContactsInGoogle({String? accessToken}) async {
+    isLogin = true;
+    update();
     try {
       // Encode contacts list to JSON
       final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
@@ -323,13 +326,17 @@ class StorageController extends GetxController {
         print("Error saving contacts: $e");
       }
     }
+    isLogin = false;
+    update();
   }
 
   ///<<<====================== upload file repo ===============================>>>
   Future<void> uploadFile(File file, String? accessToken) async {
     try {
       if (accessToken == null) {
-        print('Access token is null');
+        if (kDebugMode) {
+          print('Access token is null');
+        }
         return;
       }
 
@@ -432,7 +439,14 @@ class StorageController extends GetxController {
       if (downloadResponse.statusCode == 200) {
         // Process downloaded content
         final List<int> fileBytes = downloadResponse.bodyBytes;
-        final String fileContent = utf8.decode(fileBytes);
+        final List<ContactsModel> fileContent = (jsonDecode(utf8.decode(fileBytes)) as List).map((item) => ContactsModel.fromJson(item)).toList();
+
+        for (var content in fileContent) {
+          if (!contacts.any((contact) => contact.id == content.id)) {
+            contacts.add(content);
+            update();
+          }
+        }
         if (kDebugMode) {
           print(fileContent);
         }

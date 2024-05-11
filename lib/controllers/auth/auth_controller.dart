@@ -31,10 +31,13 @@ class AuthController extends GetxController{
   var firebaseAuth = FirebaseAuth.instance;
   var firebaseFireStore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
+  bool isLoading = false;
 
 
   ///<<<=================== Sign Up Repo ===============================>>>
   Future<void> signUpRepo()async {
+    isLoading = true;
+    update();
     try{
       await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text).then((value) async{
         await firebaseFireStore.collection("users").doc(value.user?.uid).set(
@@ -45,22 +48,23 @@ class AuthController extends GetxController{
           }
         );
       });
-      await verifyEmailRepo();
-      if(user!.emailVerified){
-        Get.toNamed(AppRoutes.signInScreen);
-      }else{
-        Get.snackbar("Something went wrong:", "please check your email and password!");
-      }
+
+      Get.toNamed(AppRoutes.signInScreen);
       Get.snackbar("New Account Created", "");
     }catch(e){
-      Get.snackbar("$e", "");
+      Get.snackbar("Try again!", "Something went wrong.");
     }
+    isLoading = false;
+    update();
+
   }
 
   ///<<<=================== Sign In Repo ===============================>>>
 
 
   Future<void> signInRepo()async {
+    isLoading = true;
+    update();
     try{
       await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text).timeout(Duration(seconds: 30));
       final user = firebaseAuth.currentUser;
@@ -76,6 +80,8 @@ class AuthController extends GetxController{
         print(e);
       }
     }
+    isLoading = false;
+    update();
   }
 
   ///<<<=================== Reset Password Repo ==========================>>>
@@ -93,9 +99,10 @@ class AuthController extends GetxController{
   ///<<<=================== Verify Email ================================>>>
 
   Future<void> verifyEmailRepo() async {
-    await user?.sendEmailVerification().then((value){
+    var emailVerifyResponse = await user?.sendEmailVerification().then((value){
       Get.snackbar("Link sent", "A link has been sent to your email", animationDuration: Duration(seconds: 5));
     });
+    print("Email verify: $emailVerifyResponse");
   }
 
   ///<<<=================== Sign Out Repo ===============================>>>
@@ -202,14 +209,18 @@ class AuthController extends GetxController{
         print(googleUser?.id);
       }
     } catch (e) {
-      print("Error: $e");
+      if (kDebugMode) {
+        print("Error: $e");
+      }
     }
   }
 
   Future<void> uploadFile() async {
     try {
       if (accessToken == null) {
-        print('Access token is null');
+        if (kDebugMode) {
+          print('Access token is null');
+        }
         return;
       }
 
@@ -226,12 +237,19 @@ class AuthController extends GetxController{
       );
 
       if (response.statusCode == 200) {
-        print('File uploaded successfully');
+        if (kDebugMode) {
+          print('File uploaded successfully');
+        }
+        Get.back();
       } else {
-        print('File upload failed with status code ${response.statusCode}');
+        if (kDebugMode) {
+          print('File upload failed with status code ${response.statusCode}');
+        }
       }
     } catch (e) {
-      print('Upload failed: $e');
+      if (kDebugMode) {
+        print('Upload failed: $e');
+      }
     }
   }
 

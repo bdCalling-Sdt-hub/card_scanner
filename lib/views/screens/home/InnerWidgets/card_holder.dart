@@ -23,7 +23,9 @@ class CardHolder extends StatelessWidget {
   Widget build(context) {
     return GetBuilder<StorageController>(
         builder:(storageController) {
-          return Container(
+          return storageController.isLoading
+              ? Center(child: CircularProgressIndicator())
+              : Container(
             width: Get.width,
             decoration: BoxDecoration(
               color: AppColors.green_50,

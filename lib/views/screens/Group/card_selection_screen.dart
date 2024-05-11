@@ -77,6 +77,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                   onTap: () {
                                     isSelect[index] = !isSelect[index];
                                     if (isSelect[index]) {
+                                      print(storageController.selectedGroupContacts);
                                       if(storageController.selectedGroupContacts.isEmpty){
                                         storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
                                       }else{
