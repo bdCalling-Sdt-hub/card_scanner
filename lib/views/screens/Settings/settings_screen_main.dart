@@ -18,8 +18,8 @@ class SettingsScreenMain extends StatelessWidget {
   final notificationController = ValueNotifier<bool>(false);
 
   List servicesList = [
-    {"icon": Icon(Icons.pageview), "text": AppStrings.general},
-    {"icon": Icon(Icons.notifications), "text": AppStrings.notifications},
+    // {"icon": Icon(Icons.pageview), "text": AppStrings.general},
+    // {"icon": Icon(Icons.notifications), "text": AppStrings.notifications},
     {"icon": Icon(Icons.language), "text": AppStrings.language},
     {
       "icon": SvgPicture.asset(AppIcons.aboutIcon, height: 18),
@@ -64,23 +64,26 @@ class SettingsScreenMain extends StatelessWidget {
                   servicesList.length,
                   (index) => InkWell(
                     onTap: () {
-                      if (index == 0) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return openAlertDialog(0);
-                          },
-                        );
-                      } else if (index == 1) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return openAlertDialog(1);
-                          },
-                        );
-                      } else if(index == 2){
+                      // if (index == 0) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return openAlertDialog(0);
+                      //     },
+                      //   );
+                      // }
+                      // else if (index == 1) {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) {
+                      //       return openAlertDialog(1);
+                      //     },
+                      //   );
+                      // }
+                      if(index == 0){
                         Get.to(ChangeLanguageScreen());
-                      } else if(index == 3){
+                      }
+                      else if(index == 1){
                         Get.to(AboutScreen());
                       }
                     },
