@@ -74,7 +74,10 @@ class CreateGroupScreen extends StatelessWidget {
               ///<<<=================== Select Cards Button ==================>>>
               GestureDetector(
                 onTap: (){
-                  storageController.loadContacts().then((value) => Get.to(CardSelectionScreen()));
+                  storageController.loadContacts().then((value) {
+                    storageController.tempoContactsList.addAll(storageController.selectedContacts);
+                    Get.to(CardSelectionScreen());
+                  },);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: Get.width - 150),

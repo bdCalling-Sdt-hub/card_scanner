@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 import '../../widgets/no_data.dart';
+import 'create_group_screen.dart';
 
 class CardSelectionScreen extends StatefulWidget {
   CardSelectionScreen({super.key});
@@ -77,15 +78,18 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                   onTap: () {
                                     isSelect[index] = !isSelect[index];
                                     if (isSelect[index]) {
-                                      print(storageController.selectedGroupContacts);
-                                      if(storageController.selectedGroupContacts.isEmpty){
+
+                                      if(storageController.tempoContactsList.isEmpty){
                                         storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                        print("storageController.selectedGroupContacts: ${storageController.selectedGroupContacts}");
                                       }else{
-                                        for (var element in storageController.selectedGroupContacts) {
+                                        for (var element in storageController.tempoContactsList) {
                                           if(element.email != storageController.allContactsForGroup[index].email){
                                             if (kDebugMode) {
                                               print(storageController.allContactsForGroup[index].email);
                                             }
+                                            // storageController.tempoContactsList.add(storageController.allContactsForGroup[index]);
+                                            print("storageController.tempoContactsList: ${storageController.tempoContactsList}");
                                             storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
                                           } else{
                                             Get.snackbar("Already Added", "", duration: Duration(milliseconds: 700));
@@ -192,7 +196,8 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
           onTap: () {
-            Get.back();
+            // storageController.selectedGroupContacts.addAll(storageController.tempoContactsList);
+            Get.offAll(CreateGroupScreen());
           },
           text: AppStrings.saveNBack,
           backgroundColor: AppColors.black_500,

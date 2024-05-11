@@ -50,7 +50,9 @@ class StorageController extends GetxController {
   TextEditingController groupNameController = TextEditingController();
   List<ContactsModel> allContactsForGroup = [];
   List<ContactsModel> singleGroupContacts = [];
+  List<ContactsModel> tempoContactsList = [];
   List<ContactGroup> groupedContactsList = [];
+
   RxList selectedGroupContacts = [].obs;
   static String appTitle = "";
 
