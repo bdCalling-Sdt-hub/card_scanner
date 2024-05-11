@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -12,7 +13,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class GroupScreen extends StatelessWidget {
-  const GroupScreen({super.key});
+  GroupScreen({super.key});
+
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,7 @@ class GroupScreen extends StatelessWidget {
               ///<<<================== Recently Added Text ===================>>>
               SizedBox(height: 16.h),
               CustomText(
-                text: "${AppStrings.recentlyAdded}(0)",
+                text: "${AppStrings.recentlyAdded}(${storageController.groupedContactsList.length})",
                 fontSize: 16,
                 color: AppColors.black_400 ,
               ),

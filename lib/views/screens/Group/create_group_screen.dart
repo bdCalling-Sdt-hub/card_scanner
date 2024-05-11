@@ -5,13 +5,11 @@ import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../Helpers/prefs_helper.dart';
 import '../../../Models/contacts_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
@@ -75,7 +73,7 @@ class CreateGroupScreen extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   storageController.loadContacts().then((value) {
-                    storageController.tempoContactsList.addAll(storageController.selectedContacts);
+                    storageController.selectedGroupContacts.clear();
                     Get.to(CardSelectionScreen());
                   },);
                 },
@@ -209,14 +207,24 @@ class CreateGroupScreen extends StatelessWidget {
             onTap: (){
               List<ContactsModel> groupList = [];
               // ContactGroup groupList;
-              for (int index = 0; index < storageController.selectedGroupContacts.length; index++) {
-                groupList = storageController.createGroup(index: index);
+              if(storageController.groupNameController.text.isNotEmpty){
+                for (int index = 0; index < storageController.selectedGroupContacts.length; index++) {
+                  groupList = storageController.createGroup(index: index);
+                }
+                ContactGroup contactGroup = ContactGroup(name: storageController.groupNameController.text, contactsList: groupList);
+                storageController.groupedContactsList.add(contactGroup);
+                // PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
+                storageController.selectedGroupContacts.clear();
+                storageController.groupNameController.text = "";
+
+                Get.back();
+                Get.snackbar(AppStrings.groupIsCreated, "");
+                if (kDebugMode) {
+                  print("storageController.groupedContactsList: ${storageController.groupedContactsList[0].name}, ${storageController.groupedContactsList[0].contactsList[0].email}");
+                }
+              }else{
+                Get.snackbar(AppStrings.groupNameMandatory, "");
               }
-              ContactGroup contactGroup = ContactGroup(name: storageController.groupNameController.text, contactsList: groupList);
-              storageController.groupedContactsList.add(contactGroup);
-              // PrefsHelper.setList("selectedGroupContacts", storageController.selectedGroupContacts);
-              Get.back();
-              Get.snackbar(AppStrings.groupIsCreated, "");
             },
           text: AppStrings.createGroup,
           backgroundColor: AppColors.black_500,

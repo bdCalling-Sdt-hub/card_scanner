@@ -143,6 +143,7 @@ class AppStrings{
   static String alpha = "Alpha";
   static String noCardsSelected = "No Cards Selected";
   static String groupIsCreated = "Group is created";
+  static String groupNameMandatory = "Group name is mandatory to create a group";
   static String save = "Save";
   static String saveNBack = "Save & Back";
 

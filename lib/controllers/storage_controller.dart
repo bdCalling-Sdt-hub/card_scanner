@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +49,6 @@ class StorageController extends GetxController {
   TextEditingController groupNameController = TextEditingController();
   List<ContactsModel> allContactsForGroup = [];
   List<ContactsModel> singleGroupContacts = [];
-  List<ContactsModel> tempoContactsList = [];
   List<ContactGroup> groupedContactsList = [];
 
   RxList selectedGroupContacts = [].obs;
@@ -354,7 +352,7 @@ class StorageController extends GetxController {
       };
 
       // Encode metadata to JSON
-      final String metadataJson = json.encode(metadata);
+      json.encode(metadata);
 
       // Create an HTTP request to upload the file to Google Drive
       final http.Response response = await http.post(

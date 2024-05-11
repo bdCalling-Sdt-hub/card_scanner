@@ -1,15 +1,10 @@
 import 'dart:io';
 
-import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
-import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +14,7 @@ import '../../widgets/no_data.dart';
 import 'create_group_screen.dart';
 
 class CardSelectionScreen extends StatefulWidget {
-  CardSelectionScreen({super.key});
+  const CardSelectionScreen({super.key});
 
   @override
   State<CardSelectionScreen> createState() => _CardSelectionScreenState();
@@ -78,23 +73,9 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                   onTap: () {
                                     isSelect[index] = !isSelect[index];
                                     if (isSelect[index]) {
-
-                                      if(storageController.tempoContactsList.isEmpty){
-                                        storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                      storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
+                                      if (kDebugMode) {
                                         print("storageController.selectedGroupContacts: ${storageController.selectedGroupContacts}");
-                                      }else{
-                                        for (var element in storageController.tempoContactsList) {
-                                          if(element.email != storageController.allContactsForGroup[index].email){
-                                            if (kDebugMode) {
-                                              print(storageController.allContactsForGroup[index].email);
-                                            }
-                                            // storageController.tempoContactsList.add(storageController.allContactsForGroup[index]);
-                                            print("storageController.tempoContactsList: ${storageController.tempoContactsList}");
-                                            storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
-                                          } else{
-                                            Get.snackbar("Already Added", "", duration: Duration(milliseconds: 700));
-                                          }
-                                        }
                                       }
 
                                     } else {
@@ -197,7 +178,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
         child: CustomElevatedButton(
           onTap: () {
             // storageController.selectedGroupContacts.addAll(storageController.tempoContactsList);
-            Get.offAll(CreateGroupScreen());
+            Get.back();
           },
           text: AppStrings.saveNBack,
           backgroundColor: AppColors.black_500,
