@@ -51,4 +51,20 @@ class ContactGroup {
   final List<ContactsModel> contactsList ;
 
   ContactGroup({required this.name, required this.contactsList});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'contactsList': contactsList.map((contact) => contact.toJson()).toList(),
+    };
+  }
+
+  factory ContactGroup.fromJson(Map<String, dynamic> json) {
+    return ContactGroup(
+      name: json['name'],
+      contactsList: (json['contactsList'] as List)
+          .map((contactJson) => ContactsModel.fromJson(contactJson))
+          .toList(),
+    );
+  }
 }

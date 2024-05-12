@@ -1,4 +1,7 @@
 
+import 'dart:io';
+
+import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -6,17 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../../Helpers/prefs_helper.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 import '../QrCodeScanner/scan_qr_code_screen.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
-  const MyQrCodeScreen({super.key});
+  MyQrCodeScreen({super.key});
+
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -44,33 +52,59 @@ class MyQrCodeScreen extends StatelessWidget {
                 width: 100.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  image: DecorationImage(
+                  image: PrefsHelper.profileImagePath.isEmpty
+                      ? DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage("https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826")),
+                      image: AssetImage(AppImages.blankProfileImage))
+                      : DecorationImage(
+                      fit: BoxFit.fill,
+                      image: FileImage(File(PrefsHelper.profileImagePath))),
                 ),
               ),
               SizedBox(height: 20.h),
               CustomText(
-                text: "Mustain Billah",
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                text: profileController.nameController.text.isEmpty? "Name: null" : profileController.nameController.text,
                 fontSize: 20,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 color: AppColors.green_900,
               ),
               CustomText(
-                text: "Ui-Ux Designer",
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                text: profileController.designationController.text.isEmpty? "Designation: null" : profileController.designationController.text,
                 color: AppColors.black_400,
-              ),
-              SizedBox(
-                  height: 4.h
-              ),
-              CustomText(
-                text: "Sparktech.agency",
-                fontWeight: FontWeight.w400,
                 fontSize: 16,
+              ),
+              SizedBox(height: 4.h),
+              CustomText(
+                maxLines: 2,
+                textAlign: TextAlign.left,
+                text: profileController.companyController.text.isEmpty? "Company Name: null" : profileController.companyController.text,
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
                 color: AppColors.black_400,
               ),
               SizedBox(height: 12.h),
-              Image.asset(AppImages.qr1Img, height: 150, width: 150,),
+              QrImageView(
+                data: "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
+                version: QrVersions.auto,
+                size: 200,
+                gapless: false,
+                // embeddedImage: FileImage(File(selectedContact.imageUrl)),
+                embeddedImageStyle: QrEmbeddedImageStyle(
+                    size: Size(100, 100)
+                ),
+                errorStateBuilder: (context, error) {
+                  return Center(
+                    child: Text(
+                      "Uh oh! Something went wrong...",
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                },
+              ),
               CustomText(text: AppStrings.nameCardScanner, fontSize: 12,),
               SizedBox(height: 30.h,),
               Padding(

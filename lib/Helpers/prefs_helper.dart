@@ -1,13 +1,19 @@
 
 import 'dart:convert';
 
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Models/contacts_model.dart';
 
 
 
 class PrefsHelper extends GetxController {
+
+
   static String token = "";
   static bool isInformation = false;
   static bool isStyle = false;
@@ -23,8 +29,10 @@ class PrefsHelper extends GetxController {
   static String userAddress = "";
   static String profileImagePath = "";
   static int colorIndex = 0;
+  static int unGroupedContacts = 0;
   static bool isLogoShow = true;
   static bool isProfilePhotoShow = true;
+  static List groupedContactsList = [];
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
@@ -40,8 +48,10 @@ class PrefsHelper extends GetxController {
     profileImagePath = preferences.getString("profileImagePath") ?? "";
     cameraImage = preferences.getString("cameraImage") ?? "";
     colorIndex = preferences.getInt("colorIndex") ?? 0;
+    unGroupedContacts = preferences.getInt("unGroupedContacts") ?? 0;
     isLogoShow = preferences.getBool("isLogoShow") ?? true;
     isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
+    groupedContactsList = await getGroupedList();
   }
 
   ///<<<======================== Get Data Form Shared Preference ==============>
@@ -72,6 +82,20 @@ class PrefsHelper extends GetxController {
     }
   }
 
+  // To load the list from shared preferences
+  static Future<List<ContactGroup>> getGroupedList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? serializedJson = prefs.getString('contactsList');
+    if (serializedJson != null) {
+      List<dynamic> decodedList = json.decode(serializedJson);
+      return decodedList.map((json) => ContactGroup.fromJson(json)).toList();
+    } else {
+      return [];
+    }
+  }
+
+
   ///<<<=====================Save Data To Shared Preference=====================>
 
   static Future setString(String key, value) async {
@@ -93,7 +117,18 @@ class PrefsHelper extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     final List<String> stringList = list.map((item) => item.toString()).toList();
     await prefs.setStringList(key, stringList);
-    print(stringList);
+    if (kDebugMode) {
+      print(stringList);
+    }
+  }
+
+  static void saveGroupedList(List<ContactGroup> groupedContactsList) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<Map<String, dynamic>> serializedList = groupedContactsList.map((group) => group.toJson()).toList();
+    String serializedJson = json.encode(serializedList);
+
+    await prefs.setString('contactsList', serializedJson);
   }
 
 

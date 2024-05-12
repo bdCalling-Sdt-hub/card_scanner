@@ -11,28 +11,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../Helpers/prefs_helper.dart';
 import '../Models/contacts_model.dart';
+import '../utils/app_strings.dart';
 
 class StorageController extends GetxController {
+
   @override
   void onInit() async {
     // TODO: implement onInit
     loadContacts().then((value) => initializeSelectionList());
     super.onInit();
   }
-
-  // @override
-  // void dispose() {
-  //   nameController.dispose();
-  //   designationController.dispose();
-  //   companyController.dispose();
-  //   emailController.dispose();
-  //   phoneController.dispose();
-  //   addressController.dispose();
-  //   id = '';
-  //   imagePath = '';
-  //   super.dispose();
-  // }
 
   List<ContactsModel> contacts = [];
   static TextEditingController nameController = TextEditingController();
@@ -56,7 +46,7 @@ class StorageController extends GetxController {
 
 
   ///<<<===================== Create group repo ==============================>>>
-  List<ContactsModel> createGroup({required int index}) {
+  List<ContactsModel> groupListAdded({required int index}) {
     ContactsModel contactsModel = ContactsModel(
         id: selectedGroupContacts[index].id,
         imageUrl: selectedGroupContacts[index].imageUrl,
@@ -70,7 +60,39 @@ class StorageController extends GetxController {
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
   }
+  ///==================== new group repo==============================>>>///
+  List<ContactsModel> groupList = [];
+  int groupCount = 0;
 
+  createGroup(){
+    for (int index = 0; index < selectedGroupContacts.length; index++) {
+      groupList = groupListAdded(index: index);
+    }
+    ContactGroup contactGroup = ContactGroup(name: groupNameController.text, contactsList: groupList);
+    groupedContactsList.add(contactGroup);
+    PrefsHelper.saveGroupedList(groupedContactsList);
+    PrefsHelper.setList("selectedGroupContacts", selectedGroupContacts);
+    update();
+    selectedGroupContacts.clear();
+    groupNameController.text = "";
+    groupCount += 1;
+    Get.back();
+    Get.snackbar(AppStrings.groupIsCreated, "");
+    if (kDebugMode) {
+      print("storageController.groupedContactsList: ${groupedContactsList[0].name}, ${groupedContactsList[0].contactsList[0].email}");
+    }
+  }
+
+  int groupUpdateStatus(int groupedContactsCount){
+    int? unGroupedContacts;
+    if(PrefsHelper.unGroupedContacts.isEqual(0)){
+      unGroupedContacts = allContactsForGroup.length - groupedContactsCount;
+    }else{
+      unGroupedContacts = PrefsHelper.unGroupedContacts - groupedContactsCount;
+    }
+    PrefsHelper.setInt('unGroupedContacts', unGroupedContacts);
+    return unGroupedContacts;
+  }
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 

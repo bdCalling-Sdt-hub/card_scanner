@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
+import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/onboarding_screen.dart';
@@ -24,11 +25,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   StorageController storageController = Get.put(StorageController());
 
+
   @override
   void initState() {
     // TODO: implement initState
     final user = FirebaseAuth.instance.currentUser;
     storageController.loadContacts();
+    loadGroupContacts();
     if (kDebugMode) {
       print("=====${user?.uid}");
     }
@@ -43,6 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     });
     super.initState();
+  }
+
+  Future<void> loadGroupContacts() async {
+    storageController.groupedContactsList = await PrefsHelper.getGroupedList();
   }
 
   @override
