@@ -17,10 +17,11 @@ import '../../views/screens/CardExport/all_cards_export_screen.dart';
 import '../../views/screens/CardExport/card_export_screen.dart';
 import '../../views/screens/CardSync/card_sync_screen.dart';
 import '../../views/screens/Group/create_group_screen.dart';
-import '../../views/screens/LinkedInScreens/linkedin_webview_screen.dart';
 import '../../views/screens/Profile/share_profile_card_screen.dart';
 import '../../views/screens/Profile/view_ecard_screen.dart';
 import '../../views/screens/SplashScreen/splash_screen.dart';
+import '../../views/screens/WebViewScreens/google_webview_screen.dart';
+import '../../views/screens/WebViewScreens/linkedin_webview_screen.dart';
 
 class AppRoutes {
   static String splashScreen = "/splash_screen";
@@ -43,6 +44,7 @@ class AppRoutes {
   static String profileScreen = "/profile_screen";
   static String viewECardScreen = "/view_ecard_screen";
   static String shareProfileCardScreen = "/share_profile_card_screen";
+  static String googleWebViewScreen = "/google_webview_screen";
 
 
 
@@ -66,6 +68,6 @@ class AppRoutes {
     GetPage(name: linkedInWebViewScreen, page: () => LinkedInWebViewScreen()),
     GetPage(name: profileScreen, page: () => ProfileScreen()),
     GetPage(name: viewECardScreen, page: () => ViewECardScreen()),
-    GetPage(name: shareProfileCardScreen, page: () => ShareProfileCardScreen()),
+    GetPage(name: googleWebViewScreen, page: () => GoogleWebViewScreen()),
   ];
 }

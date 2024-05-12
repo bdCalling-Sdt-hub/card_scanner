@@ -81,84 +81,107 @@ class CreateOrEditCardScreen extends StatelessWidget {
                           showDialog(context: context,
                             builder: (context) {
                               return AlertDialog(
+                                contentPadding: EdgeInsets.all(4.w),
                                 backgroundColor: AppColors.green_700,
-                                content: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                                  height: 100.h,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          storageController.getGalleryImage();
-                                          Get.back();
-                                        },
-                                        child: Container(
-                                          height: 70,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: AppColors.green_600,
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: const [
-                                              Icon(Icons.image_outlined),
-                                              CustomText(text: "Gallery", fontSize: 16,)
-                                            ],
-                                          ),),
-                                      ),
-                                      SizedBox(width: 8,),
-                                      InkWell(
-                                        onTap: () {
-                                          storageController.getCameraImage();
-                                          // controller.selectImageCamera();
-                                          Get.back();
-                                        },
-                                        child: Container(
-                                          height: 70,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: AppColors.green_600,
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
-                                              CustomText(text: "Camera", fontSize: 16,)
-                                            ],
-                                          ),
+                                content: Wrap(
+                                  alignment: WrapAlignment.center,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        storageController.getGalleryImage();
+                                        Get.back();
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                        height: 70,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          color: AppColors.green_600,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: const [
+                                            Icon(Icons.image_outlined),
+                                            CustomText(text: "Gallery", fontSize: 16,)
+                                          ],
+                                        ),),
+                                    ),
+                                    SizedBox(width: 8,),
+                                    InkWell(
+                                      onTap: () {
+                                        storageController.getCameraImage();
+                                        // controller.selectImageCamera();
+                                        Get.back();
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                        height: 70,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          color: AppColors.green_600,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
+                                            CustomText(text: "Camera", fontSize: 16,)
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(width: 8,),
-                                      InkWell(
-                                        onTap: () {
-                                          Get.toNamed(AppRoutes.linkedInWebViewScreen);
-                                          Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'", "",
-                                              duration: Duration(seconds: 3),
-                                              colorText: AppColors.green_900,
-                                          );
+                                    ),
+                                    SizedBox(width: 8,),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.linkedInWebViewScreen);
+                                        Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'", "",
+                                            duration: Duration(seconds: 3),
+                                            colorText: AppColors.green_900,
+                                        );
 
-                                        },
-                                        child: Container(
-                                          height: 70,
-                                          width: 75,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8),
-                                            color: AppColors.green_600,
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                              CustomText(text: "LinkedIn", fontSize: 16,)
-                                            ],
-                                          ),
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                        height: 70,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          color: AppColors.green_600,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
+                                            CustomText(text: "LinkedIn", fontSize: 16,)
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(width: 8,),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.googleWebViewScreen);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                        height: 70,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(8),
+                                          color: AppColors.green_600,
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(AppIcons.googleColorfulIcon, height: 20, width: 20, color: AppColors.black_500, ),
+                                            CustomText(text: "Google", fontSize: 16,)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               );
                             },
