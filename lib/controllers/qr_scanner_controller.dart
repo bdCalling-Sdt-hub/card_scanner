@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../utils/app_strings.dart';
 import '../views/screens/CreateCard/create_edit_card_screen.dart';
-import '../views/screens/QrCodeScanner/scan_qr_code_screen.dart';
 
 class QrScannerController extends GetxController{
 

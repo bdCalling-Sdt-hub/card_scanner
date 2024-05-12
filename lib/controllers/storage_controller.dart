@@ -21,6 +21,8 @@ class StorageController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     loadContacts().then((value) => initializeSelectionList());
+    allContactsForGroup.clear();
+    groupedContactsList = PrefsHelper.groupedContactsList;
     super.onInit();
   }
 
@@ -65,6 +67,9 @@ class StorageController extends GetxController {
   int groupCount = 0;
 
   createGroup(){
+    isLoading = true;
+    update();
+    groupList.clear();
     for (int index = 0; index < selectedGroupContacts.length; index++) {
       groupList = groupListAdded(index: index);
     }
@@ -77,21 +82,30 @@ class StorageController extends GetxController {
     groupNameController.text = "";
     groupCount += 1;
     Get.back();
+    isLoading = false;
+    update();
     Get.snackbar(AppStrings.groupIsCreated, "");
     if (kDebugMode) {
       print("storageController.groupedContactsList: ${groupedContactsList[0].name}, ${groupedContactsList[0].contactsList[0].email}");
     }
   }
 
-  int groupUpdateStatus(int groupedContactsCount){
-    int? unGroupedContacts;
+  int unGroupedContacts = 0;
+  Future<int> groupUpdateStatus(int groupedContactsCount) async{
     if(PrefsHelper.unGroupedContacts.isEqual(0)){
       unGroupedContacts = allContactsForGroup.length - groupedContactsCount;
     }else{
       unGroupedContacts = PrefsHelper.unGroupedContacts - groupedContactsCount;
     }
     PrefsHelper.setInt('unGroupedContacts', unGroupedContacts);
+    if(unGroupedContacts < 0){
+      return 0;
+    }
     return unGroupedContacts;
+  }
+
+  void removeSelectedContactsFromAll() async {
+    allContactsForGroup.removeWhere((element) => selectedGroupContacts.contains(element));
   }
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -484,49 +498,4 @@ class StorageController extends GetxController {
       }
     }
   }
-
-  // Future<void> uploadFile(File file, String? accessToken) async {
-  //   try {
-  //     if (accessToken == null) {
-  //       print('Access token is null');
-  //       return;
-  //     }
-  //
-  //     // Read file bytes
-  //     final List<int> bytes = await file.readAsBytes();
-  //     // Set the filename
-  //     final String fileName = file.path.split('/').last; // Extract filename from file path
-  //     print(fileName);
-  //
-  //     // Create metadata for the file
-  //     final Map<String, dynamic> metadata = {
-  //       'name': fileName, // Set the filename
-  //     };
-  //
-  //     // Encode metadata to JSON
-  //     final String metadataJson = json.encode(metadata);
-  //
-  //     // Create an HTTP request to upload the file to Google Drive
-  //     final http.Response response = await http.post(
-  //       Uri.parse('https://www.googleapis.com/upload/drive/v3/files?uploadType=media'),
-  //       headers: {
-  //         'Authorization': 'Bearer $accessToken',
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         // 'Content-Type': 'application/octet-stream',
-  //         // 'Content-Length': bytes.length.toString(),
-  //       },
-  //       body: bytes,
-  //     );
-  //
-  //     // Check the response status code
-  //     if (response.statusCode == 200) {
-  //       print('File uploaded successfully');
-  //     } else {
-  //       print('File upload failed with status code ${response.statusCode} \n ${response.body} \n ${response.bodyBytes}');
-  //     }
-  //   } catch (e) {
-  //     print('Upload failed: $e');
-  //   }
-  // }
-
 }

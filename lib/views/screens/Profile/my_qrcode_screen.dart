@@ -12,15 +12,16 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../Helpers/prefs_helper.dart';
+import '../../../controllers/qr_scanner_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
-import '../QrCodeScanner/scan_qr_code_screen.dart';
 
 class MyQrCodeScreen extends StatelessWidget {
   MyQrCodeScreen({super.key});
 
   ProfileController profileController = Get.put(ProfileController());
+  QrScannerController qrScannerController = Get.put(QrScannerController());
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,7 @@ class MyQrCodeScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            // Get.to(ScanQrCodeScreen());
+                            qrScannerController.qrScanner();
                           },
                           child: Container(
                             height: 50.h,

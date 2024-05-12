@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/ocr_create_card_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
@@ -43,6 +44,10 @@ class AllCardsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.h),
+
+                GetBuilder<OCRCreateCardController>(builder: (controller) {
+                  return controller.isLoading? Center(child: CircularProgressIndicator()) : SizedBox();
+                },),
 
                 ///<<<================== Digital Card List ===================>>>
 
@@ -190,7 +195,7 @@ class AllCardsScreen extends StatelessWidget {
                         ),
                       );
                     },),
-                )
+                ),
               ],
             );
           },),

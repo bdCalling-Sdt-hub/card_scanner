@@ -2,7 +2,6 @@
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/screens/CardSync/card_sync_screen.dart';
-import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -15,8 +14,6 @@ import 'package:http/http.dart' as http;
 import '../../Helpers/prefs_helper.dart';
 import '../../views/screens/Auth/signin_screen.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
-import 'dart:io';
-import 'package:googleapis_auth/auth_io.dart';
 
 class AuthController extends GetxController{
 

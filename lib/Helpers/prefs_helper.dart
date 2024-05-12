@@ -1,7 +1,6 @@
 
 import 'dart:convert';
 
-import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -32,7 +31,7 @@ class PrefsHelper extends GetxController {
   static int unGroupedContacts = 0;
   static bool isLogoShow = true;
   static bool isProfilePhotoShow = true;
-  static List groupedContactsList = [];
+  static List<ContactGroup>groupedContactsList = [];
 
   ///<<<======================== Get All Data Form Shared Preference ==============>
 
@@ -50,6 +49,7 @@ class PrefsHelper extends GetxController {
     colorIndex = preferences.getInt("colorIndex") ?? 0;
     unGroupedContacts = preferences.getInt("unGroupedContacts") ?? 0;
     isLogoShow = preferences.getBool("isLogoShow") ?? true;
+    isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
     isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
     groupedContactsList = await getGroupedList();
   }

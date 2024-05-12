@@ -138,8 +138,8 @@ class AppStrings{
   static String createNewGroup = "Create new group";
   static String createGroup = "Create Group";
   static String selectCards = "Select Cards";
-  static String recentlyAdded = "Recently added";
-  static String unGrouped = "Ungrouped";
+  static String recentlyAdded = "Recently added group";
+  static String unGrouped = "Ungrouped contacts";
   static String alpha = "Alpha";
   static String noCardsSelected = "No Cards Selected";
   static String groupIsCreated = "Group is created";

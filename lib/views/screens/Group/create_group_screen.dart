@@ -204,8 +204,8 @@ class CreateGroupScreen extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
-            onTap: (){
-
+            onTap: () async {
+              await storageController.groupUpdateStatus(storageController.selectedGroupContacts.length).then((value) => storageController.removeSelectedContactsFromAll());
               // ContactGroup groupList;
               if(storageController.groupNameController.text.isNotEmpty){
                 storageController.createGroup();

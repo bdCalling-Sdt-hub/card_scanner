@@ -395,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         buildServiceItems(
                                           onTap: () {
-                                            Get.to(ShareProfileCardScreen());
+                                            Get.toNamed(AppRoutes.shareProfileCardScreen);
                                           },
                                           icon: AppIcons.shareCard,
                                           title: AppStrings.shareCard,

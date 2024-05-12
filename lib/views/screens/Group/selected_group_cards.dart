@@ -1,4 +1,8 @@
 
+import 'dart:io';
+
+import 'package:card_scanner/Models/contacts_model.dart';
+import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,12 +19,8 @@ import '../../../utils/app_strings.dart';
 class SelectedGroupCards extends StatelessWidget {
   SelectedGroupCards({super.key});
 
-  List cardDetailsList = [
-    {"image": "https://img.freepik.com/free-photo/bohemian-man-with-his-arms-crossed_1368-3542.jpg?t=st=1711008338~exp=1711011938~hmac=3a05225c2a75c0c003c9f09d51c3fbb6cda1d0189f31e94c8f72555a28854f63&w=826", "name" : "Michael Chen", "companyName" : "XYZ Tech Solutions", "designation" : "Senior Software Engineer" },
-    {"image": "https://img.freepik.com/free-photo/portrait-young-businesswoman-holding-eyeglasses-hand-against-gray-backdrop_23-2148029483.jpg?t=st=1711008375~exp=1711011975~hmac=511516ca747144f164ba632e645a5e64ec5b83132241f31a387017b30764cff6&w=826", "name" : "Emily Rodriguez", "companyName" : "Global Finance Group", "designation" : "Financial Analyst" },
-    {"image": "https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?t=st=1711008418~exp=1711012018~hmac=0e5c69783af897de4032dee9e55d26366c4a747abe603bbdf93c1d64cd208b47&w=1380", "name" : "Lisa Nguyen", "companyName" : "Stellar Designs LLC", "designation" : "Creative Director" },
-  ];
-
+  int listIndex = Get.arguments['index'];
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class SelectedGroupCards extends StatelessWidget {
                   const Icon(Icons.groups),
                   SizedBox(width: 12.w),
                   CustomText(
-                    text: "${AppStrings.group}: ${AppStrings.alpha}",
+                    text: "${AppStrings.group}: ${storageController.groupedContactsList[listIndex].name}",
                     color: AppColors.black_500,
                     fontSize: 16,
                   )
@@ -58,11 +58,11 @@ class SelectedGroupCards extends StatelessWidget {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: cardDetailsList.length,
+                  itemCount: storageController.groupedContactsList[listIndex].contactsList.length,
                   itemBuilder: (context, index) {
+                    List<ContactsModel> contactsList = storageController.groupedContactsList[listIndex].contactsList;
                     return Container(
                       width: Get.width,
-                      height: 100.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.r)
                       ),
@@ -73,30 +73,38 @@ class SelectedGroupCards extends StatelessWidget {
                             width: 90.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
-                              image: DecorationImage(fit: BoxFit.cover,image: NetworkImage(cardDetailsList[index]["image"])),
+                              image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contactsList[index].imageUrl))),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 8.h,),
-                                CustomText(
-                                  text: cardDetailsList[index]["name"],
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                SizedBox(height: 4.h,),
-                                CustomText(
-                                  text: cardDetailsList[index]["companyName"],
-                                  fontSize: 12,
-                                ),
-                                CustomText(
-                                  text: cardDetailsList[index]["designation"],
-                                  fontSize: 12,
-                                ),
-                              ],
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 8.h,),
+                                  CustomText(
+                                    textAlign: TextAlign.left,
+                                    maxLines: 2,
+                                    text: contactsList[index].name,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  SizedBox(height: 4.h,),
+                                  CustomText(
+                                    textAlign: TextAlign.left,
+                                    maxLines: 3,
+                                    text: contactsList[index].designation,
+                                    fontSize: 12,
+                                  ),
+                                  CustomText(
+                                    textAlign: TextAlign.left,
+                                    maxLines: 3,
+                                    text: contactsList[index].companyName,
+                                    fontSize: 12,
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ],

@@ -189,7 +189,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                     labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.designationController,
                   decoration: InputDecoration(
@@ -197,7 +197,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                     labelStyle: TextStyle(color: AppColors.black_200),
                   ),
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.companyController,
                   decoration: InputDecoration(
@@ -205,7 +205,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -214,7 +214,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.phoneController,
                   keyboardType: TextInputType.phone,
@@ -223,7 +223,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.addressController,
                   keyboardType: TextInputType.text,
@@ -232,7 +232,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 100.h,),
+                SizedBox(height: 50.h,),
 
                 ///<<<================ Done Button ============================>>>
 
