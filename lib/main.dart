@@ -1,4 +1,3 @@
-import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/global/dependency.dart';
 import 'package:card_scanner/utils/app_colors.dart';
