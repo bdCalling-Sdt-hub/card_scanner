@@ -138,8 +138,6 @@ class ShareProfileCardScreen extends StatelessWidget {
                   InkWell(
                     onTap: () async {
                       screenShotHelper.captureAndSaveImage(screenshotController);
-                      Get.snackbar("Qr code downloaded to your phone gallery".tr, "");
-
 
                       // _saveQRToGallery(context);
                     },

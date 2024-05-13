@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -11,12 +12,15 @@ class ScreenShotHelper{
   ///==============Capture image save to gallery repo=========================>>>
   Future<void> captureAndSaveImage(ScreenshotController screenshotController) async{
     final Uint8List? uint8List = await screenshotController.capture();
-    print("uint8List $uint8List");
+    if (kDebugMode) {
+      print("uint8List $uint8List");
+    }
     if(uint8List != null){
       final PermissionStatus status = await Permission.storage.request();
       if(status.isGranted){
         final result = await ImageGallerySaver.saveImage(uint8List);
         if(result['isSuccess']){
+          Get.snackbar("Image downloaded to your phone gallery".tr, "");
           if (kDebugMode) {
             print("Image saved to gallery");
           }else{
@@ -26,11 +30,13 @@ class ScreenShotHelper{
           }
         }
       }else{
+        await Permission.storage.request();
         if (kDebugMode) {
-          await Permission.storage.request();
           print("Permission to access storage denied");
         }
       }
+    }else{
+      Get.snackbar("Screenshot is failed".tr, "");
     }
   }
 

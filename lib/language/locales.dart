@@ -158,7 +158,7 @@ class Locales extends Translations{
       "Designation: null" : "Designation: null",
       "Company Name: null" : "Company Name: null",
       "Name Card Scanner" : "Name Card Scanner",
-      "Qr code downloaded to your phone gallery" : "Qr code downloaded to your phone gallery",
+      "Image downloaded to your phone gallery" : "Image downloaded to your phone gallery",
       "Save Image" : "Save Image",
       "View" : "View",
       "Card Code" : "Card Code",
@@ -208,6 +208,8 @@ class Locales extends Translations{
       "Upload failed" : "Upload failed",
       "Operation failed" : "Operation failed",
       "Upload contacts before downloading!" : "Upload contacts before downloading!",
+      "Screenshot is failed" : "Screenshot is failed",
+      "Share & Save Card" : "Share & Save Card",
 
 
       ///<<<=================== Bottom Nav Bar Texts ========================>>>

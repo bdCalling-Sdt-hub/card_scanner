@@ -200,6 +200,7 @@ class AppStrings{
 
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";
+  static String shareSaveCard = "Share & Save Card";
   static String shareCard = "Share Card";
   static String pointYourCamera = "Point your camera at the QR code.";
   static String share = "Share";

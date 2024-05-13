@@ -160,7 +160,6 @@ class MyQrCodeScreen extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             screenShotHelper.captureAndSaveImage(screenshotController);
-                            Get.snackbar("Qr code downloaded to your phone gallery".tr, "");
                           },
                           child: Container(
                             height: 50.h,
