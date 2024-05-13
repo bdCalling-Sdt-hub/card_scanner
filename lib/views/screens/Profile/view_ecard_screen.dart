@@ -37,7 +37,7 @@ class ViewECardScreen extends StatelessWidget {
                         Get.back();
                       }),
                   CustomText(
-                    text: AppStrings.eCard,
+                    text: AppStrings.eCard.tr,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -104,14 +104,14 @@ class ViewECardScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            CustomBackButton(
+                            PrefsHelper.userPhone.isNotEmpty? CustomBackButton(
                               onTap: () {},
                               icon: Icons.phone_iphone_outlined,
                               radius: 100,
                               color: AppColors.black_500,
                               height: 25,
                               width: 25,
-                            ),
+                            ): SizedBox(),
                             SizedBox(
                               width: 8.w,
                             ),
@@ -128,14 +128,14 @@ class ViewECardScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            CustomBackButton(
+                            PrefsHelper.userMail.isNotEmpty? CustomBackButton(
                               onTap: () {},
                               icon: Icons.email_outlined,
                               radius: 100,
                               color: AppColors.black_500,
                               height: 25,
                               width: 25,
-                            ),
+                            ) : SizedBox(),
                             SizedBox(
                               width: 8.w,
                             ),
@@ -152,14 +152,14 @@ class ViewECardScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            CustomBackButton(
+                            PrefsHelper.userAddress.isNotEmpty? CustomBackButton(
                               onTap: () {},
                               icon: Icons.location_on_outlined,
                               radius: 100,
                               color: AppColors.black_500,
                               height: 25,
                               width: 25,
-                            ),
+                            ) : SizedBox(),
                             SizedBox(
                               width: 8.w,
                             ),
@@ -186,12 +186,7 @@ class ViewECardScreen extends StatelessWidget {
                       width: 130.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        image: PrefsHelper.profileImagePath.isEmpty
-                            ? DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage(AppImages.blankProfileImage),
-                              )
-                            : DecorationImage(
+                        image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: FileImage(
                                     File(PrefsHelper.profileImagePath)),
@@ -220,7 +215,7 @@ class ViewECardScreen extends StatelessWidget {
                     onTap: () {
                       Get.to(EditProfileScreen());
                     },
-                    text: AppStrings.edit,
+                    text: AppStrings.edit.tr,
                     height: 48,
                     width: 110,
                     iconSize: 20,
@@ -240,7 +235,7 @@ class ViewECardScreen extends StatelessWidget {
                     onTap: () {
                       Get.to(ShareProfileCardScreen());
                     },
-                    text: AppStrings.shareCard,
+                    text: AppStrings.shareCard.tr,
                     ifImage: true,
                     svgIcon: AppIcons.sendIcon,
                     height: 48,

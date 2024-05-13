@@ -47,9 +47,9 @@ class AuthController extends GetxController{
       });
 
       Get.toNamed(AppRoutes.signInScreen);
-      Get.snackbar("New Account Created", "");
+      Get.snackbar("New Account Created".tr, "");
     }catch(e){
-      Get.snackbar("Try again!", "Something went wrong.");
+      Get.snackbar("Something went wrong,".tr, "Try again!".tr );
     }
     isLoading = false;
     update();
@@ -67,9 +67,9 @@ class AuthController extends GetxController{
       final user = firebaseAuth.currentUser;
       if(user?.email != null){
         Get.toNamed(AppRoutes.homeScreen);
-        Get.snackbar("Successfully logged in", "");
+        Get.snackbar("Successfully logged in".tr, "");
       }else{
-        Get.snackbar("Something went wrong:", "please check your email and password!");
+        Get.snackbar("Something went wrong,".tr, "please check your email and password!".tr);
       }
     }catch(e){
       Get.snackbar("$e", "");
@@ -86,7 +86,7 @@ class AuthController extends GetxController{
   Future<void> resetPassRepo()async {
     try{
       await firebaseAuth.sendPasswordResetEmail(email: emailController.text);
-      Get.snackbar("Password reset link sent to your email!", "");
+      Get.snackbar("Password reset link sent to your email!".tr, "");
       Get.offAllNamed(AppRoutes.signInScreen);
     }catch(e){
       Get.snackbar("$e", "");
@@ -97,9 +97,11 @@ class AuthController extends GetxController{
 
   Future<void> verifyEmailRepo() async {
     var emailVerifyResponse = await user?.sendEmailVerification().then((value){
-      Get.snackbar("Link sent", "A link has been sent to your email", animationDuration: Duration(seconds: 5));
+      Get.snackbar("Link sent".tr, "A link has been sent to your email".tr, animationDuration: Duration(seconds: 5));
     });
-    print("Email verify: $emailVerifyResponse");
+    if (kDebugMode) {
+      print("Email verify: $emailVerifyResponse");
+    }
   }
 
   ///<<<=================== Sign Out Repo ===============================>>>
@@ -108,7 +110,7 @@ class AuthController extends GetxController{
       await firebaseAuth.signOut();
       Get.offAll(SignInScreen());
       PrefsHelper.removeAllPrefData();
-      Get.snackbar("You are signed out", "");
+      Get.snackbar("You are signed out".tr, "");
     }catch(e){
       Get.snackbar("$e", "");
     }
@@ -180,6 +182,8 @@ class AuthController extends GetxController{
   StorageController storageController = Get.put(StorageController());
 
   Future<void> googleSignInRepo() async {
+    isLoading = true;
+    update();
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: ['https://www.googleapis.com/auth/drive']).signIn();
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -193,8 +197,8 @@ class AuthController extends GetxController{
 
       if (kDebugMode) {
         print("Credential Token: ${credential.accessToken}");
-        accessToken = credential.accessToken;
       }
+      accessToken = credential.accessToken;
 
       if (googleUser != null) {
         // await uploadFile();
@@ -210,45 +214,48 @@ class AuthController extends GetxController{
         print("Error: $e");
       }
     }
+    isLoading = false;
+    update();
   }
 
-  Future<void> uploadFile() async {
-    try {
-      if (accessToken == null) {
-        if (kDebugMode) {
-          print('Access token is null');
-        }
-        return;
-      }
-
-      final ByteData data = await rootBundle.load('assets/images/contactsImage.png');
-      final List<int> bytes = data.buffer.asUint8List();
-
-      final http.Response response = await http.post(
-        Uri.parse('https://www.googleapis.com/upload/drive/v3/files?uploadType=media'),
-        headers: {
-          'Authorization': 'Bearer $accessToken',
-          'Content-Type': 'application/octet-stream',
-        },
-        body: bytes,
-      );
-
-      if (response.statusCode == 200) {
-        if (kDebugMode) {
-          print('File uploaded successfully');
-        }
-        Get.back();
-      } else {
-        if (kDebugMode) {
-          print('File upload failed with status code ${response.statusCode}');
-        }
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Upload failed: $e');
-      }
-    }
-  }
+  // Future<void> uploadFile() async {
+  //   try {
+  //     if (accessToken == null) {
+  //       if (kDebugMode) {
+  //         print('Access token is null');
+  //       }
+  //       return;
+  //     }
+  //
+  //     final ByteData data = await rootBundle.load('assets/images/contactsImage.png');
+  //     final List<int> bytes = data.buffer.asUint8List();
+  //
+  //     final http.Response response = await http.post(
+  //       Uri.parse('https://www.googleapis.com/upload/drive/v3/files?uploadType=media'),
+  //       headers: {
+  //         'Authorization': 'Bearer $accessToken',
+  //         'Content-Type': 'application/octet-stream',
+  //       },
+  //       body: bytes,
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       if (kDebugMode) {
+  //         print('File uploaded successfully');
+  //       }
+  //       Get.snackbar("File uploaded successfully", "");
+  //       Get.back();
+  //     } else {
+  //       if (kDebugMode) {
+  //         print('File upload failed with status code ${response.statusCode}');
+  //       }
+  //     }
+  //   } catch (e) {
+  //     if (kDebugMode) {
+  //       print('Upload failed: $e');
+  //     }
+  //   }
+  // }
 
 
   //////////////////////////////////////////////////////////////////////////////
@@ -309,7 +316,7 @@ class AuthController extends GetxController{
       final googleSignIn = GoogleSignIn();
       await googleSignIn.signOut().then((value) {
         if(value == null){
-          Get.snackbar("Google logout successful", "");
+          Get.snackbar("Google logout successful".tr, "");
           Get.offAll(CardSyncScreen());
           if (kDebugMode) {
             print("Value $value");
@@ -318,7 +325,7 @@ class AuthController extends GetxController{
       },
       );
     }catch(e){
-      Get.snackbar("Something went wrong, try again!", "");
+      Get.snackbar("Something went wrong, try again!".tr, "");
     }
   }
 

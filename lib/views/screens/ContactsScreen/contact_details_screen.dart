@@ -42,7 +42,7 @@ class ContactDetailsScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: CustomText(
-                      text: AppStrings.contactDetails,
+                      text: AppStrings.contactDetails.tr,
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                     ),
@@ -75,20 +75,20 @@ class ContactDetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20.h),
                     customWrap(
-                        title: AppStrings.name, value: contactDetails.name),
+                        title: AppStrings.name.tr, value: contactDetails.name),
                     customWrap(
-                        title: AppStrings.designation,
+                        title: AppStrings.designation.tr,
                         value: contactDetails.designation),
                     customWrap(
-                        title: AppStrings.companyName,
+                        title: AppStrings.companyName.tr,
                         value: contactDetails.companyName),
                     customWrap(
-                        title: AppStrings.email, value: contactDetails.email),
+                        title: AppStrings.email.tr, value: contactDetails.email),
                     customWrap(
-                        title: AppStrings.phoneNumber,
+                        title: AppStrings.phoneNumber.tr,
                         value: contactDetails.phoneNumber),
                     customWrap(
-                        title: AppStrings.address,
+                        title: AppStrings.address.tr,
                         value: contactDetails.address),
                   ],
                 ),

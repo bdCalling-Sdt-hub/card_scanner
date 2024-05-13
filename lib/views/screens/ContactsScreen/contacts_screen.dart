@@ -8,6 +8,7 @@ import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.d
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({super.key});
@@ -22,7 +23,7 @@ class ContactsScreen extends StatelessWidget {
           child: Column(
             children: [
               CustomText(
-                text: AppStrings.contacts,
+                text: AppStrings.contacts.tr,
                 color: AppColors.black_500,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -35,7 +36,7 @@ class ContactsScreen extends StatelessWidget {
               ),
               SizedBox(height: 12.h,),
               CustomText(
-                text: AppStrings.currentlyNoContacts,
+                text: AppStrings.currentlyNoContacts.tr,
                 color: AppColors.black_500,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
@@ -43,7 +44,7 @@ class ContactsScreen extends StatelessWidget {
               SizedBox(height: 12.h,),
               CustomText(
                 maxLines: 3,
-                text: AppStrings.noContactsFoundTryAgain,
+                text: AppStrings.noContactsFoundTryAgain.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: AppColors.black_400,
@@ -53,7 +54,7 @@ class ContactsScreen extends StatelessWidget {
                   onTap: (){},
                 height: 42.h,
                 width: 130.w,
-                text: AppStrings.addContacts,
+                text: AppStrings.addContacts.tr,
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
                 backgroundColor: AppColors.green_900,

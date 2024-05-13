@@ -58,12 +58,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    String profileText = PrefsHelper.signedIn? AppStrings.me : AppStrings.signIn;
+    String profileText = PrefsHelper.signedIn? AppStrings.me.tr : AppStrings.signIn.tr;
     List<String> navBarTexts = [
-      AppStrings.cards,
-      AppStrings.contacts,
+      AppStrings.cards.tr,
+      AppStrings.contacts.tr,
       "",
-      AppStrings.enterprise,
+      AppStrings.enterprise.tr,
       profileText
     ];
     return Container(

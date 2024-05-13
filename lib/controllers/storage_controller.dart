@@ -208,7 +208,7 @@ class StorageController extends GetxController {
   Future<void> deleteContact(String id) async {
     contacts.removeWhere((contact) => contact.id == id);
     update();
-    Get.snackbar("The contact is deleted", "");
+    Get.snackbar("The contact is deleted".tr, "");
     saveContacts();
   }
 
@@ -335,12 +335,9 @@ class StorageController extends GetxController {
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Google Drive All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   String? fileId;
-  bool isLogin = false;
   ///<<<===================== save contacts repo =============================>>>
 
   Future<void> saveContactsInGoogle({String? accessToken}) async {
-    isLogin = true;
-    update();
     try {
       // Encode contacts list to JSON
       final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
@@ -362,8 +359,6 @@ class StorageController extends GetxController {
         print("Error saving contacts: $e");
       }
     }
-    isLogin = false;
-    update();
   }
 
   ///<<<====================== upload file repo ===============================>>>
@@ -404,6 +399,7 @@ class StorageController extends GetxController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         fileId = responseData['id'];
+        Get.snackbar("File uploaded successfully".tr, "");
         if (kDebugMode) {
           print('File uploaded successfully $fileId');
         }
@@ -413,6 +409,7 @@ class StorageController extends GetxController {
         }
       }
     } catch (e) {
+      Get.snackbar("Upload failed".tr, "");
       if (kDebugMode) {
         print('Upload failed: $e');
       }
@@ -441,6 +438,7 @@ class StorageController extends GetxController {
       );
 
       if (updateResponse.statusCode == 200) {
+        Get.snackbar("File updated successfully".tr, "");
         if (kDebugMode) {
           print('File updated successfully');
         }
@@ -452,6 +450,7 @@ class StorageController extends GetxController {
 
     }catch(e){
       if (kDebugMode) {
+        Get.snackbar("Operation failed".tr, "");
         print('Operation failed: $e');
       }
     }
@@ -461,8 +460,8 @@ class StorageController extends GetxController {
   Future<void> downloadFile(String? accessToken)async {
     try {
       if (accessToken == null) {
+        Get.snackbar("Upload contacts before downloading!".tr, "");
         if (kDebugMode) {
-          Get.snackbar("Upload contacts before downloading!", "");
           print('Access token is null');
         }
         return;
@@ -488,11 +487,13 @@ class StorageController extends GetxController {
         }
 
       }else {
+        Get.snackbar("Upload failed".tr, "");
         if (kDebugMode) {
           print('File download failed with status code ${downloadResponse.statusCode}');
         }
       }
     }catch(e){
+      Get.snackbar("Upload failed".tr, "$e");
       if (kDebugMode) {
         print(e);
       }

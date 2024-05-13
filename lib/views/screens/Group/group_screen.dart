@@ -35,7 +35,7 @@ class GroupScreen extends StatelessWidget {
                         icon: Icons.arrow_back,
                       ),
                       CustomText(
-                        text: AppStrings.group,
+                        text: AppStrings.group.tr,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
@@ -76,7 +76,7 @@ class GroupScreen extends StatelessWidget {
                           const Icon(Icons.add),
                           SizedBox(width: 12.w),
                           CustomText(
-                            text: AppStrings.createNewGroup,
+                            text: AppStrings.createNewGroup.tr,
                             color: AppColors.black_500,
                             fontSize: 16,
                           )
@@ -91,7 +91,7 @@ class GroupScreen extends StatelessWidget {
                     builder: (storageController) {
                       return CustomText(
                         text:
-                            "${AppStrings.recentlyAdded} (${storageController.groupCount})",
+                            "${AppStrings.recentlyAdded.tr} (${storageController.groupCount})",
                         fontSize: 16,
                         color: AppColors.black_400,
                       );
@@ -102,7 +102,7 @@ class GroupScreen extends StatelessWidget {
                   ),
                   CustomText(
                     text:
-                        "${AppStrings.unGrouped} (${storageController.unGroupedContacts})",
+                        "${AppStrings.unGrouped.tr} (${storageController.unGroupedContacts})",
                     fontSize: 16,
                     color: AppColors.black_400,
                   ),
@@ -137,7 +137,7 @@ class GroupScreen extends StatelessWidget {
                                   SizedBox(width: 12.w),
                                   CustomText(
                                     text:
-                                    "${AppStrings.group}: ${storageController.groupedContactsList[index].name}",
+                                    "${AppStrings.group.tr}: ${storageController.groupedContactsList[index].name}",
                                     color: AppColors.black_500,
                                     fontSize: 16,
                                   )

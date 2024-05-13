@@ -10,6 +10,7 @@ import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class AllCardsScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CustomText(
-                    text: AppStrings.contacts,
+                    text: AppStrings.contacts.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -57,7 +58,9 @@ class AllCardsScreen extends StatelessWidget {
                     itemCount: storageController.contacts.length,
                     itemBuilder: (context, index) {
                       ContactsModel contacts = storageController.contacts[index];
-                      print("contacts.companyName: ${contacts.companyName}");
+                      if (kDebugMode) {
+                        print("contacts.companyName: ${contacts.companyName}");
+                      }
                       return GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.contactDetailsScreen, arguments: {"index": index});
@@ -147,7 +150,7 @@ class AllCardsScreen extends StatelessWidget {
                                       ///<<<==================== Sign out pop up =========================>>>
 
                                       return AlertDialog(
-                                        content: CustomText(text: "Are you sure to delete contacts?", fontSize: 20, color: AppColors.black_500,),
+                                        content: CustomText(text: "Are you sure to delete contacts?".tr, fontSize: 20, color: AppColors.black_500,),
                                         actions: [
                                           Row(
                                             children: [
@@ -156,7 +159,7 @@ class AllCardsScreen extends StatelessWidget {
                                                   onTap: (){
                                                     Get.back();
                                                   },
-                                                  text: "No",
+                                                  text: "No".tr,
                                                   textColor: AppColors.black_500,
                                                   isFillColor: false,
                                                   borderColor: AppColors.green_900,
@@ -169,7 +172,7 @@ class AllCardsScreen extends StatelessWidget {
                                                     Get.back();
                                                     storageController.deleteContact(contacts.id);
                                                   },
-                                                  text: "Yes",
+                                                  text: "Yes".tr,
                                                   backgroundColor: AppColors.green_900,
                                                 ),
                                               ),

@@ -48,7 +48,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       icon: Icons.arrow_back,
                     ),
                     CustomText(
-                      text: screenTitle,
+                      text: screenTitle.tr,
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                     ),
@@ -102,9 +102,9 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                         ),
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.center,
-                                          children: const [
+                                          children: [
                                             Icon(Icons.image_outlined),
-                                            CustomText(text: "Gallery", fontSize: 16,)
+                                            CustomText(text: "Gallery".tr, fontSize: 16,)
                                           ],
                                         ),),
                                     ),
@@ -127,7 +127,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
-                                            CustomText(text: "Camera", fontSize: 16,)
+                                            CustomText(text: "Camera".tr, fontSize: 16,)
                                           ],
                                         ),
                                       ),
@@ -136,7 +136,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     InkWell(
                                       onTap: () {
                                         Get.toNamed(AppRoutes.linkedInWebViewScreen);
-                                        Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'", "",
+                                        Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'".tr, "",
                                             duration: Duration(seconds: 3),
                                             colorText: AppColors.green_900,
                                         );
@@ -154,7 +154,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                            CustomText(text: "LinkedIn", fontSize: 16,)
+                                            CustomText(text: "LinkedIn".tr, fontSize: 16,)
                                           ],
                                         ),
                                       ),
@@ -176,7 +176,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             SvgPicture.asset(AppIcons.googleColorfulIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                            CustomText(text: "Google", fontSize: 16,)
+                                            CustomText(text: "Google".tr, fontSize: 16,)
                                           ],
                                         ),
                                       ),
@@ -208,7 +208,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       // hintText: AppStrings.fullName,
                     // hintStyle: TextStyle(color: AppColors.black_200),
-                    labelText: AppStrings.fullName,
+                    labelText: AppStrings.fullName.tr,
                     labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -216,7 +216,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 TextFormField(
                   controller: StorageController.designationController,
                   decoration: InputDecoration(
-                    labelText:  AppStrings.designation,
+                    labelText:  AppStrings.designation.tr,
                     labelStyle: TextStyle(color: AppColors.black_200),
                   ),
                 ),
@@ -224,7 +224,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 TextFormField(
                   controller: StorageController.companyController,
                   decoration: InputDecoration(
-                      labelText: AppStrings.companyName,
+                      labelText: AppStrings.companyName.tr,
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -233,7 +233,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   controller: StorageController.emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      labelText: AppStrings.email,
+                      labelText: AppStrings.email.tr,
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -242,7 +242,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   controller: StorageController.phoneController,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                      labelText: AppStrings.contactNumber,
+                      labelText: AppStrings.contactNumber.tr,
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -251,7 +251,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   controller: StorageController.addressController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      labelText: AppStrings.address,
+                      labelText: AppStrings.address.tr,
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -279,7 +279,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       Get.toNamed(AppRoutes.allCardsScreen);
                       // Get.to(AllCardsScreen());
                     },
-                    text: AppStrings.done,
+                    text: AppStrings.done.tr,
                     backgroundColor: AppColors.black_500,
                     width: 120,
                     height: 42,

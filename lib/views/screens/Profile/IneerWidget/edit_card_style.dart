@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +11,6 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../widgets/CustomBackButton/custom_back_button.dart';
-import '../../../widgets/customButton/custom_elevated_button.dart';
 import '../../../widgets/customText/custom_text.dart';
 
 class EditCardStyle extends StatelessWidget {
@@ -193,7 +191,7 @@ class EditCardStyle extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
             child: CustomText(
-              text: AppStrings.selectCardBackground,
+              text: AppStrings.selectCardBackground.tr,
               fontWeight: FontWeight.w500,
               fontSize: 16,
             ),
@@ -246,7 +244,7 @@ class EditCardStyle extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: CustomText(
-              text: AppStrings.moreSelect,
+              text: AppStrings.moreSelect.tr,
               fontSize: 16,
             ),
           ),
@@ -270,7 +268,7 @@ class EditCardStyle extends StatelessWidget {
             child: Row(
               children: [
                 CustomText(
-                  text: AppStrings.displayCompany,
+                  text: AppStrings.displayCompany.tr,
                   fontSize: 16,
                 ),
                 Spacer(),
@@ -315,7 +313,7 @@ class EditCardStyle extends StatelessWidget {
             child: Row(
               children: [
                 CustomText(
-                  text: AppStrings.displayProfilePhoto,
+                  text: AppStrings.displayProfilePhoto.tr,
                   fontSize: 16,
                 ),
                 Spacer(),

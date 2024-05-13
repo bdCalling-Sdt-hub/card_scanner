@@ -32,7 +32,7 @@ class ChangeLanguageScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.changeLanguage,
+                    text: AppStrings.changeLanguage.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),

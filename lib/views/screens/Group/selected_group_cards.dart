@@ -45,7 +45,7 @@ class SelectedGroupCards extends StatelessWidget {
                   const Icon(Icons.groups),
                   SizedBox(width: 12.w),
                   CustomText(
-                    text: "${AppStrings.group}: ${storageController.groupedContactsList[listIndex].name}",
+                    text: "${AppStrings.group.tr}: ${storageController.groupedContactsList[listIndex].name}",
                     color: AppColors.black_500,
                     fontSize: 16,
                   )

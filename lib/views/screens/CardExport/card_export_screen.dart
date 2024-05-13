@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -16,11 +14,11 @@ import '../../widgets/CustomBackButton/custom_back_button.dart';
 class CardExportScreen extends StatelessWidget {
   CardExportScreen({super.key});
 
-  List cardQrList = [
-    {"qrImg" : AppImages.qr1Img, "title" : "Mohsin", "designation": "Runner"},
-    {"qrImg" : AppImages.qr1Img, "title" : "Cool", "designation": "Runner"},
-    {"qrImg" : AppImages.qr1Img, "title" : "Frozen", "designation": "Runner"},
-  ];
+  // List cardQrList = [
+  //   {"qrImg" : AppImages.qr1Img, "title" : "Mohsin", "designation": "Runner"},
+  //   {"qrImg" : AppImages.qr1Img, "title" : "Cool", "designation": "Runner"},
+  //   {"qrImg" : AppImages.qr1Img, "title" : "Frozen", "designation": "Runner"},
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +33,7 @@ class CardExportScreen extends StatelessWidget {
                   children: [
                     CustomBackButton(onTap: () {Get.back();},),
                     CustomText(
-                      text: AppStrings.cardExport,
+                      text: AppStrings.cardExport.tr,
                       color: AppColors.black_500,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -68,7 +66,7 @@ class CardExportScreen extends StatelessWidget {
                               errorStateBuilder: (context, error) {
                                 return Center(
                                   child: Text(
-                                    "Uh oh! Something went wrong...",
+                                    "Oh! Something went wrong...".tr,
                                     textAlign: TextAlign.center,
                                   ),
                                 );

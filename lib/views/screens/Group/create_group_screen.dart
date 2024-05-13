@@ -48,7 +48,7 @@ class CreateGroupScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.createGroup,
+                    text: AppStrings.createGroup.tr,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
@@ -62,7 +62,7 @@ class CreateGroupScreen extends StatelessWidget {
               TextFormField(
                 controller: storageController.groupNameController,
                 decoration: InputDecoration(
-                  labelText: AppStrings.enterGroupName,
+                  labelText: AppStrings.enterGroupName.tr,
                   labelStyle: TextStyle(color: AppColors.black_200),
                 ),
                 onFieldSubmitted: createList,
@@ -89,7 +89,7 @@ class CreateGroupScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: CustomText(
-                      text: AppStrings.selectCards,
+                      text: AppStrings.selectCards.tr,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -103,7 +103,7 @@ class CreateGroupScreen extends StatelessWidget {
                     SizedBox(height: 150.h,),
                     Image.asset(AppImages.noData, height: 100, width: 100,),
                     CustomText(
-                      text: AppStrings.noCardsSelected,
+                      text: AppStrings.noCardsSelected.tr,
                     ),
                   ],
                 )
@@ -213,7 +213,7 @@ class CreateGroupScreen extends StatelessWidget {
                 Get.snackbar(AppStrings.groupNameMandatory, "");
               }
             },
-          text: AppStrings.createGroup,
+          text: AppStrings.createGroup.tr,
           backgroundColor: AppColors.black_500,
         ),
       ),

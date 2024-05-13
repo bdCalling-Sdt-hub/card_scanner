@@ -72,6 +72,8 @@ dependencies:
   googleapis_auth: ^1.6.0
   http: ^1.2.1
   flutter_currency_picker: ^1.4.1
+  url_launcher: ^6.2.6
+  image: ^4.1.7
 
 
 dev_dependencies:

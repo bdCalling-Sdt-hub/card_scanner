@@ -33,7 +33,7 @@ class AboutScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.aboutUs,
+                    text: AppStrings.aboutUs.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),

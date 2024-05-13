@@ -1,16 +1,12 @@
 
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
-import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/FAQ/faq_screen.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
 import 'package:card_scanner/views/screens/Profile/my_qrcode_screen.dart';
@@ -20,18 +16,12 @@ import 'package:card_scanner/views/screens/Settings/settings_screen_main.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'IneerWidget/custom_container_button.dart';
-import 'card_style.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -41,15 +31,15 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List cardViewList = [
-      {"icon" : Icon(Icons.visibility_outlined, size: 32), "text" : AppStrings.view},
-      {"icon" : Icon(Icons.qr_code_scanner, size: 32), "text" : AppStrings.cardCode},
+      {"icon" : Icon(Icons.visibility_outlined, size: 32), "text" : AppStrings.view.tr},
+      {"icon" : Icon(Icons.qr_code_scanner, size: 32), "text" : AppStrings.cardCode.tr},
     ];
 
     List servicesList = [
-      {"icon" : SvgPicture.asset(AppIcons.sendIcon, height: 18), "text" : AppStrings.recommendToFriends},
-      {"icon" : Icon(Icons.swap_vert_circle_outlined), "text" : AppStrings.faq},
-      {"icon" : Icon(Icons.settings_outlined), "text" : AppStrings.settings},
-      {"icon" : Icon(Icons.logout_outlined), "text" : AppStrings.signOut},
+      {"icon" : SvgPicture.asset(AppIcons.sendIcon, height: 18), "text" : AppStrings.recommendToFriends.tr},
+      {"icon" : Icon(Icons.swap_vert_circle_outlined), "text" : AppStrings.faq.tr},
+      {"icon" : Icon(Icons.settings_outlined), "text" : AppStrings.settings.tr},
+      {"icon" : Icon(Icons.logout_outlined), "text" : AppStrings.signOut.tr},
     ];
     return Scaffold(
       bottomNavigationBar: BottomNavBar(currentIndex: 4),
@@ -60,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
             return Column(
               children: [
                 CustomText(
-                  text: AppStrings.myProfile,
+                  text: AppStrings.myProfile.tr,
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
                 ),
@@ -95,7 +85,7 @@ class ProfileScreen extends StatelessWidget {
                             CustomText(
                               maxLines: 2,
                               textAlign: TextAlign.left,
-                              text: profileController.nameController.text.isEmpty? "Name: null" : profileController.nameController.text,
+                              text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: AppColors.green_900,
@@ -103,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                             CustomText(
                               maxLines: 2,
                               textAlign: TextAlign.left,
-                              text: profileController.designationController.text.isEmpty? "Designation: null" : profileController.designationController.text,
+                              text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
                               color: AppColors.black_400,
                               fontSize: 16,
                             ),
@@ -111,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                             CustomText(
                               maxLines: 2,
                               textAlign: TextAlign.left,
-                              text: profileController.companyController.text.isEmpty? "Company Name: null" : profileController.companyController.text,
+                              text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
                               fontWeight: FontWeight.w400,
                               fontSize: 18,
                               color: AppColors.black_400,
@@ -127,7 +117,7 @@ class ProfileScreen extends StatelessWidget {
                           onTap: (){
                             Get.to(EditProfileScreen());
                           },
-                          text: AppStrings.edit
+                          text: AppStrings.edit.tr
                       ),
                     ],
                   ),
@@ -202,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
                                   ///<<<==================== Sign out pop up =========================>>>
 
                                   return AlertDialog(
-                                    content: CustomText(text: "Are you sure to sign out?", fontSize: 20, color: AppColors.black_500,),
+                                    content: CustomText(text: "Are you sure to sign out?".tr, fontSize: 20, color: AppColors.black_500,),
                                     actions: [
                                       Row(
                                         children: [
@@ -211,7 +201,7 @@ class ProfileScreen extends StatelessWidget {
                                               onTap: (){
                                                 Get.back();
                                               },
-                                              text: "No",
+                                              text: "No".tr,
                                               textColor: AppColors.black_500,
                                               isFillColor: false,
                                               borderColor: AppColors.green_900,
@@ -224,7 +214,7 @@ class ProfileScreen extends StatelessWidget {
                                                 // SystemNavigator.pop();
                                                 authController.signOutRepo();
                                               },
-                                              text: "Yes",
+                                              text: "Yes".tr,
                                               backgroundColor: AppColors.green_900,
                                             ),
                                           ),

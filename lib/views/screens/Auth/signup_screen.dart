@@ -51,12 +51,12 @@ class SignUpScreen extends StatelessWidget {
                 height: 12.h,
               ),
               CustomText(
-                text: AppStrings.signUpNOw,
+                text: AppStrings.signUpNOw.tr,
                 fontWeight: FontWeight.w600,
                 fontSize: 32,
               ),
               CustomText(
-                text: AppStrings.fillTheDetails,
+                text: AppStrings.fillTheDetails.tr,
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 color: AppColors.black_400,
@@ -149,14 +149,14 @@ class SignUpScreen extends StatelessWidget {
                   if (value!.isEmpty) {
                     return AppStrings.enterEmail.tr;
                   } else if (!AppStrings.emailRegexp.hasMatch(authController.emailController.text)) {
-                    return AppStrings.enterValidEmail;
+                    return AppStrings.enterValidEmail.tr;
                   } else {
                     return null;
                   }
                 },
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
-                hintText: AppStrings.email,
+                hintText: AppStrings.email.tr,
                 hintStyle: GoogleFonts.kumbhSans(
                     fontSize: 16.h,
                     fontWeight: FontWeight.w400,
@@ -248,7 +248,7 @@ class SignUpScreen extends StatelessWidget {
                 validator: (value) {
                   if (value.isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
-                  } else if (value.length < 8) {
+                  } else if (value.length < 6) {
                     return AppStrings.passMustContainBoth.tr;
                   } else if (!AppStrings.passRegExp.hasMatch(value)) {
                     return AppStrings.passMustContainBoth.tr;
@@ -336,7 +336,7 @@ class SignUpScreen extends StatelessWidget {
               },
               borderRadius: 12,
               borderColor: AppColors.black_500,
-              text: AppStrings.backToSignInBtn,
+              text: AppStrings.backToSignInBtn.tr,
               textColor: AppColors.black_500,
               fontSize: 16,
               fontWeight: FontWeight.w400,

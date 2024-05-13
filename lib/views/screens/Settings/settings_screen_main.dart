@@ -20,7 +20,7 @@ class SettingsScreenMain extends StatelessWidget {
   List servicesList = [
     // {"icon": Icon(Icons.pageview), "text": AppStrings.general},
     // {"icon": Icon(Icons.notifications), "text": AppStrings.notifications},
-    {"icon": Icon(Icons.language), "text": AppStrings.language},
+    {"icon": Icon(Icons.language), "text": AppStrings.language.tr},
     {
       "icon": SvgPicture.asset(AppIcons.aboutIcon, height: 18),
       "text": AppStrings.aboutUs
@@ -49,7 +49,7 @@ class SettingsScreenMain extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.settings,
+                    text: AppStrings.settings.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -154,7 +154,7 @@ class SettingsScreenMain extends StatelessWidget {
               child: Row(
                 children: [
                   CustomText(
-                    text: AppStrings.setAsDefault,
+                    text: AppStrings.setAsDefault.tr,
                     fontSize: 16,
                   ),
                   Spacer(),
@@ -175,7 +175,7 @@ class SettingsScreenMain extends StatelessWidget {
               child: Row(
                 children: [
                   CustomText(
-                    text: AppStrings.firstLast,
+                    text: AppStrings.firstLast.tr,
                     fontSize: 16,
                   ),
                   Spacer(),
@@ -196,7 +196,7 @@ class SettingsScreenMain extends StatelessWidget {
               child: Row(
                 children: [
                   CustomText(
-                    text: AppStrings.lastFirst,
+                    text: AppStrings.lastFirst.tr,
                     fontSize: 16,
                   ),
                   Spacer(),
@@ -232,7 +232,7 @@ class SettingsScreenMain extends StatelessWidget {
               child: Row(
                 children: [
                   CustomText(
-                      text: AppStrings.receiveNotifications,
+                      text: AppStrings.receiveNotifications.tr,
                     fontSize: 16,
                   ),
                   Spacer(),

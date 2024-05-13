@@ -45,7 +45,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                   //   icon: Icons.arrow_back,
                   // ),
                   CustomText(
-                    text: AppStrings.selectContacts,
+                    text: AppStrings.selectContacts.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -180,7 +180,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
             // storageController.selectedGroupContacts.addAll(storageController.tempoContactsList);
             Get.back();
           },
-          text: AppStrings.saveNBack,
+          text: AppStrings.saveNBack.tr,
           backgroundColor: AppColors.black_500,
         ),
       ),

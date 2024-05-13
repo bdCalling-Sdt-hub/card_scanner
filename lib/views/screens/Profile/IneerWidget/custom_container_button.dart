@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/customText/custom_text.dart';
@@ -73,7 +74,7 @@ class CustomContainerButton extends StatelessWidget {
             ),
             SizedBox(width: farWidth.w),
             CustomText(
-              text: text,
+              text: text.tr,
               color: textColor,
               fontWeight: fontWeight,
               fontSize: fontSize,

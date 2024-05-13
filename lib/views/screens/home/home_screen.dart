@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 8.w, vertical: 0.h),
-                        hintText: "${AppStrings.search}...",
+                        hintText: "${AppStrings.search.tr}...",
                         hintStyle: const TextStyle(
                           color: AppColors.green_50,
                           fontSize: 16,
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppColors.green_500,
                             ),
                             CustomText(
-                              text: AppStrings.donate,
+                              text: AppStrings.donate.tr,
                               color: AppColors.green_500,
                               fontWeight: FontWeight.w600,
                               left: 4,
@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
 
                           CustomText(
-                            text: AppStrings.shareWithAnyone,
+                            text: AppStrings.shareWithAnyone.tr,
                             maxLines: 2,
                             color: AppColors.black_500,
                             fontSize: 24,
@@ -281,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         ),
                                                                         CustomText(
                                                                           text:
-                                                                              AppStrings.cardCreateManually,
+                                                                              AppStrings.cardCreateManually.tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         ),
                                                                         CustomText(
                                                                           text:
-                                                                              AppStrings.cardCreateOcr,
+                                                                              AppStrings.cardCreateOcr.tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -344,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             },
                                           );
                                         },
-                                        text: AppStrings.createDigitalCards,
+                                        text: AppStrings.createDigitalCards.tr,
                                         textColor: AppColors.black_500,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w400,
@@ -382,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 AppRoutes.cardSyncScreen);
                                           },
                                           icon: AppIcons.cardSyncIcon,
-                                          title: AppStrings.cardSync,
+                                          title: AppStrings.cardSync.tr,
                                         ),
                                         buildServiceItems(
                                           onTap: () {
@@ -391,14 +391,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 AppRoutes.allCardsExportScreen);
                                           },
                                           icon: AppIcons.excelIcon,
-                                          title: AppStrings.cardExport,
+                                          title: AppStrings.cardExport.tr,
                                         ),
                                         buildServiceItems(
                                           onTap: () {
                                             Get.toNamed(AppRoutes.shareProfileCardScreen);
                                           },
                                           icon: AppIcons.shareCard,
-                                          title: AppStrings.shareCard,
+                                          title: AppStrings.shareCard.tr,
                                         ),
                                       ],
                                     ),
@@ -452,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: paymentController.amountController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(left: 8.w),
-                  labelText: AppStrings.amount,
+                  labelText: AppStrings.amount.tr,
                 labelStyle: TextStyle(
                   color: AppColors.green_900
                 )
@@ -464,7 +464,7 @@ class _HomeScreenState extends State<HomeScreen> {
             CurrencySelector(
               indent: EdgeInsets.only(left: 8.w),
               value: currency?.code,
-              hintText: 'Currency Type (Code)',
+              hintText: 'Currency Type (Code)'.tr,
               fieldBackground: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
               update: (value) => setState(() => currency = value),
             ),
@@ -478,15 +478,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     print("Currency Code ${currency!.code}");
                   }
                   Get.to(paymentController.buildPaypalCheckout(
-                      subscriptionName: "Donation",
+                      subscriptionName: "Donation".tr,
                       context: context,
                       amount: paymentController.amountController.text,
                       currency: currency!.code));
                 }else{
-                  Get.snackbar("Please, must select a currency", "");
+                  Get.snackbar("Please, must select a currency".tr, "");
                 }
               },
-              text: AppStrings.send,
+              text: AppStrings.send.tr,
               backgroundColor: AppColors.black_500,
             )
           ],

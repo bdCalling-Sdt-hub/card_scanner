@@ -42,7 +42,7 @@ class CardHolder extends StatelessWidget {
                     MainAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: AppStrings.cards,
+                        text: AppStrings.cards.tr,
                         fontWeight: FontWeight.w500,
                         color: AppColors.black_500,
                         fontSize: 16,
@@ -64,7 +64,7 @@ class CardHolder extends StatelessWidget {
                                 AppIcons.groupIcon),
                             SizedBox(width: 4.w),
                             CustomText(
-                              text: AppStrings.group,
+                              text: AppStrings.group.tr,
                             ),
                             SizedBox(width: 8.w),
                           ],
@@ -90,7 +90,7 @@ class CardHolder extends StatelessWidget {
                                 AppIcons.manageIcon),
                             SizedBox(width: 4.w),
                             CustomText(
-                              text: AppStrings.manage,
+                              text: AppStrings.manage.tr,
                             )
                           ],
                         ),
@@ -181,7 +181,7 @@ class CardHolder extends StatelessWidget {
                                                         ),
                                                       ),
                                                       CustomText(
-                                                        text: AppStrings.moreOptions,
+                                                        text: AppStrings.moreOptions.tr,
                                                         fontWeight: FontWeight.w500,
                                                         fontSize: 24,
                                                       ),
@@ -217,7 +217,7 @@ class CardHolder extends StatelessWidget {
                                                                         ),
                                                                       ),
                                                                       CustomText(
-                                                                        text: AppStrings.shareWith,
+                                                                        text: AppStrings.shareWith.tr,
                                                                         fontSize: 20,
                                                                         fontWeight: FontWeight.w500,
                                                                       ),
@@ -269,7 +269,7 @@ class CardHolder extends StatelessWidget {
                                                             Icon(Icons.share),
                                                             SizedBox(width: 8.w),
                                                             CustomText(
-                                                              text: AppStrings.shareBusinessCard,
+                                                              text: AppStrings.shareBusinessCard.tr,
                                                               fontSize: 16,
                                                             )
                                                           ],
@@ -301,7 +301,7 @@ class CardHolder extends StatelessWidget {
                                                                     children: [
                                                                       SizedBox(height: 40.h),
                                                                       CustomText(
-                                                                        text: AppStrings.areYouSure,
+                                                                        text: AppStrings.areYouSure.tr,
                                                                         fontWeight: FontWeight.w500,
                                                                         fontSize: 20,
                                                                       ),
@@ -318,7 +318,7 @@ class CardHolder extends StatelessWidget {
                                                                               storageController.deleteContact(storageController.contacts[index].id);
                                                                               Get.toNamed(AppRoutes.homeScreen);
                                                                             },
-                                                                            text: AppStrings.yes,
+                                                                            text: AppStrings.yes.tr,
                                                                             height: 38,
                                                                             width: 64,
                                                                             isFillColor: true,
@@ -334,7 +334,7 @@ class CardHolder extends StatelessWidget {
                                                                             onTap: () {
                                                                               Get.back();
                                                                             },
-                                                                            text: AppStrings.no,
+                                                                            text: AppStrings.no.tr,
                                                                             height: 38,
                                                                             width: 64,
                                                                             borderColor: AppColors.black_500,
@@ -359,7 +359,7 @@ class CardHolder extends StatelessWidget {
                                                             Icon(Icons.delete),
                                                             SizedBox(width: 8.w),
                                                             CustomText(
-                                                              text: AppStrings.removeCard,
+                                                              text: AppStrings.removeCard.tr,
                                                               fontSize: 16,
                                                             )
                                                           ],
@@ -407,7 +407,7 @@ class CardHolder extends StatelessWidget {
                     padding: EdgeInsets.only(
                         top: 16.h, left: 12.w),
                     child: CustomText(
-                      text: AppStrings.cards,
+                      text: AppStrings.cards.tr,
                     ),
                   ),
                 ),
@@ -422,7 +422,7 @@ class CardHolder extends StatelessWidget {
                       height: 16.h,
                     ),
                     CustomText(
-                      text: AppStrings.noCards,
+                      text: AppStrings.noCards.tr,
                     ),
                     SizedBox(
                       height: 4.h,
@@ -433,7 +433,7 @@ class CardHolder extends StatelessWidget {
                       child: CustomText(
                         maxLines: 3,
                         text: AppStrings
-                            .useBusinessCardRecognitionFunction,
+                            .useBusinessCardRecognitionFunction.tr,
                       ),
                     )
                   ],

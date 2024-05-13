@@ -1,6 +1,4 @@
 
-
-
 import 'dart:typed_data';
 
 import 'package:card_scanner/controllers/storage_controller.dart';
@@ -71,7 +69,7 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: CustomText(text:'LinkedIn', fontSize: 20, fontWeight: FontWeight.w500,)),
+        title: Center(child: CustomText(text:'LinkedIn'.tr, fontSize: 20, fontWeight: FontWeight.w500,)),
         leading: Padding(
           padding: const EdgeInsets.all(15.0),
           child: CustomBackButton(

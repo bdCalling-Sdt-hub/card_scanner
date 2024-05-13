@@ -1,19 +1,13 @@
 
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
-import 'package:card_scanner/controllers/auth/forgotPasswordController.dart';
-import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/custom_text_field/custom_text_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
@@ -52,7 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 54.h, width: Get.width),
                 CustomText(
-                  text: AppStrings.forgotPassword,
+                  text: AppStrings.forgotPassword.tr,
                   fontWeight: FontWeight.w600,
                   fontSize: 28,
                   color: AppColors.black_500,
@@ -64,7 +58,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 24.h),
                   child: CustomText(
                     maxLines: 2,
-                    text: AppStrings.enterYourEmail,
+                    text: AppStrings.enterYourEmail.tr,
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
                     color: AppColors.black_400,
@@ -74,7 +68,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: CustomText(
-                    text: AppStrings.email,
+                    text: AppStrings.email.tr,
                     color: AppColors.black_500,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -90,14 +84,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                     if (value!.isEmpty) {
                       return AppStrings.enterEmail.tr;
                     } else if (!AppStrings.emailRegexp.hasMatch("")) {
-                      return AppStrings.enterValidEmail;
+                      return AppStrings.enterValidEmail.tr;
                     } else {
                       return null;
                     }
                   },
                   keyboardType: TextInputType.text,
                   textAlign: TextAlign.start,
-                  hintText: AppStrings.email,
+                  hintText: AppStrings.email.tr,
                   hintStyle: GoogleFonts.kumbhSans(
                       fontSize: 16.h,
                       fontWeight: FontWeight.w400,
@@ -129,7 +123,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: CustomText(
-                        text: AppStrings.or,
+                        text: AppStrings.or.tr,
                         color: AppColors.black_500,
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
@@ -147,7 +141,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: CustomText(
-                    text: AppStrings.contactNumber,
+                    text: AppStrings.contactNumber.tr,
                     color: AppColors.black_500,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -202,7 +196,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,
-          text: AppStrings.getOtp,
+          text: AppStrings.getOtp.tr,
           textColor: AppColors.whiteColor,
           fontSize: 16,
           fontWeight: FontWeight.w400,

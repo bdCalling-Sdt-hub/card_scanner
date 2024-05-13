@@ -39,7 +39,7 @@ class QrScannerController extends GetxController{
               print("$name, $designation, $companyName, $email, $phoneNumber, $address");
             }
             // Now you can use this data as needed
-            Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard))?.then((value) {
+            Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard.tr))?.then((value) {
               result = "";
               StorageController.appTitle = AppStrings.createCard;
             },);

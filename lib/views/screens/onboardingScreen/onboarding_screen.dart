@@ -1,19 +1,14 @@
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
-import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/inner/onboard_scroll_controller.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -204,7 +199,7 @@ class OnBoardingScreen extends StatelessWidget {
                 onTap: () {
                   Get.toNamed(AppRoutes.signInScreen);
                 },
-                text: onBoardScrollController.currentPosition.value == 2? AppStrings.signInBtn : AppStrings.skipBtn,
+                text: onBoardScrollController.currentPosition.value == 2? AppStrings.signInBtn.tr : AppStrings.skipBtn.tr,
                 textColor: AppColors.black_400,
               ),
               SizedBox(
@@ -222,7 +217,7 @@ class OnBoardingScreen extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(AppRoutes.signUpScreen);
                   },
-                  text: AppStrings.signUpBtn,
+                  text: AppStrings.signUpBtn.tr,
                   textColor: AppColors.whiteColor,
                 )
                     : ElevatedButton(

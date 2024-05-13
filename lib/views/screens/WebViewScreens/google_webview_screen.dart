@@ -71,7 +71,7 @@ class _GoogleWebViewScreenState extends State<GoogleWebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: CustomText(text:'Google Search', fontSize: 20, fontWeight: FontWeight.w500,)),
+        title: Center(child: CustomText(text:'Google Search'.tr, fontSize: 20, fontWeight: FontWeight.w500,)),
         leading: Padding(
           padding: const EdgeInsets.all(15.0),
           child: CustomBackButton(

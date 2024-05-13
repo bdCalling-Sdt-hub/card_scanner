@@ -3,6 +3,7 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class CardStyleScreen extends StatelessWidget {
                       onTap: (){Get.back();},
                     icon: Icons.arrow_back,
                   ),
-                  CustomText(text: AppStrings.cardStyle, fontSize: 20, fontWeight: FontWeight.w500,),
+                  CustomText(text: AppStrings.cardStyle.tr, fontSize: 20, fontWeight: FontWeight.w500,),
                   SizedBox(width: 30,)
                 ],
               ),
@@ -56,7 +57,9 @@ class CardStyleScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: cardColorList.length,
                 onPageChanged: (value) {
-                  print("===============$value");
+                  if (kDebugMode) {
+                    print("===============$value");
+                  }
                   currentPosition.value = value;
                 },
                 itemBuilder: (context, index) {

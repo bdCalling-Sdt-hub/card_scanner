@@ -44,7 +44,7 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
             SizedBox(height: 54.h, width: Get.width),
             CustomText(
-              text: AppStrings.resetPassword,
+              text: AppStrings.resetPassword.tr,
               fontWeight: FontWeight.w600,
               fontSize: 28,
               color: AppColors.black_500,
@@ -56,7 +56,7 @@ class ResetPasswordScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.h),
               child: CustomText(
                 maxLines: 2,
-                text: AppStrings.passwordLength,
+                text: AppStrings.passwordLength.tr,
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 color: AppColors.black_400,
@@ -66,7 +66,7 @@ class ResetPasswordScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: CustomText(
-                text: AppStrings.password,
+                text: AppStrings.password.tr,
                 color: AppColors.black_500,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -84,7 +84,7 @@ class ResetPasswordScreen extends StatelessWidget {
               validator: (value) {
                 if (value.isEmpty) {
                   return AppStrings.fieldCantBeEmpty.tr;
-                } else if (value.length < 8) {
+                } else if (value.length < 6) {
                   return AppStrings.passMustContainBoth.tr;
                 } else if (!AppStrings.passRegExp.hasMatch(value)) {
                   return AppStrings.passMustContainBoth.tr;
@@ -120,7 +120,7 @@ class ResetPasswordScreen extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: CustomText(
-                text: AppStrings.confirmPassword,
+                text: AppStrings.confirmPassword.tr,
                 color: AppColors.black_500,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -184,11 +184,11 @@ class ResetPasswordScreen extends StatelessWidget {
           isFillColor: true,
           onTap: () {
             Get.toNamed(AppRoutes.homeScreen);
-            Get.snackbar("Password reset successfully", "");
+            Get.snackbar("Password reset successfully".tr, "");
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,
-          text: AppStrings.resetBtn,
+          text: AppStrings.resetBtn.tr,
           textColor: AppColors.whiteColor,
           fontSize: 16,
           fontWeight: FontWeight.w400,

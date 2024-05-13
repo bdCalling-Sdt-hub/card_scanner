@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:card_scanner/Helpers/screen_shot_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../../Helpers/prefs_helper.dart';
 import '../../../controllers/qr_scanner_controller.dart';
@@ -22,6 +24,8 @@ class MyQrCodeScreen extends StatelessWidget {
 
   ProfileController profileController = Get.put(ProfileController());
   QrScannerController qrScannerController = Get.put(QrScannerController());
+  ScreenshotController screenshotController = ScreenshotController();
+  ScreenShotHelper screenShotHelper = ScreenShotHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class MyQrCodeScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.myQrCode,
+                    text: AppStrings.myQrCode.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -66,7 +70,7 @@ class MyQrCodeScreen extends StatelessWidget {
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.nameController.text.isEmpty? "Name: null" : profileController.nameController.text,
+                text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: AppColors.green_900,
@@ -74,7 +78,7 @@ class MyQrCodeScreen extends StatelessWidget {
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.designationController.text.isEmpty? "Designation: null" : profileController.designationController.text,
+                text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
                 color: AppColors.black_400,
                 fontSize: 16,
               ),
@@ -82,31 +86,41 @@ class MyQrCodeScreen extends StatelessWidget {
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.companyController.text.isEmpty? "Company Name: null" : profileController.companyController.text,
+                text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
                 fontWeight: FontWeight.w400,
                 fontSize: 18,
                 color: AppColors.black_400,
               ),
               SizedBox(height: 12.h),
-              QrImageView(
-                data: "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
-                version: QrVersions.auto,
-                size: 200,
-                gapless: false,
-                // embeddedImage: FileImage(File(selectedContact.imageUrl)),
-                embeddedImageStyle: QrEmbeddedImageStyle(
-                    size: Size(100, 100)
-                ),
-                errorStateBuilder: (context, error) {
-                  return Center(
-                    child: Text(
-                      "Uh oh! Something went wrong...",
-                      textAlign: TextAlign.center,
+              Screenshot(
+                controller: screenshotController,
+                child: Container(
+                  height: 200.h,
+                  width: 200.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteColor
+                  ),
+                  child: QrImageView(
+                    data: "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
+                    version: QrVersions.auto,
+                    size: 200,
+                    gapless: false,
+                    // embeddedImage: FileImage(File(selectedContact.imageUrl)),
+                    embeddedImageStyle: QrEmbeddedImageStyle(
+                        size: Size(100, 100)
                     ),
-                  );
-                },
+                    errorStateBuilder: (context, error) {
+                      return Center(
+                        child: Text(
+                          "Oh! Something went wrong...".tr,
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
-              CustomText(text: AppStrings.nameCardScanner, fontSize: 12,),
+              CustomText(text: AppStrings.nameCardScanner.tr, fontSize: 12,),
               SizedBox(height: 30.h,),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40.w),
@@ -136,7 +150,7 @@ class MyQrCodeScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 8.h,),
                         CustomText(
-                          text: AppStrings.scanQrCode,
+                          text: AppStrings.scanQrCode.tr,
                         )
                       ],
                     ),
@@ -145,7 +159,8 @@ class MyQrCodeScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.snackbar("Qr code downloaded", "");
+                            screenShotHelper.captureAndSaveImage(screenshotController);
+                            Get.snackbar("Qr code downloaded to your phone gallery".tr, "");
                           },
                           child: Container(
                             height: 50.h,
@@ -164,7 +179,7 @@ class MyQrCodeScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 8.h,),
                         CustomText(
-                          text: AppStrings.saveImage,
+                          text: AppStrings.saveImage.tr,
                         )
                       ],
                     )

@@ -36,7 +36,7 @@ class DuplicateCardsScreen extends StatelessWidget {
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.manageDuplicateCards,
+                    text: AppStrings.manageDuplicateCards.tr,
                     color: AppColors.black_500,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,

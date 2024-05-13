@@ -45,7 +45,7 @@ class EditProfileScreen extends StatelessWidget {
                         },
                       ),
                       CustomText(
-                        text: AppStrings.editProfile,
+                        text: AppStrings.editProfile.tr,
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
@@ -101,7 +101,7 @@ class EditProfileScreen extends StatelessWidget {
                                   : AppColors.transparentColor,
                               border: Border.all(color: AppColors.green_900)),
                           child: CustomText(
-                            text: AppStrings.cardStyle,
+                            text: AppStrings.cardStyle.tr,
                             color: profileController.isStyle.value
                                 ? AppColors.whiteColor
                                 : AppColors.black_500,
@@ -158,9 +158,9 @@ class EditProfileScreen extends StatelessWidget {
                                                   ),
                                                   child: Column(
                                                     mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: const [
+                                                    children: [
                                                       Icon(Icons.image_outlined),
-                                                      CustomText(text: "Gallery", fontSize: 16,)
+                                                      CustomText(text: "Gallery".tr, fontSize: 16,)
                                                     ],
                                                   ),),
                                               ),
@@ -179,7 +179,7 @@ class EditProfileScreen extends StatelessWidget {
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
                                                       SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
-                                                      CustomText(text: "Camera", fontSize: 16,)
+                                                      CustomText(text: "Camera".tr, fontSize: 16,)
                                                     ],
                                                   ),
                                                 ),
@@ -225,7 +225,7 @@ class EditProfileScreen extends StatelessWidget {
                             ),
                           ),
                           CustomText(
-                            text: "${AppStrings.basicInfo}:",
+                            text: "${AppStrings.basicInfo.tr}:",
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                             color: AppColors.green_900,
@@ -237,7 +237,7 @@ class EditProfileScreen extends StatelessWidget {
                             controller: profileController.nameController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.fullName,
+                                labelText: AppStrings.fullName.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -251,7 +251,7 @@ class EditProfileScreen extends StatelessWidget {
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.mobileNumber,
+                                labelText: AppStrings.mobileNumber.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -265,7 +265,7 @@ class EditProfileScreen extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.email,
+                                labelText: AppStrings.email.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -273,7 +273,7 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 12.h,),
                           CustomText(
-                            text: "${AppStrings.workInfo}:",
+                            text: "${AppStrings.workInfo.tr}:",
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                             color: AppColors.green_900,
@@ -282,7 +282,7 @@ class EditProfileScreen extends StatelessWidget {
                             controller: profileController.designationController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.designation,
+                                labelText: AppStrings.designation.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -292,7 +292,7 @@ class EditProfileScreen extends StatelessWidget {
                             controller: profileController.companyController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.companyName,
+                                labelText: AppStrings.companyName.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -302,7 +302,7 @@ class EditProfileScreen extends StatelessWidget {
                             controller: profileController.addressController,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.address,
+                                labelText: AppStrings.address.tr,
                                 labelStyle: TextStyle(
                                     fontSize: 14
                                 )
@@ -333,7 +333,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               width: Get.width,
                               height: 42.h,
-                              text: AppStrings.saveAndPreview,
+                              text: AppStrings.saveAndPreview.tr,
                               backgroundColor: AppColors.black_500,
                             ),
                           )

@@ -84,8 +84,8 @@ class AppStrings{
   static String contacts = "Contacts";
   static String contactDetails = "Contact Details";
   static String selectContacts = "Select Contacts";
-  static String currentlyNoContacts = "There are currently no contacts available";
-  static String noContactsFoundTryAgain = "No contacts found. Please try again later for updated information or check back soon.";
+  static String currentlyNoContacts = "There are currently no contact available";
+  static String noContactsFoundTryAgain = "No contact found. Please try again later for updated information or check back soon.";
   static String selectedItems = "Selected items";
   static String unselectAll = "Unselect all";
   static String export = "Export";
@@ -119,9 +119,9 @@ class AppStrings{
   static String mobileBackup = "Mobile backup";
   static String batchExportCards = "Batch export cards information.";
   static String emailBackup = "Google drive backup";
-  static String dataBackupEmailsSecurely = "Protect your data backup google drive securely.";
+  static String dataBackupEmailsSecurely = "Protect your data backup in google drive securely.";
   static String sureToSaveInMobile = "Are you sure to back up your contacts information in your mobile local storage?";
-  static String sureToSaveInEmail = "Backup your contacts information in google drive for safekeeping";
+  static String sureToSaveInEmail = "Backup your contact information in google drive for safekeeping";
 
 
   ///<<<==================== Create Card Screen =============================>>>
@@ -177,7 +177,7 @@ class AppStrings{
   static String setAsDefault = "Set as default";
   static String lastFirst = "Last, First";
   static String firstLast = "First, Last";
-  static String receiveNotifications = "Receive  notifications";
+  static String receiveNotifications = "Receive notifications";
   static String changeLanguage = "Change Language";
   static String contactUs = "Contact";
   static String followUs = "Follow";
@@ -215,7 +215,7 @@ class AppStrings{
   static String submitBtn = "Submit";
   static String resetBtn = "Reset Password";
   static String goSearch = "Go Search";
-  static String addContacts = "Add Contacts";
+  static String addContacts = "Add Contact";
   static String tryItFree = "Try it free";
 
   ///<<<===================== Nav Bar Texts =================================>>>
@@ -236,6 +236,6 @@ class AppStrings{
   static const enterAddress = "Enter your address";
   static const wrongPassword = "Wrong password!!! Please enter your \ncurrent password";
   static RegExp passRegExp = RegExp(r'(?=.*[a-z])(?=.*[0-9])');
-  static const String passMustContainBoth = "Password must be 8 characters long & contain both \nalphabets and numerics";
+  static const String passMustContainBoth = "Password must be 6 characters long & contain both \nalphabets and numerics";
   static const String passDoesNotMatch = "Password does not match";
 }

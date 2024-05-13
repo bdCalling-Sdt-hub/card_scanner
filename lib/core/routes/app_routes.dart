@@ -68,6 +68,7 @@ class AppRoutes {
     GetPage(name: linkedInWebViewScreen, page: () => LinkedInWebViewScreen()),
     GetPage(name: profileScreen, page: () => ProfileScreen()),
     GetPage(name: viewECardScreen, page: () => ViewECardScreen()),
+    GetPage(name: shareProfileCardScreen, page: () => ShareProfileCardScreen()),
     GetPage(name: googleWebViewScreen, page: () => GoogleWebViewScreen()),
   ];
 }

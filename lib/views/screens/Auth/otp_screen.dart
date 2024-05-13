@@ -1,17 +1,12 @@
 
-
-
-
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Auth/reset_password_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -50,7 +45,7 @@ class OtpScreen extends StatelessWidget {
               children: [
                 const Icon(Icons.arrow_back_ios, size: 16,),
                 CustomText(
-                  text: AppStrings.enterOtpCode,
+                  text: AppStrings.enterOtpCode.tr,
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                   color: AppColors.black_500,
@@ -76,7 +71,7 @@ class OtpScreen extends StatelessWidget {
                 appContext: (context),
                 validator: (value) {
                   if (value!.length != 6) {
-                    return "Please enter the OTP code.";
+                    return "Please enter the OTP code.".tr;
                   }
                 },
                 autoFocus: true,

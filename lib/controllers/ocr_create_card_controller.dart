@@ -47,7 +47,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, 'I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated ' "}
+            {"text": "$extractedText, ${'I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with "/" separated '.tr} "}
           ]
         }
       ]
@@ -99,11 +99,11 @@ class OCRCreateCardController extends GetxController{
 
         return response.body.toString();
       } else {
-        Get.snackbar("Invalid value", "Something went wrong", backgroundColor: AppColors.primaryColor);
+        Get.snackbar("Invalid value".tr, "Something went wrong".tr, backgroundColor: AppColors.primaryColor);
         return "Something went wrong";
       }
     } catch (error) {
-      Get.snackbar("Invalid value", "Something went wrong", backgroundColor: AppColors.primaryColor);
+      Get.snackbar("Invalid value".tr, "Something went wrong".tr, backgroundColor: AppColors.primaryColor);
       if (kDebugMode) {
         print("Error: $error");
       }

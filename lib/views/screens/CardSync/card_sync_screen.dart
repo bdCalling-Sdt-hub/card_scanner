@@ -1,6 +1,4 @@
 
-import 'dart:ui';
-
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -9,11 +7,8 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -41,7 +36,7 @@ class CardSyncScreen extends StatelessWidget {
                     Get.back();
                   }),
                   CustomText(
-                    text: AppStrings.smartSync,
+                    text: AppStrings.smartSync.tr,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -200,7 +195,7 @@ class CardSyncScreen extends StatelessWidget {
                                     SizedBox(height: 8.h,),
                                     CustomText(
                                       maxLines: 5,
-                                      text: AppStrings.sureToSaveInEmail,
+                                      text: AppStrings.sureToSaveInEmail.tr,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.green_900,
@@ -209,12 +204,12 @@ class CardSyncScreen extends StatelessWidget {
                                 ),
                               ),
                               actions: [
-                                GetBuilder<StorageController>(builder: (storageController) {
-                                  return storageController.isLogin? Center(child: CircularProgressIndicator()) : CustomElevatedButton(onTap: () {
+                                GetBuilder<AuthController>(builder: (authController) {
+                                  return authController.isLoading? Center(child: CircularProgressIndicator()) : CustomElevatedButton(onTap: () {
                                     authController.googleSignInRepo();
                                   },
                                     svgIcon: AppIcons.googleColorfulIcon,
-                                    text: "Upload",
+                                    text: "Upload".tr,
                                     backgroundColor: AppColors.black_500,
                                     fontSize: 20,
                                   );
@@ -225,12 +220,12 @@ class CardSyncScreen extends StatelessWidget {
                                   maxLines: 2,
                                   textAlign: TextAlign.start,
                                     fontSize: 16,
-                                    text: "To get access another google account press on logout,",
+                                    text: "To get access another google account press on logout,".tr,
                                 ),
                                 TextButton(onPressed: (){
                                   authController.googleSignOutRepo();
                                 },
-                                    child: Text("Logout",
+                                    child: Text("Logout".tr,
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.blue,
@@ -259,7 +254,7 @@ class CardSyncScreen extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: CustomText(
-                                text: AppStrings.emailBackup,
+                                text: AppStrings.emailBackup.tr,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -269,7 +264,7 @@ class CardSyncScreen extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: CustomText(
                                 textAlign: TextAlign.left,
-                                text: AppStrings.dataBackupEmailsSecurely,
+                                text: AppStrings.dataBackupEmailsSecurely.tr,
                                 fontSize: 16,
                               ),
                             )
@@ -282,11 +277,11 @@ class CardSyncScreen extends StatelessWidget {
                       child: RichText(
                         textAlign: TextAlign.start,
                         text: TextSpan(
-                          text: 'To import back up contacts press below,  ',
+                          text: 'To import back up contacts press below,  '.tr,
                           style: TextStyle(fontSize: 16, color: AppColors.black_500),
                           children: <TextSpan>[
                             TextSpan(
-                                text: 'Import Contacts',
+                                text: 'Import Contacts'.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.blueAccent,

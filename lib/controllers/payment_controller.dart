@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -26,7 +27,7 @@ class PaymentController extends GetxController{
               "shipping_discount": 0
             }
           },
-          "description": "The payment transaction description.",
+          "description": "The payment transaction description.".tr,
           "item_list": {
             "items": [
               {
@@ -39,16 +40,25 @@ class PaymentController extends GetxController{
           }
         }
       ],
-      note: "Contact us for any questions on your order.",
+      note: "Contact us for any questions on your order.".tr,
       onSuccess: (Map params) async {
-        print("onSuccess: ${params["message"]}");
+        Get.snackbar("Payment successful".tr, "");
+        if (kDebugMode) {
+          print("onSuccess: ${params["message"]}");
+        }
       },
       onError: (error) {
-        print("onError: $error");
+        Get.snackbar("Something went wrong,".tr, "Try again!".tr);
+        if (kDebugMode) {
+          print("onError: $error");
+        }
         Navigator.pop(context);
       },
       onCancel: () {
-        print('cancelled:');
+        Get.snackbar("Payment cancelled".tr, "");
+        if (kDebugMode) {
+          print('cancelled:');
+        }
       },
     );
   }

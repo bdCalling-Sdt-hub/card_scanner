@@ -33,7 +33,7 @@ class RecommendNameCardScreen extends StatelessWidget {
                   ),
                   CustomText(
                     maxLines: 2,
-                    text: AppStrings.recommendNameCard,
+                    text: AppStrings.recommendNameCard.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
                   ),
@@ -48,12 +48,12 @@ class RecommendNameCardScreen extends StatelessWidget {
               SizedBox(height: 24.h),
 
               CustomText(
-                text: AppStrings.nameCardScanner,
+                text: AppStrings.nameCardScanner.tr,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
               CustomText(
-                text: AppStrings.toInstallNameCardScanner,
+                text: AppStrings.toInstallNameCardScanner.tr,
                 fontSize: 16,
               ),
 

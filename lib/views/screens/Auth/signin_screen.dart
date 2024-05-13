@@ -4,16 +4,13 @@ import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
 import '../../../utils/app_images.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
@@ -53,7 +50,7 @@ class SignInScreen extends StatelessWidget {
                 height: 20.h,
               ),
               CustomText(
-                text: AppStrings.signInNow,
+                text: AppStrings.signInNow.tr,
                 fontWeight: FontWeight.w600,
                 fontSize: 32,
               ),
@@ -61,7 +58,7 @@ class SignInScreen extends StatelessWidget {
                 height: 8.h,
               ),
               CustomText(
-                text: AppStrings.signForExperience,
+                text: AppStrings.signForExperience.tr,
                 fontWeight: FontWeight.w400,
                 fontSize: 16,
                 color: AppColors.black_400,
@@ -76,14 +73,14 @@ class SignInScreen extends StatelessWidget {
                   if (value!.isEmpty) {
                     return AppStrings.enterEmail.tr;
                   } else if (!AppStrings.emailRegexp.hasMatch("")) {
-                    return AppStrings.enterValidEmail;
+                    return AppStrings.enterValidEmail.tr;
                   } else {
                     return null;
                   }
                 },
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
-                hintText: AppStrings.email,
+                hintText: AppStrings.email.tr,
                 hintStyle: GoogleFonts.kumbhSans(
                     fontSize: 16.h,
                     fontWeight: FontWeight.w400,
@@ -111,7 +108,7 @@ class SignInScreen extends StatelessWidget {
                 validator: (value) {
                   if (value.isEmpty) {
                     return AppStrings.fieldCantBeEmpty.tr;
-                  } else if (value.length < 8) {
+                  } else if (value.length < 6) {
                     return AppStrings.passMustContainBoth.tr;
                   } else if (!AppStrings.passRegExp.hasMatch(value)) {
                     return AppStrings.passMustContainBoth.tr;
@@ -152,7 +149,7 @@ class SignInScreen extends StatelessWidget {
                     Get.to(ForgotPasswordScreen());
                   },
                   child: CustomText(
-                    text: AppStrings.forgotPassword,
+                    text: AppStrings.forgotPassword.tr,
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                     color: AppColors.black_400,
@@ -250,7 +247,7 @@ class SignInScreen extends StatelessWidget {
                 },
                 borderRadius: 12,
                 borderColor: AppColors.black_500,
-                text: AppStrings.signInBtn,
+                text: AppStrings.signInBtn.tr,
                 backgroundColor: AppColors.black_500,
                 textColor: AppColors.whiteColor,
                 fontSize: 16,
@@ -262,7 +259,7 @@ class SignInScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
-                    text: AppStrings.doNotHaveYouAccount,
+                    text: AppStrings.doNotHaveYouAccount.tr,
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
                     color: AppColors.black_400,
@@ -276,7 +273,7 @@ class SignInScreen extends StatelessWidget {
                       Get.toNamed(AppRoutes.signUpScreen);
                     },
                     child: CustomText(
-                      text: AppStrings.signUp,
+                      text: AppStrings.signUp.tr,
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
                       color: AppColors.black_500,
@@ -301,7 +298,7 @@ class SignInScreen extends StatelessWidget {
                   onTap: () {
                     Get.toNamed(AppRoutes.homeScreen);
                   },
-                  text: AppStrings.skipBtn,
+                  text: AppStrings.skipBtn.tr,
                   textColor: AppColors.black_400,
                 ),
               ),

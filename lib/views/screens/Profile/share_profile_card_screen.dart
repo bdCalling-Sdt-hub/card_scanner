@@ -1,7 +1,4 @@
 
-
-import 'dart:ui' as ui;
-
 import 'package:card_scanner/Helpers/screen_shot_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -9,14 +6,14 @@ import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class ShareProfileCardScreen extends StatelessWidget {
   ShareProfileCardScreen({super.key});
@@ -25,8 +22,7 @@ class ShareProfileCardScreen extends StatelessWidget {
   ScreenshotController screenshotController = ScreenshotController();
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
 
-  String link ="https://cf88BYf=name-card-scanner" ;
-
+  String link = "https://cf88BYf=name-card-scanner";
 
   @override
   Widget build(BuildContext context) {
@@ -40,87 +36,100 @@ class ShareProfileCardScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomBackButton(
-                      onTap: (){
-                        Get.back();
-                        },
+                    onTap: () {
+                      Get.back();
+                    },
                   ),
                   CustomText(
-                    text: AppStrings.shareCard,
+                    text: AppStrings.shareCard.tr,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(width: 30.w,)
+                  SizedBox(
+                    width: 30.w,
+                  )
                 ],
               ),
               SizedBox(height: 50.h),
+
               ///<<<================= QR Code ========================>>>
               Screenshot(
                 controller: screenshotController,
-                child: QrImageView(
-                  data: "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
-                  version: QrVersions.auto,
-                  size: 200,
-                  gapless: false,
-                  // embeddedImage: FileImage(File(selectedContact.imageUrl)),
-                  embeddedImageStyle: QrEmbeddedImageStyle(
-                      size: Size(100, 100)
+                child: Container(
+                  height: 220.h,
+                  width: 220.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteColor
                   ),
-                  errorStateBuilder: (context, error) {
-                    return Center(
-                      child: Text(
-                        "Uh oh! Something went wrong...",
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  },
+                  child: QrImageView(
+                    data:
+                        "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
+                    version: QrVersions.auto,
+                    size: 200,
+                    gapless: false,
+                    // embeddedImage: FileImage(File(selectedContact.imageUrl)),
+                    embeddedImageStyle:
+                        QrEmbeddedImageStyle(size: Size(100, 100)),
+                    errorStateBuilder: (context, error) {
+                      return Center(
+                        child: Text(
+                          "Oh! Something went wrong...".tr,
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: 20.h),
               CustomText(
-                text: AppStrings.pointYourCamera,
+                text: AppStrings.pointYourCamera.tr,
                 color: AppColors.black_400,
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
               ),
-              SizedBox(height: 40.h,),
+              SizedBox(
+                height: 40.h,
+              ),
 
               ///<<<================ Share Card Button ======================>>>
 
               CustomElevatedButton(
-                  onTap: (){
-                    Share.share(link) ;
-                  },
+                onTap: () {
+                  Share.share(link);
+                },
                 borderRadius: 24,
-                text: AppStrings.share,
+                text: AppStrings.share.tr,
                 backgroundColor: AppColors.black_500,
                 height: 54.h,
                 width: 162.w,
               ),
-              SizedBox(height: 24.h,),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.black_50,
-                  borderRadius: BorderRadius.circular(8)
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: link,
-                      fontSize: 16,
-                    ),
-
-                    ///<<<=============== Qr Code Link Copy Icon ==============>>>
-
-                    InkWell(
-                        onTap: (){
-                          Get.snackbar("Share link copied", "");
-                        },
-                        child: Icon(Icons.content_copy_outlined))
-                  ],
-                ),
+              SizedBox(
+                height: 24.h,
               ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       color: AppColors.black_50,
+              //       borderRadius: BorderRadius.circular(8)),
+              //   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       CustomText(
+              //         text: link,
+              //         fontSize: 16,
+              //       ),
+              //
+              //       ///<<<=============== Qr Code Link Copy Icon ==============>>>
+              //
+              //       InkWell(
+              //           onTap: () {
+              //             Get.snackbar("Share link copied", "");
+              //           },
+              //           child: Icon(Icons.content_copy_outlined))
+              //     ],
+              //   ),
+              // ),
               SizedBox(height: 54.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,9 +138,10 @@ class ShareProfileCardScreen extends StatelessWidget {
                   InkWell(
                     onTap: () async {
                       screenShotHelper.captureAndSaveImage(screenshotController);
+                      Get.snackbar("Qr code downloaded to your phone gallery".tr, "");
+
 
                       // _saveQRToGallery(context);
-                      Get.snackbar("Qr code downloaded", "");
                     },
                     child: Container(
                       padding: EdgeInsets.only(top: 8.h, right: 4.w, left: 4.w),
@@ -143,10 +153,15 @@ class ShareProfileCardScreen extends StatelessWidget {
                           border: Border.all(color: AppColors.green_600)),
                       child: Column(
                         children: [
-                          Icon(Icons.file_download_outlined, size: 30,),
-                          SizedBox(height: 4.h,),
+                          Icon(
+                            Icons.file_download_outlined,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
                           CustomText(
-                            text: "Download",
+                            text: "Download".tr,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           )
@@ -155,8 +170,8 @@ class ShareProfileCardScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                      // Get.snackbar("Qr code downloaded", "");
+                    onTap: () async {
+                      sendEmail();
                     },
                     child: Container(
                       padding: EdgeInsets.only(top: 8.h, right: 4.w, left: 4.w),
@@ -168,10 +183,15 @@ class ShareProfileCardScreen extends StatelessWidget {
                           border: Border.all(color: AppColors.green_600)),
                       child: Column(
                         children: [
-                          Icon(Icons.email_outlined, size: 30,),
-                          SizedBox(height: 4.h,),
+                          Icon(
+                            Icons.email_outlined,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
                           CustomText(
-                            text: "Email",
+                            text: "Email".tr,
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                           )
@@ -189,4 +209,14 @@ class ShareProfileCardScreen extends StatelessWidget {
     );
   }
 
+  Future<void> sendEmail() async{
+    final Uri emailLaunchUri = Uri(scheme: 'mailto',);
+    try{
+      await launchUrl(emailLaunchUri);
+    }catch(e){
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
 }

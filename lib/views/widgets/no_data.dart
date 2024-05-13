@@ -2,6 +2,7 @@
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../utils/app_images.dart';
 import 'customText/custom_text.dart';
 import 'custom_image.dart';
@@ -22,7 +23,7 @@ class NoData extends StatelessWidget {
             size: 70.sp,
           ),
           CustomText(
-            text: AppStrings.noData,
+            text: AppStrings.noData.tr,
             fontSize: 16.h,
             top: 8.h,
           )

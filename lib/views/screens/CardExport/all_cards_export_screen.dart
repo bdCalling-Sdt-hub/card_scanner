@@ -6,8 +6,6 @@ import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/Profile/IneerWidget/custom_container_button.dart';
-import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
@@ -40,7 +38,7 @@ class AllCardsExportScreen extends StatelessWidget {
                       Get.back();
                     },),
                     CustomText(
-                      text: "${AppStrings.selectedItems}: ${storageController.count}",
+                      text: "${AppStrings.selectedItems.tr}: ${storageController.count}",
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                     ),
@@ -49,7 +47,7 @@ class AllCardsExportScreen extends StatelessWidget {
                         storageController.unSelectAll();
                       },
                       child: CustomText(
-                        text: AppStrings.unselectAll,
+                        text: AppStrings.unselectAll.tr,
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                         color: AppColors.green_800,
@@ -137,7 +135,7 @@ class AllCardsExportScreen extends StatelessWidget {
         onPressed: () {
         Get.toNamed(AppRoutes.cardExportScreen);
       },
-        child: CustomText(text: AppStrings.export, color: AppColors.green_300,),),
+        child: CustomText(text: AppStrings.export.tr, color: AppColors.green_300,),),
     );
   }
 }

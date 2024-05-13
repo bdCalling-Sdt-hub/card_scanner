@@ -65,24 +65,24 @@ class ManageModalSheet extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Get.to(CreateOrEditCardScreen(
-                            screenTitle: AppStrings.createCardTitle));
-                        StorageController.appTitle = AppStrings.createCardTitle;
+                            screenTitle: AppStrings.createCardTitle.tr));
+                        StorageController.appTitle = AppStrings.createCardTitle.tr;
                       },
-                      child: manageCards(Icons.add, AppStrings.createCard),
+                      child: manageCards(Icons.add, AppStrings.createCard.tr),
                     ),
                     InkWell(
                       onTap: () async {
                         qrScannerController.qrScanner();
                       },
                       child: manageCards(Icons.filter_center_focus_outlined,
-                          AppStrings.scanQrCode),
+                          AppStrings.scanQrCode.tr),
                     ),
                     InkWell(
                       onTap: () {
                         Get.to(DuplicateCardsScreen());
                       },
                       child: manageCards(Icons.credit_card_outlined,
-                          AppStrings.duplicateCards),
+                          AppStrings.duplicateCards.tr),
                     ),
                     SizedBox()
                   ],

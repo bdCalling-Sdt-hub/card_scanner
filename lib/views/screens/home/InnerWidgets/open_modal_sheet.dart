@@ -86,7 +86,7 @@ class OpenModalSheet extends StatelessWidget {
                               ),
                             ),
                             CustomText(
-                              text: AppStrings.shareWith,
+                              text: AppStrings.shareWith.tr,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
@@ -138,7 +138,7 @@ class OpenModalSheet extends StatelessWidget {
                   Icon(Icons.share),
                   SizedBox(width: 8.w),
                   CustomText(
-                    text: AppStrings.shareBusinessCard,
+                    text: AppStrings.shareBusinessCard.tr,
                     fontSize: 16,
                   )
                 ],
@@ -170,7 +170,7 @@ class OpenModalSheet extends StatelessWidget {
                           children: [
                             SizedBox(height: 40.h),
                             CustomText(
-                              text: AppStrings.areYouSure,
+                              text: AppStrings.areYouSure.tr,
                               fontWeight: FontWeight.w500,
                               fontSize: 20,
                             ),
@@ -186,7 +186,7 @@ class OpenModalSheet extends StatelessWidget {
                                   onTap: () {
                                     Get.toNamed(AppRoutes.homeScreen);
                                   },
-                                  text: AppStrings.yes,
+                                  text: AppStrings.yes.tr,
                                   height: 38,
                                   width: 64,
                                   isFillColor: true,
@@ -202,7 +202,7 @@ class OpenModalSheet extends StatelessWidget {
                                   onTap: () {
                                     Get.back();
                                   },
-                                  text: AppStrings.no,
+                                  text: AppStrings.no.tr,
                                   height: 38,
                                   width: 64,
                                   borderColor: AppColors.black_500,
@@ -227,7 +227,7 @@ class OpenModalSheet extends StatelessWidget {
                   Icon(Icons.delete),
                   SizedBox(width: 8.w),
                   CustomText(
-                    text: AppStrings.removeCard,
+                    text: AppStrings.removeCard.tr,
                     fontSize: 16,
                   )
                 ],
