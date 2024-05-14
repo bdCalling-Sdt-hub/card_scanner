@@ -41,13 +41,13 @@ class AboutScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 40.h),
-              Image.asset(AppImages.nameCardLogo),
+              Center(child: Image.asset(AppImages.nameCardLogo, height:300.h)),
               SizedBox(height: 8.h),
               Divider(),
 
               CustomText(
                 maxLines: 10,
-                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",),
+                text: "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner now for seamless connectivity.",),
 
               SizedBox(height: 20.h),
 

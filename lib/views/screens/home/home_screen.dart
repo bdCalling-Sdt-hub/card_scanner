@@ -12,6 +12,7 @@ import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_currency_picker/flutter_currency_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -77,100 +78,106 @@ class _HomeScreenState extends State<HomeScreen> {
 
               ///<<<=================== Top Bar ===========================>>>
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(width: 30.w),
-                  Expanded(
-                      child: SizedBox(
-                    height: 40,
-                    child: TextFormField(
-                      onChanged: filterContacts,
-                      controller: searchController,
-                      // controller: widget.textEditingController,
-                      keyboardType: TextInputType.text,
-                      // onChanged: widget.onChanged,
-                      maxLines: 1,
-                      cursorColor: AppColors.green_200,
-                      style: const TextStyle(
-                        color: AppColors.green_500,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 8.w, vertical: 0.h),
-                        hintText: "${AppStrings.search.tr}...",
-                        hintStyle: const TextStyle(
-                          color: AppColors.green_50,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 30.w),
+                        Expanded(
+                            child: SizedBox(
+                              height: 40,
+                              child: TextFormField(
+                                onChanged: filterContacts,
+                                controller: searchController,
+                                // controller: widget.textEditingController,
+                                keyboardType: TextInputType.text,
+                                // onChanged: widget.onChanged,
+                                maxLines: 1,
+                                cursorColor: AppColors.green_200,
+                                style: const TextStyle(
+                                  color: AppColors.green_500,
+                                ),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 8.w, vertical: 0.h),
+                                  hintText: "${AppStrings.search.tr}...",
+                                  hintStyle: const TextStyle(
+                                    color: AppColors.green_50,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  fillColor: AppColors.green_900,
+                                  filled: true,
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    color: AppColors.green_50,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gapPadding: 0),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gapPadding: 0),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      gapPadding: 0),
+                                ),
+                              ),
+                            )),
+                        SizedBox(
+                          width: 8.w,
                         ),
-                        fillColor: AppColors.green_900,
-                        filled: true,
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: AppColors.green_50,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            gapPadding: 0),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            gapPadding: 0),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            gapPadding: 0),
-                      ),
-                    ),
-                  )),
-                  SizedBox(
-                    width: 8.w,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      if (kDebugMode) {
-                        print("Payment Controller Called");
-                      }
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return paymentAlertDialog(context);
-                        },
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      height: 40.h,
-                      width: 100.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r),
-                          color: AppColors.black_500),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.monetization_on_outlined,
-                              color: AppColors.green_500,
+                        InkWell(
+                          onTap: () {
+                            if (kDebugMode) {
+                              print("Payment Controller Called");
+                            }
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return paymentAlertDialog(context);
+                              },
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
+                            height: 40.h,
+                            width: 100.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                color: AppColors.black_500),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.monetization_on_outlined,
+                                    color: AppColors.green_500,
+                                  ),
+                                  CustomText(
+                                    text: AppStrings.donate.tr,
+                                    color: AppColors.green_500,
+                                    fontWeight: FontWeight.w600,
+                                    left: 4,
+                                  ),
+                                ],
+                              ),
                             ),
-                            CustomText(
-                              text: AppStrings.donate.tr,
-                              color: AppColors.green_500,
-                              fontWeight: FontWeight.w600,
-                              left: 4,
-                            ),
-                          ],
-                        ),
-                      ),
-                      // child: Column(
-                      //   children: [
-                      //     Center(
-                      //         child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
-                      //     // CustomText(text: "Donate", fontSize: 12, color: AppColors.green_500,),
-                      //   ],
-                      // ),
+                            // child: Column(
+                            //   children: [
+                            //     Center(
+                            //         child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
+                            //     // CustomText(text: "Donate", fontSize: 12, color: AppColors.green_500,),
+                            //   ],
+                            // ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
 
               searchController.text.isNotEmpty && filteredContacts.isNotEmpty

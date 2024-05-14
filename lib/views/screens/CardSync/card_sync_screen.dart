@@ -206,7 +206,7 @@ class CardSyncScreen extends StatelessWidget {
                               actions: [
                                 GetBuilder<AuthController>(builder: (authController) {
                                   return authController.isLoading? Center(child: CircularProgressIndicator()) : CustomElevatedButton(onTap: () {
-                                    authController.googleSignInRepo();
+                                    authController.googleSignInRepo(isUpload: true);
                                   },
                                     svgIcon: AppIcons.googleColorfulIcon,
                                     text: "Upload".tr,
@@ -224,6 +224,7 @@ class CardSyncScreen extends StatelessWidget {
                                 ),
                                 TextButton(onPressed: (){
                                   authController.googleSignOutRepo();
+                                  Get.back();
                                 },
                                     child: Text("Logout".tr,
                                       style: TextStyle(
@@ -274,27 +275,29 @@ class CardSyncScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: 'To import back up contacts press below,  '.tr,
-                          style: TextStyle(fontSize: 16, color: AppColors.black_500),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: 'Import Contacts'.tr,
-                                style: TextStyle(
+                      child: GetBuilder<AuthController>(builder: (authController) {
+                        return authController.isLoading? Center(child: CircularProgressIndicator()) : RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: 'To import back up contacts press below,  '.tr,
+                            style: TextStyle(fontSize: 16, color: AppColors.black_500),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'Import Contacts'.tr,
+                                  style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.blueAccent,
                                     fontSize: 18,
                                     decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()..onTap = (){
-                                  storageController.downloadFile(AuthController.accessToken);
-                              }
-                            ),
-                          ],
-                        ),
-                      ),
+                                  ),
+                                  recognizer: TapGestureRecognizer()..onTap = (){
+                                    authController.googleSignInRepo(isUpload: false);
+                                  }
+                              ),
+                            ],
+                          ),
+                        );
+                      },),
                     ),
                   ],
                 ),

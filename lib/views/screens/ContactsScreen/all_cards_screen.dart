@@ -9,7 +9,6 @@ import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.da
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

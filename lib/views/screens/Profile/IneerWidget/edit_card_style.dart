@@ -7,10 +7,12 @@ import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/routes/app_routes.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../widgets/CustomBackButton/custom_back_button.dart';
+import '../../../widgets/customButton/custom_elevated_button.dart';
 import '../../../widgets/customText/custom_text.dart';
 
 class EditCardStyle extends StatelessWidget {
@@ -65,7 +67,7 @@ class EditCardStyle extends StatelessWidget {
                             CustomText(
                               textAlign: TextAlign.left,
                               maxLines: 2,
-                              text: PrefsHelper.userName,
+                              text: profileController.nameController.text,
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
@@ -73,14 +75,14 @@ class EditCardStyle extends StatelessWidget {
                             CustomText(
                               textAlign: TextAlign.left,
                               maxLines: 2,
-                              text: PrefsHelper.userDesignation,
+                              text: profileController.designationController.text,
                               fontSize: 16,
                               color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
                             ),
                             CustomText(
                               textAlign: TextAlign.left,
                               maxLines: 2,
-                              text: PrefsHelper.userCompany,
+                              text: profileController.companyController.text,
                               fontSize: 18,
                               color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
                             ),
@@ -92,20 +94,20 @@ class EditCardStyle extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomBackButton(
+                          PrefsHelper.userPhone.isNotEmpty || profileController.phoneController.text.isNotEmpty? CustomBackButton(
                             onTap: () {},
                             icon: Icons.phone_iphone_outlined,
                             radius: 100,
                             color: AppColors.black_500,
                             height: 25,
                             width: 25,
-                          ),
+                          ) : SizedBox(),
                           SizedBox(
                             width: 8.w,
                           ),
                           CustomText(
                             textAlign: TextAlign.left,
-                            text: PrefsHelper.userPhone,
+                            text: profileController.phoneController.text,
                             color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
                             fontSize: 18,
                           )
@@ -116,20 +118,20 @@ class EditCardStyle extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomBackButton(
+                          PrefsHelper.userMail.isNotEmpty || profileController.emailController.text.isNotEmpty? CustomBackButton(
                             onTap: () {},
                             icon: Icons.email_outlined,
                             radius: 100,
                             color: AppColors.black_500,
                             height: 25,
                             width: 25,
-                          ),
+                          ) : SizedBox(),
                           SizedBox(
                             width: 8.w,
                           ),
                           CustomText(
                             textAlign: TextAlign.left,
-                            text: PrefsHelper.userMail,
+                            text: profileController.emailController.text,
                             color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
                             fontSize: 18,
                           )
@@ -140,21 +142,23 @@ class EditCardStyle extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          CustomBackButton(
+                          PrefsHelper.userAddress.isNotEmpty || profileController.addressController.text.isNotEmpty
+                              ? CustomBackButton(
                             onTap: () {},
                             icon: Icons.location_on_outlined,
                             radius: 100,
                             color: AppColors.black_500,
                             height: 25,
                             width: 25,
-                          ),
+                          )
+                              : SizedBox(),
                           SizedBox(
                             width: 8.w,
                           ),
                           CustomText(
                             textAlign: TextAlign.left,
                             maxLines: 3,
-                            text: PrefsHelper.userAddress,
+                            text: profileController.addressController.text,
                             color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
                             fontSize: 18,
                           )
@@ -347,6 +351,33 @@ class EditCardStyle extends StatelessWidget {
           SizedBox(height: 48.h),
 
           ///<<<================= Save and Preview Button =================>>>
+
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 42.w),
+            child: CustomElevatedButton(
+              onTap: (){
+                PrefsHelper.userName = profileController.nameController.text;
+                PrefsHelper.userMail = profileController.emailController.text;
+                PrefsHelper.userPhone = profileController.phoneController.text;
+                PrefsHelper.userDesignation = profileController.designationController.text;
+                PrefsHelper.userCompany = profileController.companyController.text;
+                PrefsHelper.userAddress = profileController.addressController.text;
+                PrefsHelper.setString("userName", profileController.nameController.text);
+                PrefsHelper.setString("userMail", profileController.emailController.text);
+                PrefsHelper.setString("userPhone", profileController.phoneController.text);
+                PrefsHelper.setString("userDesignation", profileController.designationController.text);
+                PrefsHelper.setString("userCompany", profileController.companyController.text);
+                PrefsHelper.setString("userAddress", profileController.addressController.text);
+
+                Get.offAllNamed(AppRoutes.profileScreen);
+              },
+              width: Get.width,
+              height: 42.h,
+              text: AppStrings.saveAndPreview.tr,
+              backgroundColor: AppColors.black_500,
+            ),
+          )
 
           // Padding(
           //   padding: EdgeInsets.symmetric(horizontal: 42.w),

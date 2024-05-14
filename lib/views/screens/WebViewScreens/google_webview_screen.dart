@@ -1,12 +1,11 @@
 
 
-
-import 'dart:typed_data';
-
+import 'package:card_scanner/Helpers/screen_shot_helper.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,14 +25,14 @@ class _GoogleWebViewScreenState extends State<GoogleWebViewScreen> {
 
   StorageController storageController = Get.put(StorageController());
   final ScreenshotController screenshotController = ScreenshotController();
+  ScreenShotHelper screenShotHelper = ScreenShotHelper();
   late final WebViewController controller;
 
-
-  Future<Uint8List?> captureAndSaveImage() async{
-    final Uint8List? uint8list = await screenshotController.capture();
-    print("Uint8list:============>>> $uint8list");
-    return uint8list;
-  }
+  // Future<Uint8List?> captureAndSaveImage() async{
+  //   final Uint8List? uint8list = await screenshotController.capture();
+  //   print("Uint8list:============>>> $uint8list");
+  //   return uint8list;
+  // }
 
   @override
   void initState() {
@@ -62,7 +61,9 @@ class _GoogleWebViewScreenState extends State<GoogleWebViewScreen> {
       // controller.reload();
       // Get.snackbar(message.message, "");
 
-      print("message: =========>> ${message.message}");
+      if (kDebugMode) {
+        print("message: =========>> ${message.message}");
+      }
     });
     super.initState();
   }
@@ -91,7 +92,7 @@ class _GoogleWebViewScreenState extends State<GoogleWebViewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await captureAndSaveImage().then((value) => storageController.getLinkedInImage(imageBytes: value));
+          await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => storageController.getLinkedInImage(imageBytes: value));
         },
         backgroundColor: AppColors.black_500,
         child: Icon(Icons.camera_alt, color: AppColors.green_500,),

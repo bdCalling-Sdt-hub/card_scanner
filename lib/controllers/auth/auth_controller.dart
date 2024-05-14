@@ -1,15 +1,12 @@
 
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
-import 'package:card_scanner/views/screens/CardSync/card_sync_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
 
 import '../../Helpers/prefs_helper.dart';
 import '../../views/screens/Auth/signin_screen.dart';
@@ -82,8 +79,10 @@ class AuthController extends GetxController{
   }
 
   ///<<<=================== Reset Password Repo ==========================>>>
-
+  bool isReset = false;
   Future<void> resetPassRepo()async {
+    isReset = true;
+    update();
     try{
       await firebaseAuth.sendPasswordResetEmail(email: emailController.text);
       Get.snackbar("Password reset link sent to your email!".tr, "");
@@ -91,6 +90,8 @@ class AuthController extends GetxController{
     }catch(e){
       Get.snackbar("$e", "");
     }
+    isReset = false;
+    update();
   }
 
   ///<<<=================== Verify Email ================================>>>
@@ -179,9 +180,10 @@ class AuthController extends GetxController{
   //   }
   // }
   static String? accessToken;
+  String? idToken;
   StorageController storageController = Get.put(StorageController());
 
-  Future<void> googleSignInRepo() async {
+  Future<void> googleSignInRepo({required bool isUpload}) async {
     isLoading = true;
     update();
     try {
@@ -197,12 +199,17 @@ class AuthController extends GetxController{
 
       if (kDebugMode) {
         print("Credential Token: ${credential.accessToken}");
+        print("Id Token: ${credential.providerId}");
       }
       accessToken = credential.accessToken;
 
       if (googleUser != null) {
         // await uploadFile();
-        await storageController.saveContactsInGoogle(accessToken: accessToken); // Upload file after successful sign-in
+        if(isUpload){
+         await storageController.saveContactsInGoogle(accessToken: accessToken);// Upload file after successful sign-in
+        }else{
+         await storageController.downloadFile(AuthController.accessToken);
+        }
       }
 
       if (kDebugMode) {
@@ -317,7 +324,7 @@ class AuthController extends GetxController{
       await googleSignIn.signOut().then((value) {
         if(value == null){
           Get.snackbar("Google logout successful".tr, "");
-          Get.offAll(CardSyncScreen());
+          Get.back();
           if (kDebugMode) {
             print("Value $value");
           }

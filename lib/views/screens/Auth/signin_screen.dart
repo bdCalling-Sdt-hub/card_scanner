@@ -234,25 +234,27 @@ class SignInScreen extends StatelessWidget {
 
               ///<<<========================== Sign In Button ================>>>
 
-              CustomElevatedButton(
-                height: 50.h,
-                width: Get.width,
-                isFillColor: true,
-                onTap: () {
-                  authController.signInRepo();
-                  authController.ifSignIn.value = true;
-                  PrefsHelper.setBool(AppStrings.signedIn, true);
-                  PrefsHelper.signedIn = true;
-                  storageController.loadContacts();
-                },
-                borderRadius: 12,
-                borderColor: AppColors.black_500,
-                text: AppStrings.signInBtn.tr,
-                backgroundColor: AppColors.black_500,
-                textColor: AppColors.whiteColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
+              GetBuilder<AuthController>(builder: (authController) {
+                return authController.isLoading? Center(child: CircularProgressIndicator()):CustomElevatedButton(
+                  height: 50.h,
+                  width: Get.width,
+                  isFillColor: true,
+                  onTap: () {
+                    authController.signInRepo();
+                    authController.ifSignIn.value = true;
+                    PrefsHelper.setBool(AppStrings.signedIn, true);
+                    PrefsHelper.signedIn = true;
+                    storageController.loadContacts();
+                  },
+                  borderRadius: 12,
+                  borderColor: AppColors.black_500,
+                  text: AppStrings.signInBtn.tr,
+                  backgroundColor: AppColors.black_500,
+                  textColor: AppColors.whiteColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                );
+              },),
               SizedBox(height: 8.h,),
 
               Row(

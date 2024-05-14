@@ -193,6 +193,7 @@ class CardHolder extends StatelessWidget {
 
                                                       InkWell(
                                                         onTap: () {
+
                                                           showDialog(
                                                             context: context,
                                                             builder: (context) {

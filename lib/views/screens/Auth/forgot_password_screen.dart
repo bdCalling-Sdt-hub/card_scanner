@@ -89,7 +89,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       return null;
                     }
                   },
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.start,
                   hintText: AppStrings.email.tr,
                   hintStyle: GoogleFonts.kumbhSans(
@@ -111,83 +111,84 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 24.h,
                 ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: AppColors.black_900,
-                      width: 135.w,
-                      height: 1.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: CustomText(
-                        text: AppStrings.or.tr,
-                        color: AppColors.black_500,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Container(
-                      color: AppColors.black_900,
-                      width: 135.w,
-                      height: 1.h,
-                    )
-                  ],
-                ),
-
-                ///<<<================= Contact Number field==============================>>>
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomText(
-                    text: AppStrings.contactNumber.tr,
-                    color: AppColors.black_500,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 8.h,),
-
-                CustomTextField(
-                  // textEditingController: forgotPasswordController.passwordController,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return AppStrings.fieldCantBeEmpty.tr;
-                    } else {
-                      return null;
-                    }
-                  },
-                  keyboardType: TextInputType.phone,
-                  textAlign: TextAlign.start,
-                  hintText: AppStrings.enterMobileNumber.tr,
-                  hintStyle: GoogleFonts.prompt(
-                      fontSize: 16.h,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black_300),
-                  inputTextStyle: GoogleFonts.prompt(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.h,
-                      color: AppColors.black_500),
-                  fieldBorderRadius: 8,
-                  // prefixIcon: Icon(
-                  //   Icons.lock_outlined,
-                  //   size: 24.h,
-                  //   color: AppColors.black_400,
-                  // ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-
-                SizedBox(height: 8.h),
-                SizedBox(height: 54.h,),
+                //
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       color: AppColors.black_900,
+                //       width: 135.w,
+                //       height: 1.h,
+                //     ),
+                //     Padding(
+                //       padding: EdgeInsets.symmetric(horizontal: 12.w),
+                //       child: CustomText(
+                //         text: AppStrings.or.tr,
+                //         color: AppColors.black_500,
+                //         fontWeight: FontWeight.w500,
+                //         fontSize: 20,
+                //       ),
+                //     ),
+                //     Container(
+                //       color: AppColors.black_900,
+                //       width: 135.w,
+                //       height: 1.h,
+                //     )
+                //   ],
+                // ),
+                //
+                // ///<<<================= Contact Number field==============================>>>
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: CustomText(
+                //     text: AppStrings.contactNumber.tr,
+                //     color: AppColors.black_500,
+                //     fontSize: 16,
+                //     fontWeight: FontWeight.w500,
+                //   ),
+                // ),
+                // SizedBox(height: 8.h,),
+                //
+                // CustomTextField(
+                //   // textEditingController: forgotPasswordController.passwordController,
+                //   validator: (value) {
+                //     if (value.isEmpty) {
+                //       return AppStrings.fieldCantBeEmpty.tr;
+                //     } else {
+                //       return null;
+                //     }
+                //   },
+                //   keyboardType: TextInputType.phone,
+                //   textAlign: TextAlign.start,
+                //   hintText: AppStrings.enterMobileNumber.tr,
+                //   hintStyle: GoogleFonts.prompt(
+                //       fontSize: 16.h,
+                //       fontWeight: FontWeight.w400,
+                //       color: AppColors.black_300),
+                //   inputTextStyle: GoogleFonts.prompt(
+                //       fontWeight: FontWeight.w400,
+                //       fontSize: 16.h,
+                //       color: AppColors.black_500),
+                //   fieldBorderRadius: 8,
+                //   // prefixIcon: Icon(
+                //   //   Icons.lock_outlined,
+                //   //   size: 24.h,
+                //   //   color: AppColors.black_400,
+                //   // ),
+                // ),
+                // SizedBox(
+                //   height: 24.h,
+                // ),
+                //
+                // SizedBox(height: 8.h),
+                // SizedBox(height: 54.h,),
               ],
             ),
           ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-        child: CustomElevatedButton(
+        child: GetBuilder<AuthController>(builder: (authController) {
+        return authController.isReset? Center(child: CircularProgressIndicator()): CustomElevatedButton(
           height: 50.h,
           width: Get.width,
           isFillColor: true,
@@ -196,11 +197,12 @@ class ForgotPasswordScreen extends StatelessWidget {
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,
-          text: AppStrings.getOtp.tr,
+          text: "Send Link".tr,
           textColor: AppColors.whiteColor,
           fontSize: 16,
           fontWeight: FontWeight.w400,
-        ),
+        );
+        },),
       ),
     );
   }

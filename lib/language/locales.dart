@@ -210,7 +210,7 @@ class Locales extends Translations{
       "Upload contacts before downloading!" : "Upload contacts before downloading!",
       "Screenshot is failed" : "Screenshot is failed",
       "Share & Save Card" : "Share & Save Card",
-
+      "Contact successfully downloaded" : "Contact successfully downloaded",
 
       ///<<<=================== Bottom Nav Bar Texts ========================>>>
 

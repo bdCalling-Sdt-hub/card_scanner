@@ -10,7 +10,7 @@ class ScreenShotHelper{
 
 
   ///==============Capture image save to gallery repo=========================>>>
-  Future<void> captureAndSaveImage(ScreenshotController screenshotController) async{
+  Future<Uint8List?> captureAndSaveImage(ScreenshotController screenshotController) async{
     final Uint8List? uint8List = await screenshotController.capture();
     if (kDebugMode) {
       print("uint8List $uint8List");
@@ -38,11 +38,12 @@ class ScreenShotHelper{
     }else{
       Get.snackbar("Screenshot is failed".tr, "");
     }
+    return uint8List;
   }
 
 
 ///==============another method Capture image save to gallery repo=========================>>>
-  ///RepaintBoundary(
+  //RepaintBoundary(
   //           key: _qrImageKey,
   //           child: QrImageView(
   //

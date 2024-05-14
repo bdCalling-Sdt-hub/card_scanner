@@ -1,4 +1,5 @@
 
+import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
@@ -9,13 +10,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../Helpers/prefs_helper.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../utils/app_colors.dart';
+import '../../widgets/customButton/custom_elevated_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
 class CardStyleScreen extends StatelessWidget {
   CardStyleScreen({super.key});
 
   PageController pageController = PageController();
+  ProfileController profileController = Get.put(ProfileController());
 
   List cardColorList = [
     AppColors.ashColor,

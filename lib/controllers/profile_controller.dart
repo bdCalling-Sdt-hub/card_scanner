@@ -27,9 +27,9 @@ class ProfileController extends GetxController{
     AppColors.whitishColor
   ];
 
-  final companyLogoController = ValueNotifier<bool>(false);
+  final companyLogoController = ValueNotifier<bool>(PrefsHelper.isLogoShow);
 
-  final profilePhotoController = ValueNotifier<bool>(false);
+  final profilePhotoController = ValueNotifier<bool>(PrefsHelper.isProfilePhotoShow);
 
   TextEditingController nameController = TextEditingController(text: PrefsHelper.userName);
   TextEditingController designationController = TextEditingController(text: PrefsHelper.userDesignation);

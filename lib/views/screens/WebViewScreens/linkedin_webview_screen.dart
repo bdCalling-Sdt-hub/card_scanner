@@ -1,6 +1,7 @@
 
 import 'dart:typed_data';
 
+import 'package:card_scanner/Helpers/screen_shot_helper.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
@@ -32,6 +33,7 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
     print("Uint8list:============>>> $uint8list");
     return uint8list;
   }
+  ScreenShotHelper screenShotHelper = ScreenShotHelper();
 
   @override
   void initState() {
@@ -89,7 +91,7 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-        await captureAndSaveImage().then((value) => storageController.getLinkedInImage(imageBytes: value));
+        await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => storageController.getLinkedInImage(imageBytes: value));
         },
         backgroundColor: AppColors.black_500,
         child: Icon(Icons.camera_alt, color: AppColors.green_500,),

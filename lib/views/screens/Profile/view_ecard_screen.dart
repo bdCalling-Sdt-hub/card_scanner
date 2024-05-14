@@ -18,6 +18,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ViewECardScreen extends StatelessWidget {
   ViewECardScreen({super.key});
@@ -119,7 +120,7 @@ class ViewECardScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                CustomBackButton(
+                                PrefsHelper.userPhone.isEmpty? SizedBox() : CustomBackButton(
                                   onTap: () {},
                                   icon: Icons.phone_iphone_outlined,
                                   radius: 100,
@@ -143,7 +144,7 @@ class ViewECardScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                CustomBackButton(
+                                PrefsHelper.userMail.isEmpty? SizedBox(): CustomBackButton(
                                   onTap: () {},
                                   icon: Icons.email_outlined,
                                   radius: 100,
@@ -167,7 +168,7 @@ class ViewECardScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                CustomBackButton(
+                                PrefsHelper.userAddress.isEmpty? SizedBox() : CustomBackButton(
                                   onTap: () {},
                                   icon: Icons.location_on_outlined,
                                   radius: 100,
@@ -247,8 +248,9 @@ class ViewECardScreen extends StatelessWidget {
 
                   CustomContainerButton(
                     onTap: () {
-                      screenShotHelper.captureAndSaveImage(screenshotController);
-                      Get.to(ShareProfileCardScreen());
+
+                      // screenShotHelper.captureAndSaveImage(screenshotController);
+                      Share.share("this is test share");
                     },
                     text: AppStrings.shareCard.tr,
                     ifImage: true,

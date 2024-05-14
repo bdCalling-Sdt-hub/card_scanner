@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -16,7 +18,6 @@ import '../Models/contacts_model.dart';
 import '../utils/app_strings.dart';
 
 class StorageController extends GetxController {
-
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -46,7 +47,6 @@ class StorageController extends GetxController {
   RxList selectedGroupContacts = [].obs;
   static String appTitle = "";
 
-
   ///<<<===================== Create group repo ==============================>>>
   List<ContactsModel> groupListAdded({required int index}) {
     ContactsModel contactsModel = ContactsModel(
@@ -62,18 +62,20 @@ class StorageController extends GetxController {
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
   }
+
   ///==================== new group repo==============================>>>///
   List<ContactsModel> groupList = [];
   int groupCount = 0;
 
-  createGroup(){
+  createGroup() {
     isLoading = true;
     update();
     groupList.clear();
     for (int index = 0; index < selectedGroupContacts.length; index++) {
       groupList = groupListAdded(index: index);
     }
-    ContactGroup contactGroup = ContactGroup(name: groupNameController.text, contactsList: groupList);
+    ContactGroup contactGroup =
+        ContactGroup(name: groupNameController.text, contactsList: groupList);
     groupedContactsList.add(contactGroup);
     PrefsHelper.saveGroupedList(groupedContactsList);
     PrefsHelper.setList("selectedGroupContacts", selectedGroupContacts);
@@ -86,26 +88,29 @@ class StorageController extends GetxController {
     update();
     Get.snackbar(AppStrings.groupIsCreated, "");
     if (kDebugMode) {
-      print("storageController.groupedContactsList: ${groupedContactsList[0].name}, ${groupedContactsList[0].contactsList[0].email}");
+      print(
+          "storageController.groupedContactsList: ${groupedContactsList[0].name}, ${groupedContactsList[0].contactsList[0].email}");
     }
   }
 
   int unGroupedContacts = 0;
-  Future<int> groupUpdateStatus(int groupedContactsCount) async{
-    if(PrefsHelper.unGroupedContacts.isEqual(0)){
+
+  Future<int> groupUpdateStatus(int groupedContactsCount) async {
+    if (PrefsHelper.unGroupedContacts.isEqual(0)) {
       unGroupedContacts = allContactsForGroup.length - groupedContactsCount;
-    }else{
+    } else {
       unGroupedContacts = PrefsHelper.unGroupedContacts - groupedContactsCount;
     }
     PrefsHelper.setInt('unGroupedContacts', unGroupedContacts);
-    if(unGroupedContacts < 0){
+    if (unGroupedContacts < 0) {
       return 0;
     }
     return unGroupedContacts;
   }
 
   void removeSelectedContactsFromAll() async {
-    allContactsForGroup.removeWhere((element) => selectedGroupContacts.contains(element));
+    allContactsForGroup
+        .removeWhere((element) => selectedGroupContacts.contains(element));
   }
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -184,7 +189,7 @@ class StorageController extends GetxController {
   Future<void> updateContact() async {
     if (imagePath != null && imagePath!.isNotEmpty) {
       final existingContactIndex =
-      contacts.indexWhere((contact) => contact.id == id);
+          contacts.indexWhere((contact) => contact.id == id);
       if (existingContactIndex != -1) {
         // Update contact details
         contacts[existingContactIndex] = ContactsModel(
@@ -212,7 +217,7 @@ class StorageController extends GetxController {
     saveContacts();
   }
 
-///=============================================================================
+  ///=============================================================================
 
   ///<<<-------------------- Generate Id ------------------------------------>>>
   String generateId() {
@@ -256,7 +261,7 @@ class StorageController extends GetxController {
       print("image path: $file");
     }
     imagePath = file?.path;
-    if(imagePath != null){
+    if (imagePath != null) {
       cropImage(imgPath: imagePath!);
     }
   }
@@ -292,7 +297,8 @@ class StorageController extends GetxController {
     if (croppedFile != null) {
       imagePath = croppedFile.path;
       update();
-      Get.offAll(CreateOrEditCardScreen(screenTitle: appTitle));
+      Get.back();
+      Get.back();
     }
   }
 
@@ -330,36 +336,39 @@ class StorageController extends GetxController {
     update();
   }
 
-
-
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Google Drive All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   String? fileId;
+
   ///<<<===================== save contacts repo =============================>>>
 
   Future<void> saveContactsInGoogle({String? accessToken}) async {
     try {
       // Encode contacts list to JSON
-      final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
+      final contactsJson =
+          json.encode(contacts.map((c) => c.toJson()).toList());
 
       // Write contacts JSON to a temporary file
       final directory = await getTemporaryDirectory();
       final file = File('${directory.path}/contacts.json');
       await file.writeAsString(contactsJson);
+      await downloadFileId();
 
       // Upload the contacts JSON file to Google Drive
-      if(fileId == null){
+      if (fileId == null) {
         await uploadFile(file, accessToken);
-      }else{
+      } else {
         await updateFile(fileId!, file, accessToken);
       }
-
     } catch (e) {
       if (kDebugMode) {
         print("Error saving contacts: $e");
       }
     }
   }
+
+  var firebaseFireStore = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   ///<<<====================== upload file repo ===============================>>>
   Future<void> uploadFile(File file, String? accessToken) async {
@@ -375,7 +384,8 @@ class StorageController extends GetxController {
       final List<int> bytes = await file.readAsBytes();
 
       // Set the filename
-      final String fileName = file.path.split('/').last; // Extract filename from file path
+      final String fileName =
+          file.path.split('/').last; // Extract filename from file path
 
       // Create metadata for the file
       final Map<String, dynamic> metadata = {
@@ -387,7 +397,8 @@ class StorageController extends GetxController {
 
       // Create an HTTP request to upload the file to Google Drive
       final http.Response response = await http.post(
-        Uri.parse('https://www.googleapis.com/upload/drive/v3/files?uploadType=media&name=$metadata'),
+        Uri.parse(
+            'https://www.googleapis.com/upload/drive/v3/files?uploadType=media&name=$metadata'),
         headers: {
           'Authorization': 'Bearer $accessToken',
           'Content-Type': 'application/octet-stream',
@@ -399,13 +410,15 @@ class StorageController extends GetxController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         fileId = responseData['id'];
+        uploadFileId(fileId!);
         Get.snackbar("File uploaded successfully".tr, "");
         if (kDebugMode) {
           print('File uploaded successfully $fileId');
         }
       } else {
         if (kDebugMode) {
-          print('File upload failed with status code ${response.statusCode} \n${response.contentLength}');
+          print(
+              'File upload failed with status code ${response.statusCode} \n${response.contentLength}');
         }
       }
     } catch (e) {
@@ -417,9 +430,9 @@ class StorageController extends GetxController {
   }
 
   ///<<<====================== update file repo ===============================>>>
-  Future<void> updateFile(String fileId,File file, String? accessToken )async {
-    try{
-      if(accessToken == null){
+  Future<void> updateFile(String fileId, File file, String? accessToken) async {
+    try {
+      if (accessToken == null) {
         if (kDebugMode) {
           print("Access token is null");
         }
@@ -429,7 +442,8 @@ class StorageController extends GetxController {
       final List<int> bytes = await file.readAsBytes();
       // Update file content
       final http.Response updateResponse = await http.patch(
-        Uri.parse('https://www.googleapis.com/upload/drive/v3/files/$fileId?uploadType=media'),
+        Uri.parse(
+            'https://www.googleapis.com/upload/drive/v3/files/$fileId?uploadType=media'),
         headers: {
           'Authorization': 'Bearer $accessToken',
           'Content-Type': 'application/json; charset=UTF-8',
@@ -444,11 +458,11 @@ class StorageController extends GetxController {
         }
       } else {
         if (kDebugMode) {
-          print('File update failed with status code ${updateResponse.statusCode}');
+          print(
+              'File update failed with status code ${updateResponse.statusCode}');
         }
       }
-
-    }catch(e){
+    } catch (e) {
       if (kDebugMode) {
         Get.snackbar("Operation failed".tr, "");
         print('Operation failed: $e');
@@ -457,7 +471,7 @@ class StorageController extends GetxController {
   }
 
   ///<<<====================== download file repo =============================>>>
-  Future<void> downloadFile(String? accessToken)async {
+  Future<void> downloadFile(String? accessToken) async {
     try {
       if (accessToken == null) {
         Get.snackbar("Upload contacts before downloading!".tr, "");
@@ -466,36 +480,89 @@ class StorageController extends GetxController {
         }
         return;
       }
+      await downloadFileId();
       final http.Response downloadResponse = await http.get(
-        Uri.parse('https://www.googleapis.com/drive/v3/files/$fileId?alt=media'),
+        Uri.parse(
+            'https://www.googleapis.com/drive/v3/files/$fileId?alt=media'),
         headers: {'Authorization': 'Bearer $accessToken'},
       );
 
       if (downloadResponse.statusCode == 200) {
         // Process downloaded content
         final List<int> fileBytes = downloadResponse.bodyBytes;
-        final List<ContactsModel> fileContent = (jsonDecode(utf8.decode(fileBytes)) as List).map((item) => ContactsModel.fromJson(item)).toList();
+        final List<ContactsModel> fileContent =
+            (jsonDecode(utf8.decode(fileBytes)) as List)
+                .map((item) => ContactsModel.fromJson(item))
+                .toList();
 
         for (var content in fileContent) {
           if (!contacts.any((contact) => contact.id == content.id)) {
             contacts.add(content);
+            saveContacts();
             update();
           }
         }
+        Get.snackbar("Contact successfully downloaded".tr, "");
         if (kDebugMode) {
           print(fileContent);
         }
-
-      }else {
+      } else {
         Get.snackbar("Upload failed".tr, "");
         if (kDebugMode) {
-          print('File download failed with status code ${downloadResponse.statusCode}');
+          print(
+              'File download failed with status code ${downloadResponse.statusCode}');
         }
       }
-    }catch(e){
+    } catch (e) {
       Get.snackbar("Upload failed".tr, "$e");
       if (kDebugMode) {
         print(e);
+      }
+    }
+  }
+
+  ///<<<=========== FileID upload and download in Firebase FireStore =========>>>
+
+  Future<void> uploadFileId(String fileId) async {
+    User? user = auth.currentUser;
+    if (user != null) {
+      String userEmail = user.email!;
+      // Upload fileId under the user's email document in FireStore
+      await firebaseFireStore.collection('userFiles').doc(userEmail).set({
+        'fileId': fileId,
+      });
+      if (kDebugMode) {
+        print('File ID uploaded successfully for user: $userEmail');
+      }
+    } else {
+      if (kDebugMode) {
+        print('User is not authenticated.');
+      }
+    }
+  }
+
+  Future<void> downloadFileId() async {
+    User? user = auth.currentUser;
+    if (user != null) {
+      String userEmail = user.email!;
+      // Query FireStore to get the fileId associated with user's email
+      DocumentSnapshot snapshot = await firebaseFireStore
+          .collection('userFiles') // Collection where user emails are stored
+          .doc(userEmail) // Document name is user's email
+          .get();
+
+      if (snapshot.exists) {
+        // Assuming 'fileId' is a field in the document
+        fileId = snapshot['fileId'];
+        if (kDebugMode) {
+          print("FileID downloaded: $fileId");
+        }
+        // Now you can use the fileId to download the file
+        // Download logic...
+      } else {
+        if (kDebugMode) {
+          print('No file associated with this user.');
+        }
       }
     }
   }

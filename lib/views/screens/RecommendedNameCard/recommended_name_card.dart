@@ -2,14 +2,15 @@
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_icons.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
+import '../Profile/IneerWidget/custom_container_button.dart';
 
 class RecommendNameCardScreen extends StatelessWidget {
   const RecommendNameCardScreen({super.key});
@@ -66,38 +67,23 @@ class RecommendNameCardScreen extends StatelessWidget {
                   color: AppColors.green_100
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        height: 40.h,
-                        width: 40.w,
-                        decoration: BoxDecoration(
-                            color: AppColors.black_500,
-                            borderRadius: BorderRadius.circular(12.r)
-                        ),
-                        child: Center(child: SvgPicture.asset(AppIcons.linkedinIcon)),
-                      ),
-                      Container(
-                        height: 40.h,
-                        width: 40.w,
-                        decoration: BoxDecoration(
-                            color: AppColors.black_500,
-                            borderRadius: BorderRadius.circular(12.r)
-                        ),
-                        child: Center(child: SvgPicture.asset(AppIcons.fbIcon)),
-                      ),
-                      Container(
-                        height: 40.h,
-                        width: 40.w,
-                        decoration: BoxDecoration(
-                            color: AppColors.black_500,
-                            borderRadius: BorderRadius.circular(12.r)
-                        ),
-                        child: Center(child: SvgPicture.asset(AppIcons.emailIcon, color: AppColors.green_50,)),
-                      )
-                    ],
+                  padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 15.h),
+                  child: CustomContainerButton(
+                    onTap: () {
+                      // screenShotHelper.captureAndSaveImage(screenshotController);
+                      Share.share("this is test share");
+                    },
+                    text: AppStrings.shareCard.tr,
+                    ifImage: true,
+                    svgIcon: AppIcons.sendIcon,
+                    imageHeight: 20,
+                    imageWidth: 20,
+                    radius: 25,
+                    fontSize: 16,
+                    iconColor: AppColors.whiteColor,
+                    textColor: AppColors.whiteColor,
+                    farWidth: 8,
+                    backgroundColor: AppColors.black_500,
                   ),
                 ),
               )

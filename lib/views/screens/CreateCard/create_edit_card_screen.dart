@@ -87,99 +87,105 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                   alignment: WrapAlignment.center,
                                   crossAxisAlignment: WrapCrossAlignment.center,
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        storageController.getGalleryImage();
-                                        Get.back();
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                                        height: 70,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
-                                          color: AppColors.green_600,
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            storageController.getGalleryImage();
+                                            Get.back();
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: AppColors.green_600,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.image_outlined),
+                                                CustomText(text: "Gallery".tr, fontSize: 16,)
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.image_outlined),
-                                            CustomText(text: "Gallery".tr, fontSize: 16,)
-                                          ],
-                                        ),),
+                                        SizedBox(height: 8),
+                                        InkWell(
+                                          onTap: () {
+                                            storageController.getCameraImage();
+                                            Get.back();
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: AppColors.green_600,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
+                                                CustomText(text: "Camera".tr, fontSize: 16,)
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(width: 8,),
-                                    InkWell(
-                                      onTap: () {
-                                        storageController.getCameraImage();
-                                        // controller.selectImageCamera();
-                                        Get.back();
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                                        height: 70,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
-                                          color: AppColors.green_600,
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Get.toNamed(AppRoutes.linkedInWebViewScreen);
+                                            Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'".tr, "",
+                                              duration: Duration(seconds: 3),
+                                              colorText: AppColors.green_900,
+                                            );
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: AppColors.green_600,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
+                                                CustomText(text: "LinkedIn".tr, fontSize: 16,)
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(AppIcons.ocrCameraIcon, height: 20, width: 20,),
-                                            CustomText(text: "Camera".tr, fontSize: 16,)
-                                          ],
+                                        SizedBox(height: 8),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.toNamed(AppRoutes.googleWebViewScreen);
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                                            height: 70,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: AppColors.green_600,
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(AppIcons.googleColorfulIcon, height: 20, width: 20, color: AppColors.black_500, ),
+                                                CustomText(text: "Google".tr, fontSize: 16,)
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 8,),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.toNamed(AppRoutes.linkedInWebViewScreen);
-                                        Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'".tr, "",
-                                            duration: Duration(seconds: 3),
-                                            colorText: AppColors.green_900,
-                                        );
-
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                                        height: 70,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
-                                          color: AppColors.green_600,
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                            CustomText(text: "LinkedIn".tr, fontSize: 16,)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 8,),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.toNamed(AppRoutes.googleWebViewScreen);
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                                        height: 70,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
-                                          color: AppColors.green_600,
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(AppIcons.googleColorfulIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                            CustomText(text: "Google".tr, fontSize: 16,)
-                                          ],
-                                        ),
-                                      ),
+                                      ],
                                     ),
                                   ],
                                 ),

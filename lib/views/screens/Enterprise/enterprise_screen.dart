@@ -25,16 +25,14 @@ class EnterpriseScreen extends StatelessWidget {
 
   List enterpriseSecondList = [
     {"titleText" : AppStrings.fastNAccurateDataEntry, "subTitleText" : AppStrings.quicklyEnterBusinessCardsToSales, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.roleBasedAccessControl, "subTitleText" : AppStrings.secureCompanyDataWithAppropriateRole, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.smartCollaboration, "subTitleText" : AppStrings.facilitateTeamCollaboration, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.dataIntegration, "subTitleText" : AppStrings.integrateYourCustomerDataWithOtherCRM, "image" : AppImages.enterprise3},
+    // {"titleText" : AppStrings.roleBasedAccessControl, "subTitleText" : AppStrings.secureCompanyDataWithAppropriateRole, "image" : AppImages.enterpriseImg2},
+    // {"titleText" : AppStrings.smartCollaboration, "subTitleText" : AppStrings.facilitateTeamCollaboration, "image" : AppImages.enterpriseImg2},
+    // {"titleText" : AppStrings.dataIntegration, "subTitleText" : AppStrings.integrateYourCustomerDataWithOtherCRM, "image" : AppImages.enterprise3},
   ];
 
   List enterpriseThirdList = [
     {"icon" : AppIcons.saveTime, "name" : AppStrings.fastInputBusinessCards},
     {"icon" : AppIcons.importExportIcon, "name" : AppStrings.exchangeEcardsSeamlessly},
-    {"icon" : AppIcons.networkIcon, "name" : AppStrings.centralizeAllEmployeesBusinessCards},
-    {"icon" : AppIcons.setRole, "name" : AppStrings.setRoleForEachUser},
     {"icon" : AppIcons.dataLists, "name" : AppStrings.exportCustomerData},
     {"icon" : AppIcons.safeData, "name" : AppStrings.dataIsAlwaysSafeAndSecure},
   ];
