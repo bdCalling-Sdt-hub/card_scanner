@@ -1,8 +1,12 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -41,6 +45,16 @@ class ScreenShotHelper{
     return uint8List;
   }
 
+  File? file;
+  Future<File?> getImagePath({Uint8List? imageBytes}) async {
+    if (imageBytes != null) {
+      final directory = await getTemporaryDirectory();
+      final path = '${directory.path}/profile_image.jpg';
+      file = File(path);
+      await file!.writeAsBytes(imageBytes);
+    }
+    return file;
+  }
 
 ///==============another method Capture image save to gallery repo=========================>>>
   //RepaintBoundary(

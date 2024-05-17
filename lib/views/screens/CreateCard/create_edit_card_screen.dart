@@ -8,6 +8,7 @@ import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:get/get.dart';
 
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
+import '../ContactsScreen/all_cards_screen.dart';
 
 class CreateOrEditCardScreen extends StatelessWidget {
   CreateOrEditCardScreen({super.key, required this.screenTitle});
@@ -44,7 +46,13 @@ class CreateOrEditCardScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomBackButton(
-                      onTap: (){Get.back();},
+                      onTap: (){
+                        if(screenTitle == AppStrings.createCardTitle){
+                          Get.toNamed(AppRoutes.homeScreen);
+                        }else{
+                          Get.toNamed(AppRoutes.allCardsScreen);
+                        }
+                      },
                       icon: Icons.arrow_back,
                     ),
                     CustomText(
@@ -141,10 +149,35 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                         InkWell(
                                           onTap: () {
                                             Get.toNamed(AppRoutes.linkedInWebViewScreen);
-                                            Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'".tr, "",
-                                              duration: Duration(seconds: 3),
-                                              colorText: AppColors.green_900,
-                                            );
+                                            showDialog(context: context, builder: (context) {
+                                              return AlertDialog(content: SizedBox(
+                                                height: 200,
+                                                child: Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment: Alignment.topRight,
+                                                        child: CustomBackButton(onTap: (){Get.back();})),
+                                                    SizedBox(height: 20,),
+                                                    CustomText(
+                                                      fontSize: 16,
+                                                      maxLines: 5,
+                                                      text: "Google & Apple SignIn doesn't support in web view, So don't try".tr,
+                                                    ),
+                                                    CustomText(
+                                                      fontSize: 18,
+                                                      text: "'Continue with Google & Sign in with Apple'",
+                                                      maxLines: 3,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: AppColors.green_900,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),);
+                                            },);
+                                            // Get.snackbar("Google Sign In does not support web view, So don't try 'Continue with Google'".tr, "",
+                                            //   duration: Duration(seconds: 3),
+                                            //   colorText: AppColors.green_900,
+                                            // );
                                           },
                                           child: Container(
                                             margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),

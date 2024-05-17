@@ -29,43 +29,37 @@ class ContactDetailsScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomBackButton(
-                      icon: Icons.arrow_back,
-                      onTap: () {
-                        Get.back();
-                      }),
-                  Align(
-                    alignment: Alignment.center,
-                    child: CustomText(
-                      text: AppStrings.contactDetails.tr,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomBackButton(
+                        icon: Icons.arrow_back,
+                        onTap: () {
+                          Get.back();
+                        }),
+                    Align(
+                      alignment: Alignment.center,
+                      child: CustomText(
+                        text: AppStrings.contactDetails.tr,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              SingleChildScrollView(
-                child: Column(
+                    SizedBox(
+                      width: 30,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 40.h),
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Container(
-                    //   height: 250,
-                    //   width: Get.width,
-                    //   child: PhotoView(
-                    //       imageProvider: FileImage(File(contactDetails.imageUrl))),
-                    // ),
                     Container(
-                      height: 250,
-                      width: Get.width,
+                      height: 220,
+                      width: Get.width * 0.9,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         image: DecorationImage(
@@ -73,27 +67,27 @@ class ContactDetailsScreen extends StatelessWidget {
                             image: FileImage(File(contactDetails.imageUrl)))
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 40.h),
                     customWrap(
                         title: AppStrings.name.tr, value: contactDetails.name),
                     customWrap(
                         title: AppStrings.designation.tr,
                         value: contactDetails.designation),
                     customWrap(
-                        title: AppStrings.companyName.tr,
+                        title: AppStrings.company.tr,
                         value: contactDetails.companyName),
                     customWrap(
                         title: AppStrings.email.tr, value: contactDetails.email),
                     customWrap(
-                        title: AppStrings.phoneNumber.tr,
+                        title: AppStrings.contact.tr,
                         value: contactDetails.phoneNumber),
                     customWrap(
                         title: AppStrings.address.tr,
                         value: contactDetails.address),
                   ],
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -105,18 +99,21 @@ class ContactDetailsScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        CustomText(
-          text: "$title: ",
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
+        SizedBox(
+          width: 100.w,
+          child: CustomText(
+            textAlign: TextAlign.left,
+            text: "$title: ",
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
-        SizedBox(width: 12,),
         Expanded(
           child: CustomText(
             textAlign: TextAlign.left,
             maxLines: 5,
             text: value,
-            fontSize: 18,
+            fontSize: 16,
             color: AppColors.green_900,
           ),
         )

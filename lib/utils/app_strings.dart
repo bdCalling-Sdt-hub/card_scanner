@@ -14,6 +14,7 @@ class AppStrings{
   static String fillTheDetails = "Please  fill the details and create account.";
   static String email = "Email";
   static String phoneNumber = "Phone Number";
+  static String contact = "Contact";
   static String newPassword = "New Password";
   static String confirmNewPassword = "Confirm New Password";
   static String rememberMe = "Remember Me";
@@ -128,6 +129,7 @@ class AppStrings{
   static String createCardTitle = "Create card";
   static String editCard = "Edit card";
   static String companyName = "Company Name";
+  static String company = "Company";
   static String designation = "Designation";
   static String done = "Done";
   static String manageDuplicateCards = "Manage Duplicate Cards";

@@ -130,7 +130,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       }
     }else if(index == 3){
       if(!(widget.currentIndex == 3)){
-        Get.offAll(()=> EnterpriseScreen(),
+        Get.to(()=> EnterpriseScreen(),
             transition: Transition.noTransition
         );
       }

@@ -297,8 +297,7 @@ class StorageController extends GetxController {
     if (croppedFile != null) {
       imagePath = croppedFile.path;
       update();
-      Get.back();
-      Get.back();
+      Get.offAll(CreateOrEditCardScreen(screenTitle: appTitle));
     }
   }
 

@@ -77,13 +77,13 @@ class ManageModalSheet extends StatelessWidget {
                       child: manageCards(Icons.filter_center_focus_outlined,
                           AppStrings.scanQrCode.tr),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.to(DuplicateCardsScreen());
-                      },
-                      child: manageCards(Icons.credit_card_outlined,
-                          AppStrings.duplicateCards.tr),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     Get.to(DuplicateCardsScreen());
+                    //   },
+                    //   child: manageCards(Icons.credit_card_outlined,
+                    //       AppStrings.duplicateCards.tr),
+                    // ),
                     SizedBox()
                   ],
                 ),
@@ -138,6 +138,7 @@ class ManageModalSheet extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 8),
       height: 76.h,
+      width: 80.w,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AppColors.green_600)),

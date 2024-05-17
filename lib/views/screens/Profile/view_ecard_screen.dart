@@ -26,6 +26,7 @@ class ViewECardScreen extends StatelessWidget {
   ScreenshotController screenshotController = ScreenshotController();
   ProfileController profileController = Get.put(ProfileController());
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
+  File? imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -247,10 +248,10 @@ class ViewECardScreen extends StatelessWidget {
                   ///<<<================= Share Card Button ================>>>
 
                   CustomContainerButton(
-                    onTap: () {
+                    onTap: () async {
 
-                      // screenShotHelper.captureAndSaveImage(screenshotController);
-                      Share.share("this is test share");
+                      imagePath = await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => screenShotHelper.getImagePath(imageBytes: value));
+                      Share.share(imagePath!.path);
                     },
                     text: AppStrings.shareCard.tr,
                     ifImage: true,
