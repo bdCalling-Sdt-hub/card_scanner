@@ -6,6 +6,7 @@ import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -47,7 +48,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, ${'I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with "/" separated '.tr} "}
+            {"text": "$extractedText, ${"I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text".tr} "}
           ]
         }
       ]
@@ -112,8 +113,9 @@ class OCRCreateCardController extends GetxController{
   }
 
   ///<<<=================== Get Camera Image ================================>>>
+  bool isBothSide = true;
 
-  selectImageCamera({bool? isOcr}) async {
+  Future<String?>selectImageCamera({bool? isOcr}) async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
     await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -125,38 +127,58 @@ class OCRCreateCardController extends GetxController{
         print("================>>> $imagePath");
       }
       if(isOcr == true){
-        await processImage(imagePath!);
+        // await processImage(imagePath!);
       }
       captureImageList.add(imagePath);
       update();
+      return imagePath;
     }
+    return "";
   }
 
   ///<<<================== Get Gallery Image ================================>>>
-  selectImageGallery() async {
+  Future<String?>selectImageGallery() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
     await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (getImages != null) {
       imagePath = getImages.path;
       update();
+      StorageController.imagePath = imagePath;
+      if (kDebugMode) {
+        print("================>>> $imagePath");
+      }
+
+      await processImage(imagePath!);
+
+      captureImageList.add(imagePath);
+      update();
+      return imagePath;
     }
+    return "";
   }
 
   ///<<<================== Extract Text From Image ==========================>>>
-  Future<void> processImage(String imgPath) async {
+  Future<String> processImage(String imgPath) async {
     if (kDebugMode) {
       print("============>>>> $imgPath");
     }
     // TODO: implement processImage
     final image = InputImage.fromFile(File(imgPath));
+
     final recognized = await textRecognizer.processImage(image);
     if (kDebugMode) {
       print("||||||${recognized.text}");
     }
     StorageController.imagePath = imgPath;
     update();
-    textFormatRepo(extractedText: recognized.text);
+    return recognized.text;
+    // textFormatRepo(extractedText: recognized.text);
   }
+
+  ///<<<================== another side call =================================>>>
+  // Future<void> anotherSide()async {
+  //   showDialog(context: Get.context, builder: builder)
+  // }
 
 }

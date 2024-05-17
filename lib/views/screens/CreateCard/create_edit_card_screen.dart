@@ -165,7 +165,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                     ),
                                                     CustomText(
                                                       fontSize: 18,
-                                                      text: "'Continue with Google & Sign in with Apple'",
+                                                      text: "'Continue with Google & Sign in with Apple'".tr,
                                                       maxLines: 3,
                                                       fontWeight: FontWeight.w600,
                                                       color: AppColors.green_900,

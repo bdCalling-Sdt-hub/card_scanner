@@ -84,45 +84,45 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(width: 30.w),
                   Expanded(
                       child: SizedBox(
-                        height: 40,
-                        child: TextFormField(
-                          onChanged: filterContacts,
-                          controller: searchController,
-                          // controller: widget.textEditingController,
-                          keyboardType: TextInputType.text,
-                          // onChanged: widget.onChanged,
-                          maxLines: 1,
-                          cursorColor: AppColors.green_200,
-                          style: const TextStyle(
-                            color: AppColors.green_500,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 8.w, vertical: 0.h),
-                            hintText: "${AppStrings.search.tr}...",
-                            hintStyle: const TextStyle(
-                              color: AppColors.green_50,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            fillColor: AppColors.green_900,
-                            filled: true,
-                            suffixIcon: Icon(
-                              Icons.search,
-                              color: AppColors.green_50,
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                gapPadding: 0),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                gapPadding: 0),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                gapPadding: 0),
-                          ),
+                    height: 40,
+                    child: TextFormField(
+                      onChanged: filterContacts,
+                      controller: searchController,
+                      // controller: widget.textEditingController,
+                      keyboardType: TextInputType.text,
+                      // onChanged: widget.onChanged,
+                      maxLines: 1,
+                      cursorColor: AppColors.green_200,
+                      style: const TextStyle(
+                        color: AppColors.green_500,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 8.w, vertical: 0.h),
+                        hintText: "${AppStrings.search.tr}...",
+                        hintStyle: const TextStyle(
+                          color: AppColors.green_50,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
-                      )),
+                        fillColor: AppColors.green_900,
+                        filled: true,
+                        suffixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.green_50,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            gapPadding: 0),
+                      ),
+                    ),
+                  )),
                   SizedBox(
                     width: 8.w,
                   ),
@@ -233,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 content: Container(
                                                   padding: EdgeInsets.only(
                                                       top: 12.h, left: 8.w),
-                                                  height: 120.h,
+                                                  height: 180.h,
                                                   child: GetBuilder<
                                                       OCRCreateCardController>(
                                                     builder: (controller) {
@@ -243,7 +243,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               child:
                                                                   CircularProgressIndicator())
                                                           : Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
                                                               children: [
+
+                                                                CustomText(
+                                                                  textAlign: TextAlign.center,
+                                                                  text: "Create Cards",
+                                                                  fontSize: 18,
+                                                                ),
+                                                                /// <<<========== Create Card Manually =================>>>
+
                                                                 InkWell(
                                                                   onTap: () {
                                                                     Get.to(CreateOrEditCardScreen(
@@ -283,8 +294,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               8.w,
                                                                         ),
                                                                         CustomText(
-                                                                          text:
-                                                                              AppStrings.cardCreateManually.tr,
+                                                                          text: AppStrings
+                                                                              .cardCreateManually
+                                                                              .tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -292,13 +304,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Spacer(),
+
+                                                                /// <<<========== Create Card Using OCR Camera =================>>>
+
                                                                 InkWell(
-                                                                  onTap: () {
-                                                                    ocrCreateCardController
-                                                                        .selectImageCamera(
-                                                                            isOcr:
-                                                                                true);
+                                                                  onTap:
+                                                                      () async {
+                                                                    String
+                                                                        responseText =
+                                                                        await ocrCreateCardController
+                                                                            .selectImageCamera(isOcr: true)
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.processImage(value!),
+                                                                            );
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return ocrCreateCardController.isLoading
+                                                                            ? Center(child: CircularProgressIndicator())
+                                                                            : AlertDialog(
+                                                                                content: CustomText(
+                                                                                  maxLines: 2,
+                                                                                  text: "Do you want scan back part of your card".tr,
+                                                                                  fontSize: 20,
+                                                                                  color: AppColors.black_500,
+                                                                                ),
+                                                                                actions: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: CustomElevatedButton(
+                                                                                          onTap: () {
+                                                                                            Get.back();
+                                                                                            ocrCreateCardController.textFormatRepo(extractedText: responseText);
+                                                                                          },
+                                                                                          text: "No".tr,
+                                                                                          textColor: AppColors.black_500,
+                                                                                          isFillColor: false,
+                                                                                          borderColor: AppColors.green_900,
+                                                                                        ),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        width: 12,
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: CustomElevatedButton(
+                                                                                          onTap: () async {
+                                                                                            // SystemNavigator.pop();
+                                                                                            String newResponse = await ocrCreateCardController.selectImageCamera(isOcr: true).then(
+                                                                                                  (value) => ocrCreateCardController.processImage(value!),
+                                                                                                );
+                                                                                            responseText += newResponse;
+                                                                                            Get.back();
+                                                                                            ocrCreateCardController.textFormatRepo(extractedText: responseText);
+                                                                                          },
+                                                                                          text: "Yes".tr,
+                                                                                          backgroundColor: AppColors.green_900,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                      },
+                                                                    );
                                                                   },
                                                                   child:
                                                                       Container(
@@ -329,8 +400,108 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               8.w,
                                                                         ),
                                                                         CustomText(
-                                                                          text:
-                                                                              AppStrings.cardCreateOcr.tr,
+                                                                          text: AppStrings
+                                                                              .cardCreateOcr
+                                                                              .tr,
+                                                                          fontSize:
+                                                                              16,
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+
+                                                                /// <<<========== Create Card Using OCR Gallery =================>>>
+
+                                                                InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    String
+                                                                        responseText =
+                                                                        await ocrCreateCardController
+                                                                            .selectImageGallery()
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.processImage(value!),
+                                                                            );
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return ocrCreateCardController.isLoading
+                                                                            ? Center(child: CircularProgressIndicator())
+                                                                            : AlertDialog(
+                                                                                content: CustomText(
+                                                                                  maxLines: 2,
+                                                                                  text: "Do you want scan back part of your card".tr,
+                                                                                  fontSize: 20,
+                                                                                  color: AppColors.black_500,
+                                                                                ),
+                                                                                actions: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: CustomElevatedButton(
+                                                                                          onTap: () {
+                                                                                            Get.back();
+                                                                                            ocrCreateCardController.textFormatRepo(extractedText: responseText);
+                                                                                          },
+                                                                                          text: "No".tr,
+                                                                                          textColor: AppColors.black_500,
+                                                                                          isFillColor: false,
+                                                                                          borderColor: AppColors.green_900,
+                                                                                        ),
+                                                                                      ),
+                                                                                      SizedBox(
+                                                                                        width: 12,
+                                                                                      ),
+                                                                                      Expanded(
+                                                                                        child: CustomElevatedButton(
+                                                                                          onTap: () async {
+                                                                                            // SystemNavigator.pop();
+                                                                                            String newResponse = await ocrCreateCardController.selectImageGallery().then(
+                                                                                                  (value) => ocrCreateCardController.processImage(value!),
+                                                                                                );
+                                                                                            responseText += newResponse;
+                                                                                            Get.back();
+                                                                                            ocrCreateCardController.textFormatRepo(extractedText: responseText);
+                                                                                          },
+                                                                                          text: "Yes".tr,
+                                                                                          backgroundColor: AppColors.green_900,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                      },
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    padding: EdgeInsets
+                                                                        .all(8
+                                                                            .w),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.r),
+                                                                      color: AppColors
+                                                                          .green_600,
+                                                                    ),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Icon(Icons
+                                                                            .image_outlined),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              8.w,
+                                                                        ),
+                                                                        CustomText(
+                                                                          text: AppStrings
+                                                                              .cardCreateOcr
+                                                                              .tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -398,7 +569,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         buildServiceItems(
                                           onTap: () {
-                                            Get.toNamed(AppRoutes.shareProfileCardScreen);
+                                            Get.toNamed(AppRoutes
+                                                .shareProfileCardScreen);
                                           },
                                           icon: AppIcons.shareCard,
                                           title: AppStrings.shareCard.tr,
@@ -454,12 +626,9 @@ class _HomeScreenState extends State<HomeScreen> {
             TextFormField(
               controller: paymentController.amountController,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(left: 8.w),
+                  contentPadding: EdgeInsets.only(left: 8.w),
                   labelText: AppStrings.amount.tr,
-                labelStyle: TextStyle(
-                  color: AppColors.green_900
-                )
-              ),
+                  labelStyle: TextStyle(color: AppColors.green_900)),
             ),
             SizedBox(
               height: 12.h,
@@ -468,7 +637,8 @@ class _HomeScreenState extends State<HomeScreen> {
               indent: EdgeInsets.only(left: 8.w),
               value: currency?.code,
               hintText: 'Currency Type (Code)'.tr,
-              fieldBackground: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+              fieldBackground:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
               update: (value) => setState(() => currency = value),
             ),
             SizedBox(
@@ -476,7 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CustomElevatedButton(
               onTap: () {
-                if(currency?.code != null && currency!.code.isNotEmpty){
+                if (currency?.code != null && currency!.code.isNotEmpty) {
                   if (kDebugMode) {
                     print("Currency Code ${currency!.code}");
                   }
@@ -485,7 +655,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       context: context,
                       amount: paymentController.amountController.text,
                       currency: currency!.code));
-                }else{
+                } else {
                   Get.snackbar("Please, must select a currency".tr, "");
                 }
               },

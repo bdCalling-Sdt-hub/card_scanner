@@ -116,13 +116,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       }
     }else if(index == 1){
       if(!(widget.currentIndex == 1)){
-        if(ifContacts){
           Get.to(()=> AllCardsScreen(), transition: Transition.noTransition);
-        }else{
-          Get.offAll(()=> ContactsScreen(),
-              transition: Transition.noTransition
-          );
-        }
       }
     }else if(index == 2){
       if(!(widget.currentIndex == 2)){

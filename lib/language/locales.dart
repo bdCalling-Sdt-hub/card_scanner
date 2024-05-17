@@ -212,6 +212,11 @@ class Locales extends Translations{
       "Share & Save Card" : "Share & Save Card",
       "Contact successfully downloaded" : "Contact successfully downloaded",
 
+      "I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text" : "I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text",
+      "Google & Apple SignIn doesn't support in web view, So don't try" : "Google & Apple SignIn doesn't support in web view, So don't try",
+      "'Continue with Google & Sign in with Apple'" : "'Continue with Google & Sign in with Apple'",
+      "Do you want scan back part of your card" : "Do you want scan back part of your card",
+
       ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
       "Home" : "Home",
