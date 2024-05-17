@@ -5,9 +5,12 @@ import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../widgets/customButton/custom_elevated_button.dart';
 
 class GroupScreen extends StatelessWidget {
   GroupScreen({super.key});
@@ -135,12 +138,80 @@ class GroupScreen extends StatelessWidget {
                                 children: [
                                   const Icon(Icons.groups),
                                   SizedBox(width: 12.w),
-                                  CustomText(
-                                    text:
-                                    "${AppStrings.group.tr}: ${storageController.groupedContactsList[index].name}",
-                                    color: AppColors.black_500,
-                                    fontSize: 16,
-                                  )
+                                  Expanded(
+                                    child: CustomText(
+                                      textAlign: TextAlign.left,
+                                      text:
+                                      "${AppStrings.group.tr}: ${storageController.groupedContactsList[index].name}",
+                                      color: AppColors.black_500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+
+                                  InkWell(
+                                    onTap: (){
+
+                                    },
+                                    child: Container(
+                                      height: 30.h,
+                                      width: 30.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      child: Icon(Icons.border_color_outlined, size: 18,color: AppColors.black_500),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+
+                                          ///<<<==================== Sign out pop up =========================>>>
+
+                                          return AlertDialog(
+                                            content: CustomText(text: "Are you sure to delete contacts?".tr, fontSize: 20, color: AppColors.black_500,),
+                                            actions: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: CustomElevatedButton(
+                                                      onTap: (){
+                                                        Get.back();
+                                                      },
+                                                      text: "No".tr,
+                                                      textColor: AppColors.black_500,
+                                                      isFillColor: false,
+                                                      borderColor: AppColors.green_900,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 12,),
+                                                  Expanded(
+                                                    child: CustomElevatedButton(
+                                                      onTap: (){
+                                                        Get.back();
+                                                      },
+                                                      text: "Yes".tr,
+                                                      backgroundColor: AppColors.green_900,
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 30.h,
+                                      width: 30.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      child: Icon(Icons.delete_forever_rounded, size: 18,color: AppColors.black_500),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

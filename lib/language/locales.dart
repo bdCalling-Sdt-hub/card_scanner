@@ -216,6 +216,8 @@ class Locales extends Translations{
       "Google & Apple SignIn doesn't support in web view, So don't try" : "Google & Apple SignIn doesn't support in web view, So don't try",
       "'Continue with Google & Sign in with Apple'" : "'Continue with Google & Sign in with Apple'",
       "Do you want scan back part of your card" : "Do you want scan back part of your card",
+      "OCR with gallery image" : "OCR with gallery image",
+      "OCR with camera image" : "OCR with camera image",
 
       ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
