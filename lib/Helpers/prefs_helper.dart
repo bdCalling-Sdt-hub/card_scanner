@@ -52,6 +52,8 @@ class PrefsHelper extends GetxController {
     isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
     isProfilePhotoShow = preferences.getBool("isProfilePhotoShow") ?? true;
     groupedContactsList = await getGroupedList();
+    localizationLanguageCode = preferences.getString("localizationLanguageCode") ?? "en";
+    localizationCountryCode = preferences.getString("localizationCountryCode") ?? "US";
   }
 
   ///<<<======================== Get Data Form Shared Preference ==============>

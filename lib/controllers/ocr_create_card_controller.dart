@@ -7,6 +7,7 @@ import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +18,7 @@ class OCRCreateCardController extends GetxController{
 
   final _apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
   GeminiResponseModel? geminiResponseModel;
-  TextRecognizer textRecognizer = TextRecognizer();
+  TextRecognizer textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
 
   List responseList = [];
   String? imagePath;
@@ -167,12 +168,18 @@ class OCRCreateCardController extends GetxController{
     final image = InputImage.fromFile(File(imgPath));
 
     final recognized = await textRecognizer.processImage(image);
+    String text = '';
+    for (TextBlock block in recognized.blocks) {
+      for (TextLine line in block.lines) {
+        text += '${line.text}\n';
+      }
+    }
     if (kDebugMode) {
-      print("||||||${recognized.text}");
+      print("||||||$text");
     }
     StorageController.imagePath = imgPath;
     update();
-    return recognized.text;
+    return text;
     // textFormatRepo(extractedText: recognized.text);
   }
 

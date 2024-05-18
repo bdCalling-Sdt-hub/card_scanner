@@ -1,6 +1,6 @@
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Settings/about_screen.dart';
-import 'package:card_scanner/views/screens/Settings/change_anguage_screen.dart';
+import 'package:card_scanner/views/screens/Settings/change_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

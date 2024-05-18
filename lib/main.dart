@@ -10,6 +10,8 @@ import 'firebase_options.dart';
 import 'Helpers/prefs_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'language/locales.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefsHelper.getAllPrefData();
@@ -37,6 +39,12 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) {
         return GetMaterialApp(
+          translations: Locales(),
+          // locale: const Locale("en", "US"),
+          defaultTransition: Transition.noTransition,
+          locale: Locale(PrefsHelper.localizationLanguageCode,
+              PrefsHelper.localizationCountryCode),
+          fallbackLocale: const Locale("en", "US"),
           debugShowCheckedModeBanner: false,
           title: 'Name Card Scanner',
           theme: ThemeData(

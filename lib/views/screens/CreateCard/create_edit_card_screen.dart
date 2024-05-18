@@ -294,7 +294,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
-                SizedBox(height: 50.h,),
+                SizedBox(height: 36.h,),
 
                 ///<<<================ Done Button ============================>>>
 
