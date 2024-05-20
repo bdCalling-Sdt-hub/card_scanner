@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
+import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 
@@ -19,7 +20,7 @@ import '../../../utils/app_strings.dart';
 class SelectedGroupCards extends StatelessWidget {
   SelectedGroupCards({super.key});
 
-  int listIndex = Get.arguments['index'];
+  int groupIndex = Get.arguments['index'];
   StorageController storageController = Get.put(StorageController());
 
   @override
@@ -45,7 +46,7 @@ class SelectedGroupCards extends StatelessWidget {
                   const Icon(Icons.groups),
                   SizedBox(width: 12.w),
                   CustomText(
-                    text: "${AppStrings.group.tr}: ${storageController.groupedContactsList[listIndex].name}",
+                    text: "${AppStrings.group.tr}: ${storageController.groupedContactsList[groupIndex].name}",
                     color: AppColors.black_500,
                     fontSize: 16,
                   )
@@ -58,56 +59,62 @@ class SelectedGroupCards extends StatelessWidget {
 
               Expanded(
                 child: ListView.builder(
-                  itemCount: storageController.groupedContactsList[listIndex].contactsList.length,
+                  itemCount: storageController.groupedContactsList[groupIndex].contactsList.length,
                   itemBuilder: (context, index) {
-                    List<ContactsModel> contactsList = storageController.groupedContactsList[listIndex].contactsList;
-                    return Container(
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.r)
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 90.h,
-                            width: 90.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contactsList[index].imageUrl))),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 8.h,),
-                                  CustomText(
-                                    textAlign: TextAlign.left,
-                                    maxLines: 2,
-                                    text: contactsList[index].name,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  SizedBox(height: 4.h,),
-                                  CustomText(
-                                    textAlign: TextAlign.left,
-                                    maxLines: 3,
-                                    text: contactsList[index].designation,
-                                    fontSize: 12,
-                                  ),
-                                  CustomText(
-                                    textAlign: TextAlign.left,
-                                    maxLines: 3,
-                                    text: contactsList[index].companyName,
-                                    fontSize: 12,
-                                  ),
-                                ],
+                    List<ContactsModel> contactsList = storageController.groupedContactsList[groupIndex].contactsList;
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.groupContactDetailScreen, arguments: {"groupIndex" : groupIndex, "contactIndex": index});
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(bottom: 8.h),
+                        width: Get.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r)
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 90.h,
+                              width: 90.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contactsList[index].imageUrl))),
                               ),
                             ),
-                          )
-                        ],
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 8.h,),
+                                    CustomText(
+                                      textAlign: TextAlign.left,
+                                      maxLines: 2,
+                                      text: contactsList[index].name,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    SizedBox(height: 4.h,),
+                                    CustomText(
+                                      textAlign: TextAlign.left,
+                                      maxLines: 3,
+                                      text: contactsList[index].designation,
+                                      fontSize: 12,
+                                    ),
+                                    CustomText(
+                                      textAlign: TextAlign.left,
+                                      maxLines: 3,
+                                      text: contactsList[index].companyName,
+                                      fontSize: 12,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },),

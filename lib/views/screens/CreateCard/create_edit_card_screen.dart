@@ -28,6 +28,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
   OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   
   final String screenTitle;
+  RxBool isTapped = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +69,33 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 SizedBox(height: 20.h),
                 Stack(
                   children: [
-                    Container(
-                      height: 150.h,
-                      width: 150.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        image: StorageController.imagePath != null && StorageController.imagePath!.isNotEmpty
-                            ? DecorationImage(image: FileImage(File("${StorageController.imagePath}")), fit: BoxFit.cover)
-                            : DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/images/blankProfileImage.png")),
-                      ),
-                    ),
+                   Obx(() =>  GestureDetector(
+                     onTap: () {
+                       isTapped.value = !isTapped.value;
+                     },
+                     child: isTapped.value
+                         ? Container(
+                       height: 250.h,
+                       width: Get.width,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(8.r),
+                         image: StorageController.imagePath != null && StorageController.imagePath!.isNotEmpty
+                             ? DecorationImage(image: FileImage(File("${StorageController.imagePath}")), fit: BoxFit.cover)
+                             : DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/images/blankProfileImage.png")),
+                       ),
+                     )
+                         : Container(
+                       height: 150.h,
+                       width: 150.w,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(8.r),
+                         image: StorageController.imagePath != null && StorageController.imagePath!.isNotEmpty
+                             ? DecorationImage(image: FileImage(File("${StorageController.imagePath}")), fit: BoxFit.cover)
+                             : DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/images/blankProfileImage.png")),
+                       ),
+                     ),
+                   ),
+                   ),
 
                     ///<<<================ Edit Icon ==========================>>>
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/routes/app_routes.dart';
 import '../../../../utils/app_colors.dart';
@@ -193,77 +194,78 @@ class CardHolder extends StatelessWidget {
 
                                                       InkWell(
                                                         onTap: () {
+                                                          Share.share("${storageController.contacts[index].name}, ${storageController.contacts[index].designation}, ${storageController.contacts[index].companyName}, ${storageController.contacts[index].phoneNumber}, ${storageController.contacts[index].email}, ${storageController.contacts[index].address}");
 
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return AlertDialog(
-                                                                surfaceTintColor:  AppColors.green_900,
-                                                                contentPadding: EdgeInsets.zero,
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius: BorderRadius.circular(8)),
-                                                                content: Container(
-                                                                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-                                                                  width: Get.width,
-                                                                  height: 200.h,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Align(
-                                                                        alignment: Alignment.centerRight,
-                                                                        child: CustomBackButton(
-                                                                          onTap: (){
-                                                                            Get.back();
-                                                                          },
-                                                                          radius: 100.r,
-                                                                        ),
-                                                                      ),
-                                                                      CustomText(
-                                                                        text: AppStrings.shareWith.tr,
-                                                                        fontSize: 20,
-                                                                        fontWeight: FontWeight.w500,
-                                                                      ),
-                                                                      SizedBox(height: 40.h,),
-                                                                      Padding(
-                                                                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                                                                        child: Row(
-                                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                          children: [
-                                                                            Container(
-                                                                              height: 40.h,
-                                                                              width: 40.w,
-                                                                              decoration: BoxDecoration(
-                                                                                  color: AppColors.black_500,
-                                                                                  borderRadius: BorderRadius.circular(12.r)
-                                                                              ),
-                                                                              child: Center(child: SvgPicture.asset(AppIcons.linkedinIcon)),
-                                                                            ),
-                                                                            Container(
-                                                                              height: 40.h,
-                                                                              width: 40.w,
-                                                                              decoration: BoxDecoration(
-                                                                                  color: AppColors.black_500,
-                                                                                  borderRadius: BorderRadius.circular(12.r)
-                                                                              ),
-                                                                              child: Center(child: SvgPicture.asset(AppIcons.fbIcon)),
-                                                                            ),
-                                                                            Container(
-                                                                              height: 40.h,
-                                                                              width: 40.w,
-                                                                              decoration: BoxDecoration(
-                                                                                  color: AppColors.black_500,
-                                                                                  borderRadius: BorderRadius.circular(12.r)
-                                                                              ),
-                                                                              child: Center(child: SvgPicture.asset(AppIcons.emailIcon, color: AppColors.green_50,)),
-                                                                            )
-                                                                          ],
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
+                                                          // showDialog(
+                                                          //   context: context,
+                                                          //   builder: (context) {
+                                                          //     return AlertDialog(
+                                                          //       surfaceTintColor:  AppColors.green_900,
+                                                          //       contentPadding: EdgeInsets.zero,
+                                                          //       shape: RoundedRectangleBorder(
+                                                          //           borderRadius: BorderRadius.circular(8)),
+                                                          //       content: Container(
+                                                          //         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                                                          //         width: Get.width,
+                                                          //         height: 200.h,
+                                                          //         child: Column(
+                                                          //           children: [
+                                                          //             Align(
+                                                          //               alignment: Alignment.centerRight,
+                                                          //               child: CustomBackButton(
+                                                          //                 onTap: (){
+                                                          //                   Get.back();
+                                                          //                 },
+                                                          //                 radius: 100.r,
+                                                          //               ),
+                                                          //             ),
+                                                          //             CustomText(
+                                                          //               text: AppStrings.shareWith.tr,
+                                                          //               fontSize: 20,
+                                                          //               fontWeight: FontWeight.w500,
+                                                          //             ),
+                                                          //             SizedBox(height: 40.h,),
+                                                          //             Padding(
+                                                          //               padding: EdgeInsets.symmetric(horizontal: 20.w),
+                                                          //               child: Row(
+                                                          //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          //                 children: [
+                                                          //                   Container(
+                                                          //                     height: 40.h,
+                                                          //                     width: 40.w,
+                                                          //                     decoration: BoxDecoration(
+                                                          //                         color: AppColors.black_500,
+                                                          //                         borderRadius: BorderRadius.circular(12.r)
+                                                          //                     ),
+                                                          //                     child: Center(child: SvgPicture.asset(AppIcons.linkedinIcon)),
+                                                          //                   ),
+                                                          //                   Container(
+                                                          //                     height: 40.h,
+                                                          //                     width: 40.w,
+                                                          //                     decoration: BoxDecoration(
+                                                          //                         color: AppColors.black_500,
+                                                          //                         borderRadius: BorderRadius.circular(12.r)
+                                                          //                     ),
+                                                          //                     child: Center(child: SvgPicture.asset(AppIcons.fbIcon)),
+                                                          //                   ),
+                                                          //                   Container(
+                                                          //                     height: 40.h,
+                                                          //                     width: 40.w,
+                                                          //                     decoration: BoxDecoration(
+                                                          //                         color: AppColors.black_500,
+                                                          //                         borderRadius: BorderRadius.circular(12.r)
+                                                          //                     ),
+                                                          //                     child: Center(child: SvgPicture.asset(AppIcons.emailIcon, color: AppColors.green_50,)),
+                                                          //                   )
+                                                          //                 ],
+                                                          //               ),
+                                                          //             )
+                                                          //           ],
+                                                          //         ),
+                                                          //       ),
+                                                          //     );
+                                                          //   },
+                                                          // );
                                                         },
                                                         child: Row(
                                                           children: [

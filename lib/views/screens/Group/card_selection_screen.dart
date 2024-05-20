@@ -66,6 +66,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                           itemCount:
                               storageController.allContactsForGroup.length,
                           itemBuilder: (context, index) {
+                            storageController.allContactsForGroup.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                             List<bool> isSelect = List.generate(
                                 storageController.allContactsForGroup.length,
                                 (index) => false);

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../Models/contacts_model.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
 class GroupScreen extends StatelessWidget {
@@ -161,57 +162,58 @@ class GroupScreen extends StatelessWidget {
                                   //     child: Icon(Icons.border_color_outlined, size: 18,color: AppColors.black_500),
                                   //   ),
                                   // ),
-                                  // InkWell(
-                                  //   onTap: (){
-                                  //     showDialog(
-                                  //       context: context,
-                                  //       builder: (context) {
-                                  //
-                                  //         ///<<<==================== Sign out pop up =========================>>>
-                                  //
-                                  //         return AlertDialog(
-                                  //           content: CustomText(text: "Are you sure to delete contacts?".tr, fontSize: 20, color: AppColors.black_500,),
-                                  //           actions: [
-                                  //             Row(
-                                  //               children: [
-                                  //                 Expanded(
-                                  //                   child: CustomElevatedButton(
-                                  //                     onTap: (){
-                                  //                       Get.back();
-                                  //                     },
-                                  //                     text: "No".tr,
-                                  //                     textColor: AppColors.black_500,
-                                  //                     isFillColor: false,
-                                  //                     borderColor: AppColors.green_900,
-                                  //                   ),
-                                  //                 ),
-                                  //                 SizedBox(width: 12,),
-                                  //                 Expanded(
-                                  //                   child: CustomElevatedButton(
-                                  //                     onTap: (){
-                                  //                       Get.back();
-                                  //                     },
-                                  //                     text: "Yes".tr,
-                                  //                     backgroundColor: AppColors.green_900,
-                                  //                   ),
-                                  //                 ),
-                                  //
-                                  //               ],
-                                  //             ),
-                                  //           ],
-                                  //         );
-                                  //       },
-                                  //     );
-                                  //   },
-                                  //   child: Container(
-                                  //     height: 30.h,
-                                  //     width: 30.w,
-                                  //     decoration: BoxDecoration(
-                                  //       borderRadius: BorderRadius.circular(100),
-                                  //     ),
-                                  //     child: Icon(Icons.delete_forever_rounded, size: 18,color: AppColors.black_500),
-                                  //   ),
-                                  // ),
+                                  InkWell(
+                                    onTap: (){
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+
+                                          ///<<<==================== Sign out pop up =========================>>>
+
+                                          return AlertDialog(
+                                            content: CustomText(text: "Are you sure to delete contacts?".tr, fontSize: 20, color: AppColors.black_500,),
+                                            actions: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: CustomElevatedButton(
+                                                      onTap: (){
+                                                        Get.back();
+                                                      },
+                                                      text: "No".tr,
+                                                      textColor: AppColors.black_500,
+                                                      isFillColor: false,
+                                                      borderColor: AppColors.green_900,
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 12,),
+                                                  Expanded(
+                                                    child: CustomElevatedButton(
+                                                      onTap: (){
+                                                        Get.back();
+                                                        storageController.deleteGroupRepo(index: index);
+                                                      },
+                                                      text: "Yes".tr,
+                                                      backgroundColor: AppColors.green_900,
+                                                    ),
+                                                  ),
+
+                                                ],
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 30.h,
+                                      width: 30.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(100),
+                                      ),
+                                      child: Icon(Icons.delete_forever_rounded, size: 18,color: AppColors.black_500),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),

@@ -17,6 +17,7 @@ import '../../views/screens/CardExport/all_cards_export_screen.dart';
 import '../../views/screens/CardExport/card_export_screen.dart';
 import '../../views/screens/CardSync/card_sync_screen.dart';
 import '../../views/screens/Group/create_group_screen.dart';
+import '../../views/screens/Group/group_contact_detail_screen.dart';
 import '../../views/screens/Profile/share_profile_card_screen.dart';
 import '../../views/screens/Profile/view_ecard_screen.dart';
 import '../../views/screens/SplashScreen/splash_screen.dart';
@@ -45,6 +46,7 @@ class AppRoutes {
   static String viewECardScreen = "/view_ecard_screen";
   static String shareProfileCardScreen = "/share_profile_card_screen";
   static String googleWebViewScreen = "/google_webview_screen";
+  static String groupContactDetailScreen = "/group_contact_detail_screen";
 
 
 
@@ -69,6 +71,6 @@ class AppRoutes {
     GetPage(name: profileScreen, page: () => ProfileScreen()),
     GetPage(name: viewECardScreen, page: () => ViewECardScreen()),
     GetPage(name: shareProfileCardScreen, page: () => ShareProfileCardScreen()),
-    GetPage(name: googleWebViewScreen, page: () => GoogleWebViewScreen()),
+    GetPage(name: groupContactDetailScreen, page: () => GroupContactDetailScreen()),
   ];
 }

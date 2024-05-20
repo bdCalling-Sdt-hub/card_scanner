@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,12 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:share_plus/share_plus.dart';
 
 import '../Helpers/prefs_helper.dart';
 import '../Models/contacts_model.dart';
 import '../utils/app_strings.dart';
+import 'package:path/path.dart' as p;
 
 class StorageController extends GetxController {
   @override
@@ -61,6 +64,13 @@ class StorageController extends GetxController {
     singleGroupContacts.add(contactsModel);
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
+  }
+
+  ///===================>> Delete Group Repo <<===============================
+  deleteGroupRepo({required int index}){
+    groupedContactsList.removeAt(index);
+    PrefsHelper.saveGroupedList(groupedContactsList);
+    update();
   }
 
   ///==================== new group repo==============================>>>///
@@ -112,6 +122,69 @@ class StorageController extends GetxController {
     allContactsForGroup
         .removeWhere((element) => selectedGroupContacts.contains(element));
   }
+
+
+  ///<<<========================= Excel export repo ================================>>>>
+  Future<void> exportToExcel({required List<ContactsModel> contactList}) async {
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Contacts'];
+    CellStyle cellStyle = CellStyle(
+      // backgroundColorHex: "#1AFF1A",
+      fontFamily: getFontFamily(FontFamily.Calibri),
+      horizontalAlign: HorizontalAlign.Center,
+      verticalAlign: VerticalAlign.Center,
+    );
+
+    // Add header row
+    List<TextCellValue> headers = [
+      TextCellValue("ID"),
+      TextCellValue("Image URL"),
+      TextCellValue("Name"),
+      TextCellValue("Designation"),
+      TextCellValue("Company Name"),
+      TextCellValue("Email"),
+      TextCellValue("Phone Number"),
+      TextCellValue("Address")
+    ];
+
+    sheetObject.appendRow(headers);
+
+    // Add data rows
+    for (var contact in contactList) {
+      List<TextCellValue> data = [
+        TextCellValue(contact.id),
+        TextCellValue(contact.imageUrl),
+        TextCellValue(contact.name),
+        TextCellValue(contact.designation),
+        TextCellValue(contact.companyName),
+        TextCellValue(contact.email),
+        TextCellValue(contact.phoneNumber),
+        TextCellValue(contact.address),
+      ];
+      sheetObject.appendRow(data);
+    }
+
+    // Save the file in the documents directory
+    Directory? directory;
+    if (Platform.isAndroid) {
+      directory = await getExternalStorageDirectory();  // Get external storage directory
+    } else if (Platform.isIOS) {
+      directory = await getApplicationDocumentsDirectory();  // Get application documents directory
+    } else {
+      directory = await getApplicationDocumentsDirectory();  // Default to application documents directory
+    }
+
+    String filePath = p.join(directory!.path, 'Contacts.xlsx');
+    var xFile = XFile(filePath);
+
+    if (kDebugMode) {
+      print('Excel file created at $filePath');
+    }
+
+    // Provide the option to share the file
+    Share.shareXFiles([xFile], text: 'Here is your contacts Excel file.');
+  }
+
 
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 

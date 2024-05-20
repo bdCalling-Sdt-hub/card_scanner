@@ -14,11 +14,6 @@ import '../../widgets/CustomBackButton/custom_back_button.dart';
 class CardExportScreen extends StatelessWidget {
   CardExportScreen({super.key});
 
-  // List cardQrList = [
-  //   {"qrImg" : AppImages.qr1Img, "title" : "Mohsin", "designation": "Runner"},
-  //   {"qrImg" : AppImages.qr1Img, "title" : "Cool", "designation": "Runner"},
-  //   {"qrImg" : AppImages.qr1Img, "title" : "Frozen", "designation": "Runner"},
-  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +52,7 @@ class CardExportScreen extends StatelessWidget {
                             QrImageView(
                               data: "${selectedContact.name}/${selectedContact.designation}/${selectedContact.companyName}/${selectedContact.email}/${selectedContact.phoneNumber}/${selectedContact.address} ",
                               version: QrVersions.auto,
-                              size: 250,
+                              size: 200,
                               gapless: false,
                               // embeddedImage: FileImage(File(selectedContact.imageUrl)),
                               embeddedImageStyle: QrEmbeddedImageStyle(

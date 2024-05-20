@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   PaymentController paymentController = Get.put(PaymentController());
 
-  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
+  OCRCreateCardController ocrCreateCardController =
+      Get.put(OCRCreateCardController());
   StorageController storageController = Get.put(StorageController());
   OcrImageDialog ocrImageDialog = OcrImageDialog();
 
@@ -289,7 +290,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               8.w,
                                                                         ),
                                                                         CustomText(
-                                                                          text: "Create cards manually".tr,
+                                                                          text:
+                                                                              "Create cards manually".tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -304,8 +306,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   onTap:
                                                                       () async {
                                                                     String
-                                                                        responseText = await ocrCreateCardController.selectImageCamera(isOcr: true).then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
-                                                                    ocrImageDialog.ocrCameraImageDialog(context, responseText);
+                                                                        responseText =
+                                                                        await ocrCreateCardController
+                                                                            .selectImageCamera(isOcr: true)
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!),
+                                                                            )
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.processImage(value!),
+                                                                            );
+                                                                    ocrImageDialog.ocrCameraImageDialog(
+                                                                        context,
+                                                                        responseText);
                                                                   },
                                                                   child:
                                                                       Container(
@@ -336,7 +348,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               8.w,
                                                                         ),
                                                                         CustomText(
-                                                                          text: "OCR with camera image".tr,
+                                                                          text:
+                                                                              "OCR with camera image".tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -351,8 +364,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   onTap:
                                                                       () async {
                                                                     String
-                                                                        responseText = await ocrCreateCardController.selectImageGallery().then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
-                                                                    ocrImageDialog.ocrGalleryImageDialog(context, responseText);
+                                                                        responseText =
+                                                                        await ocrCreateCardController
+                                                                            .selectImageGallery()
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!),
+                                                                            )
+                                                                            .then(
+                                                                              (value) => ocrCreateCardController.processImage(value!),
+                                                                            );
+                                                                    ocrImageDialog.ocrGalleryImageDialog(
+                                                                        context,
+                                                                        responseText);
                                                                   },
                                                                   child:
                                                                       Container(
@@ -376,7 +399,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                               8.w,
                                                                         ),
                                                                         CustomText(
-                                                                          text: "OCR with gallery image".tr,
+                                                                          text:
+                                                                              "OCR with gallery image".tr,
                                                                           fontSize:
                                                                               16,
                                                                         )
@@ -435,11 +459,109 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         buildServiceItems(
                                           onTap: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  content: SizedBox(
+                                                    height: 100,
+                                                    width: Get.width,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            storageController
+                                                                .exportToExcel(
+                                                                    contactList:
+                                                                        storageController
+                                                                            .contacts);
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets.symmetric(horizontal: 12.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.w),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.r),
+                                                              color: AppColors
+                                                                  .green_600,
+                                                            ),
+                                                            child: Row(
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 20.w,
+                                                                ),
+                                                                SvgPicture.asset(
+                                                                    AppIcons
+                                                                        .excelIcon),
+                                                                SizedBox(
+                                                                  width: 20.w,
+                                                                ),
+                                                                CustomText(
+                                                                  text:
+                                                                      "Excel Export"
+                                                                          .tr,
+                                                                  fontSize: 16,
+                                                                  fontWeight: FontWeight.w500,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            Get.toNamed(AppRoutes
+                                                                .allCardsExportScreen);
+                                                          },
+                                                          child: Container(
+                                                            margin: EdgeInsets.symmetric(horizontal: 12.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.w),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8.r),
+                                                              color: AppColors
+                                                                  .green_600,
+                                                            ),
+                                                            child: Row(
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 20.w,
+                                                                ),
+                                                                Icon(Icons.qr_code_2),
+                                                                SizedBox(
+                                                                  width: 20.w,
+                                                                ),
+                                                                CustomText(
+                                                                  text:
+                                                                      "Qr Export"
+                                                                          .tr,
+                                                                  fontSize: 16,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
                                             // Get.to(AllCardsExportScreen());
-                                            Get.toNamed(
-                                                AppRoutes.allCardsExportScreen);
                                           },
-                                          icon: AppIcons.excelIcon,
+                                          isExport: true,
                                           title: AppStrings.cardExport.tr,
                                         ),
                                         buildServiceItems(
@@ -547,8 +669,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Padding buildServiceItems(
       {required VoidCallback onTap,
-      required String icon,
-      required String title}) {
+      String icon = "",
+      required String title,
+      bool isExport = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: GestureDetector(
@@ -556,7 +679,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(icon),
+            isExport ? Icon(Icons.ios_share) : SvgPicture.asset(icon),
             SizedBox(
               height: 4.h,
             ),

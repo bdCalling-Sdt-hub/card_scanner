@@ -219,6 +219,8 @@ class Locales extends Translations{
       "OCR with gallery image" : "OCR with gallery image",
       "OCR with camera image" : "OCR with camera image",
       "Display name card logo" : "Display name card logo",
+      "Excel Export" : "Excel Export",
+      "Qr Export" : "QR Export",
 
       ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
