@@ -48,9 +48,7 @@ class OcrImageDialog{
                   child: CustomElevatedButton(
                     onTap: () async {
                       // SystemNavigator.pop();
-                      String newResponse = await ocrCreateCardController.selectImageCamera(isOcr: true).then(
-                            (value) => ocrCreateCardController.processImage(value!),
-                      );
+                      String newResponse = await ocrCreateCardController.selectImageCamera(isOcr: true).then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
                       responseText += newResponse;
                       Get.back();
                       ocrCreateCardController.textFormatRepo(extractedText: responseText);
@@ -104,9 +102,7 @@ class OcrImageDialog{
                   child: CustomElevatedButton(
                     onTap: () async {
                       // SystemNavigator.pop();
-                      String newResponse = await ocrCreateCardController.selectImageGallery().then(
-                            (value) => ocrCreateCardController.processImage(value!),
-                      );
+                      String newResponse = await ocrCreateCardController.selectImageGallery().then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
                       responseText += newResponse;
                       Get.back();
                       ocrCreateCardController.textFormatRepo(extractedText: responseText);

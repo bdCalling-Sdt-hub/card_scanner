@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -22,7 +23,6 @@ class ShareProfileCardScreen extends StatelessWidget {
   ScreenshotController screenshotController = ScreenshotController();
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
 
-  String link = "https://cf88BYf=name-card-scanner";
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +95,11 @@ class ShareProfileCardScreen extends StatelessWidget {
               ///<<<================ Share Card Button ======================>>>
 
               CustomElevatedButton(
-                onTap: () {
-                  Share.share(link);
+                onTap: () async {
+                  XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                  if(image != null){
+                    Share.shareXFiles([image]);
+                  }
                 },
                 borderRadius: 24,
                 text: AppStrings.share.tr,
@@ -138,7 +141,6 @@ class ShareProfileCardScreen extends StatelessWidget {
                   InkWell(
                     onTap: () async {
                       screenShotHelper.captureAndSaveImage(screenshotController);
-
                       // _saveQRToGallery(context);
                     },
                     child: Container(

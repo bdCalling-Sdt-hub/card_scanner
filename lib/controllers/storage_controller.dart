@@ -99,7 +99,7 @@ class StorageController extends GetxController {
     if (PrefsHelper.unGroupedContacts.isEqual(0)) {
       unGroupedContacts = allContactsForGroup.length - groupedContactsCount;
     } else {
-      unGroupedContacts = PrefsHelper.unGroupedContacts - groupedContactsCount;
+      unGroupedContacts = await PrefsHelper.getInt("unGroupedContacts") - groupedContactsCount;
     }
     PrefsHelper.setInt('unGroupedContacts', unGroupedContacts);
     if (unGroupedContacts < 0) {

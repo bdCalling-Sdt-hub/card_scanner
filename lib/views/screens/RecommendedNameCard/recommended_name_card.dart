@@ -3,6 +3,7 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../utils/app_colors.dart';
@@ -13,7 +14,9 @@ import '../../widgets/customText/custom_text.dart';
 import '../Profile/IneerWidget/custom_container_button.dart';
 
 class RecommendNameCardScreen extends StatelessWidget {
-  const RecommendNameCardScreen({super.key});
+  RecommendNameCardScreen({super.key});
+
+  String recommendLink = "https://drive.google.com/drive/folders/12pj2lHcyCttzoLA6WVG0rhb_qhofQLow";
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,23 @@ class RecommendNameCardScreen extends StatelessWidget {
 
               SizedBox(height: 40.h),
 
-              Image.asset(AppImages.qr1Img, height: 220.h, width: 220.w,),
+              QrImageView(
+                data: recommendLink,
+                version: QrVersions.auto,
+                size: 200,
+                gapless: false,
+                // embeddedImage: FileImage(File(selectedContact.imageUrl)),
+                embeddedImageStyle:
+                QrEmbeddedImageStyle(size: Size(100, 100)),
+                errorStateBuilder: (context, error) {
+                  return Center(
+                    child: Text(
+                      "Oh! Something went wrong...".tr,
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                },
+              ),
 
               SizedBox(height: 24.h),
 
@@ -71,9 +90,9 @@ class RecommendNameCardScreen extends StatelessWidget {
                   child: CustomContainerButton(
                     onTap: () {
                       // screenShotHelper.captureAndSaveImage(screenshotController);
-                      Share.share("this is test share");
+                      Share.share(recommendLink);
                     },
-                    text: AppStrings.shareCard.tr,
+                    text: "Share Name Card".tr,
                     ifImage: true,
                     svgIcon: AppIcons.sendIcon,
                     imageHeight: 20,

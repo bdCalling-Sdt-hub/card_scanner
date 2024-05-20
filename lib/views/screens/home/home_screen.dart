@@ -304,12 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   onTap:
                                                                       () async {
                                                                     String
-                                                                        responseText =
-                                                                        await ocrCreateCardController
-                                                                            .selectImageCamera(isOcr: true)
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.processImage(value!),
-                                                                            );
+                                                                        responseText = await ocrCreateCardController.selectImageCamera(isOcr: true).then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
                                                                     ocrImageDialog.ocrCameraImageDialog(context, responseText);
                                                                   },
                                                                   child:
@@ -356,12 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   onTap:
                                                                       () async {
                                                                     String
-                                                                        responseText =
-                                                                        await ocrCreateCardController
-                                                                            .selectImageGallery()
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.processImage(value!),
-                                                                            );
+                                                                        responseText = await ocrCreateCardController.selectImageGallery().then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
                                                                     ocrImageDialog.ocrGalleryImageDialog(context, responseText);
                                                                   },
                                                                   child:

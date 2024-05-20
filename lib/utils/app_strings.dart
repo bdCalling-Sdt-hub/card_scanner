@@ -204,6 +204,7 @@ class AppStrings{
   static String eCard = "E-Card";
   static String shareSaveCard = "Share & Save Card";
   static String shareCard = "Share Card";
+  static String shareNameCard = "Share Name Card";
   static String pointYourCamera = "Point your camera at the QR code.";
   static String share = "Share";
   static String download = "Download";

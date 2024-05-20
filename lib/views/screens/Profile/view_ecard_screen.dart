@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -49,7 +50,11 @@ class ViewECardScreen extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(width: 30.w)
+                  CustomBackButton(
+                      icon: Icons.file_download_outlined,
+                      onTap: () async {
+                        await screenShotHelper.captureAndSaveImage(screenshotController);
+                      }),
                 ],
               ),
             ),
@@ -270,9 +275,10 @@ class ViewECardScreen extends StatelessWidget {
 
                   CustomContainerButton(
                     onTap: () async {
-
-                      imagePath = await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => screenShotHelper.getImagePath(imageBytes: value));
-                      Share.share(imagePath!.path);
+                      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                      if(image != null){
+                        Share.shareXFiles([image]);
+                      }
                     },
                     text: AppStrings.shareCard.tr,
                     ifImage: true,

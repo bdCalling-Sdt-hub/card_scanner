@@ -27,7 +27,10 @@ class CustomContainerButton extends StatelessWidget {
     this.ifImage = false,
     this.svgIcon = "",
     this.ifBorder = false,
-    required this.onTap
+    required this.onTap,
+    this.paddingH = 4,
+    this.paddingV = 0,
+
   });
 
   double height;
@@ -48,6 +51,8 @@ class CustomContainerButton extends StatelessWidget {
   FontWeight fontWeight;
   String text;
   VoidCallback onTap;
+  double paddingH;
+  double paddingV;
 
 
   @override

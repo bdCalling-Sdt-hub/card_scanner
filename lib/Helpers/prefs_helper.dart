@@ -70,7 +70,8 @@ class PrefsHelper extends GetxController {
 
   static Future<int> getInt(String key) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getInt(key) ?? (-1);
+    unGroupedContacts  = preferences.getInt("unGroupedContacts") ?? 0;
+    return preferences.getInt(key) ?? (0);
   }
 
   static Future<List<dynamic>> getList(String key) async {

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -13,7 +14,7 @@ import 'package:screenshot/screenshot.dart';
 class ScreenShotHelper{
 
 
-  ///==============Capture image save to gallery repo=========================>>>
+  ///============== Capture image repo=========================>>>
   Future<Uint8List?> captureAndSaveImage(ScreenshotController screenshotController) async{
     final Uint8List? uint8List = await screenshotController.capture();
     if (kDebugMode) {
@@ -22,7 +23,7 @@ class ScreenShotHelper{
     if(uint8List != null){
       final PermissionStatus status = await Permission.storage.request();
       if(status.isGranted){
-        final result = await ImageGallerySaver.saveImage(uint8List);
+        final result = await ImageGallerySaver.saveImage(uint8List,name: "screen_shot_mage",);
         if(result['isSuccess']){
           Get.snackbar("Image downloaded to your phone gallery".tr, "");
           if (kDebugMode) {
@@ -45,6 +46,34 @@ class ScreenShotHelper{
     return uint8List;
   }
 
+  ///=================>> Gallery Image Save Repo <<<============================
+  Future<void> galleryImageSaver({Uint8List? uint8List}) async {
+    if(uint8List != null){
+      final PermissionStatus status = await Permission.storage.request();
+      if(status.isGranted){
+        final result = await ImageGallerySaver.saveImage(uint8List,name: "QrCodeImage");
+        if(result['isSuccess']){
+          Get.snackbar("Image downloaded to your phone gallery".tr, "");
+          if (kDebugMode) {
+            print("Image saved to gallery");
+          }else{
+            if (kDebugMode) {
+              print("Failed to save image: ${result['error']}");
+            }
+          }
+        }
+      }else{
+        await Permission.storage.request();
+        if (kDebugMode) {
+          print("Permission to access storage denied");
+        }
+      }
+    }else{
+      Get.snackbar("Screenshot is failed".tr, "");
+    }
+  }
+
+  ///=================>> Get Captured Image Path <<============================
   File? file;
   Future<File?> getImagePath({Uint8List? imageBytes}) async {
     if (imageBytes != null) {
@@ -55,6 +84,8 @@ class ScreenShotHelper{
     }
     return file;
   }
+
+
 
 ///==============another method Capture image save to gallery repo=========================>>>
   //RepaintBoundary(

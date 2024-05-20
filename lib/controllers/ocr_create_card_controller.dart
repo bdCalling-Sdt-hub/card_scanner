@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import '../Models/gemimi_response_model.dart';
@@ -157,6 +158,40 @@ class OCRCreateCardController extends GetxController{
       return imagePath;
     }
     return "";
+  }
+
+  ///<<<================== Crop Image =======================================>>>
+  Future<String?> cropImage({required String imgPath}) async {
+    if (kDebugMode) {
+      print("Image Path: $imgPath");
+    }
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: imgPath,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      imagePath = croppedFile.path;
+      update();
+    }
+    return imagePath;
   }
 
   ///<<<================== Extract Text From Image ==========================>>>
