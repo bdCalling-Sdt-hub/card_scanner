@@ -182,14 +182,25 @@ class StorageController extends GetxController {
     }
 
     String filePath = p.join(directory!.path, 'Contacts.xlsx');
-    var xFile = XFile(filePath);
+    File(filePath)
+      ..createSync(recursive: true)
+      ..writeAsBytesSync(excel.encode()!);
 
     if (kDebugMode) {
       print('Excel file created at $filePath');
     }
 
     // Provide the option to share the file
-    Share.shareXFiles([xFile], text: 'Here is your contacts Excel file.');
+    Share.shareFiles([filePath], text: 'Here is your contacts Excel file.');
+    // var xFile = XFile(filePath);
+    //
+    // if (kDebugMode) {
+    //   print('Excel file created at $filePath');
+    // }
+    //
+    //   Share.shareXFiles([xFile], text: 'Here is your contacts Excel file.');
+
+    // Provide the option to share the file
   }
 
 
@@ -206,8 +217,7 @@ class StorageController extends GetxController {
       if (file.existsSync()) {
         final data = await file.readAsString();
         final List<dynamic> jsonList = json.decode(data);
-        contacts =
-            jsonList.map((json) => ContactsModel.fromJson(json)).toList();
+        contacts = jsonList.map((json) => ContactsModel.fromJson(json)).toList();
         allContactsForGroup.addAll(contacts);
         update();
       }

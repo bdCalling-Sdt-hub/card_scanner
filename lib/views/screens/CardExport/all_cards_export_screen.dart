@@ -14,11 +14,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 
-class AllCardsExportScreen extends StatelessWidget {
+class AllCardsExportScreen extends StatefulWidget {
   AllCardsExportScreen({super.key});
 
+  @override
+  State<AllCardsExportScreen> createState() => _AllCardsExportScreenState();
+}
+
+class _AllCardsExportScreenState extends State<AllCardsExportScreen> {
   StorageController storageController = Get.put(StorageController());
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration(seconds: 2),() {
+      return storageController.loadContacts();
+    },);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

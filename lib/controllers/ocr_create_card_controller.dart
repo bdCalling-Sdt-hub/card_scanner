@@ -56,8 +56,7 @@ class OCRCreateCardController extends GetxController{
       ]
     };
     try {
-      var response =
-      await http.post(url, body: jsonEncode(bodyData), headers: headers);
+      var response = await http.post(url, body: jsonEncode(bodyData), headers: headers);
       isLoading = false;
       update();
       if (kDebugMode) {
