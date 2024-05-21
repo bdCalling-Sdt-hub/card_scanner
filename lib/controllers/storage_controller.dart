@@ -22,7 +22,7 @@ import 'package:path/path.dart' as p;
 
 class StorageController extends GetxController {
   @override
-  void onInit() async {
+  void onInit(){
     // TODO: implement onInit
     loadContacts().then((value) => initializeSelectionList());
     allContactsForGroup.clear();
@@ -211,6 +211,7 @@ class StorageController extends GetxController {
   Future<void> loadContacts() async {
     allContactsForGroup.clear();
     isLoading = true;
+    update();
     try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/contacts.json');
@@ -222,6 +223,7 @@ class StorageController extends GetxController {
         update();
       }
       isLoading = false;
+      update();
     } catch (e) {
       if (kDebugMode) {
         print("Error loading contacts: $e");

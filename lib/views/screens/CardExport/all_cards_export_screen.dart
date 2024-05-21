@@ -14,27 +14,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 
-class AllCardsExportScreen extends StatefulWidget {
+class AllCardsExportScreen extends StatelessWidget {
   AllCardsExportScreen({super.key});
 
-  @override
-  State<AllCardsExportScreen> createState() => _AllCardsExportScreenState();
-}
-
-class _AllCardsExportScreenState extends State<AllCardsExportScreen> {
   StorageController storageController = Get.put(StorageController());
 
   @override
-  void initState() {
-    // TODO: implement initState
-    Future.delayed(Duration(seconds: 2),() {
-      return storageController.loadContacts();
-    },);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    storageController.isSelected = List.generate(storageController.contacts.length, (index) => false);
     return Scaffold(
       // bottomNavigationBar: BottomNavBar(currentIndex: 1),
 
@@ -89,7 +76,7 @@ class _AllCardsExportScreenState extends State<AllCardsExportScreen> {
                           width: Get.width,
                           height: 100.h,
                           decoration: BoxDecoration(
-                            border: Border.all(color: storageController.isSelected[index]? AppColors.green_900 : AppColors.transparentColor),
+                              border: Border.all(color: storageController.isSelected[index]? AppColors.green_900 : AppColors.transparentColor),
                               borderRadius: BorderRadius.circular(12.r)
                           ),
                           child: Row(
