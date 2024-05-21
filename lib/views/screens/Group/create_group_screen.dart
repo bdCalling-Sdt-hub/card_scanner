@@ -19,6 +19,9 @@ import '../../widgets/customText/custom_text.dart';
 
 class CreateGroupScreen extends StatelessWidget {
   CreateGroupScreen({super.key});
+
+
+
   Map<String, List<String>> lists = {};
   StorageController storageController = Get.put(StorageController());
   String listName = "";

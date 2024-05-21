@@ -31,7 +31,6 @@ class AppRoutes {
   static String signUpScreen = "/signup_screen";
   static String signInScreen = "/signin_screen";
   static String resetPasswordScreen = "/reset_password_screen";
-  static String otpScreen = "/otp_screen";
   static String forgotPasswordScreen = "/forgot_password_screen";
   static String allCardsScreen = "/all_cards_screen";
   static String cardSyncScreen = "/card_sync_screen";
@@ -57,7 +56,6 @@ class AppRoutes {
     GetPage(name: signUpScreen, page: () => SignUpScreen()),
     GetPage(name: signInScreen, page: () => SignInScreen()),
     GetPage(name: resetPasswordScreen, page: () => ResetPasswordScreen()),
-    GetPage(name: otpScreen, page: () => OtpScreen()),
     GetPage(name: forgotPasswordScreen, page: () => ForgotPasswordScreen()),
     GetPage(name: allCardsScreen, page: () => AllCardsScreen()),
     GetPage(name: cardSyncScreen, page: () => CardSyncScreen()),

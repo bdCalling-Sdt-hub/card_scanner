@@ -51,7 +51,9 @@ class ViewECardScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   CustomBackButton(
+                    width: 50,
                       icon: Icons.file_download_outlined,
+                      iconSize: 22,
                       onTap: () async {
                         await screenShotHelper.captureAndSaveImage(screenshotController);
                       }),

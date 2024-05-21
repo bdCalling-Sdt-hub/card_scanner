@@ -64,6 +64,7 @@ class AllCardsExportScreen extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     itemCount: storageController.contacts.length,
                     itemBuilder: (context, index) {
+                      storageController.contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                       ContactsModel contacts = storageController.contacts[index];
                       return GestureDetector(
                         onTap: () {

@@ -73,6 +73,13 @@ class StorageController extends GetxController {
     update();
   }
 
+  ///===================>> Delete Group Contact Repo <<===============================
+  deleteGroupContactRepo({required int groupIndex,required int listIndex}){
+    groupedContactsList[groupIndex].contactsList.removeAt(listIndex);
+    PrefsHelper.saveGroupedList(groupedContactsList);
+    update();
+  }
+
   ///==================== new group repo==============================>>>///
   List<ContactsModel> groupList = [];
   int groupCount = 0;

@@ -78,6 +78,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                        height: 250.h,
                        width: Get.width,
                        decoration: BoxDecoration(
+                         color: AppColors.green_600,
                          borderRadius: BorderRadius.circular(8.r),
                          image: StorageController.imagePath != null && StorageController.imagePath!.isNotEmpty
                              ? DecorationImage(image: FileImage(File("${StorageController.imagePath}")), fit: BoxFit.cover)
@@ -88,6 +89,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                        height: 150.h,
                        width: 150.w,
                        decoration: BoxDecoration(
+                         color: AppColors.green_600,
                          borderRadius: BorderRadius.circular(8.r),
                          image: StorageController.imagePath != null && StorageController.imagePath!.isNotEmpty
                              ? DecorationImage(image: FileImage(File("${StorageController.imagePath}")), fit: BoxFit.cover)

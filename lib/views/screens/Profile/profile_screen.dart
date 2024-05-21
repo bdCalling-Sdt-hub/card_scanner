@@ -202,6 +202,7 @@ class ProfileScreen extends StatelessWidget {
                                                 Get.back();
                                               },
                                               text: "No".tr,
+                                              height: 48.h,
                                               textColor: AppColors.black_500,
                                               isFillColor: false,
                                               borderColor: AppColors.green_900,
@@ -215,6 +216,7 @@ class ProfileScreen extends StatelessWidget {
                                                 authController.signOutRepo();
                                               },
                                               text: "Yes".tr,
+                                              height: 48.h,
                                               backgroundColor: AppColors.green_900,
                                             ),
                                           ),

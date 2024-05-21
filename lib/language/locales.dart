@@ -221,6 +221,8 @@ class Locales extends Translations{
       "Display name card logo" : "Display name card logo",
       "Excel Export" : "Excel Export",
       "Qr Export" : "QR Export",
+      "Groups" : "Groups",
+      "No Groups Created" : "No Groups Created",
 
       ///<<<=================== Bottom Nav Bar Texts ========================>>>
 

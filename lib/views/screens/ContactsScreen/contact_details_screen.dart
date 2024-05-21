@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/routes/app_routes.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
@@ -16,8 +16,7 @@ import '../../widgets/customText/custom_text.dart';
 class ContactDetailsScreen extends StatelessWidget {
   ContactDetailsScreen({super.key});
 
-  StorageController phoneStorageController =
-      Get.put(StorageController());
+  StorageController phoneStorageController = Get.put(StorageController());
 
   int index = Get.arguments["index"];
 
@@ -28,7 +27,7 @@ class ContactDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -48,8 +47,42 @@ class ContactDetailsScreen extends StatelessWidget {
                         fontSize: 20,
                       ),
                     ),
-                    SizedBox(
-                      width: 30,
+                    InkWell(
+                      onTap: () async {
+                        if (phoneStorageController.selectedContacts.isEmpty) {
+                          phoneStorageController.selectedContacts
+                              .add(contactDetails);
+                        }
+                        Get.toNamed(AppRoutes.cardExportScreen);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: AppColors.blackColor,
+                        ),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            Icon(
+                              Icons.qr_code_2,
+                              size: 16,
+                              color: AppColors.whiteColor,
+                            ),
+                            SizedBox(
+                              width: 4.w,
+                            ),
+                            CustomText(
+                              text: "Qr Export".tr,
+                              fontSize: 14,
+                              color: AppColors.whiteColor,
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -61,10 +94,11 @@ class ContactDetailsScreen extends StatelessWidget {
                       height: 220,
                       width: Get.width * 0.9,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                            image: FileImage(File(contactDetails.imageUrl)))
+                          color: AppColors.green_600,
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: FileImage(File(contactDetails.imageUrl))),
                       ),
                     ),
                     SizedBox(height: 40.h),
@@ -77,7 +111,8 @@ class ContactDetailsScreen extends StatelessWidget {
                         title: AppStrings.company.tr,
                         value: contactDetails.companyName),
                     customWrap(
-                        title: AppStrings.email.tr, value: contactDetails.email),
+                        title: AppStrings.email.tr,
+                        value: contactDetails.email),
                     customWrap(
                         title: AppStrings.contact.tr,
                         value: contactDetails.phoneNumber),

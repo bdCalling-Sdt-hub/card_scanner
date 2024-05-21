@@ -94,7 +94,7 @@ class GroupScreen extends StatelessWidget {
                   GetBuilder<StorageController>(
                     builder: (storageController) {
                       return CustomText(
-                        text:
+                        text: storageController.groupedContactsList.isEmpty? "${AppStrings.recentlyAdded.tr} (0)" :
                             "${AppStrings.recentlyAdded.tr} (${storageController.groupCount})",
                         fontSize: 16,
                         color: AppColors.black_400,
@@ -112,12 +112,17 @@ class GroupScreen extends StatelessWidget {
                   // ),
 
                   ///<<<================== New Group Created ====================>>>
-                  SizedBox(height: 32.h),
-                  Expanded(
+                  SizedBox(height: 12.h),
+                  CustomText(text:"${"Groups".tr}:", fontSize: 16, fontWeight: FontWeight.w500,),
+                  SizedBox(height: 16.h),
+                  storageController.groupedContactsList.isEmpty
+                      ? Center(child: CustomText(text: "No Groups Created".tr,))
+                      : Expanded(
                     child: GetBuilder<StorageController>(builder: (storageController) {
                       return storageController.isLoading? Center(child: CircularProgressIndicator()) : ListView.builder(
                         itemCount: storageController.groupedContactsList.length,
                         itemBuilder: (context, index) {
+                          storageController.groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                           return GestureDetector(
                             onTap: () {
                               PrefsHelper.getGroupedList().then((value) {
@@ -142,10 +147,10 @@ class GroupScreen extends StatelessWidget {
                                   Expanded(
                                     child: CustomText(
                                       textAlign: TextAlign.left,
-                                      text:
-                                      "${AppStrings.group.tr}: ${storageController.groupedContactsList[index].name}",
+                                      text: storageController.groupedContactsList[index].name,
                                       color: AppColors.black_500,
                                       fontSize: 16,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
 
@@ -168,7 +173,7 @@ class GroupScreen extends StatelessWidget {
                                         context: context,
                                         builder: (context) {
 
-                                          ///<<<==================== Sign out pop up =========================>>>
+                                          ///<<<==================== Delete group pop up =========================>>>
 
                                           return AlertDialog(
                                             content: CustomText(text: "Are you sure to delete contacts?".tr, fontSize: 20, color: AppColors.black_500,),
@@ -181,12 +186,13 @@ class GroupScreen extends StatelessWidget {
                                                         Get.back();
                                                       },
                                                       text: "No".tr,
+                                                      height: 48.h,
                                                       textColor: AppColors.black_500,
                                                       isFillColor: false,
                                                       borderColor: AppColors.green_900,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 12,),
+                                                  SizedBox(width: 12.w,),
                                                   Expanded(
                                                     child: CustomElevatedButton(
                                                       onTap: (){
@@ -194,6 +200,7 @@ class GroupScreen extends StatelessWidget {
                                                         storageController.deleteGroupRepo(index: index);
                                                       },
                                                       text: "Yes".tr,
+                                                      height: 48.h,
                                                       backgroundColor: AppColors.green_900,
                                                     ),
                                                   ),
@@ -211,9 +218,10 @@ class GroupScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(100),
                                       ),
-                                      child: Icon(Icons.delete_forever_rounded, size: 18,color: AppColors.black_500),
+                                      child: Icon(Icons.delete_forever_rounded, size: 22,color: AppColors.black_500),
                                     ),
                                   ),
+                                  SizedBox(width: 8.w,),
                                 ],
                               ),
                             ),
