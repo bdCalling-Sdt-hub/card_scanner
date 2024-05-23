@@ -73,5 +73,6 @@ class AppRoutes {
     GetPage(name: shareProfileCardScreen, page: () => ShareProfileCardScreen()),
     GetPage(name: groupContactDetailScreen, page: () => GroupContactDetailScreen()),
     GetPage(name: editGroupScreen, page: () => EditGroupScreen()),
+    GetPage(name: googleWebViewScreen, page: () => GoogleWebViewScreen()),
   ];
 }
