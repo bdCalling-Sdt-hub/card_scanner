@@ -18,7 +18,15 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Permission.storage.request();
+  var status = await Permission.storage.request();
+  if (status.isDenied) {
+    await Permission.storage.request();
+  }
+
+// You can also directly ask permission about its status.
+  if (await Permission.storage.isRestricted) {
+    print("Why this is restricted?");
+  }
 
   DependencyInjection di = DependencyInjection();
   di.dependencies();
