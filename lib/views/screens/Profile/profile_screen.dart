@@ -21,12 +21,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/ocr_create_card_controller.dart';
 import 'IneerWidget/custom_container_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
   AuthController authController = Get.put(AuthController());
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
 
   @override
   Widget build(BuildContext context) {
@@ -47,214 +49,220 @@ class ProfileScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           child: GetBuilder<ProfileController>(builder: (profileController) {
-            return Column(
-              children: [
-                CustomText(
-                  text: AppStrings.myProfile.tr,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20,
-                ),
-                SizedBox(height: 20.h),
-
-                ///<<<====================== Profile Details ==================>>>
-
-                SizedBox(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 80.h,
-                        width: 80.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          image: PrefsHelper.profileImagePath.isEmpty
-                              ? DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(AppImages.blankProfileImage))
-                              : DecorationImage(
-                              fit: BoxFit.fill,
-                              image: FileImage(File(PrefsHelper.profileImagePath))),
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Expanded(
-                        flex: 10,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.green_900,
-                            ),
-                            CustomText(
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
-                              color: AppColors.black_400,
-                              fontSize: 16,
-                            ),
-                            SizedBox(height: 4.h),
-                            CustomText(
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 18,
-                              color: AppColors.black_400,
-                            )
-                          ],
-                        ),
-                      ),
-                      Spacer(),
-
-                      ///<<<============== Edit Card ==========================>>>
-
-                      CustomContainerButton(
-                          onTap: (){
-                            Get.to(EditProfileScreen());
-                          },
-                          text: AppStrings.edit.tr
-                      ),
-                    ],
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomText(
+                    text: AppStrings.myProfile.tr,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
                   ),
-                ),
-                SizedBox(height: 24.h),
-
-                ///<<<===================== View Card Items ===================>>>
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.h),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(
-                        cardViewList.length,
-                            (index) => InkWell(
-                          onTap: (){
-                            if(index == 0){
-                              Get.to(ViewECardScreen());
-                            } else if(index == 1){
-                              Get.to(MyQrCodeScreen());
-                            }
-                          },
-                          child: Container(
-                            height: 65.h,
-                            width: 120.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
-                                border: Border.all(color: AppColors.black_400)
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                cardViewList[index]["icon"],
-                                CustomText(
-                                  text: cardViewList[index]["text"],
-                                  fontSize: 16,
-                                )
-                              ],
-                            ),
+                  SizedBox(height: 20.h),
+              
+                  ///<<<====================== Profile Details ==================>>>
+              
+                  SizedBox(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 80.h,
+                          width: 80.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            image: PrefsHelper.profileImagePath.isEmpty
+                                ? DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(AppImages.blankProfileImage))
+                                : DecorationImage(
+                                fit: BoxFit.fill,
+                                image: FileImage(File(PrefsHelper.profileImagePath))),
                           ),
                         ),
-                      )
-                  ),
-                ),
-                SizedBox(height: 40.h),
-
-                ///<<<=================== Services List =======================>>>
-
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(color: AppColors.black_400)
-                  ),
-                  child: Column(
-                    children: List.generate(
-                      servicesList.length, (index) =>
-                        InkWell(
-                          onTap: (){
-                            if(index == 2 ){
-                              Get.to(SettingsScreenMain());
-                            } else if(index == 0 ){
-                              Get.to(RecommendNameCardScreen());
-                            } else if(index == 1 ){
-                              Get.to(FAQScreen());
-                            } else if(index == 3 ){
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-
-                                  ///<<<==================== Sign out pop up =========================>>>
-
-                                  return AlertDialog(
-                                    content: CustomText(text: "Are you sure to sign out?".tr, fontSize: 20, color: AppColors.black_500,),
-                                    actions: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomElevatedButton(
-                                              onTap: (){
-                                                Get.back();
-                                              },
-                                              text: "No".tr,
-                                              height: 48.h,
-                                              textColor: AppColors.black_500,
-                                              isFillColor: false,
-                                              borderColor: AppColors.green_900,
-                                            ),
-                                          ),
-                                          SizedBox(width: 12,),
-                                          Expanded(
-                                            child: CustomElevatedButton(
-                                              onTap: (){
-                                                // SystemNavigator.pop();
-                                                authController.signOutRepo();
-                                              },
-                                              text: "Yes".tr,
-                                              height: 48.h,
-                                              backgroundColor: AppColors.green_900,
-                                            ),
-                                          ),
-
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                            margin: EdgeInsets.symmetric(vertical: 6.h),
-                            decoration: BoxDecoration(
-                                color: AppColors.green_600,
-                                borderRadius: BorderRadius.circular(8.r)
-                            ),
-                            child: Row(
-                              children: [
-                                servicesList[index]["icon"],
-                                SizedBox(width: 8.w),
-                                CustomText(
-                                  text: servicesList[index]["text"],
-                                  fontSize: 16,
-                                  color: AppColors.black_500,
-                                ),
-                                Spacer(),
-                                Icon(Icons.arrow_forward_ios_outlined, size: 12),
-                              ],
-                            ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          flex: 10,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                maxLines: 2,
+                                textAlign: TextAlign.left,
+                                text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.green_900,
+                              ),
+                              CustomText(
+                                maxLines: 2,
+                                textAlign: TextAlign.left,
+                                text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
+                                color: AppColors.black_400,
+                                fontSize: 16,
+                              ),
+                              SizedBox(height: 4.h),
+                              CustomText(
+                                maxLines: 2,
+                                textAlign: TextAlign.left,
+                                text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                color: AppColors.black_400,
+                              )
+                            ],
                           ),
                         ),
+                        Spacer(),
+              
+                        ///<<<============== Edit Card ==========================>>>
+              
+                        CustomContainerButton(
+                            onTap: (){
+                              Get.to(EditProfileScreen());
+                            },
+                            text: AppStrings.edit.tr
+                        ),
+                      ],
                     ),
                   ),
-                )
-              ],
+                  SizedBox(height: 24.h),
+              
+                  ///<<<===================== View Card Items ===================>>>
+              
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.h),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(
+                          cardViewList.length,
+                              (index) => InkWell(
+                            onTap: (){
+                              if(index == 0){
+                                Get.to(ViewECardScreen());
+                              } else if(index == 1){
+                                Get.to(MyQrCodeScreen());
+                              }
+                            },
+                            child: Container(
+                              height: 65.h,
+                              width: 120.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4.r),
+                                  border: Border.all(color: AppColors.black_400)
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  cardViewList[index]["icon"],
+                                  CustomText(
+                                    text: cardViewList[index]["text"],
+                                    fontSize: 16,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                    ),
+                  ),
+                  SizedBox(height: 40.h),
+              
+                  ///<<<=================== Services List =======================>>>
+              
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(color: AppColors.black_400)
+                    ),
+                    child: Column(
+                      children: List.generate(
+                        servicesList.length, (index) =>
+                          InkWell(
+                            onTap: (){
+                              if(index == 2 ){
+                                Get.to(SettingsScreenMain());
+                              } else if(index == 0 ){
+                                Get.to(RecommendNameCardScreen());
+                              } else if(index == 1 ){
+                                Get.to(FAQScreen());
+                              } else if(index == 3 ){
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+              
+                                    ///<<<==================== Sign out pop up =========================>>>
+              
+                                    return AlertDialog(
+                                      content: CustomText(text: "Are you sure to sign out?".tr, fontSize: 20, color: AppColors.black_500,),
+                                      actions: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CustomElevatedButton(
+                                                onTap: (){
+                                                  Get.back();
+                                                },
+                                                text: "No".tr,
+                                                height: 48.h,
+                                                textColor: AppColors.black_500,
+                                                isFillColor: false,
+                                                borderColor: AppColors.green_900,
+                                              ),
+                                            ),
+                                            SizedBox(width: 12,),
+                                            Expanded(
+                                              child: CustomElevatedButton(
+                                                onTap: (){
+                                                  // SystemNavigator.pop();
+                                                  authController.signOutRepo();
+                                                },
+                                                text: "Yes".tr,
+                                                height: 48.h,
+                                                backgroundColor: AppColors.green_900,
+                                              ),
+                                            ),
+              
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+                              margin: EdgeInsets.symmetric(vertical: 6.h),
+                              decoration: BoxDecoration(
+                                  color: AppColors.green_600,
+                                  borderRadius: BorderRadius.circular(8.r)
+                              ),
+                              child: Row(
+                                children: [
+                                  servicesList[index]["icon"],
+                                  SizedBox(width: 8.w),
+                                  CustomText(
+                                    text: servicesList[index]["text"],
+                                    fontSize: 16,
+                                    color: AppColors.black_500,
+                                  ),
+                                  Spacer(),
+                                  Icon(Icons.arrow_forward_ios_outlined, size: 12),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  GetBuilder<OCRCreateCardController>(builder: (ocrCreateCardController) {
+                    return ocrCreateCardController.isLoading? Center(child: CircularProgressIndicator()) : SizedBox();
+                  },)
+                ],
+              ),
             );
           },),
         ),

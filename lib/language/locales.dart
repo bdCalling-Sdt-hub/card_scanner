@@ -251,8 +251,8 @@ class Locales extends Translations {
           "Share & Save Card": "Share & Save Card",
           "Contact successfully downloaded": "Contact successfully downloaded",
 
-          "I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text":
-              "I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text",
+          "I need only from the text name, designation, company name, email, phone & contact number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text":
+              "I need only from the text name, designation, company name, email, phone & contact number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text",
           "Google & Apple SignIn doesn't support in web view, So don't try":
               "Google & Apple SignIn doesn't support in web view, So don't try",
           "'Continue with Google & Sign in with Apple'":
@@ -266,6 +266,15 @@ class Locales extends Translations {
           "Qr Export": "QR Export",
           "Groups": "Groups",
           "No Groups Created": "No Groups Created",
+          "Edit Group": "Edit Group",
+          "Save Group": "Save Group",
+          "Scanned Images": "Scanned Images",
+          "No image found": "No image found",
+          "Sorts by": "Sorts by",
+          "Sorts by person name": "Sorts by person name",
+          "Sorts by company name": "Sorts by company name",
+          "Check your internet connection & Try again!":
+              "Check your internet connection & Try again!",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -502,8 +511,8 @@ class Locales extends Translations {
           "Share & Save Card": "分享和保存卡片",
           "Contact successfully downloaded": "联系人下载成功",
 
-          "I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text":
-              "我只需要文本中的姓名、职位、公司名称、电子邮件、电话号码和地址，不要键值对，只需用'/'分隔的值，如果没有获得所需的值，则给出空白文本",
+          "I need only from the text name, designation, company name, email, phone & contact number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text":
+              "我只需要从文本中提取姓名、职称、公司名称、电子邮件、电话号码和联系号码及地址，并以'/'分隔，如果没有所需的值，则给出空文本",
           "Google & Apple SignIn doesn't support in web view, So don't try":
               "Google和Apple登录不支持Web视图，因此不要尝试",
           "'Continue with Google & Sign in with Apple'": "'继续使用Google和Apple登录'",
@@ -515,6 +524,14 @@ class Locales extends Translations {
           "Qr Export": "QR 导出",
           "Groups": "群组",
           "No Groups Created": "未创建群组",
+          "Edit Group": "编辑组",
+          "Save Group": "保存组",
+          "Scanned Images": "扫描的图像",
+          "No image found": "未找到图像",
+          "Sorts by": "排序方式",
+          "Sorts by person name": "按人名排序",
+          "Sorts by company name": "按公司名排序",
+          "Check your internet connection & Try again!": "检查你的互联网连接并重试！",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 

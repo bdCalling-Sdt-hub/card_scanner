@@ -313,13 +313,11 @@ class CardHolder extends StatelessWidget {
                                                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                         children: [
                                                                           SizedBox(),
-
                                                                           ///<<<=============== Yes Button ================>>>
 
                                                                           CustomElevatedButton(
                                                                             onTap: () {
                                                                               storageController.deleteContact(storageController.contacts[index].id);
-                                                                              Get.toNamed(AppRoutes.homeScreen);
                                                                             },
                                                                             text: AppStrings.yes.tr,
                                                                             height: 38,
@@ -332,7 +330,6 @@ class CardHolder extends StatelessWidget {
                                                                           ),
 
                                                                           ///<<<=============== No Button ================>>>
-
                                                                           CustomElevatedButton(
                                                                             onTap: () {
                                                                               Get.back();

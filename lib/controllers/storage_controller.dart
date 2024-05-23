@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
+import 'package:card_scanner/views/screens/Group/selected_group_cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +19,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../Helpers/prefs_helper.dart';
 import '../Models/contacts_model.dart';
+import '../core/routes/app_routes.dart';
 import '../utils/app_strings.dart';
 import 'package:path/path.dart' as p;
 
@@ -47,8 +50,52 @@ class StorageController extends GetxController {
   List<ContactsModel> singleGroupContacts = [];
   List<ContactGroup> groupedContactsList = [];
 
-  RxList selectedGroupContacts = [].obs;
+
+  Set<ContactsModel> selectedGroupContactsSet = <ContactsModel>{};
+  RxList<ContactsModel> selectedGroupContacts = <ContactsModel>[].obs;
   static String appTitle = "";
+
+  ///<<<=============== Sorting Repo ==================================>>>
+  RxBool isTapped = false.obs;
+  List sortsList = ["Sorts by person name".tr, "Sorts by company name".tr];
+
+  sortBy({required int index}){
+    if(index == 0){
+      contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+      update();
+    }
+    else if(index == 1){
+      contacts.sort((a, b) => a.companyName.toLowerCase().compareTo(b.companyName.toLowerCase()));
+      update();
+    }
+    isTapped.value = false;
+  }
+
+  ///<<<============= To remove duplicate contacts ===========================>>>
+
+  void addSelectedContact(ContactsModel contact){
+    selectedGroupContactsSet.add(contact);
+    selectedGroupContacts.value = selectedGroupContactsSet.toList();
+  }
+
+  void addMultipleSelectedContacts(List<ContactsModel> contacts) {
+    selectedGroupContactsSet.addAll(contacts);
+    selectedGroupContacts.value = selectedGroupContactsSet.toList();
+  }
+
+  ///<<<==================== Update Group Repo ==============================>>>
+
+  upDateGroupContactRepo({required int groupIndex}){
+    ContactGroup contactGroup = ContactGroup(name: groupNameController.text, contactsList: selectedGroupContacts);
+    groupedContactsList[groupIndex] = contactGroup;
+    PrefsHelper.saveGroupedList(groupedContactsList);
+    update();
+    Get.back();
+    Future.delayed(Duration(seconds: 1), () {
+      groupNameController.clear();
+      selectedGroupContacts.clear();
+    },);
+  }
 
   ///<<<===================== Create group repo ==============================>>>
   List<ContactsModel> groupListAdded({required int index}) {
@@ -263,6 +310,7 @@ class StorageController extends GetxController {
         email: emailController.text,
         phoneNumber: phoneController.text,
         address: addressController.text,
+        capturedImageList: OCRCreateCardController.capturedImageList,
       ));
       update();
       saveContacts();
@@ -273,6 +321,7 @@ class StorageController extends GetxController {
       emailController.clear();
       phoneController.clear();
       addressController.clear();
+      OCRCreateCardController.capturedImageList = [];
     }
   }
 
@@ -307,6 +356,7 @@ class StorageController extends GetxController {
     update();
     Get.snackbar("The contact is deleted".tr, "");
     saveContacts();
+    Get.offAllNamed(AppRoutes.homeScreen);
   }
 
   ///=============================================================================

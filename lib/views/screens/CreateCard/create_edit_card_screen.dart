@@ -52,6 +52,14 @@ class CreateOrEditCardScreen extends StatelessWidget {
                           Get.toNamed(AppRoutes.homeScreen);
                         }else{
                           Get.toNamed(AppRoutes.allCardsScreen);
+                          StorageController.imagePath = "";
+                          StorageController.nameController.text = "";
+                          StorageController.designationController.text = "";
+                          StorageController.companyController.text = "";
+                          StorageController.emailController.text = "";
+                          StorageController.phoneController.text = "";
+                          StorageController.addressController.text = "";
+                          storageController.id = "";
                         }
                       },
                       icon: Icons.arrow_back,
@@ -299,7 +307,6 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 SizedBox(height: 4.h,),
                 TextFormField(
                   controller: StorageController.phoneController,
-                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       labelText: AppStrings.contactNumber.tr,
                       labelStyle: TextStyle(color: AppColors.black_200)

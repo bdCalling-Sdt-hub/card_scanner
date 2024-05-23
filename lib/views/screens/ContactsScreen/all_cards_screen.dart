@@ -9,8 +9,10 @@ import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.da
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -25,6 +27,7 @@ class AllCardsScreen extends StatelessWidget {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +38,81 @@ class AllCardsScreen extends StatelessWidget {
           child: GetBuilder<StorageController>(builder: (storageController) {
             return Column(
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: CustomText(
-                    text: AppStrings.contacts.tr,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(width: 20,),
+                    CustomText(
+                      text: AppStrings.contacts.tr,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        storageController.isTapped.value = !storageController.isTapped.value;
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.black_500,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Obx(() => Row(
+                          children: [
+                            CustomText(
+                              text: "Sorts by".tr,
+                              color: AppColors.green_500,
+                            ),
+                            storageController.isTapped.value? Icon(Icons.keyboard_arrow_down, color: AppColors.green_500,) : Icon(Icons.arrow_forward_ios, color: AppColors.green_500, size: 14,)
+                          ],
+                        )),
+                      ),
+                    ),
+                  ],
                 ),
+                Obx(() => storageController.isTapped.value? Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    height: 80.h,
+                    decoration: BoxDecoration(
+                        color: AppColors.green_600,
+                        borderRadius: BorderRadius.circular(4.r)
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            storageController.sortBy(index: 0);
+                          },
+                          child: CustomText(
+                            text: storageController.sortsList[0],
+                            color: AppColors.green_900,
+                            fontWeight: FontWeight.w500,
+                            bottom: 10,
+                          ),
+                        ),
+                        Container(
+                          width: 160.w,
+                          height: 1.h,
+                          color: AppColors.green_900,),
+                        InkWell(
+                          onTap: () {
+                            storageController.sortBy(index: 1);
+                          },
+                          child: CustomText(
+                            top: 5,
+                            text: storageController.sortsList[1],
+                            color: AppColors.green_900,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ) : SizedBox()),
                 SizedBox(height: 20.h),
 
                 GetBuilder<OCRCreateCardController>(builder: (controller) {
@@ -56,7 +126,6 @@ class AllCardsScreen extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     itemCount: storageController.contacts.length,
                     itemBuilder: (context, index) {
-                      storageController.contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                       ContactsModel contacts = storageController.contacts[index];
                       if (kDebugMode) {
                         print("contacts.companyName: ${contacts.companyName}");

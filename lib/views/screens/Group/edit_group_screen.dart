@@ -6,33 +6,22 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../Models/contacts_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
-class CreateGroupScreen extends StatelessWidget {
-  CreateGroupScreen({super.key});
+class EditGroupScreen extends StatelessWidget {
+  EditGroupScreen({super.key});
 
+  int groupIndex = Get.arguments['groupIndex'];
 
-
-  Map<String, List<String>> lists = {};
   StorageController storageController = Get.put(StorageController());
-  String listName = "";
 
-  void createList(String listName) {
-      lists[listName] = [];
-      listName = listName;
-  }
-  void addItemToList(String listName, String item) {
-      lists[listName]?.add(item);
-  }
 
 
   @override
@@ -48,11 +37,15 @@ class CreateGroupScreen extends StatelessWidget {
                 children: [
                   CustomBackButton(onTap: (){
                     Get.back();
+                    Future.delayed(Duration(seconds: 1), () {
+                      storageController.groupNameController.clear();
+                      storageController.selectedGroupContacts.clear();
+                    },);
                   },
                     icon: Icons.arrow_back,
                   ),
                   CustomText(
-                    text: AppStrings.createGroup.tr,
+                    text: "Edit Group".tr,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
@@ -69,7 +62,6 @@ class CreateGroupScreen extends StatelessWidget {
                   labelText: AppStrings.enterGroupName.tr,
                   labelStyle: TextStyle(color: AppColors.black_200),
                 ),
-                onFieldSubmitted: createList,
               ),
               SizedBox(height: 16.h,),
 
@@ -77,7 +69,6 @@ class CreateGroupScreen extends StatelessWidget {
               GestureDetector(
                 onTap: (){
                   storageController.loadContacts().then((value) {
-                    storageController.selectedGroupContacts.clear();
                     Get.to(CardSelectionScreen());
                   },);
                 },
@@ -85,7 +76,7 @@ class CreateGroupScreen extends StatelessWidget {
                   margin: EdgeInsets.only(left: Get.width - 150),
                   height: 32.h,
                   decoration: BoxDecoration(
-                    color: AppColors.green_600,
+                      color: AppColors.green_600,
                       border: Border.all(
                           color: AppColors.black_400
                       ),
@@ -190,7 +181,7 @@ class CreateGroupScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                        
+
                               ///<<<================ Edit Icon ================>>>
                             ],
                           ),
@@ -203,23 +194,15 @@ class CreateGroupScreen extends StatelessWidget {
         ),
       ),
 
-      ///<<<=============== Create Group Button ==============================>>>
+      ///<<<=============== Edit Group Button ==============================>>>
 
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
-            onTap: () async {
-              await storageController.groupUpdateStatus(storageController.selectedGroupContacts.length).then((value) => Future.delayed(Duration(seconds: 1), () {
-                storageController.removeSelectedContactsFromAll();
-              },));
-              // ContactGroup groupList;
-              if(storageController.groupNameController.text.isNotEmpty){
-                storageController.createGroup();
-              }else{
-                Get.snackbar(AppStrings.groupNameMandatory, "");
-              }
-            },
-          text: AppStrings.createGroup.tr,
+          onTap: () async {
+            storageController.upDateGroupContactRepo(groupIndex: groupIndex);
+          },
+          text: "Save Group".tr,
           backgroundColor: AppColors.black_500,
         ),
       ),

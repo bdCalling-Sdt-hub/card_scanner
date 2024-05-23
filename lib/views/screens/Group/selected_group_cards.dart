@@ -59,7 +59,7 @@ class SelectedGroupCards extends StatelessWidget {
                         if(storageController.selectedGroupContacts.isEmpty){
                           storageController.selectedGroupContacts.addAll(storageController.groupedContactsList[groupIndex].contactsList);
                         }
-                        Get.toNamed(AppRoutes.createGroupScreen);
+                        Get.toNamed(AppRoutes.editGroupScreen, arguments: {"groupIndex" : groupIndex});
                       },
                       child: Container(
                         height: 30.h,

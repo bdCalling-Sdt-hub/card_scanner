@@ -23,7 +23,7 @@ class OCRCreateCardController extends GetxController{
 
   List responseList = [];
   String? imagePath;
-  List captureImageList = [];
+  static List<String> capturedImageList = [];
   List textList = [];
   bool isLoading  = false;
 
@@ -50,13 +50,13 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, ${"I need only from the text name, designation, company name, email, phone number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text".tr} "}
+            {"text": "$extractedText, ${"I need only from the text name, designation, company name, email, phone & contact number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text".tr} "}
           ]
         }
       ]
     };
     try {
-      var response = await http.post(url, body: jsonEncode(bodyData), headers: headers);
+      var response = await http.post(url, body: jsonEncode(bodyData), headers: headers).timeout(Duration(seconds: 30));
       isLoading = false;
       update();
       if (kDebugMode) {
@@ -118,8 +118,7 @@ class OCRCreateCardController extends GetxController{
 
   Future<String?>selectImageCamera({bool? isOcr}) async {
     final ImagePicker picker = ImagePicker();
-    final XFile? getImages =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
+    final XFile? getImages = await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (getImages != null) {
       imagePath = getImages.path;
       update();
@@ -130,8 +129,6 @@ class OCRCreateCardController extends GetxController{
       if(isOcr == true){
         // await processImage(imagePath!);
       }
-      captureImageList.add(imagePath);
-      update();
       return imagePath;
     }
     return "";
@@ -151,9 +148,6 @@ class OCRCreateCardController extends GetxController{
       }
 
       await processImage(imagePath!);
-
-      captureImageList.add(imagePath);
-      update();
       return imagePath;
     }
     return "";
@@ -188,6 +182,7 @@ class OCRCreateCardController extends GetxController{
 
     if (croppedFile != null) {
       imagePath = croppedFile.path;
+      capturedImageList.add(imagePath!);
       update();
     }
     return imagePath;

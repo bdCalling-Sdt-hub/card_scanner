@@ -46,7 +46,7 @@ class AuthController extends GetxController{
       Get.toNamed(AppRoutes.signInScreen);
       Get.snackbar("New Account Created".tr, "");
     }catch(e){
-      Get.snackbar("Something went wrong,".tr, "Try again!".tr );
+      Get.snackbar("Something went wrong,".tr, "Check your internet connection & Try again!".tr );
     }
     isLoading = false;
     update();
@@ -69,7 +69,7 @@ class AuthController extends GetxController{
         Get.snackbar("Something went wrong,".tr, "please check your email and password!".tr);
       }
     }catch(e){
-      Get.snackbar("$e", "");
+      Get.snackbar("Something went wrong,".tr, "please check your email and password!".tr);
       if (kDebugMode) {
         print(e);
       }

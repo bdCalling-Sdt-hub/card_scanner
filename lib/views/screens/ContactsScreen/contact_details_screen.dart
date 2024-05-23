@@ -4,10 +4,8 @@ import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../core/routes/app_routes.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
@@ -19,6 +17,7 @@ class ContactDetailsScreen extends StatelessWidget {
   StorageController phoneStorageController = Get.put(StorageController());
 
   int index = Get.arguments["index"];
+  RxBool isTapped = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -90,18 +89,70 @@ class ContactDetailsScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 220,
-                      width: Get.width * 0.9,
-                      decoration: BoxDecoration(
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 180.h,
+                        width: 180.w,
+                        decoration: BoxDecoration(
                           color: AppColors.green_600,
                           borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image: FileImage(File(contactDetails.imageUrl))),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 20.h,),
+                    Obx(() => GestureDetector(
+                      onTap: () {
+                        isTapped.value = !isTapped.value;
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.green_600
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: "Scanned Images".tr,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            isTapped.value? Icon(Icons.keyboard_arrow_down,) :Icon(Icons.arrow_forward_ios_rounded, size: 14,),
+                          ],
+                        ),
+                      ),
+                    )),
+                    Obx(() => isTapped.value? Column(
+                      children: [
+                        SizedBox(height: 12.h,),
+                        contactDetails.capturedImageList != null? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: List.generate(
+                                  contactDetails.capturedImageList!.length, (index) {
+                                return Container(
+                                  height: 220,
+                                  width: Get.width * 0.9,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: FileImage(
+                                            File(contactDetails.capturedImageList![index])
+                                        ),
+                                      )
+                                  ),
+                                );
+                              }),
+                            ),
+                          ) : Center(child: CustomText(text: "No image found".tr,)),
+                      ],
+                    ) : SizedBox()),
+                    SizedBox(height: 30.h),
                     customWrap(
                         title: AppStrings.name.tr, value: contactDetails.name),
                     customWrap(
@@ -120,7 +171,7 @@ class ContactDetailsScreen extends StatelessWidget {
                         title: AppStrings.address.tr,
                         value: contactDetails.address),
                   ],
-                )
+                ),
               ],
             ),
           ),

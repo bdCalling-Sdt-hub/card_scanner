@@ -122,7 +122,7 @@ class GroupScreen extends StatelessWidget {
                       return storageController.isLoading? Center(child: CircularProgressIndicator()) : ListView.builder(
                         itemCount: storageController.groupedContactsList.length,
                         itemBuilder: (context, index) {
-                          storageController.groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+                          // storageController.groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                           return GestureDetector(
                             onTap: () {
                               PrefsHelper.getGroupedList().then((value) {

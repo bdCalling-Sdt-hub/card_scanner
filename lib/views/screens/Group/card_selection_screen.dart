@@ -156,7 +156,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                             ),
                                           ),
                                         ),
-                                     
+
 
                                         ///<<<================ Edit Icon ================>>>
                                       ],
@@ -178,6 +178,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: CustomElevatedButton(
           onTap: () {
+            // storageController.addMultipleSelectedContacts(storageController.selectedGroupContacts);
             // storageController.selectedGroupContacts.addAll(storageController.tempoContactsList);
             Get.back();
           },

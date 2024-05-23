@@ -7,6 +7,7 @@ class ContactsModel {
   final String email;
   final String phoneNumber;
   final String address;
+  final List<String>? capturedImageList;
 
   ContactsModel({
     required this.id,
@@ -17,6 +18,7 @@ class ContactsModel {
     required this.email,
     required this.phoneNumber,
     required this.address,
+    this.capturedImageList,
   });
 
   Map<String, dynamic> toJson() {
@@ -29,6 +31,7 @@ class ContactsModel {
       'email': email,
       'phoneNumber': phoneNumber,
       'address': address,
+      'capturedImageList': capturedImageList,
     };
   }
 
@@ -42,9 +45,22 @@ class ContactsModel {
       email: json['email'],
       phoneNumber: json['phoneNumber'],
       address: json['address'],
+      capturedImageList: (json['capturedImageList'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (runtimeType != other.runtimeType) return false;
+    final ContactsModel otherContact = other as ContactsModel;
+    return id == otherContact.id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
+
 
 class ContactGroup {
   final String name ;
