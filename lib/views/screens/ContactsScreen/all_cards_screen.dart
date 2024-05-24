@@ -197,6 +197,8 @@ class AllCardsScreen extends StatelessWidget {
                                   StorageController.phoneController.text = contacts.phoneNumber;
                                   StorageController.addressController.text = contacts.address;
                                   storageController.id = contacts.id;
+                                  StorageController.capturedImageList = contacts.capturedImageList ?? [];
+
 
                                   Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));
                                   StorageController.appTitle = AppStrings.editCard;

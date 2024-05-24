@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
-import 'package:card_scanner/views/screens/Group/selected_group_cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +33,7 @@ class StorageController extends GetxController {
   }
 
   List<ContactsModel> contacts = [];
+  static List<String> capturedImageList = [];
   static TextEditingController nameController = TextEditingController();
   static TextEditingController designationController = TextEditingController();
   static TextEditingController companyController = TextEditingController();
@@ -91,6 +91,7 @@ class StorageController extends GetxController {
     PrefsHelper.saveGroupedList(groupedContactsList);
     update();
     Get.back();
+    Get.back();
     Future.delayed(Duration(seconds: 1), () {
       groupNameController.clear();
       selectedGroupContacts.clear();
@@ -107,7 +108,9 @@ class StorageController extends GetxController {
         companyName: selectedGroupContacts[index].companyName,
         email: selectedGroupContacts[index].email,
         phoneNumber: selectedGroupContacts[index].phoneNumber,
-        address: selectedGroupContacts[index].address);
+        address: selectedGroupContacts[index].address,
+      capturedImageList: selectedGroupContacts[index].capturedImageList
+    );
     singleGroupContacts.add(contactsModel);
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
@@ -125,6 +128,7 @@ class StorageController extends GetxController {
     groupedContactsList[groupIndex].contactsList.removeAt(listIndex);
     PrefsHelper.saveGroupedList(groupedContactsList);
     update();
+    Get.back();
   }
 
   ///==================== new group repo==============================>>>///
@@ -198,7 +202,7 @@ class StorageController extends GetxController {
       TextCellValue("Company Name"),
       TextCellValue("Email"),
       TextCellValue("Phone Number"),
-      TextCellValue("Address")
+      TextCellValue("Address"),
     ];
 
     sheetObject.appendRow(headers);
@@ -342,6 +346,7 @@ class StorageController extends GetxController {
           email: emailController.text,
           phoneNumber: phoneController.text,
           address: addressController.text,
+          capturedImageList: capturedImageList
         );
         update();
         saveContacts();
@@ -356,7 +361,7 @@ class StorageController extends GetxController {
     update();
     Get.snackbar("The contact is deleted".tr, "");
     saveContacts();
-    Get.offAllNamed(AppRoutes.homeScreen);
+    // Get.offAllNamed(AppRoutes.homeScreen);
   }
 
   ///=============================================================================

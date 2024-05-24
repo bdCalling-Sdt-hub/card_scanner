@@ -308,9 +308,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     String
                                                                         responseText =
                                                                         await ocrCreateCardController
-                                                                            .selectImageCamera(isOcr: true)
+                                                                            .selectImageCamera()
                                                                             .then(
-                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!),
+                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
                                                                             )
                                                                             .then(
                                                                               (value) => ocrCreateCardController.processImage(value!),

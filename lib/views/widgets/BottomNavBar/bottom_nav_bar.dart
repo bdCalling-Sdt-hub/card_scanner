@@ -122,7 +122,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       }
     }else if(index == 2){
       if(!(widget.currentIndex == 2)){
-        String? responseText = await ocrCreateCardController.selectImageCamera(isOcr: true).then((value) => ocrCreateCardController.cropImage(imgPath: value!),).then((value) => ocrCreateCardController.processImage(value!),);
+        String? responseText = await ocrCreateCardController.selectImageCamera().then((value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),).then((value) => ocrCreateCardController.processImage(value!),);
         ocrImageDialog.ocrCameraImageDialog(context, responseText!);
       }
     }else if(index == 3){

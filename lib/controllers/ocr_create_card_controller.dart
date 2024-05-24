@@ -116,7 +116,7 @@ class OCRCreateCardController extends GetxController{
   ///<<<=================== Get Camera Image ================================>>>
   bool isBothSide = true;
 
-  Future<String?>selectImageCamera({bool? isOcr}) async {
+  Future<String?>selectImageCamera() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages = await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (getImages != null) {
@@ -125,9 +125,6 @@ class OCRCreateCardController extends GetxController{
       StorageController.imagePath = imagePath;
       if (kDebugMode) {
         print("================>>> $imagePath");
-      }
-      if(isOcr == true){
-        // await processImage(imagePath!);
       }
       return imagePath;
     }
@@ -154,7 +151,7 @@ class OCRCreateCardController extends GetxController{
   }
 
   ///<<<================== Crop Image =======================================>>>
-  Future<String?> cropImage({required String imgPath}) async {
+  Future<String?> cropImage({required String imgPath, bool? isOcr}) async {
     if (kDebugMode) {
       print("Image Path: $imgPath");
     }
@@ -182,7 +179,9 @@ class OCRCreateCardController extends GetxController{
 
     if (croppedFile != null) {
       imagePath = croppedFile.path;
-      capturedImageList.add(imagePath!);
+      if(isOcr == true){
+        capturedImageList.add(imagePath!);
+      }
       update();
     }
     return imagePath;

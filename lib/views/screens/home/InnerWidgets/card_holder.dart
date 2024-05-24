@@ -318,6 +318,7 @@ class CardHolder extends StatelessWidget {
                                                                           CustomElevatedButton(
                                                                             onTap: () {
                                                                               storageController.deleteContact(storageController.contacts[index].id);
+                                                                              Get.offAllNamed(AppRoutes.homeScreen);
                                                                             },
                                                                             text: AppStrings.yes.tr,
                                                                             height: 38,

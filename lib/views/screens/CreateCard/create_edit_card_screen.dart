@@ -60,6 +60,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
                           StorageController.phoneController.text = "";
                           StorageController.addressController.text = "";
                           storageController.id = "";
+                          OCRCreateCardController.capturedImageList = [];
+                          StorageController.capturedImageList = [];
                         }
                       },
                       icon: Icons.arrow_back,
@@ -342,6 +344,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       StorageController.emailController.text = "";
                       StorageController.phoneController.text = "";
                       StorageController.addressController.text = "";
+                      StorageController.capturedImageList = [];
                       Get.toNamed(AppRoutes.allCardsScreen);
                       // Get.to(AllCardsScreen());
                     },

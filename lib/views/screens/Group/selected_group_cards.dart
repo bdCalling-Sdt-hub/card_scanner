@@ -160,7 +160,6 @@ class SelectedGroupCards extends StatelessWidget {
                                               Expanded(
                                                 child: CustomElevatedButton(
                                                   onTap: (){
-                                                    Get.back();
                                                     storageController.deleteGroupContactRepo(groupIndex: groupIndex, listIndex: index);
                                                     // storageController.deleteGroupRepo(index: index);
                                                   },

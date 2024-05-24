@@ -1,6 +1,8 @@
+import 'package:card_scanner/Helpers/permission_handler.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/global/dependency.dart';
 import 'package:card_scanner/utils/app_colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,15 +20,19 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  var status = await Permission.storage.request();
-  if (status.isDenied) {
-    await Permission.storage.request();
-  }
+  PhonePermissionHandler permissionHandler = PhonePermissionHandler();
+  // await permissionHandler.storageRequest(Permission.storage);
+  // await permissionHandler.storagePermission();
 
-// You can also directly ask permission about its status.
-  if (await Permission.storage.isRestricted) {
-    print("Why this is restricted?");
-  }
+//   var status = await Permission.storage.request();
+//   if (status.isDenied) {
+//     await Permission.storage.request();
+//   }
+//
+// // You can also directly ask permission about its status.
+//   if (await Permission.storage.isRestricted) {
+//     print("Why this is restricted?");
+//   }
 
   DependencyInjection di = DependencyInjection();
   di.dependencies();

@@ -59,6 +59,7 @@ dependencies:
   webview_flutter: ^4.7.0
   screenshot: ^2.3.0
   permission_handler: ^11.3.1
+  device_info_plus: ^10.1.0
   image_gallery_saver: ^2.0.3
   flutter_cache_manager: any
   image_cropper: any
