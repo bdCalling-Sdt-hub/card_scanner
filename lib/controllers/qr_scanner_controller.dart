@@ -32,7 +32,7 @@ class QrScannerController extends GetxController{
             StorageController.designationController.text = designation;
             StorageController.companyController.text = companyName;
             StorageController.emailController.text = email;
-            StorageController.phoneController.text = phoneNumber;
+            StorageController.mobilePhoneController.text = phoneNumber;
             StorageController.addressController.text = address;
 
             if (kDebugMode) {

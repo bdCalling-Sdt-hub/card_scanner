@@ -57,7 +57,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                           StorageController.designationController.text = "";
                           StorageController.companyController.text = "";
                           StorageController.emailController.text = "";
-                          StorageController.phoneController.text = "";
+                          StorageController.mobilePhoneController.text = "";
                           StorageController.addressController.text = "";
                           storageController.id = "";
                           OCRCreateCardController.capturedImageList = [];
@@ -308,9 +308,33 @@ class CreateOrEditCardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h,),
                 TextFormField(
-                  controller: StorageController.phoneController,
+                  controller: StorageController.mobilePhoneController,
                   decoration: InputDecoration(
-                      labelText: AppStrings.contactNumber.tr,
+                      labelText: "Mobile Phone".tr,
+                      labelStyle: TextStyle(color: AppColors.black_200)
+                  ),
+                ),
+                SizedBox(height: 4.h,),
+                TextFormField(
+                  controller: StorageController.landPhoneController,
+                  decoration: InputDecoration(
+                      labelText: "Land Phone".tr,
+                      labelStyle: TextStyle(color: AppColors.black_200)
+                  ),
+                ),
+                SizedBox(height: 4.h,),
+                TextFormField(
+                  controller: StorageController.faxController,
+                  decoration: InputDecoration(
+                      labelText: "Fax".tr,
+                      labelStyle: TextStyle(color: AppColors.black_200)
+                  ),
+                ),
+                SizedBox(height: 4.h,),
+                TextFormField(
+                  controller: StorageController.websiteController,
+                  decoration: InputDecoration(
+                      labelText: "Website".tr,
                       labelStyle: TextStyle(color: AppColors.black_200)
                   ),
                 ),
@@ -342,7 +366,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                       StorageController.designationController.text = "";
                       StorageController.companyController.text = "";
                       StorageController.emailController.text = "";
-                      StorageController.phoneController.text = "";
+                      StorageController.mobilePhoneController.text = "";
                       StorageController.addressController.text = "";
                       StorageController.capturedImageList = [];
                       Get.toNamed(AppRoutes.allCardsScreen);

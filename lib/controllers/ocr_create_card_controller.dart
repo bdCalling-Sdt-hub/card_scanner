@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:card_scanner/Services/image_bb_service.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
@@ -20,19 +21,13 @@ class OCRCreateCardController extends GetxController{
   final _apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
   GeminiResponseModel? geminiResponseModel;
   TextRecognizer textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
+  ImageBBService imageBBService = ImageBBService();
 
   List responseList = [];
   String? imagePath;
   static List<String> capturedImageList = [];
   List textList = [];
   bool isLoading  = false;
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController designationController = TextEditingController();
-  TextEditingController companyNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController contactController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
 
 
   ///<<<==================== Text Formatting by Gemini Api ==================>>>
@@ -50,7 +45,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, ${"I need only from the text name, designation, company name, email, phone & contact number and address with no key, value pair just only values with '/' separated, if not get the desired value then give blank text".tr} "}
+            {"text": "$extractedText, ${'I want the above texts like the json structure,{"name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"} always give response in same structure and format'.tr} "}
           ]
         }
       ]
@@ -69,25 +64,39 @@ class OCRCreateCardController extends GetxController{
         geminiResponseModel = GeminiResponseModel.fromJson(jsonDecode(response.body));
         final text = geminiResponseModel?.candidates?[0].content?.parts?[0].text;
         if(text != null ){
-          var responseText = text.replaceAll(RegExp(r'([*\-\n])'), '');
+          RegExp pattern = RegExp(r'[`\*\-\n\\/]');
+          Map<String, dynamic> responseText = jsonDecode(text.replaceAll(pattern, ''));
           if (kDebugMode) {
             print("responseText:::: $responseText");
           }
-          List<String> parts = responseText.split('/').map((e) => e.trim()).toList();
 
-          // Extract values and assign them to variables
-          String name = parts[0];
-          String designation = parts[1];
-          String companyName = parts[2];
-          String email = parts[3];
-          String phoneNumber = parts[4];
-          String address = parts.sublist(5).join(', '); // Join remaining parts for address
-
+          String name = responseText['name'] ?? '';
+          String designation = responseText['designation'] ?? '';
+          String companyName = responseText['company_name'] ?? '';
+          String email = responseText['email'] ?? '';
+          String mobilePhone = responseText['mobile_phone'] ?? '';
+          String landPhone = responseText['land_phone']?.toString() ?? ''; // Handle null value
+          String fax = responseText['fax']?.toString() ?? ''; // Handle null value
+          String website = responseText['website']?.toString() ?? ''; // Handle null value
+          String address = responseText['address'] ?? '';
+          // List<String> parts = responseText.split('/').map((e) => e.trim()).toList();
+          //
+          // // Extract values and assign them to variables
+          // name = parts[0];
+          // designation = parts[1];
+          // companyName = parts[2];
+          // email = parts[3];
+          // phoneNumber = parts[4];
+          // address = parts.sublist(5).join(', '); // Join remaining parts for address
+          //
           StorageController.nameController.text = name;
           StorageController.designationController.text = designation;
           StorageController.companyController.text = companyName;
           StorageController.emailController.text = email;
-          StorageController.phoneController.text = phoneNumber;
+          StorageController.mobilePhoneController.text = mobilePhone;
+          StorageController.landPhoneController.text = landPhone;
+          StorageController.faxController.text = fax;
+          StorageController.websiteController.text = website;
           StorageController.addressController.text = address;
 
           Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard));
@@ -95,13 +104,13 @@ class OCRCreateCardController extends GetxController{
 
           // Print the extracted values
           if (kDebugMode) {
-            print('Name: $name \nDesignation: $designation \nCompany Name: $companyName \nEmail: $email \nPhone Number: $phoneNumber \nAddress: $address');
+            print('Name: $name \nDesignation: $designation \nCompany Name: $companyName \nEmail: $email \nMobile Phone: $mobilePhone \nLand Phone: $landPhone \nFax: $fax \nWebsite: $website \nAddress: $address');
           }
         }
 
         return response.body.toString();
       } else {
-        Get.snackbar("Invalid value".tr, "Something went wrong".tr, backgroundColor: AppColors.primaryColor);
+        Get.snackbar("Invalid value".tr, "Something went wrong, Try again!".tr, backgroundColor: AppColors.primaryColor);
         return "Something went wrong";
       }
     } catch (error) {
@@ -178,7 +187,7 @@ class OCRCreateCardController extends GetxController{
     );
 
     if (croppedFile != null) {
-      imagePath = croppedFile.path;
+      imagePath = await imageBBService.imageCompressor(imagePath: croppedFile.path);
       if(isOcr == true){
         capturedImageList.add(imagePath!);
       }

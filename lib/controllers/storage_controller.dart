@@ -38,7 +38,10 @@ class StorageController extends GetxController {
   static TextEditingController designationController = TextEditingController();
   static TextEditingController companyController = TextEditingController();
   static TextEditingController emailController = TextEditingController();
-  static TextEditingController phoneController = TextEditingController();
+  static TextEditingController mobilePhoneController = TextEditingController();
+  static TextEditingController landPhoneController = TextEditingController();
+  static TextEditingController faxController = TextEditingController();
+  static TextEditingController websiteController = TextEditingController();
   static TextEditingController addressController = TextEditingController();
   final picker = ImagePicker();
   static String? imagePath;
@@ -312,7 +315,7 @@ class StorageController extends GetxController {
         designation: designationController.text,
         companyName: companyController.text,
         email: emailController.text,
-        phoneNumber: phoneController.text,
+        phoneNumber: mobilePhoneController.text,
         address: addressController.text,
         capturedImageList: OCRCreateCardController.capturedImageList,
       ));
@@ -323,7 +326,7 @@ class StorageController extends GetxController {
       designationController.clear();
       companyController.clear();
       emailController.clear();
-      phoneController.clear();
+      mobilePhoneController.clear();
       addressController.clear();
       OCRCreateCardController.capturedImageList = [];
     }
@@ -344,7 +347,7 @@ class StorageController extends GetxController {
           designation: designationController.text,
           companyName: companyController.text,
           email: emailController.text,
-          phoneNumber: phoneController.text,
+          phoneNumber: mobilePhoneController.text,
           address: addressController.text,
           capturedImageList: capturedImageList
         );
