@@ -152,8 +152,6 @@ class OCRCreateCardController extends GetxController{
       if (kDebugMode) {
         print("================>>> $imagePath");
       }
-
-      await processImage(imagePath!);
       return imagePath;
     }
     return "";
