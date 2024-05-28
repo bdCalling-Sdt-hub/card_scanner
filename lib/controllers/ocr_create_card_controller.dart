@@ -132,6 +132,7 @@ class OCRCreateCardController extends GetxController{
       imagePath = getImages.path;
       update();
       StorageController.imagePath = imagePath;
+      // imagePath = await imageBBService.imageCompressor(imagePath: imagePath!);
       if (kDebugMode) {
         print("================>>> $imagePath");
       }
@@ -185,7 +186,10 @@ class OCRCreateCardController extends GetxController{
     );
 
     if (croppedFile != null) {
-      imagePath = await imageBBService.imageCompressor(imagePath: croppedFile.path);
+      imagePath = croppedFile.path;
+      // imagePath = await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value) {
+      //   return imageBBService.downloadImage(imageUrl: value);
+      // },);
       if(isOcr == true){
         capturedImageList.add(imagePath!);
       }

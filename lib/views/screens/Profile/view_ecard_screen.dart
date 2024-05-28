@@ -9,7 +9,6 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Profile/IneerWidget/custom_container_button.dart';
 import 'package:card_scanner/views/screens/Profile/edit_profile_screen.dart';
-import 'package:card_scanner/views/screens/Profile/share_profile_card_screen.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,184 +62,123 @@ class ViewECardScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             Screenshot(
                 controller: screenshotController,
-                child: Container(
-                  width: 300,
-                  decoration: BoxDecoration(
-                      color: profileController.cardColorList[PrefsHelper.colorIndex],
-                      borderRadius: BorderRadius.circular(8)
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
+                child: Center(
+                  child: Container(
+                    width: 300,
+                    decoration: BoxDecoration(
+                        color: profileController.cardColorList[PrefsHelper.colorIndex],
+                        borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
 
-                      ///<<<================= Name card Logo ================>>>
-                      Positioned(
-                        top: 150,
-                        child: Container(
-                          height: 170.h,
-                          width: 170.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            image: PrefsHelper.isLogoShow? DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage(AppImages.nameCardLogo),
-                                colorFilter: PrefsHelper.colorIndex == 3 || PrefsHelper.colorIndex == 4? ColorFilter.mode(
-                                  AppColors.green_500.withOpacity(0.65), // Adjust the color and opacity
-                                  BlendMode.srcATop,
-                                ) : null,
-                                opacity: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? 0.15 :  0.4) : null,
+                        ///<<<================= Name card Logo ================>>>
+                        Positioned(
+                          top: 150,
+                          child: Container(
+                            height: 170.h,
+                            width: 170.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              image: PrefsHelper.isLogoShow? DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(AppImages.nameCardLogo),
+                                  colorFilter: PrefsHelper.colorIndex == 3 || PrefsHelper.colorIndex == 4? ColorFilter.mode(
+                                    AppColors.green_500.withOpacity(0.65), // Adjust the color and opacity
+                                    BlendMode.srcATop,
+                                  ) : null,
+                                  opacity: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? 0.15 :  0.4) : null,
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          ///<<<================= Profile Picture ================>>>
-                          SizedBox(height: 16.h),
-                          Container(
-                            height: 150.h,
-                            width: 150.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              image: PrefsHelper.isProfilePhotoShow? DecorationImage(
-                                fit: BoxFit.fill,
-                                image: FileImage(
-                                    File(PrefsHelper.profileImagePath)),
-                              ) : null,
+                        Column(
+                          children: [
+                            ///<<<================= Profile Picture ================>>>
+                            SizedBox(height: 16.h),
+                            Container(
+                              height: 150.h,
+                              width: 150.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                image: PrefsHelper.isProfilePhotoShow? DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: FileImage(
+                                      File(PrefsHelper.profileImagePath)),
+                                ) : null,
+                              ),
                             ),
-                          ),
 
-                          Padding(
-                            padding:
-                            EdgeInsets.only(left: 32.w, top: 32.h, bottom: 16.h),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  width: 200,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      CustomText(
-                                        textAlign: TextAlign.left,
-                                        maxLines: 2,
-                                        text: PrefsHelper.userName,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                      ),
-                                      CustomText(
-                                        textAlign: TextAlign.left,
-                                        maxLines: 2,
-                                        text: PrefsHelper.userDesignation,
-                                        fontSize: 16,
-                                        fontWeight:  FontWeight.w500,
-                                        color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                      ),
-                                      CustomText(
-                                        textAlign: TextAlign.left,
-                                        maxLines: 2,
-                                        text: PrefsHelper.userCompany,
-                                        fontSize: 18,
-                                        fontWeight:  FontWeight.w500,
-                                        color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                      ),
-                                    ],
+                            Padding(
+                              padding:
+                              EdgeInsets.only(left: 32.w, top: 16.h, bottom: 16.h),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 200,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          textAlign: TextAlign.left,
+                                          maxLines: 2,
+                                          text: profileController.nameController.text,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
+                                        ),
+                                        CustomText(
+                                          textAlign: TextAlign.left,
+                                          maxLines: 2,
+                                          text: profileController.designationController.text,
+                                          fontSize: 16,
+                                          fontWeight:  FontWeight.w500,
+                                          color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
+                                        ),
+                                        CustomText(
+                                          textAlign: TextAlign.left,
+                                          maxLines: 2,
+                                          text: profileController.companyController.text,
+                                          fontSize: 18,
+                                          fontWeight:  FontWeight.w500,
+                                          color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Row(
-                                  children: [
-                                    PrefsHelper.userPhone.isEmpty? SizedBox() : CustomBackButton(
-                                      onTap: () {},
-                                      icon: Icons.phone_iphone_outlined,
-                                      radius: 100,
-                                      color: AppColors.black_500,
-                                      height: 25,
-                                      width: 25,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    CustomText(
-                                      textAlign: TextAlign.left,
-                                      text: PrefsHelper.userPhone,
-                                      color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                      fontSize: 18,
-                                      fontWeight:  FontWeight.w500,
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrefsHelper.userMail.isEmpty? SizedBox(): CustomBackButton(
-                                      onTap: () {},
-                                      icon: Icons.email_outlined,
-                                      radius: 100,
-                                      color: AppColors.black_500,
-                                      height: 25,
-                                      width: 25,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    Expanded(
-                                      child: CustomText(
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        textAlign: TextAlign.left,
-                                        text: PrefsHelper.userMail,
-                                        color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                        fontSize: 18,
-                                        fontWeight:  FontWeight.w500,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 8.h,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrefsHelper.userAddress.isEmpty? SizedBox() : CustomBackButton(
-                                      onTap: () {},
-                                      icon: Icons.location_on_outlined,
-                                      radius: 100,
-                                      color: AppColors.black_500,
-                                      height: 25,
-                                      width: 25,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    Expanded(
-                                      child: CustomText(
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                        maxLines: 3,
-                                        text: PrefsHelper.userAddress,
-                                        color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                        fontSize: 18,
-                                        fontWeight:  FontWeight.w500,
-                                      ),
-                                    ),
-                                    SizedBox(height: 16.h,),
-                                  ],
-                                )
-                              ],
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.phone_iphone_outlined, infoText: profileController.phoneController.text),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.call, infoText: profileController.telephoneController.text),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.fax, infoText: profileController.faxController.text),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.email_outlined, infoText: profileController.emailController.text),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.language_outlined ,infoText: profileController.websiteController.text),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  customInfoRow(infoIcon: Icons.location_on_outlined, infoText: profileController.addressController.text)
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 )),
             SizedBox(height: 16.h),
@@ -302,6 +240,30 @@ class ViewECardScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  Row customInfoRow({required IconData infoIcon, required String infoText}) {
+    return Row(
+      children: [
+        infoText.isEmpty? SizedBox() : CustomBackButton(
+          onTap: () {},
+          icon: infoIcon,
+          radius: 100,
+          color: AppColors.black_500,
+          height: 25,
+          width: 25,
+        ),
+        SizedBox(
+          width: 8.w,
+        ),
+        CustomText(
+          textAlign: TextAlign.left,
+          text: infoText,
+          color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
+          fontSize: 18,
+          fontWeight:  FontWeight.w500,
+        )
+      ],
     );
   }
 }

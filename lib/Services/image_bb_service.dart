@@ -11,7 +11,7 @@ class ImageBBService{
 
   String imageBBApiKey = "30847777af0ce6b464c34af996d1e15c";
   
-  Future<String> uploadImage(File imageFile) async{
+  Future<String> uploadImage({required File imageFile}) async{
     List<int> imageBytes = await imageFile.readAsBytes();
     String base64Image = base64Encode(imageBytes);
     
@@ -32,14 +32,16 @@ class ImageBBService{
     return imageUrl;
   }
 
-  Future<File> downloadImage(String imageUrl) async{
+  Future<String> downloadImage({required String imageUrl}) async{
     var response = await http.get(Uri.parse(imageUrl));
 
     if(response.statusCode == 200){
-      File imageFile = File('');
-      await imageFile.writeAsBytes(response.bodyBytes);
+      final Uint8List bytes = response.bodyBytes;
+      final Directory tempDir = await path_provider.getTemporaryDirectory();
+      File imageFile = File('${tempDir.path}/card_image.jpg');
+      await imageFile.writeAsBytes(bytes);
 
-      return imageFile;
+      return imageFile.path;
     } else{
       throw Exception('Failed to download image: ${response.statusCode}');
     }
@@ -55,7 +57,7 @@ class ImageBBService{
       print("The compressed app: $targetPath");
     }
     try{
-      final result = await FlutterImageCompress.compressAndGetFile(imagePath, targetPath, minHeight: 1080, minWidth: 1080, quality: 90);
+      final result = await FlutterImageCompress.compressAndGetFile(imagePath, targetPath, minHeight: 1080, minWidth: 1080, quality: 50);
       return result!.path;
     }catch(e){
       return "Something went wrong: $e";

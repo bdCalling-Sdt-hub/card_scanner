@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     AppColors.green_700,
                                                 content: Container(
                                                   padding: EdgeInsets.only(
-                                                      top: 12.h, left: 8.w),
+                                                      top: 12.h, left: 4.w),
                                                   height: 180.h,
                                                   child: GetBuilder<
                                                       OCRCreateCardController>(

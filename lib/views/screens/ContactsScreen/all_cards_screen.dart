@@ -194,7 +194,10 @@ class AllCardsScreen extends StatelessWidget {
                                   StorageController.designationController.text = contacts.designation;
                                   StorageController.companyController.text = contacts.companyName;
                                   StorageController.emailController.text = contacts.email;
-                                  StorageController.mobilePhoneController.text = contacts.phoneNumber;
+                                  StorageController.mobilePhoneController.text = contacts.mobilePhone;
+                                  StorageController.landPhoneController.text = contacts.landPhone ?? "";
+                                  StorageController.faxController.text = contacts.fax ?? "";
+                                  StorageController.websiteController.text = contacts.website ?? "";
                                   StorageController.addressController.text = contacts.address;
                                   storageController.id = contacts.id;
                                   StorageController.capturedImageList = contacts.capturedImageList ?? [];

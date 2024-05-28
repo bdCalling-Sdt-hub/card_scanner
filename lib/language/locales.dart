@@ -281,6 +281,16 @@ class Locales extends Translations {
           "Land Phone": "Land Phone",
           "Fax": "Fax",
           "Website": "Website",
+          "full name is required": "full name is required",
+          "Designation is required": "Designation is required",
+          "Company name is required": "Company name is required",
+          "Mobile number is required": "Mobile number is required",
+          "Address is required": "Address is required",
+          "Telephone": "Telephone",
+          "Mobile": "Mobile",
+          "Write here": "Write here",
+          "Save": "Save",
+          "Note": "Note",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -544,6 +554,16 @@ class Locales extends Translations {
           "Land Phone": "座机",
           "Fax": "传真",
           "Website": "网站",
+          "full name is required": "姓名是必填项",
+          "Designation is required": "职称是必填项",
+          "Company name is required": "公司名称是必填项",
+          "Mobile number is required": "手机号码是必填项",
+          "Address is required": "地址是必填项",
+          "Telephone": "电话",
+          "Mobile": "手机",
+          "Write here": "在这里写",
+          "Save": "保存",
+          "Note": "备注",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 

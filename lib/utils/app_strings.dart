@@ -197,6 +197,7 @@ class AppStrings{
   static String workInfo = "Work Info";
   static String education = "Education";
   static String mobileNumber = "Mobile Number";
+  static String mobile = "Mobile";
   static String signedIn = "signedIn";
   static String getService = "You will get service after developing phase";
 

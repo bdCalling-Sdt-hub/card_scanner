@@ -5,7 +5,11 @@ class ContactsModel {
   final String designation;
   final String companyName;
   final String email;
-  final String phoneNumber;
+  final String mobilePhone;
+  final String? landPhone;
+  final String? fax;
+  final String? website;
+  final String? note;
   final String address;
   final List<String>? capturedImageList;
 
@@ -16,7 +20,11 @@ class ContactsModel {
     required this.designation,
     required this.companyName,
     required this.email,
-    required this.phoneNumber,
+    required this.mobilePhone,
+    this.landPhone,
+    this.fax,
+    this.website,
+    this.note,
     required this.address,
     this.capturedImageList,
   });
@@ -29,7 +37,11 @@ class ContactsModel {
       'designation': designation,
       'companyName': companyName,
       'email': email,
-      'phoneNumber': phoneNumber,
+      'mobilePhone': mobilePhone,
+      'landPhone': landPhone,
+      'fax': fax,
+      'website': website,
+      'note': note,
       'address': address,
       'capturedImageList': capturedImageList,
     };
@@ -43,7 +55,11 @@ class ContactsModel {
       designation: json['designation'],
       companyName: json['companyName'],
       email: json['email'],
-      phoneNumber: json['phoneNumber'],
+      mobilePhone: json['mobilePhone'],
+      landPhone: json['landPhone'],
+      fax: json['fax'],
+      website: json['website'],
+      note: json['note'],
       address: json['address'],
       capturedImageList: (json['capturedImageList'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );

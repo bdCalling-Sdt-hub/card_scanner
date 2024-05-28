@@ -80,7 +80,7 @@ class EditCardStyle extends StatelessWidget {
 
                       Padding(
                         padding:
-                        EdgeInsets.only(left: 32.w, top: 32.h, bottom: 16.h),
+                        EdgeInsets.only(left: 32.w, top: 16.h, bottom: 16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -118,91 +118,29 @@ class EditCardStyle extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 8.h,
+                              height: 4.h,
                             ),
-                            Row(
-                              children: [
-                                PrefsHelper.userPhone.isEmpty? SizedBox() : CustomBackButton(
-                                  onTap: () {},
-                                  icon: Icons.phone_iphone_outlined,
-                                  radius: 100,
-                                  color: AppColors.black_500,
-                                  height: 25,
-                                  width: 25,
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                CustomText(
-                                  textAlign: TextAlign.left,
-                                  text: profileController.phoneController.text,
-                                  color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                  fontSize: 18,
-                                  fontWeight:  FontWeight.w500,
-                                )
-                              ],
-                            ),
+                            customInfoRow(infoIcon: Icons.phone_iphone_outlined, infoText: profileController.phoneController.text),
                             SizedBox(
-                              height: 8.h,
+                              height: 4.h,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrefsHelper.userMail.isEmpty? SizedBox(): CustomBackButton(
-                                  onTap: () {},
-                                  icon: Icons.email_outlined,
-                                  radius: 100,
-                                  color: AppColors.black_500,
-                                  height: 25,
-                                  width: 25,
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Expanded(
-                                  child: CustomText(
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    textAlign: TextAlign.left,
-                                    text: profileController.emailController.text,
-                                    color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                    fontSize: 18,
-                                    fontWeight:  FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
+                            customInfoRow(infoIcon: Icons.call, infoText: profileController.telephoneController.text),
                             SizedBox(
-                              height: 8.h,
+                              height: 4.h,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrefsHelper.userAddress.isEmpty? SizedBox() : CustomBackButton(
-                                  onTap: () {},
-                                  icon: Icons.location_on_outlined,
-                                  radius: 100,
-                                  color: AppColors.black_500,
-                                  height: 25,
-                                  width: 25,
-                                ),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Expanded(
-                                  child: CustomText(
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.left,
-                                    maxLines: 3,
-                                    text: profileController.addressController.text,
-                                    color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
-                                    fontSize: 18,
-                                    fontWeight:  FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: 16.h,),
-                              ],
-                            )
+                            customInfoRow(infoIcon: Icons.fax, infoText: profileController.faxController.text),
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            customInfoRow(infoIcon: Icons.email_outlined, infoText: profileController.emailController.text),
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            customInfoRow(infoIcon: Icons.language_outlined ,infoText: profileController.websiteController.text),
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            customInfoRow(infoIcon: Icons.location_on_outlined, infoText: profileController.addressController.text)
                           ],
                         ),
                       ),
@@ -418,5 +356,30 @@ class EditCardStyle extends StatelessWidget {
         ],
       );
     },);
+  }
+
+  Row customInfoRow({required IconData infoIcon, required String infoText}) {
+    return Row(
+                            children: [
+                              infoText.isEmpty? SizedBox() : CustomBackButton(
+                                onTap: () {},
+                                icon: infoIcon,
+                                radius: 100,
+                                color: AppColors.black_500,
+                                height: 25,
+                                width: 25,
+                              ),
+                              SizedBox(
+                                width: 8.w,
+                              ),
+                              CustomText(
+                                textAlign: TextAlign.left,
+                                text: infoText,
+                                color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5? AppColors.blackColor : AppColors.green_50,
+                                fontSize: 18,
+                                fontWeight:  FontWeight.w500,
+                              )
+                            ],
+                          );
   }
 }

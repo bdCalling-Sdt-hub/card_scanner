@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,9 +23,11 @@ import '../core/routes/app_routes.dart';
 import '../utils/app_strings.dart';
 import 'package:path/path.dart' as p;
 
+import '../views/screens/ContactsScreen/contact_details_screen.dart';
+
 class StorageController extends GetxController {
   @override
-  void onInit(){
+  void onInit() {
     // TODO: implement onInit
     loadContacts().then((value) => initializeSelectionList());
     allContactsForGroup.clear();
@@ -42,6 +45,7 @@ class StorageController extends GetxController {
   static TextEditingController landPhoneController = TextEditingController();
   static TextEditingController faxController = TextEditingController();
   static TextEditingController websiteController = TextEditingController();
+  static TextEditingController noteController = TextEditingController();
   static TextEditingController addressController = TextEditingController();
   final picker = ImagePicker();
   static String? imagePath;
@@ -53,22 +57,31 @@ class StorageController extends GetxController {
   List<ContactsModel> singleGroupContacts = [];
   List<ContactGroup> groupedContactsList = [];
 
-
   Set<ContactsModel> selectedGroupContactsSet = <ContactsModel>{};
   RxList<ContactsModel> selectedGroupContacts = <ContactsModel>[].obs;
   static String appTitle = "";
+
+  RxBool isLandPhone = false.obs;
+  RxBool isFax = false.obs;
+  RxBool isWebsite = false.obs;
+  List formFieldsList = [
+    "Land Phone".tr,
+    "Fax".tr,
+    "Website".tr,
+  ];
 
   ///<<<=============== Sorting Repo ==================================>>>
   RxBool isTapped = false.obs;
   List sortsList = ["Sorts by person name".tr, "Sorts by company name".tr];
 
-  sortBy({required int index}){
-    if(index == 0){
-      contacts.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  sortBy({required int index}) {
+    if (index == 0) {
+      contacts
+          .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       update();
-    }
-    else if(index == 1){
-      contacts.sort((a, b) => a.companyName.toLowerCase().compareTo(b.companyName.toLowerCase()));
+    } else if (index == 1) {
+      contacts.sort((a, b) =>
+          a.companyName.toLowerCase().compareTo(b.companyName.toLowerCase()));
       update();
     }
     isTapped.value = false;
@@ -76,7 +89,7 @@ class StorageController extends GetxController {
 
   ///<<<============= To remove duplicate contacts ===========================>>>
 
-  void addSelectedContact(ContactsModel contact){
+  void addSelectedContact(ContactsModel contact) {
     selectedGroupContactsSet.add(contact);
     selectedGroupContacts.value = selectedGroupContactsSet.toList();
   }
@@ -88,17 +101,21 @@ class StorageController extends GetxController {
 
   ///<<<==================== Update Group Repo ==============================>>>
 
-  upDateGroupContactRepo({required int groupIndex}){
-    ContactGroup contactGroup = ContactGroup(name: groupNameController.text, contactsList: selectedGroupContacts);
+  upDateGroupContactRepo({required int groupIndex}) {
+    ContactGroup contactGroup = ContactGroup(
+        name: groupNameController.text, contactsList: selectedGroupContacts);
     groupedContactsList[groupIndex] = contactGroup;
     PrefsHelper.saveGroupedList(groupedContactsList);
     update();
     Get.back();
     Get.back();
-    Future.delayed(Duration(seconds: 1), () {
-      groupNameController.clear();
-      selectedGroupContacts.clear();
-    },);
+    Future.delayed(
+      Duration(seconds: 1),
+      () {
+        groupNameController.clear();
+        selectedGroupContacts.clear();
+      },
+    );
   }
 
   ///<<<===================== Create group repo ==============================>>>
@@ -110,24 +127,27 @@ class StorageController extends GetxController {
         designation: selectedGroupContacts[index].designation,
         companyName: selectedGroupContacts[index].companyName,
         email: selectedGroupContacts[index].email,
-        phoneNumber: selectedGroupContacts[index].phoneNumber,
+        mobilePhone: selectedGroupContacts[index].mobilePhone,
+        landPhone: selectedGroupContacts[index].landPhone,
+        fax: selectedGroupContacts[index].fax,
+        website: selectedGroupContacts[index].website,
         address: selectedGroupContacts[index].address,
-      capturedImageList: selectedGroupContacts[index].capturedImageList
-    );
+        note: selectedGroupContacts[index].note,
+        capturedImageList: selectedGroupContacts[index].capturedImageList);
     singleGroupContacts.add(contactsModel);
     // ContactGroup group = ContactGroup(name: groupNameController.text, contacts: [contactsModel]);
     return singleGroupContacts;
   }
 
   ///===================>> Delete Group Repo <<===============================
-  deleteGroupRepo({required int index}){
+  deleteGroupRepo({required int index}) {
     groupedContactsList.removeAt(index);
     PrefsHelper.saveGroupedList(groupedContactsList);
     update();
   }
 
   ///===================>> Delete Group Contact Repo <<===============================
-  deleteGroupContactRepo({required int groupIndex,required int listIndex}){
+  deleteGroupContactRepo({required int groupIndex, required int listIndex}) {
     groupedContactsList[groupIndex].contactsList.removeAt(listIndex);
     PrefsHelper.saveGroupedList(groupedContactsList);
     update();
@@ -170,7 +190,8 @@ class StorageController extends GetxController {
     if (PrefsHelper.unGroupedContacts.isEqual(0)) {
       unGroupedContacts = allContactsForGroup.length - groupedContactsCount;
     } else {
-      unGroupedContacts = await PrefsHelper.getInt("unGroupedContacts") - groupedContactsCount;
+      unGroupedContacts =
+          await PrefsHelper.getInt("unGroupedContacts") - groupedContactsCount;
     }
     PrefsHelper.setInt('unGroupedContacts', unGroupedContacts);
     if (unGroupedContacts < 0) {
@@ -183,7 +204,6 @@ class StorageController extends GetxController {
     allContactsForGroup
         .removeWhere((element) => selectedGroupContacts.contains(element));
   }
-
 
   ///<<<========================= Excel export repo ================================>>>>
   Future<void> exportToExcel({required List<ContactsModel> contactList}) async {
@@ -204,14 +224,21 @@ class StorageController extends GetxController {
       TextCellValue("Designation"),
       TextCellValue("Company Name"),
       TextCellValue("Email"),
-      TextCellValue("Phone Number"),
+      TextCellValue("Mobile"),
+      TextCellValue("Telephone"),
+      TextCellValue("Fax"),
+      TextCellValue("Website"),
       TextCellValue("Address"),
+      TextCellValue("Note"),
+      TextCellValue("capturedImageList"),
     ];
 
     sheetObject.appendRow(headers);
 
     // Add data rows
     for (var contact in contactList) {
+      String capturedImages = contact.capturedImageList?.join(', ') ?? '';
+
       List<TextCellValue> data = [
         TextCellValue(contact.id),
         TextCellValue(contact.imageUrl),
@@ -219,8 +246,13 @@ class StorageController extends GetxController {
         TextCellValue(contact.designation),
         TextCellValue(contact.companyName),
         TextCellValue(contact.email),
-        TextCellValue(contact.phoneNumber),
+        TextCellValue(contact.mobilePhone),
+        TextCellValue(contact.landPhone ?? ""),
+        TextCellValue(contact.fax ?? ""),
+        TextCellValue(contact.website ?? ""),
         TextCellValue(contact.address),
+        TextCellValue(contact.note ?? ""),
+        TextCellValue(capturedImages),
       ];
       sheetObject.appendRow(data);
     }
@@ -228,11 +260,14 @@ class StorageController extends GetxController {
     // Save the file in the documents directory
     Directory? directory;
     if (Platform.isAndroid) {
-      directory = await getExternalStorageDirectory();  // Get external storage directory
+      directory =
+          await getExternalStorageDirectory(); // Get external storage directory
     } else if (Platform.isIOS) {
-      directory = await getApplicationDocumentsDirectory();  // Get application documents directory
+      directory =
+          await getApplicationDocumentsDirectory(); // Get application documents directory
     } else {
-      directory = await getApplicationDocumentsDirectory();  // Default to application documents directory
+      directory =
+          await getApplicationDocumentsDirectory(); // Default to application documents directory
     }
 
     String filePath = p.join(directory!.path, 'Contacts.xlsx');
@@ -257,7 +292,6 @@ class StorageController extends GetxController {
     // Provide the option to share the file
   }
 
-
   ///<<<<<<<<<<<<<<<<<<<<<<<<<<< Phone Local Storage CRUD All Methods >>>>>>>>>>>>>>>>>>>>>>>>>>
 
   ///<<<--------------------- Load contacts from mobile storage --------------->>>
@@ -272,7 +306,8 @@ class StorageController extends GetxController {
       if (file.existsSync()) {
         final data = await file.readAsString();
         final List<dynamic> jsonList = json.decode(data);
-        contacts = jsonList.map((json) => ContactsModel.fromJson(json)).toList();
+        contacts =
+            jsonList.map((json) => ContactsModel.fromJson(json)).toList();
         allContactsForGroup.addAll(contacts);
         update();
       }
@@ -315,8 +350,12 @@ class StorageController extends GetxController {
         designation: designationController.text,
         companyName: companyController.text,
         email: emailController.text,
-        phoneNumber: mobilePhoneController.text,
+        mobilePhone: mobilePhoneController.text,
+        landPhone: landPhoneController.text,
+        fax: faxController.text,
+        website: websiteController.text,
         address: addressController.text,
+        note: noteController.text,
         capturedImageList: OCRCreateCardController.capturedImageList,
       ));
       update();
@@ -328,6 +367,9 @@ class StorageController extends GetxController {
       emailController.clear();
       mobilePhoneController.clear();
       addressController.clear();
+      landPhoneController.clear();
+      faxController.clear();
+      websiteController.clear();
       OCRCreateCardController.capturedImageList = [];
     }
   }
@@ -335,22 +377,29 @@ class StorageController extends GetxController {
   ///<<<---------------------- Update contacts method ------------------------>>>
 
   Future<void> updateContact() async {
+    if (kDebugMode) {
+      print("-=-=-=-=-=-=-=--=-=-${noteController.text}");
+    }
     if (imagePath != null && imagePath!.isNotEmpty) {
       final existingContactIndex =
           contacts.indexWhere((contact) => contact.id == id);
+
       if (existingContactIndex != -1) {
         // Update contact details
         contacts[existingContactIndex] = ContactsModel(
-          id: id.toString(),
-          imageUrl: imagePath.toString(),
-          name: nameController.text,
-          designation: designationController.text,
-          companyName: companyController.text,
-          email: emailController.text,
-          phoneNumber: mobilePhoneController.text,
-          address: addressController.text,
-          capturedImageList: capturedImageList
-        );
+            id: id.toString(),
+            imageUrl: imagePath.toString(),
+            name: nameController.text,
+            designation: designationController.text,
+            companyName: companyController.text,
+            email: emailController.text,
+            mobilePhone: mobilePhoneController.text,
+            landPhone: landPhoneController.text,
+            fax: faxController.text,
+            website: websiteController.text,
+            address: addressController.text,
+            note: noteController.text,
+            capturedImageList: capturedImageList);
         update();
         saveContacts();
       }

@@ -11,6 +11,16 @@ class ProfileController extends GetxController{
 
   RxBool isStyle = false.obs;
   RxBool isInformation = true.obs;
+  RxBool isTapped = false.obs;
+  RxBool isLandPhone = false.obs;
+  RxBool isFax = false.obs;
+  RxBool isWebsite = false.obs;
+
+  List formFieldsList = [
+    "Land Phone".tr,
+    "Fax".tr,
+    "Website".tr,
+  ];
 
   RxInt selectedColorIndex = 50.obs;
 
@@ -37,6 +47,9 @@ class ProfileController extends GetxController{
   TextEditingController emailController = TextEditingController(text: PrefsHelper.userMail);
   TextEditingController phoneController = TextEditingController(text: PrefsHelper.userPhone);
   TextEditingController addressController = TextEditingController(text: PrefsHelper.userAddress);
+  TextEditingController telephoneController = TextEditingController(text: PrefsHelper.userTelephone);
+  TextEditingController faxController = TextEditingController(text: PrefsHelper.userFax);
+  TextEditingController websiteController = TextEditingController(text: PrefsHelper.userWebsite);
 
   selectImageGallery() async {
     final ImagePicker picker = ImagePicker();

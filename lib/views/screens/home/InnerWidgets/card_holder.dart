@@ -194,7 +194,7 @@ class CardHolder extends StatelessWidget {
 
                                                       InkWell(
                                                         onTap: () {
-                                                          Share.share("${storageController.contacts[index].name}, ${storageController.contacts[index].designation}, ${storageController.contacts[index].companyName}, ${storageController.contacts[index].phoneNumber}, ${storageController.contacts[index].email}, ${storageController.contacts[index].address}");
+                                                          Share.share("${storageController.contacts[index].name}, ${storageController.contacts[index].designation}, ${storageController.contacts[index].companyName}, ${storageController.contacts[index].mobilePhone}, ${storageController.contacts[index].email}, ${storageController.contacts[index].address}");
 
                                                           // showDialog(
                                                           //   context: context,

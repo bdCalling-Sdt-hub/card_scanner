@@ -22,6 +22,17 @@ class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({super.key});
 
   ProfileController profileController = Get.put(ProfileController());
+  ScrollController scrollController = ScrollController();
+
+  addItems(){
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeOut
+      );
+    });
+  }
 
 
   @override
@@ -30,6 +41,7 @@ class EditProfileScreen extends StatelessWidget {
       body: Obx(() {
         return SafeArea(
           child: SingleChildScrollView(
+            controller: scrollController,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -231,84 +243,219 @@ class EditProfileScreen extends StatelessWidget {
                             color: AppColors.green_900,
                           ),
 
-                          ///<<<================ Full Name ========================>>>
+                          Obx(() => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ///<<<================ Full Name ========================>>>
 
-                          TextFormField(
-                            controller: profileController.nameController,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.fullName.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
+                              TextFormField(
+                                controller: profileController.nameController,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.fullName.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+
+                              ///<<<=================== Mobile Number =================>>>
+
+                              TextFormField(
+                                controller: profileController.phoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.mobile.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+
+                              profileController.isLandPhone.value || profileController.telephoneController.text.isNotEmpty ? TextFormField(
+                                controller: profileController.telephoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: "Telephone".tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14,
+                                      fontWeight: FontWeight.w500
+                                    )
+                                ),
+                              ) : SizedBox(),
+                              profileController.isFax.value || profileController.faxController.text.isNotEmpty ? TextFormField(
+                                controller: profileController.faxController,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: "Fax".tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500
+                                    )
+                                ),
+                              ) : SizedBox(),
+
+                              ///<<<================= Email Address ===================>>>
+
+                              TextFormField(
+                                controller: profileController.emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.email.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+                              SizedBox(height: 12.h,),
+                              CustomText(
+                                text: "${AppStrings.workInfo.tr}:",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.green_900,
+                              ),
+                              TextFormField(
+                                controller: profileController.designationController,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.designation.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+                              TextFormField(
+                                controller: profileController.companyController,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.companyName.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+
+                              profileController.isWebsite.value || profileController.websiteController.text.isNotEmpty? TextFormField(
+                                controller: profileController.websiteController,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: "Website".tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500
+                                    )
+                                ),
+                              ) : SizedBox(),
+
+                              TextFormField(
+                                controller: profileController.addressController,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.zero,
+                                    labelText: AppStrings.address.tr,
+                                    labelStyle: TextStyle(
+                                        fontSize: 14
+                                    )
+                                ),
+                              ),
+                              SizedBox(height: 16.h,),
+                            ],
+                          )),
+
+                          Obx(() => profileController.isTapped.value? Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                              height: 120.h,
+                              decoration: BoxDecoration(
+                                  color: AppColors.green_600,
+                                  borderRadius: BorderRadius.circular(4.r)
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      profileController.isLandPhone.value = !profileController.isLandPhone.value;
+                                    },
+                                    child: CustomText(
+                                      text: profileController.formFieldsList[0],
+                                      color: AppColors.green_900,
+                                      fontWeight: FontWeight.w500,
+                                      bottom: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.w,
+                                    height: 1.h,
+                                    color: AppColors.green_900,),
+                                  InkWell(
+                                    onTap: () {
+                                      profileController.isFax.value = !profileController.isFax.value;
+                                    },
+                                    child: CustomText(
+                                      top: 5,
+                                      text: profileController.formFieldsList[1],
+                                      color: AppColors.green_900,
+                                      fontWeight: FontWeight.w500,
+                                      bottom: 10,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 100.w,
+                                    height: 1.h,
+                                    color: AppColors.green_900,),
+                                  InkWell(
+                                    onTap: () {
+                                      profileController.isWebsite.value = !profileController.isWebsite.value;
+                                    },
+                                    child: CustomText(
+                                      top: 5,
+                                      text: profileController.formFieldsList[2],
+                                      color: AppColors.green_900,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ) : SizedBox()),
+                          GestureDetector(
+                            onTap: () {
+                              profileController.isTapped.value = !profileController.isTapped.value;
+                              addItems();
+                            },
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                height: 30.h,
+                                width: 80.w,
+                                decoration: BoxDecoration(
+                                    color: AppColors.green_700,
+                                    borderRadius: BorderRadius.circular(4)
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add, color: AppColors.green_500,),
+                                    SizedBox(width: 4.w),
+                                    CustomText(
+                                      text: "Add".tr,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.green_500,
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
 
-                          ///<<<=================== Mobile Number =================>>>
-
-                          TextFormField(
-                            controller: profileController.phoneController,
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.mobileNumber.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
-                            ),
-                          ),
-
-                          ///<<<================= Email Address ===================>>>
-
-                          TextFormField(
-                            controller: profileController.emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.email.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
-                            ),
-                          ),
-                          SizedBox(height: 12.h,),
-                          CustomText(
-                            text: "${AppStrings.workInfo.tr}:",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.green_900,
-                          ),
-                          TextFormField(
-                            controller: profileController.designationController,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.designation.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
-                            ),
-                          ),
-                          TextFormField(
-                            controller: profileController.companyController,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.companyName.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
-                            ),
-                          ),
-                          TextFormField(
-                            controller: profileController.addressController,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                                labelText: AppStrings.address.tr,
-                                labelStyle: TextStyle(
-                                    fontSize: 14
-                                )
-                            ),
-                          ),
-                          SizedBox(height: 60.h,),
+                          SizedBox(height: 30.h,),
 
                           ///<<<================= Save and Preview Button =================>>>
 
@@ -322,12 +469,19 @@ class EditProfileScreen extends StatelessWidget {
                                 PrefsHelper.userDesignation = profileController.designationController.text;
                                 PrefsHelper.userCompany = profileController.companyController.text;
                                 PrefsHelper.userAddress = profileController.addressController.text;
+                                PrefsHelper.userTelephone = profileController.telephoneController.text;
+                                PrefsHelper.userFax = profileController.faxController.text;
+                                PrefsHelper.userWebsite = profileController.websiteController.text;
+
                                 PrefsHelper.setString("userName", profileController.nameController.text);
                                 PrefsHelper.setString("userMail", profileController.emailController.text);
                                 PrefsHelper.setString("userPhone", profileController.phoneController.text);
                                 PrefsHelper.setString("userDesignation", profileController.designationController.text);
                                 PrefsHelper.setString("userCompany", profileController.companyController.text);
                                 PrefsHelper.setString("userAddress", profileController.addressController.text);
+                                PrefsHelper.setString("userTelephone", profileController.telephoneController.text);
+                                PrefsHelper.setString("userFax", profileController.faxController.text);
+                                PrefsHelper.setString("userWebsite", profileController.websiteController.text);
 
                                 Get.offAllNamed(AppRoutes.profileScreen);
                               },

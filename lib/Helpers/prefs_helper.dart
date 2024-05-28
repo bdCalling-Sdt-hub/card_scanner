@@ -20,12 +20,17 @@ class PrefsHelper extends GetxController {
   static String localizationCountryCode = 'US';
   static String cameraImage = '';
   static bool signedIn = false;
+
   static String userName = "";
   static String userMail = "";
   static String userPhone = "";
   static String userDesignation = "";
   static String userCompany = "";
   static String userAddress = "";
+  static String userTelephone = "";
+  static String userFax = "";
+  static String userWebsite = "";
+
   static String profileImagePath = "";
   static int colorIndex = 0;
   static int unGroupedContacts = 0;
@@ -38,12 +43,17 @@ class PrefsHelper extends GetxController {
   static Future<void> getAllPrefData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     signedIn = preferences.getBool(AppStrings.signedIn) ?? false;
+
     userName = preferences.getString("userName") ?? "";
     userMail = preferences.getString("userMail") ?? "";
     userPhone = preferences.getString("userPhone") ?? "";
     userDesignation = preferences.getString("userDesignation") ?? "";
     userCompany = preferences.getString("userCompany") ?? "";
     userAddress = preferences.getString("userAddress") ?? "";
+    userTelephone = preferences.getString("userTelephone") ?? "";
+    userFax = preferences.getString("userFax") ?? "";
+    userWebsite = preferences.getString("userWebsite") ?? "";
+
     profileImagePath = preferences.getString("profileImagePath") ?? "";
     cameraImage = preferences.getString("cameraImage") ?? "";
     colorIndex = preferences.getInt("colorIndex") ?? 0;

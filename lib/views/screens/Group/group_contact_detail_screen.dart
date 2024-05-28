@@ -81,7 +81,7 @@ class GroupContactDetailScreen extends StatelessWidget {
                         title: AppStrings.email.tr, value: contactDetails.email),
                     customWrap(
                         title: AppStrings.contact.tr,
-                        value: contactDetails.phoneNumber),
+                        value: contactDetails.mobilePhone),
                     customWrap(
                         title: AppStrings.address.tr,
                         value: contactDetails.address),
