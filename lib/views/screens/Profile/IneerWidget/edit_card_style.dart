@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +45,7 @@ class EditCardStyle extends StatelessWidget {
 
                   ///<<<================= Name card Logo ================>>>
                   Positioned(
-                    top: 150,
+                    top: 170,
                     child: Container(
                       height: 170.h,
                       width: 170.w,
@@ -65,16 +66,35 @@ class EditCardStyle extends StatelessWidget {
                     children: [
                       ///<<<================= Profile Picture ================>>>
                       SizedBox(height: 16.h),
-                      Container(
-                        height: 150.h,
-                        width: 150.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          image: PrefsHelper.isProfilePhotoShow? DecorationImage(
-                            fit: BoxFit.fill,
-                            image: FileImage(
-                                File(PrefsHelper.profileImagePath)),
-                          ) : null,
+                      CachedNetworkImage(
+                        imageUrl: PrefsHelper.profileImagePath,
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 150.h,
+                          width: 150.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            image: PrefsHelper.isProfilePhotoShow? DecorationImage(
+                              fit: BoxFit.fill,
+                              image: imageProvider,
+                            ) : null,
+                          ),
+                        ),
+                        placeholder: (context, url) => Container(
+                            height: 150.h,
+                            width: 150.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                            ),
+                            child: Center(child: CircularProgressIndicator())),
+                        errorWidget: (context, url, error) => Container(
+                          height: 150.h,
+                          width: 150.w,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(100.r),
+                              color: AppColors.green_600
+                          ),
+                          child: Icon(Icons.error),
                         ),
                       ),
 

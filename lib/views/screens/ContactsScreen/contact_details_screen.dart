@@ -1,5 +1,5 @@
-import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
@@ -124,15 +124,30 @@ class ContactDetailsScreen extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.center,
-                      child: Container(
-                        height: 180.h,
-                        width: 180.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.green_600,
-                          borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
+                      child: CachedNetworkImage(
+                        imageUrl: contactDetails.imageUrl,
+                        imageBuilder: (context, imageProvider) => Container(
+                          height: 180.h,
+                          width: 180.w,
+                          decoration: BoxDecoration(
+                            color: AppColors.green_600,
+                            borderRadius: BorderRadius.circular(8.r),
+                            image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: FileImage(File(contactDetails.imageUrl))),
+                              image: imageProvider,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Container(
+                          height: 180.h,
+                          width: 180.w,
+                          decoration: BoxDecoration(
+                            color: AppColors.green_600,
+                            borderRadius:
+                            BorderRadius.circular(8.r),
+                          ),
+                          child: Icon(Icons.error),
                         ),
                       ),
                     ),
@@ -181,17 +196,19 @@ class ContactDetailsScreen extends StatelessWidget {
                                         children: List.generate(
                                             contactDetails.capturedImageList!
                                                 .length, (index) {
-                                          return Container(
-                                            height: 220,
-                                            width: Get.width * 0.9,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: FileImage(File(
-                                                  contactDetails
-                                                          .capturedImageList![
-                                                      index])),
-                                            )),
+                                          return CachedNetworkImage(
+                                            imageUrl: contactDetails.capturedImageList![index],
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              height: 220,
+                                              width: Get.width * 0.9,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.fill,
+                                                    image: imageProvider,
+                                                  )),
+                                            ),
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                            errorWidget: (context, url, error) => SizedBox(width: Get.width * 0.9, child: Icon(Icons.error)),
                                           );
                                         }),
                                       ),
@@ -296,15 +313,15 @@ class ContactDetailsScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                hasNoteData.value ?Expanded(
+                                Obx(() => hasNoteData.value ?Expanded(
                                   child: CustomText(
                                     textAlign: TextAlign.left,
-                                    maxLines: 5,
+                                    maxLines: 50,
                                     text: contactDetails.note!,
                                     fontSize: 16,
                                     color: AppColors.green_900,
                                   ),
-                                ) : SizedBox(),
+                                ) : SizedBox()),
                                 InkWell(
                                     onTap: () {
                                       isNoteTapped.value = true;

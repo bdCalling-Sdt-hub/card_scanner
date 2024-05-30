@@ -1,7 +1,9 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/screen_shot_helper.dart';
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
@@ -25,6 +27,7 @@ class MyQrCodeScreen extends StatelessWidget {
   ProfileController profileController = Get.put(ProfileController());
   QrScannerController qrScannerController = Get.put(QrScannerController());
   ScreenshotController screenshotController = ScreenshotController();
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
 
   @override
@@ -52,25 +55,42 @@ class MyQrCodeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.h),
-              Container(
-                height: 100.h,
-                width: 100.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  image: PrefsHelper.profileImagePath.isEmpty
-                      ? DecorationImage(
+              CachedNetworkImage(
+                imageUrl: PrefsHelper.profileImagePath,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: 150.h,
+                  width: 150.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    image: PrefsHelper.isProfilePhotoShow? DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage(AppImages.blankProfileImage))
-                      : DecorationImage(
-                      fit: BoxFit.fill,
-                      image: FileImage(File(PrefsHelper.profileImagePath))),
+                      image: imageProvider,
+                    ) : null,
+                  ),
+                ),
+                placeholder: (context, url) => Container(
+                    height: 150.h,
+                    width: 150.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Center(child: CircularProgressIndicator())),
+                errorWidget: (context, url, error) => Container(
+                  height: 150.h,
+                  width: 150.w,
+                  decoration: BoxDecoration(
+                      borderRadius:
+                      BorderRadius.circular(100.r),
+                      color: AppColors.green_600
+                  ),
+                  child: Icon(Icons.error),
                 ),
               ),
               SizedBox(height: 20.h),
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
+                text: profileController.nameController.text.isEmpty? "Name: ".tr : profileController.nameController.text,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 color: AppColors.green_900,
@@ -78,7 +98,7 @@ class MyQrCodeScreen extends StatelessWidget {
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
+                text: profileController.designationController.text.isEmpty? "Designation: ".tr : profileController.designationController.text,
                 color: AppColors.black_400,
                 fontSize: 16,
               ),
@@ -86,7 +106,7 @@ class MyQrCodeScreen extends StatelessWidget {
               CustomText(
                 maxLines: 2,
                 textAlign: TextAlign.left,
-                text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
+                text: profileController.companyController.text.isEmpty? "Company Name: ".tr : profileController.companyController.text,
                 fontWeight: FontWeight.w400,
                 fontSize: 18,
                 color: AppColors.black_400,
@@ -100,23 +120,24 @@ class MyQrCodeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor
                   ),
-                  child: QrImageView(
-                    data: "${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.addressController.text} ",
-                    version: QrVersions.auto,
-                    size: 200,
-                    gapless: false,
-                    // embeddedImage: FileImage(File(selectedContact.imageUrl)),
-                    embeddedImageStyle: QrEmbeddedImageStyle(
-                        size: Size(100, 100)
+                  child: Center(
+                    child: QrImageView(
+                      data: "${PrefsHelper.profileImagePath} /${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.telephoneController.text}/${profileController.faxController.text}/${profileController.websiteController.text}/${profileController.addressController.text} ",
+                      version: QrVersions.auto,
+                      gapless: false,
+                      // embeddedImage: FileImage(File(selectedContact.imageUrl)),
+                      embeddedImageStyle: QrEmbeddedImageStyle(
+                          size: Size(100, 100)
+                      ),
+                      errorStateBuilder: (context, error) {
+                        return Center(
+                          child: Text(
+                            "Oh! Something went wrong...".tr,
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      },
                     ),
-                    errorStateBuilder: (context, error) {
-                      return Center(
-                        child: Text(
-                          "Oh! Something went wrong...".tr,
-                          textAlign: TextAlign.center,
-                        ),
-                      );
-                    },
                   ),
                 ),
               ),
@@ -128,26 +149,32 @@ class MyQrCodeScreen extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            qrScannerController.qrScanner();
-                          },
-                          child: Container(
-                            height: 50.h,
-                            width: 50.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: AppColors.green_50
-                            ),
-                            child: Center(
+                        GetBuilder<OCRCreateCardController>(builder: (ocrCreateCardController) {
+                          return ocrCreateCardController.isLoading
+                              ? Center(child: CircularProgressIndicator())
+                              : InkWell(
+                            onTap: () async {
+                              await qrScannerController.qrScanner().then((value) {
+                                ocrCreateCardController.textFormatRepo(extractedText: value);
+                              });
+                            },
+                            child: Container(
+                              height: 50.h,
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: AppColors.green_50
+                              ),
+                              child: Center(
                                 child: SvgPicture.asset(
                                   AppIcons.barCodeScanIcon,
                                   height: 24,
                                   width: 24,
                                 ),
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },),
                         SizedBox(height: 8.h,),
                         CustomText(
                           text: AppStrings.scanQrCode.tr,

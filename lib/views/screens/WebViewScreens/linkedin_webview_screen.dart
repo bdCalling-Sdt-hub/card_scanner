@@ -91,7 +91,7 @@ class _LinkedInWebViewScreenState extends State<LinkedInWebViewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-        await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => storageController.getLinkedInImage(imageBytes: value));
+        await screenShotHelper.captureAndSaveImage(screenshotController).then((value) => storageController.getOnlineImage(imageBytes: value));
         },
         backgroundColor: AppColors.black_500,
         child: Icon(Icons.camera_alt, color: AppColors.green_500,),

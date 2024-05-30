@@ -1,3 +1,4 @@
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/qr_scanner_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
@@ -5,6 +6,7 @@ import 'package:card_scanner/views/screens/DuplicateCards/duplicate_cards_screen
 import 'package:card_scanner/views/screens/QrCodeScanner/scan_qr_code_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +23,7 @@ class ManageModalSheet extends StatelessWidget {
   RxInt selectedOption = 0.obs;
 
   QrScannerController qrScannerController = Get.put(QrScannerController());
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,12 @@ class ManageModalSheet extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () async {
-                        qrScannerController.qrScanner();
+                        await qrScannerController.qrScanner().then((value) {
+                          if (kDebugMode) {
+                            print("Qr code data =====>>>>>>>>: $value");
+                          }
+                          ocrCreateCardController.textFormatRepo(extractedText: value);
+                        });
                       },
                       child: manageCards(Icons.filter_center_focus_outlined,
                           AppStrings.scanQrCode.tr),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/views/screens/home/InnerWidgets/manage_modal_sheet.dart';
 import 'package:flutter/material.dart';
@@ -128,11 +129,26 @@ class CardHolder extends StatelessWidget {
                                   ),
                                   child: Row(
                                     children: [
-                                      Container(
-                                          margin: EdgeInsets.symmetric(vertical: 8.h),
-                                          height: 100.h,
-                                          width: 120.w,
-                                          child: Image.file(File(storageController.contacts[index].imageUrl), fit: BoxFit.cover,)),
+                                    CachedNetworkImage(
+                                    imageUrl: storageController.contacts[index].imageUrl,
+                                    imageBuilder: (context, imageProvider) => Container(
+                                        margin: EdgeInsets.symmetric(vertical: 8.h),
+                                        height: 100.h,
+                                        width: 120.w,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                            image: imageProvider)
+                                      ),
+                                    ),
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) => Container(
+                                      margin: EdgeInsets.symmetric(vertical: 8.h),
+                                      height: 100.h,
+                                      width: 120.w,
+                                      child: Icon(Icons.error),
+                                    ),
+                                  ),
                                       SizedBox(
                                         width: 8.w,
                                       ),

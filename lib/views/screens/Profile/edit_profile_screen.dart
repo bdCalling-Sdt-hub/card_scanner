@@ -138,13 +138,13 @@ class EditProfileScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 image: PrefsHelper.profileImagePath.isEmpty
                                     ? DecorationImage(image: AssetImage(AppImages.blankProfileImage),fit: BoxFit.fill)
-                                    : DecorationImage(image: FileImage(File(PrefsHelper.profileImagePath)), fit: BoxFit.fill),
+                                    : DecorationImage(image: NetworkImage(PrefsHelper.profileImagePath), fit: BoxFit.fill),
                                 borderRadius: BorderRadius.circular(100),
                                 color: AppColors.green_100
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,
-                              child: InkWell(
+                              child: controller.isLoading? Center(child: CircularProgressIndicator(color: AppColors.green_600,)) : InkWell(
                                 onTap: (){
                                   showDialog(context: context,
                                     builder: (context) {
@@ -159,6 +159,7 @@ class EditProfileScreen extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
+                                                  Get.back();
                                                   profileController.selectImageGallery();
                                                 },
                                                 child: Container(
@@ -178,6 +179,7 @@ class EditProfileScreen extends StatelessWidget {
                                               ),
                                               InkWell(
                                                 onTap: () {
+                                                  Get.back();
                                                   profileController.selectImageCamera();
                                                 },
                                                 child: Container(

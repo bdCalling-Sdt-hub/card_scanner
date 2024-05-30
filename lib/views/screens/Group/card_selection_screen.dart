@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
@@ -47,7 +48,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                   CustomText(
                     text: AppStrings.selectContacts.tr,
                     fontWeight: FontWeight.w500,
-                    fontSize: 20,
+                    fontSize: 22,
                   ),
                   SizedBox(width: 30.h),
                 ],
@@ -99,19 +100,37 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                             BorderRadius.circular(12.r)),
                                     child: Row(
                                       children: [
-                                        Container(
-                                          height: 90.h,
-                                          width: 90.w,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8.r),
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: FileImage(File(
-                                                    storageController
-                                                        .allContactsForGroup[
-                                                            index]
-                                                        .imageUrl))),
+                                        CachedNetworkImage(
+                                          imageUrl: storageController.allContactsForGroup[index].imageUrl,
+                                          imageBuilder: (context, imageProvider) => Container(
+                                            height: 90.h,
+                                            width: 90.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(8.r),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: imageProvider),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) => Container(
+                                              height: 90.h,
+                                              width: 90.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(8.r),
+                                                  color: AppColors.green_600
+                                              ),
+                                              child: Center(child: CircularProgressIndicator())),
+                                          errorWidget: (context, url, error) => Container(
+                                            height: 90.h,
+                                            width: 90.w,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(8.r),
+                                              color: AppColors.green_600
+                                            ),
+                                            child: Icon(Icons.error),
                                           ),
                                         ),
                                         Expanded(

@@ -275,8 +275,8 @@ class Locales extends Translations {
           "Sorts by company name": "Sorts by company name",
           "Check your internet connection & Try again!":
               "Check your internet connection & Try again!",
-          'I want the above texts like the json structure,{"name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"} always give response in same structure and format':
-              'I want the above texts like the json structure,{"name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"} always give response in same structure and format',
+          'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format':
+              'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format',
           "Mobile Phone": "Mobile Phone",
           "Land Phone": "Land Phone",
           "Fax": "Fax",
@@ -291,6 +291,7 @@ class Locales extends Translations {
           "Write here": "Write here",
           "Save": "Save",
           "Note": "Note",
+          "Company": "Company",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -548,8 +549,8 @@ class Locales extends Translations {
           "Sorts by person name": "按人名排序",
           "Sorts by company name": "按公司名排序",
           "Check your internet connection & Try again!": "检查你的互联网连接并重试！",
-          'I want the above texts like the json structure, {"name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"} always give response in same structure and format':
-              '我希望以上文本像 JSON 结构一样，{"name": "姓名", "designation": "职称", "company_name": "公司名称", "email": "电子邮件地址", "mobile_phone": "手机号码", "land_phone": "座机号码", "fax": "传真号码", "website": "网站地址", "address": "地址"}，并且总是以相同的结构和格式回复',
+          'I want the above texts like this structure, {"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format':
+              '我希望以上文本像这种结构一样，{"imageUrl": "图片网址", "name": "姓名", "designation": "职称", "company_name": "公司名称", "email": "电子邮件地址", "mobile_phone": "手机号码", "land_phone": "座机号码", "fax": "传真号码", "website": "网站地址", "address": "地址"}，并且总是以相同的格式回复',
           "Mobile Phone": "手机",
           "Land Phone": "座机",
           "Fax": "传真",
@@ -564,6 +565,7 @@ class Locales extends Translations {
           "Write here": "在这里写",
           "Save": "保存",
           "Note": "备注",
+          "Company": "公司",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 

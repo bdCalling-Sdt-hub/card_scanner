@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
@@ -129,19 +130,37 @@ class CreateGroupScreen extends StatelessWidget {
                               BorderRadius.circular(12.r)),
                           child: Row(
                             children: [
-                              Container(
-                                height: 90.h,
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius.circular(8.r),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(File(
-                                          storageController
-                                              .selectedGroupContacts[
-                                          index]
-                                              .imageUrl))),
+                              CachedNetworkImage(
+                                imageUrl: storageController.selectedGroupContacts[index].imageUrl,
+                                imageBuilder: (context, imageProvider) => Container(
+                                  height: 90.h,
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(8.r),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: imageProvider),
+                                  ),
+                                ),
+                                placeholder: (context, url) => Container(
+                                    height: 90.h,
+                                    width: 90.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(8.r),
+                                        color: AppColors.green_600
+                                    ),
+                                    child: Center(child: CircularProgressIndicator())),
+                                errorWidget: (context, url, error) => Container(
+                                  height: 90.h,
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(8.r),
+                                      color: AppColors.green_600
+                                  ),
+                                  child: Icon(Icons.error),
                                 ),
                               ),
                               Expanded(

@@ -50,7 +50,7 @@ class CardExportScreen extends StatelessWidget {
                             ///<<<============== Qr code generation ===============>>>
 
                             QrImageView(
-                              data: "${selectedContact.name}/${selectedContact.designation}/${selectedContact.companyName}/${selectedContact.email}/${selectedContact.mobilePhone}/${selectedContact.address} ",
+                              data: "${selectedContact.imageUrl}/ /${selectedContact.name}/${selectedContact.designation}/${selectedContact.companyName}/${selectedContact.email}/${selectedContact.mobilePhone}/${selectedContact.landPhone ?? ""}/${selectedContact.fax ?? ""}/${selectedContact.website ?? ""}/${selectedContact.address}}",
                               version: QrVersions.auto,
                               size: 200,
                               gapless: false,
@@ -67,17 +67,6 @@ class CardExportScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            // SizedBox(
-                            //   height: 100.h,
-                            //   width: Get.width,
-                            //   child: Row(
-                            //     children: [
-                            //       Image.asset(cardQrList[index]["qrImg"]),
-                            //       SizedBox(width: 8.w,),
-                            //       CustomText(text: cardQrList[index]["title"], fontSize: 20,)
-                            //     ],
-                            //   ),
-                            // ),
                             const Divider(),
                           ],
                         );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:card_scanner/Services/image_bb_service.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,6 +35,9 @@ class StorageController extends GetxController {
     groupedContactsList = PrefsHelper.groupedContactsList;
     super.onInit();
   }
+
+
+  ImageBBService imageBBService = ImageBBService();
 
   List<ContactsModel> contacts = [];
   static List<String> capturedImageList = [];
@@ -69,6 +73,7 @@ class StorageController extends GetxController {
     "Fax".tr,
     "Website".tr,
   ];
+
 
   ///<<<=============== Sorting Repo ==================================>>>
   RxBool isTapped = false.obs;
@@ -411,7 +416,7 @@ class StorageController extends GetxController {
   Future<void> deleteContact(String id) async {
     contacts.removeWhere((contact) => contact.id == id);
     update();
-    Get.snackbar("The contact is deleted".tr, "");
+    Get.snackbar("The contact is deleted".tr, "", duration: Duration(milliseconds: 800));
     saveContacts();
     // Get.offAllNamed(AppRoutes.homeScreen);
   }
@@ -449,7 +454,7 @@ class StorageController extends GetxController {
   ///<<<---------------------- LinkedIn Image -------------------------------->>>
   File? file;
 
-  Future<void> getLinkedInImage({Uint8List? imageBytes}) async {
+  Future<void> getOnlineImage({Uint8List? imageBytes}) async {
     if (imageBytes != null) {
       file = await DefaultCacheManager().putFile(
         'profile_image.jpg',
@@ -494,7 +499,11 @@ class StorageController extends GetxController {
     );
 
     if (croppedFile != null) {
-      imagePath = croppedFile.path;
+      await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value){
+        capturedImageList.add(value);
+        imagePath = value;
+      });
+      // imagePath = croppedFile.path;
       update();
       Get.offAll(CreateOrEditCardScreen(screenTitle: appTitle));
     }

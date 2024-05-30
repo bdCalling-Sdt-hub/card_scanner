@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
@@ -95,14 +96,47 @@ class SelectedGroupCards extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              Container(
-                                height: 90.h,
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contactsList[index].imageUrl))),
+                              CachedNetworkImage(
+                                imageUrl: contactsList[index].imageUrl,
+                                imageBuilder: (context, imageProvider) => Container(
+                                  height: 90.h,
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(8.r),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: imageProvider),
+                                  ),
+                                ),
+                                placeholder: (context, url) => Container(
+                                    height: 90.h,
+                                    width: 90.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(8.r),
+                                        color: AppColors.green_600
+                                    ),
+                                    child: Center(child: CircularProgressIndicator())),
+                                errorWidget: (context, url, error) => Container(
+                                  height: 90.h,
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(8.r),
+                                      color: AppColors.green_600
+                                  ),
+                                  child: Icon(Icons.error),
                                 ),
                               ),
+                              // Container(
+                              //   height: 90.h,
+                              //   width: 90.w,
+                              //   decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(8.r),
+                              //     image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contactsList[index].imageUrl))),
+                              //   ),
+                              // ),
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 16.w),

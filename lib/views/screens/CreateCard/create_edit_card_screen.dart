@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
@@ -10,6 +11,7 @@ import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -111,50 +113,66 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       isTapped.value = !isTapped.value;
                                     },
                                     child: isTapped.value
-                                        ? Container(
-                                            height: 250.h,
-                                            width: Get.width,
-                                            decoration: BoxDecoration(
-                                              color: AppColors.green_600,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              image: StorageController
-                                                              .imagePath !=
-                                                          null &&
-                                                      StorageController
-                                                          .imagePath!.isNotEmpty
-                                                  ? DecorationImage(
-                                                      image: FileImage(File(
-                                                          "${StorageController.imagePath}")),
-                                                      fit: BoxFit.cover)
-                                                  : DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: AssetImage(
-                                                          "assets/images/blankProfileImage.png")),
-                                            ),
-                                          )
-                                        : Container(
-                                            height: 150.h,
-                                            width: 150.w,
-                                            decoration: BoxDecoration(
-                                              color: AppColors.green_600,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.r),
-                                              image: StorageController
-                                                              .imagePath !=
-                                                          null &&
-                                                      StorageController
-                                                          .imagePath!.isNotEmpty
-                                                  ? DecorationImage(
-                                                      image: FileImage(File(
-                                                          "${StorageController.imagePath}")),
-                                                      fit: BoxFit.cover)
-                                                  : DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: AssetImage(
-                                                          "assets/images/blankProfileImage.png")),
-                                            ),
+                                        ?CachedNetworkImage(
+                                      imageUrl: "${StorageController.imagePath}",
+                                      imageBuilder: (context, imageProvider) => Container(
+                                        height: 250.h,
+                                        width: Get.width,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.green_600,
+                                          borderRadius:
+                                          BorderRadius.circular(8.r),
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: imageProvider),
+                                        ),
+                                      ),
+                                      placeholder: (context, url) => CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) {
+                                        if (kDebugMode) {
+                                          print("Error url : $url");
+                                        }
+                                        return Container(
+                                          height: 250.h,
+                                          width: Get.width,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.green_600,
+                                            borderRadius:
+                                            BorderRadius.circular(8.r),
                                           ),
+                                          child: Icon(Icons.error),
+                                        );
+                                      },
+                                    )
+                                        : CachedNetworkImage(
+                                      imageUrl: "${StorageController.imagePath}",
+                                      imageBuilder: (context, imageProvider) => Container(
+                                        height: 150.h,
+                                        width: 150.w,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.green_600,
+                                          borderRadius:
+                                          BorderRadius.circular(8.r),
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: imageProvider),
+                                        ),
+                                      ),
+                                      placeholder: (context, url) => SizedBox(
+                                        height: 150.h,
+                                          width: 150.w,
+                                          child: Center(child: CircularProgressIndicator())),
+                                      errorWidget: (context, url, error) => Container(
+                                        height: 150.h,
+                                        width: 150.w,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.green_600,
+                                          borderRadius:
+                                          BorderRadius.circular(8.r),
+                                        ),
+                                        child: Icon(Icons.error),
+                                      ),
+                                    ),
                                   ),
                                 ),
 
@@ -181,8 +199,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                   children: [
                                                     InkWell(
                                                       onTap: () {
-                                                        storageController
-                                                            .getGalleryImage();
+                                                        storageController.getGalleryImage();
                                                         Get.back();
                                                       },
                                                       child: Container(
@@ -441,8 +458,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                               height: 4.h,
                             ),
                             TextFormField(
-                              controller:
-                                  StorageController.designationController,
+                              controller: StorageController.designationController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Designation is required".tr;
@@ -694,6 +710,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     StorageController.addressController.text =
                                         "";
                                     StorageController.capturedImageList = [];
+                                    OCRCreateCardController.capturedImageList = [];
                                     Get.toNamed(AppRoutes.allCardsScreen);
                                   }
                                   // Get.to(AllCardsScreen());

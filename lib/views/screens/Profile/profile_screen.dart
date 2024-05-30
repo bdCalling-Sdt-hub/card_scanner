@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
@@ -65,18 +66,36 @@ class ProfileScreen extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 80.h,
-                          width: 80.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            image: PrefsHelper.profileImagePath.isEmpty
-                                ? DecorationImage(
-                                fit: BoxFit.fill,
-                                image: AssetImage(AppImages.blankProfileImage))
-                                : DecorationImage(
-                                fit: BoxFit.fill,
-                                image: FileImage(File(PrefsHelper.profileImagePath))),
+                        CachedNetworkImage(
+                          imageUrl: PrefsHelper.profileImagePath,
+                          imageBuilder: (context, imageProvider) => Container(
+                            height: 80.h,
+                            width: 80.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: imageProvider),
+                            ),
+                          ),
+                          placeholder: (context, url) => Container(
+                              height: 80.h,
+                              width: 80.w,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.circular(100.r),
+                                  color: AppColors.green_600
+                              ),
+                              child: Center(child: CircularProgressIndicator())),
+                          errorWidget: (context, url, error) => Container(
+                            height: 80.h,
+                            width: 80.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: AssetImage(AppImages.blankProfileImage))
+                            ),
                           ),
                         ),
                         SizedBox(width: 8.w),
@@ -88,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                               CustomText(
                                 maxLines: 2,
                                 textAlign: TextAlign.left,
-                                text: profileController.nameController.text.isEmpty? "Name: null".tr : profileController.nameController.text,
+                                text: profileController.nameController.text.isEmpty? "Name: ".tr : profileController.nameController.text,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.green_900,
@@ -96,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                               CustomText(
                                 maxLines: 2,
                                 textAlign: TextAlign.left,
-                                text: profileController.designationController.text.isEmpty? "Designation: null".tr : profileController.designationController.text,
+                                text: profileController.designationController.text.isEmpty? "Designation: ".tr : profileController.designationController.text,
                                 color: AppColors.black_400,
                                 fontSize: 16,
                               ),
@@ -104,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                               CustomText(
                                 maxLines: 2,
                                 textAlign: TextAlign.left,
-                                text: profileController.companyController.text.isEmpty? "Company Name: null".tr : profileController.companyController.text,
+                                text: profileController.companyController.text.isEmpty? "Company Name: ".tr : profileController.companyController.text,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 18,
                                 color: AppColors.black_400,

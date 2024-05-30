@@ -307,8 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       () async {
                                                                     String
                                                                         responseText =
-                                                                        await ocrCreateCardController
-                                                                            .selectImageCamera()
+                                                                        await ocrCreateCardController.selectImageCamera()
                                                                             .then(
                                                                               (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
                                                                             )
@@ -368,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         await ocrCreateCardController
                                                                             .selectImageGallery()
                                                                             .then(
-                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!),
+                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
                                                                             )
                                                                             .then(
                                                                               (value) => ocrCreateCardController.processImage(value!),

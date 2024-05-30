@@ -14,22 +14,28 @@ class ImageBBService{
   Future<String> uploadImage({required File imageFile}) async{
     List<int> imageBytes = await imageFile.readAsBytes();
     String base64Image = base64Encode(imageBytes);
-    
-    var response = await http.post(
-      Uri.parse('https://api.imgbb.com/1/upload'),
-      body: {
-        "key" : imageBBApiKey,
-        "image" : base64Image,
+
+    try{
+      var response = await http.post(
+          Uri.parse('https://api.imgbb.com/1/upload'),
+          body: {
+            "key" : imageBBApiKey,
+            "image" : base64Image,
+          }
+      );
+
+      var responseData = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(responseData);
       }
-    );
-
-    var responseData = jsonDecode(response.body);
-    if (kDebugMode) {
-      print(responseData);
+      String imageUrl = responseData['data']['url'];
+      return imageUrl;
+    }catch(e){
+      if (kDebugMode) {
+        print(e);
+      }
     }
-    String imageUrl = responseData['data']['url'];
-
-    return imageUrl;
+    return "";
   }
 
   Future<String> downloadImage({required String imageUrl}) async{

@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
@@ -23,7 +24,7 @@ import '../../widgets/customButton/custom_elevated_button.dart';
 class AllCardsScreen extends StatelessWidget {
   AllCardsScreen({super.key});
 
-  StorageController phoneStorageController = Get.put(StorageController());
+  StorageController storageController = Get.put(StorageController());
 
 
 
@@ -143,14 +144,28 @@ class AllCardsScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                height: 90.h,
-                                width: 90.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  image: DecorationImage(fit: BoxFit.cover,image: FileImage(File(contacts.imageUrl))),
+                            CachedNetworkImage(
+                            imageUrl: contacts.imageUrl,
+                            imageBuilder: (context, imageProvider) => Container(
+                              height: 90.h,
+                              width: 90.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                image: DecorationImage(fit: BoxFit.fill,image: imageProvider,
                                 ),
                               ),
+                            ),
+                            placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Container(
+                              height: 90.h,
+                              width: 90.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                color: AppColors.green_600
+                              ),
+                              child: Icon(Icons.error),
+                            ),
+                          ),
                               Expanded(
                                 flex: 10,
                                 child: Padding(

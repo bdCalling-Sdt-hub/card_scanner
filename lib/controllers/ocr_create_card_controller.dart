@@ -5,10 +5,8 @@ import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
@@ -23,7 +21,6 @@ class OCRCreateCardController extends GetxController{
   TextRecognizer textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
   ImageBBService imageBBService = ImageBBService();
 
-  List responseList = [];
   String? imagePath;
   static List<String> capturedImageList = [];
   List textList = [];
@@ -31,6 +28,15 @@ class OCRCreateCardController extends GetxController{
 
 
   ///<<<==================== Text Formatting by Gemini Api ==================>>>
+
+  String cleanJsonString(String jsonString) {
+    // Check if the JSON string contains backticks and newlines
+    if (jsonString.contains('```json\n')) {
+      // Remove backticks and newlines using RegExp
+      jsonString = jsonString.replaceAll('```json\n', '').replaceAll('\n```', '');
+    }
+    return jsonString;
+  }
 
   Future<String> textFormatRepo({required String extractedText}) async {
     isLoading = true;
@@ -45,7 +51,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, ${'I want the above texts like the json structure,{"name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"} always give response in same structure and format'.tr} "}
+            {"text": "$extractedText, ${'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format'.tr},${"if get Chinese language then give response values in Chinese language please"} "}
           ]
         }
       ]
@@ -63,13 +69,17 @@ class OCRCreateCardController extends GetxController{
       if (response.statusCode == 200) {
         geminiResponseModel = GeminiResponseModel.fromJson(jsonDecode(response.body));
         final text = geminiResponseModel?.candidates?[0].content?.parts?[0].text;
+        
         if(text != null ){
-          RegExp pattern = RegExp(r'[`\*\-\n\\/]');
-          Map<String, dynamic> responseText = jsonDecode(text.replaceAll(pattern, ''));
+          RegExp pattern = RegExp(r'[\n*-]');
+          final cleanText = cleanJsonString(text);
+          Map<String, dynamic> responseText = jsonDecode(cleanText.replaceAll(pattern, ""));
           if (kDebugMode) {
             print("responseText:::: $responseText");
           }
 
+
+          String imageUrl = responseText['imageUrl'] ?? '';
           String name = responseText['name'] ?? '';
           String designation = responseText['designation'] ?? '';
           String companyName = responseText['company_name'] ?? '';
@@ -89,6 +99,10 @@ class OCRCreateCardController extends GetxController{
           // phoneNumber = parts[4];
           // address = parts.sublist(5).join(', '); // Join remaining parts for address
           //
+
+          if(imageUrl != ''){
+            StorageController.imagePath = imageUrl;
+          }
           StorageController.nameController.text = name;
           StorageController.designationController.text = designation;
           StorageController.companyController.text = companyName;
@@ -99,12 +113,13 @@ class OCRCreateCardController extends GetxController{
           StorageController.websiteController.text = website;
           StorageController.addressController.text = address;
 
+
           Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard));
 
 
           // Print the extracted values
           if (kDebugMode) {
-            print('Name: $name \nDesignation: $designation \nCompany Name: $companyName \nEmail: $email \nMobile Phone: $mobilePhone \nLand Phone: $landPhone \nFax: $fax \nWebsite: $website \nAddress: $address');
+            print('ImageUrl: $imageUrl \nName: $name \nDesignation: $designation \nCompany Name: $companyName \nEmail: $email \nMobile Phone: $mobilePhone \nLand Phone: $landPhone \nFax: $fax \nWebsite: $website \nAddress: $address');
           }
         }
 
@@ -187,11 +202,20 @@ class OCRCreateCardController extends GetxController{
 
     if (croppedFile != null) {
       imagePath = croppedFile.path;
-      // imagePath = await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value) {
-      //   return imageBBService.downloadImage(imageUrl: value);
-      // },);
+      // imagePath = await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value)));
+
       if(isOcr == true){
-        capturedImageList.add(imagePath!);
+        isLoading = true;
+        update();
+        await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value){
+          capturedImageList.add(value);
+          if (kDebugMode) {
+            print("ImageBB uploaded Image: $value");
+          }
+          StorageController.imagePath = value;
+        });
+        isLoading = false;
+        update();
       }
       update();
     }
@@ -216,7 +240,7 @@ class OCRCreateCardController extends GetxController{
     if (kDebugMode) {
       print("||||||$text");
     }
-    StorageController.imagePath = imgPath;
+    // StorageController.imagePath = imgPath;
     update();
     return text;
     // textFormatRepo(extractedText: recognized.text);

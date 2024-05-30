@@ -9,7 +9,9 @@ import '../views/screens/CreateCard/create_edit_card_screen.dart';
 
 class QrScannerController extends GetxController{
 
-  Future<void> qrScanner()async {
+  String qrText = "";
+
+  Future<String> qrScanner()async {
     await FlutterBarcodeScanner.scanBarcode(
         "#ff6666", "Cancel", true, ScanMode.QR)
         .then(
@@ -19,31 +21,8 @@ class QrScannerController extends GetxController{
           if (result.isNotEmpty) {
             if (kDebugMode) {
               print('Scanned data: $result');
+              qrText = result;
             }
-            List<String> parts = result.split('/');
-            String name = parts[0];
-            String designation = parts[1];
-            String companyName = parts[2];
-            String email = parts[3];
-            String phoneNumber = parts[4];
-            String address = parts[5];
-
-            StorageController.nameController.text = name;
-            StorageController.designationController.text = designation;
-            StorageController.companyController.text = companyName;
-            StorageController.emailController.text = email;
-            StorageController.mobilePhoneController.text = phoneNumber;
-            StorageController.addressController.text = address;
-
-            if (kDebugMode) {
-              print("$name, $designation, $companyName, $email, $phoneNumber, $address");
-            }
-            // Now you can use this data as needed
-            Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.createCard.tr))?.then((value) {
-              result = "";
-              StorageController.appTitle = AppStrings.createCard;
-            },);
-
           }
         } catch (e) {
           if (kDebugMode) {
@@ -52,5 +31,6 @@ class QrScannerController extends GetxController{
         }
       },
     );
+    return qrText;
   }
 }

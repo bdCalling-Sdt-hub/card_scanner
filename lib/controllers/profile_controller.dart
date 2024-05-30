@@ -1,5 +1,8 @@
 
+import 'dart:io';
+
 import 'package:card_scanner/Helpers/prefs_helper.dart';
+import 'package:card_scanner/Services/image_bb_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,17 +54,22 @@ class ProfileController extends GetxController{
   TextEditingController faxController = TextEditingController(text: PrefsHelper.userFax);
   TextEditingController websiteController = TextEditingController(text: PrefsHelper.userWebsite);
 
+  ImageBBService imageBBService = ImageBBService();
+  bool isLoading = false;
+
   selectImageGallery() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
     await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (getImages != null) {
-      image = getImages.path;
-      PrefsHelper.profileImagePath = getImages.path;
+      isLoading = true;
       update();
-      PrefsHelper.setString("profileImagePath", getImages.path);
+      image = await imageBBService.uploadImage(imageFile: File(getImages.path));
+      PrefsHelper.profileImagePath = image!;
+      isLoading = false;
       update();
-      Get.back();
+      PrefsHelper.setString("profileImagePath", image);
+      update();
     }
   }
 
@@ -70,12 +78,14 @@ class ProfileController extends GetxController{
     final XFile? getImages =
     await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (getImages != null) {
-      image = getImages.path;
-      PrefsHelper.profileImagePath = getImages.path;
+      isLoading = true;
       update();
-      PrefsHelper.setString("profileImagePath", getImages.path);
+      image = await imageBBService.uploadImage(imageFile: File(getImages.path));
+      PrefsHelper.profileImagePath = image!;
+      isLoading = false;
       update();
-      Get.back();
+      PrefsHelper.setString("profileImagePath", image);
+      update();
     }
   }
 
