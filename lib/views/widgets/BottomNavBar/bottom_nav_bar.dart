@@ -112,7 +112,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Future<void> onTap(int index) async {
     if(index == 0){
       if(!(widget.currentIndex == 0)){
-        Get.to(()=> HomeScreen(),
+        Get.offAll(()=> HomeScreen(),
           transition: Transition.noTransition
         );
       }
@@ -134,11 +134,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
     }else if(index == 4){
       if(!(widget.currentIndex == 4)){
         if(PrefsHelper.signedIn){
-          Get.offAll(()=> ProfileScreen(),
+          Get.to(()=> ProfileScreen(),
               transition: Transition.noTransition
           );
         } else{
-          Get.offAll(()=> SignInScreen(),
+          Get.to(()=> SignInScreen(),
               transition: Transition.noTransition
           );
         }

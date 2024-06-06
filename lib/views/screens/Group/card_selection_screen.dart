@@ -156,6 +156,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                                 ),
                                                 SizedBox(height: 4,),
                                                 CustomText(
+                                                  textAlign: TextAlign.left,
                                                   overflow: TextOverflow.ellipsis,
                                                   text: storageController
                                                       .allContactsForGroup[
@@ -164,6 +165,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                                                   fontSize: 12,
                                                 ),
                                                 CustomText(
+                                                  textAlign: TextAlign.left,
                                                   overflow: TextOverflow.ellipsis,
                                                   text: storageController
                                                       .allContactsForGroup[

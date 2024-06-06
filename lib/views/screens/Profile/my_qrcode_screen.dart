@@ -8,6 +8,7 @@ import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,6 +33,9 @@ class MyQrCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print("${PrefsHelper.profileImagePath} /${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.telephoneController.text}/${profileController.faxController.text}/${profileController.websiteController.text}/${profileController.addressController.text} ");
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -122,7 +126,7 @@ class MyQrCodeScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: QrImageView(
-                      data: "${PrefsHelper.profileImagePath} /${profileController.nameController.text}/${profileController.designationController.text}/${profileController.companyController.text}/${profileController.emailController.text}/${profileController.phoneController.text}/${profileController.telephoneController.text}/${profileController.faxController.text}/${profileController.websiteController.text}/${profileController.addressController.text} ",
+                      data: "${PrefsHelper.profileImagePath} /${profileController.nameController.text} /${profileController.designationController.text} /${profileController.companyController.text} /${profileController.emailController.text} /${profileController.phoneController.text} /${profileController.telephoneController.text} /${profileController.faxController.text} /${profileController.websiteController.text} /${profileController.addressController.text} ",
                       version: QrVersions.auto,
                       gapless: false,
                       // embeddedImage: FileImage(File(selectedContact.imageUrl)),
@@ -186,7 +190,7 @@ class MyQrCodeScreen extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            screenShotHelper.captureAndSaveImage(screenshotController);
+                            screenShotHelper.captureAndSaveImage(screenshotController: screenshotController);
                           },
                           child: Container(
                             height: 50.h,

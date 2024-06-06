@@ -51,7 +51,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, ${'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format'.tr},${"if get Chinese language then give response values in Chinese language please"} "}
+            {"text": "$extractedText, find data from the 'extractedText' and give response as like this format: ${'{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, if you get any data of the mentioned fields then please put it on the specific field and if get Chinese or Japanese  language then give response values in that language please'.tr}"}
           ]
         }
       ]
@@ -129,6 +129,8 @@ class OCRCreateCardController extends GetxController{
         return "Something went wrong";
       }
     } catch (error) {
+      isLoading = false;
+      update();
       Get.snackbar("Invalid value".tr, "Something went wrong".tr, backgroundColor: AppColors.primaryColor);
       if (kDebugMode) {
         print("Error: $error");

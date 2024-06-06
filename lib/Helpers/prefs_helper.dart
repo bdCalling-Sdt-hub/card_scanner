@@ -32,6 +32,8 @@ class PrefsHelper extends GetxController {
   static String userWebsite = "";
 
   static String profileImagePath = "";
+  static String myCardImage = "";
+
   static int colorIndex = 0;
   static int unGroupedContacts = 0;
   static bool isLogoShow = true;
@@ -55,6 +57,8 @@ class PrefsHelper extends GetxController {
     userWebsite = preferences.getString("userWebsite") ?? "";
 
     profileImagePath = preferences.getString("profileImagePath") ?? "";
+    myCardImage = preferences.getString("myCardImage") ?? "";
+
     cameraImage = preferences.getString("cameraImage") ?? "";
     colorIndex = preferences.getInt("colorIndex") ?? 0;
     unGroupedContacts = preferences.getInt("unGroupedContacts") ?? 0;

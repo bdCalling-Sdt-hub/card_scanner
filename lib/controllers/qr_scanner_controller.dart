@@ -20,7 +20,7 @@ class QrScannerController extends GetxController{
           String result = value.toString();
           if (result.isNotEmpty) {
             if (kDebugMode) {
-              print('Scanned data: $result');
+              print('Scanned data:===========================================>>> \n$result');
               qrText = result;
             }
           }

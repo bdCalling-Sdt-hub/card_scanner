@@ -484,12 +484,14 @@ class EditProfileScreen extends StatelessWidget {
                                 PrefsHelper.setString("userTelephone", profileController.telephoneController.text);
                                 PrefsHelper.setString("userFax", profileController.faxController.text);
                                 PrefsHelper.setString("userWebsite", profileController.websiteController.text);
-
-                                Get.offAllNamed(AppRoutes.profileScreen);
+                                // Get.toNamed(AppRoutes.editCardStyle);
+                                // Get.offAllNamed(AppRoutes.profileScreen);
+                                profileController.isStyle.value = true;
+                                profileController.isInformation.value = false;
                               },
                               width: Get.width,
                               height: 42.h,
-                              text: AppStrings.saveAndPreview.tr,
+                              text: "Continue".tr,
                               backgroundColor: AppColors.black_500,
                             ),
                           )

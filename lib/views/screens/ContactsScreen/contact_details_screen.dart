@@ -81,10 +81,8 @@ class ContactDetailsScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () async {
-                        if (phoneStorageController.selectedContacts.isEmpty) {
-                          phoneStorageController.selectedContacts
-                              .add(contactDetails);
-                        }
+                        phoneStorageController.selectedContacts.clear();
+                        phoneStorageController.selectedContacts.add(contactDetails);
                         Get.toNamed(AppRoutes.cardExportScreen);
                       },
                       child: Container(
@@ -189,15 +187,15 @@ class ContactDetailsScreen extends StatelessWidget {
                               SizedBox(
                                 height: 12.h,
                               ),
-                              contactDetails.capturedImageList != null
+                              contactDetails.capturedImageList != []
                                   ? SingleChildScrollView(
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         children: List.generate(
-                                            contactDetails.capturedImageList!
+                                            contactDetails.capturedImageList
                                                 .length, (index) {
                                           return CachedNetworkImage(
-                                            imageUrl: contactDetails.capturedImageList![index],
+                                            imageUrl: contactDetails.capturedImageList[index],
                                             imageBuilder: (context, imageProvider) => Container(
                                               height: 220,
                                               width: Get.width * 0.9,
@@ -238,15 +236,15 @@ class ContactDetailsScreen extends StatelessWidget {
                     contactDetails.landPhone != ""
                         ? customWrap(
                             title: "Telephone".tr,
-                            value: contactDetails.landPhone!)
+                            value: contactDetails.landPhone)
                         : SizedBox(),
                     contactDetails.fax != ""
                         ? customWrap(
-                            title: "Fax".tr, value: contactDetails.fax!)
+                            title: "Fax".tr, value: contactDetails.fax)
                         : SizedBox(),
                     contactDetails.website != ""
                         ? customWrap(
-                            title: "Website".tr, value: contactDetails.website!)
+                            title: "Website".tr, value: contactDetails.website)
                         : SizedBox(),
                     customWrap(
                         title: AppStrings.address.tr,

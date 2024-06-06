@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/Helpers/screen_shot_helper.dart';
+import 'package:card_scanner/Services/image_bb_service.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
@@ -24,10 +25,12 @@ import 'package:share_plus/share_plus.dart';
 class ViewECardScreen extends StatelessWidget {
   ViewECardScreen({super.key});
 
-  ScreenshotController screenshotController = ScreenshotController();
+  ScreenshotController profileShotController = ScreenshotController();
   ProfileController profileController = Get.put(ProfileController());
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
   File? imagePath;
+  final imageBBService = Get.put(ImageBBService());
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +58,14 @@ class ViewECardScreen extends StatelessWidget {
                       icon: Icons.file_download_outlined,
                       iconSize: 22,
                       onTap: () async {
-                        await screenShotHelper.captureAndSaveImage(screenshotController);
+                        await screenShotHelper.captureAndSaveImage(screenshotController: profileShotController);
                       }),
                 ],
               ),
             ),
             SizedBox(height: 20.h),
             Screenshot(
-                controller: screenshotController,
+                controller: profileShotController,
                 child: Center(
                   child: Container(
                     width: 300,
@@ -172,11 +175,11 @@ class ViewECardScreen extends StatelessWidget {
                                     height: 4.h,
                                   ),
                                   customInfoRow(infoIcon: Icons.phone_iphone_outlined, infoText: profileController.phoneController.text),
-                                  SizedBox(
+                                  profileController.telephoneController.text.isEmpty? SizedBox() : SizedBox(
                                     height: 4.h,
                                   ),
                                   customInfoRow(infoIcon: Icons.call, infoText: profileController.telephoneController.text),
-                                  SizedBox(
+                                  profileController.faxController.text.isEmpty? SizedBox() : SizedBox(
                                     height: 4.h,
                                   ),
                                   customInfoRow(infoIcon: Icons.fax, infoText: profileController.faxController.text),
@@ -184,6 +187,7 @@ class ViewECardScreen extends StatelessWidget {
                                     height: 4.h,
                                   ),
                                   customInfoRow(infoIcon: Icons.email_outlined, infoText: profileController.emailController.text),
+                                  profileController.websiteController.text.isEmpty? SizedBox() :
                                   SizedBox(
                                     height: 4.h,
                                   ),
@@ -233,27 +237,35 @@ class ViewECardScreen extends StatelessWidget {
 
                   ///<<<================= Share Card Button ================>>>
 
-                  CustomContainerButton(
-                    onTap: () async {
-                      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-                      if(image != null){
-                        Share.shareXFiles([image]);
-                      }
-                    },
-                    text: AppStrings.shareCard.tr,
-                    ifImage: true,
-                    svgIcon: AppIcons.sendIcon,
-                    height: 48,
-                    width: 180,
-                    imageHeight: 20,
-                    imageWidth: 20,
-                    radius: 25,
-                    fontSize: 16,
-                    iconColor: AppColors.whiteColor,
-                    textColor: AppColors.whiteColor,
-                    farWidth: 8,
-                    backgroundColor: AppColors.black_500,
-                  )
+                  GetBuilder<ImageBBService>(builder: (controller) {
+                    return controller.isLoading? Center(child: Padding(
+                      padding: EdgeInsets.only(right: 24.w),
+                      child: CircularProgressIndicator(),
+                    )) : CustomContainerButton(
+                      onTap: () async {
+                        String imagePath = await screenShotHelper.captureAndSaveImage(screenshotController: profileShotController, isShare: true)
+                            .then((value) => screenShotHelper.getImagePath(imageBytes: value).then((value) => imageBBService.uploadImage(imageFile: value!)));
+                        Share.share(imagePath);
+                        // XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+                        // if(image != null){
+                        //   Share.shareXFiles([image]);
+                        // }
+                      },
+                      text: AppStrings.shareCard.tr,
+                      ifImage: true,
+                      svgIcon: AppIcons.sendIcon,
+                      height: 48,
+                      width: 180,
+                      imageHeight: 20,
+                      imageWidth: 20,
+                      radius: 25,
+                      fontSize: 16,
+                      iconColor: AppColors.whiteColor,
+                      textColor: AppColors.whiteColor,
+                      farWidth: 8,
+                      backgroundColor: AppColors.black_500,
+                    );
+                  },)
                 ],
               ),
             ),
@@ -262,10 +274,11 @@ class ViewECardScreen extends StatelessWidget {
       ),
     );
   }
+
   Row customInfoRow({required IconData infoIcon, required String infoText}) {
-    return Row(
+    return infoText.isEmpty? Row() : Row(
       children: [
-        infoText.isEmpty? SizedBox() : CustomBackButton(
+        CustomBackButton(
           onTap: () {},
           icon: infoIcon,
           radius: 100,

@@ -19,6 +19,7 @@ import '../../views/screens/CardSync/card_sync_screen.dart';
 import '../../views/screens/Group/create_group_screen.dart';
 import '../../views/screens/Group/edit_group_screen.dart';
 import '../../views/screens/Group/group_contact_detail_screen.dart';
+import '../../views/screens/Profile/IneerWidget/edit_card_style.dart';
 import '../../views/screens/Profile/share_profile_card_screen.dart';
 import '../../views/screens/Profile/view_ecard_screen.dart';
 import '../../views/screens/SplashScreen/splash_screen.dart';
@@ -48,6 +49,7 @@ class AppRoutes {
   static String googleWebViewScreen = "/google_webview_screen";
   static String groupContactDetailScreen = "/group_contact_detail_screen";
   static String editGroupScreen = "/edit_group_screen";
+  static String editCardStyle = "/edit_card_style";
 
 
 
@@ -74,5 +76,6 @@ class AppRoutes {
     GetPage(name: groupContactDetailScreen, page: () => GroupContactDetailScreen()),
     GetPage(name: editGroupScreen, page: () => EditGroupScreen()),
     GetPage(name: googleWebViewScreen, page: () => GoogleWebViewScreen()),
+    GetPage(name: editCardStyle, page: () => EditCardStyle()),
   ];
 }

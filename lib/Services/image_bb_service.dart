@@ -4,16 +4,21 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-class ImageBBService{
+class ImageBBService extends GetxController{
 
   String imageBBApiKey = "30847777af0ce6b464c34af996d1e15c";
-  
+  bool isLoading = false;
+  bool isDownloading = false;
+
   Future<String> uploadImage({required File imageFile}) async{
     List<int> imageBytes = await imageFile.readAsBytes();
     String base64Image = base64Encode(imageBytes);
+    isLoading = true;
+    update();
 
     try{
       var response = await http.post(
@@ -23,7 +28,8 @@ class ImageBBService{
             "image" : base64Image,
           }
       );
-
+      isLoading = false;
+      update();
       var responseData = jsonDecode(response.body);
       if (kDebugMode) {
         print(responseData);
@@ -34,12 +40,18 @@ class ImageBBService{
       if (kDebugMode) {
         print(e);
       }
+      isLoading = false;
+      update();
     }
     return "";
   }
 
   Future<String> downloadImage({required String imageUrl}) async{
+    isDownloading = true;
+    update();
     var response = await http.get(Uri.parse(imageUrl));
+    isDownloading = false;
+    update();
 
     if(response.statusCode == 200){
       final Uint8List bytes = response.bodyBytes;

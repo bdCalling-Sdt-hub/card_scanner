@@ -528,12 +528,12 @@ class CreateOrEditCardScreen extends StatelessWidget {
                             Obx(() {
                               return Column(
                                 children: [
-                                  StorageController.landPhoneController.text.isNotEmpty || storageController.isLandPhone.value
+                                  storageController.isLandPhone.value || StorageController.landPhoneController.text.isNotEmpty
                                       ? SizedBox(
                                     height: 4.h,
                                   )
                                       : SizedBox(),
-                                  StorageController.landPhoneController.text.isNotEmpty || storageController.isLandPhone.value
+                                  storageController.isLandPhone.value || StorageController.landPhoneController.text.isNotEmpty
                                       ? TextFormField(
                                     controller:
                                     StorageController.landPhoneController,
@@ -543,10 +543,10 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                             color: AppColors.black_300)),
                                   )
                                       : SizedBox(),
-                                  StorageController.faxController.text.isNotEmpty || storageController.isFax.value
+                                  storageController.isFax.value || StorageController.faxController.text.isNotEmpty
                                       ? SizedBox(height: 4.h)
                                       : SizedBox(),
-                                  StorageController.faxController.text.isNotEmpty || storageController.isFax.value
+                                  storageController.isFax.value || StorageController.faxController.text.isNotEmpty
                                       ? TextFormField(
                                     controller: StorageController.faxController,
                                     decoration: InputDecoration(
@@ -555,10 +555,10 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                         TextStyle(color: AppColors.black_300)),
                                   )
                                       : SizedBox() ,
-                                  StorageController.websiteController.text.isNotEmpty || storageController.isWebsite.value
+                                  storageController.isWebsite.value || StorageController.websiteController.text.isNotEmpty
                                       ? SizedBox(height: 4.h)
                                       : SizedBox(),
-                                  StorageController.websiteController.text.isNotEmpty || storageController.isWebsite.value
+                                  storageController.isWebsite.value || StorageController.websiteController.text.isNotEmpty
                                       ? TextFormField(
                                     controller: StorageController.websiteController,
                                     decoration: InputDecoration(

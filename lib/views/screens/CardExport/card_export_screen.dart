@@ -4,6 +4,7 @@ import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class CardExportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<StorageController>(builder: (storageController) {
+
         return SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -44,13 +46,16 @@ class CardExportScreen extends StatelessWidget {
                       itemCount: storageController.selectedContacts.length,
                       itemBuilder: (context, index) {
                         var selectedContact = storageController.selectedContacts[index];
+                        if (kDebugMode) {
+                          print("${selectedContact.imageUrl}/ /${selectedContact.name} /${selectedContact.designation} /${selectedContact.companyName} /${selectedContact.email} /${selectedContact.mobilePhone} /${selectedContact.landPhone ?? ""} /${selectedContact.fax ?? ""}/${selectedContact.website ?? ""}/${selectedContact.address}}");
+                        }
                         return Column(
                           children: [
 
                             ///<<<============== Qr code generation ===============>>>
 
                             QrImageView(
-                              data: "${selectedContact.imageUrl}/ /${selectedContact.name}/${selectedContact.designation}/${selectedContact.companyName}/${selectedContact.email}/${selectedContact.mobilePhone}/${selectedContact.landPhone ?? ""}/${selectedContact.fax ?? ""}/${selectedContact.website ?? ""}/${selectedContact.address}}",
+                              data: "${selectedContact.imageUrl}/ /${selectedContact.name} /${selectedContact.designation} /${selectedContact.companyName} /${selectedContact.email} /${selectedContact.mobilePhone} /${selectedContact.landPhone ?? ""} /${selectedContact.fax ?? ""}/${selectedContact.website ?? ""}/${selectedContact.address}}",
                               version: QrVersions.auto,
                               size: 200,
                               gapless: false,

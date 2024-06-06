@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Services/other_services.dart';
 import 'firebase_options.dart';
 import 'Helpers/prefs_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  OtherService.checkConnection();
   PhonePermissionHandler permissionHandler = PhonePermissionHandler();
   // await permissionHandler.storageRequest(Permission.storage);
   // await permissionHandler.storagePermission();
@@ -53,6 +55,15 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) {
         return GetMaterialApp(
+          builder: (context, child) {
+            return Overlay(
+              initialEntries: [
+                OverlayEntry(
+                  builder: (context) => child ?? Container(),
+                ),
+              ],
+            );
+          },
           translations: Locales(),
           // locale: const Locale("en", "US"),
           defaultTransition: Transition.noTransition,

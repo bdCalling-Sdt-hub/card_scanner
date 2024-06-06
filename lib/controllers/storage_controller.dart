@@ -500,7 +500,7 @@ class StorageController extends GetxController {
 
     if (croppedFile != null) {
       await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value){
-        capturedImageList.add(value);
+        // capturedImageList.add(value);
         imagePath = value;
       });
       // imagePath = croppedFile.path;

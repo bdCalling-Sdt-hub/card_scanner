@@ -4,6 +4,7 @@ import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:get/get.dart';
 
+import '../Services/image_bb_service.dart';
 import '../controllers/auth/auth_controller.dart';
 import '../controllers/ocr_create_card_controller.dart';
 import '../controllers/qr_scanner_controller.dart';
@@ -19,5 +20,6 @@ class DependencyInjection extends Bindings{
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => QrScannerController(), fenix: true);
     Get.lazyPut(() => AuthController(), fenix: true);
+    Get.lazyPut(() => ImageBBService(), fenix: true);
   }
 }

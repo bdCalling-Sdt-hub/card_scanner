@@ -36,6 +36,9 @@ target 'Runner' do
     inherit! :search_paths
   end
   pod 'GoogleMLKit/TextRecognitionChinese', '~> 6.0.0'
+  pod 'GoogleMLKit/TextRecognitionDevanagari', '~> 6.0.0'
+  pod 'GoogleMLKit/TextRecognitionJapanese', '~> 6.0.0'
+  pod 'GoogleMLKit/TextRecognitionKorean', '~> 6.0.0'
 end
 
 post_install do |installer|

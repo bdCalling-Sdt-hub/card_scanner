@@ -63,6 +63,15 @@ class _HomeScreenState extends State<HomeScreen> {
           .toList();
     });
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration(seconds: 1), () {
+      storageController.loadContacts();
+
+    },);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -448,128 +457,134 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        buildServiceItems(
-                                          onTap: () {
-                                            Get.toNamed(
-                                                AppRoutes.cardSyncScreen);
-                                          },
-                                          icon: AppIcons.cardSyncIcon,
-                                          title: AppStrings.cardSync.tr,
+                                        Expanded(
+                                          child: buildServiceItems(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                  AppRoutes.cardSyncScreen);
+                                            },
+                                            icon: AppIcons.cardSyncIcon,
+                                            title: AppStrings.cardSync.tr,
+                                          ),
                                         ),
-                                        buildServiceItems(
-                                          onTap: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  content: SizedBox(
-                                                    height: 100,
-                                                    width: Get.width,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        InkWell(
-                                                          onTap: () async {
-                                                            storageController
-                                                                .exportToExcel(
-                                                                    contactList:
-                                                                        storageController
-                                                                            .contacts);
-                                                          },
-                                                          child: Container(
-                                                            margin: EdgeInsets.symmetric(horizontal: 12.w),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.w),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.r),
-                                                              color: AppColors
-                                                                  .green_600,
-                                                            ),
-                                                            child: Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
-                                                                SvgPicture.asset(
-                                                                    AppIcons
-                                                                        .excelIcon),
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
-                                                                CustomText(
-                                                                  text:
-                                                                      "Excel Export"
-                                                                          .tr,
-                                                                  fontSize: 16,
-                                                                  fontWeight: FontWeight.w500,
-                                                                )
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () async {
-                                                            Get.toNamed(AppRoutes
-                                                                .allCardsExportScreen);
-                                                          },
-                                                          child: Container(
-                                                            margin: EdgeInsets.symmetric(horizontal: 12.w),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    8.w),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8.r),
-                                                              color: AppColors
-                                                                  .green_600,
-                                                            ),
-                                                            child: Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
-                                                                Icon(Icons.qr_code_2),
-                                                                SizedBox(
-                                                                  width: 20.w,
-                                                                ),
-                                                                CustomText(
-                                                                  text:
-                                                                      "Qr Export"
-                                                                          .tr,
-                                                                  fontSize: 16,
-                                                                )
-                                                              ],
+                                        Expanded(
+                                          child: buildServiceItems(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    content: SizedBox(
+                                                      height: 100,
+                                                      width: Get.width,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              storageController
+                                                                  .exportToExcel(
+                                                                      contactList:
+                                                                          storageController
+                                                                              .contacts);
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets.symmetric(horizontal: 12.w),
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      8.w),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.r),
+                                                                color: AppColors
+                                                                    .green_600,
+                                                              ),
+                                                              child: Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 20.w,
+                                                                  ),
+                                                                  SvgPicture.asset(
+                                                                      AppIcons
+                                                                          .excelIcon),
+                                                                  SizedBox(
+                                                                    width: 20.w,
+                                                                  ),
+                                                                  CustomText(
+                                                                    text:
+                                                                        "Excel Export"
+                                                                            .tr,
+                                                                    fontSize: 16,
+                                                                    fontWeight: FontWeight.w500,
+                                                                  )
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              Get.toNamed(AppRoutes
+                                                                  .allCardsExportScreen);
+                                                            },
+                                                            child: Container(
+                                                              margin: EdgeInsets.symmetric(horizontal: 12.w),
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      8.w),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.r),
+                                                                color: AppColors
+                                                                    .green_600,
+                                                              ),
+                                                              child: Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 20.w,
+                                                                  ),
+                                                                  Icon(Icons.qr_code_2),
+                                                                  SizedBox(
+                                                                    width: 20.w,
+                                                                  ),
+                                                                  CustomText(
+                                                                    text:
+                                                                        "Qr Export"
+                                                                            .tr,
+                                                                    fontSize: 16,
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                            // Get.to(AllCardsExportScreen());
-                                          },
-                                          isExport: true,
-                                          title: AppStrings.cardExport.tr,
+                                                  );
+                                                },
+                                              );
+                                              // Get.to(AllCardsExportScreen());
+                                            },
+                                            isExport: true,
+                                            title: AppStrings.cardExport.tr,
+                                          ),
                                         ),
-                                        buildServiceItems(
-                                          onTap: () {
-                                            Get.toNamed(AppRoutes
-                                                .shareProfileCardScreen);
-                                          },
-                                          icon: AppIcons.shareCard,
-                                          title: AppStrings.shareCard.tr,
+                                        Expanded(
+                                          child: buildServiceItems(
+                                            onTap: () {
+                                              Get.toNamed(AppRoutes
+                                                  .shareProfileCardScreen);
+                                            },
+                                            icon: AppIcons.shareCard,
+                                            title: AppStrings.shareCard.tr,
+                                          ),
                                         ),
                                       ],
                                     ),
