@@ -8,8 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
@@ -25,6 +27,44 @@ class ContactDetailsScreen extends StatelessWidget {
   RxBool isTapped = false.obs;
   RxBool isNoteTapped = false.obs;
   RxBool hasNoteData = false.obs;
+
+
+  void makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      throw 'Could not launch $phoneNumber';
+    }
+  }
+
+
+  void sendEmail(String emailTo) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: emailTo,
+      // query: encodeQueryParameters(<String, String>{
+      //   'subject': 'Example Subject & Symbols are allowed!',
+      //   'body': 'Hello, this is a test email.'
+      // }),
+    );
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch $emailTo';
+    }
+  }
+
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
 
   checkNoteData({required String noteData}){
     if(noteData == "" || noteData.isEmpty){
@@ -221,31 +261,49 @@ class ContactDetailsScreen extends StatelessWidget {
                     SizedBox(height: 30.h),
                     customWrap(
                         title: AppStrings.name.tr, value: contactDetails.name),
+                    SizedBox(height: 4.h,),
                     customWrap(
                         title: AppStrings.designation.tr,
                         value: contactDetails.designation),
+                    SizedBox(height: 4.h,),
                     customWrap(
                         title: AppStrings.company.tr,
                         value: contactDetails.companyName),
+                    SizedBox(height: 4.h,),
                     customWrap(
+                      onTap: () {
+                        sendEmail(contactDetails.email);
+                      },
+                        icon: Icons.email_outlined,
+                        isIcon: true,
                         title: AppStrings.email.tr,
                         value: contactDetails.email),
+                    SizedBox(height: 8.h,),
                     customWrap(
+                        onTap: () {
+                          makePhoneCall(contactDetails.mobilePhone);
+                        },
+                        icon: Icons.call,
+                        isIcon: true,
                         title: AppStrings.mobile.tr,
                         value: contactDetails.mobilePhone),
+                    SizedBox(height: 8.h,),
                     contactDetails.landPhone != ""
                         ? customWrap(
                             title: "Telephone".tr,
                             value: contactDetails.landPhone)
                         : SizedBox(),
+                    SizedBox(height: contactDetails.landPhone != ""? 4.h : 0,),
                     contactDetails.fax != ""
                         ? customWrap(
                             title: "Fax".tr, value: contactDetails.fax)
                         : SizedBox(),
+                    SizedBox(height: contactDetails.fax != ""? 4.h : 0,),
                     contactDetails.website != ""
                         ? customWrap(
                             title: "Website".tr, value: contactDetails.website)
                         : SizedBox(),
+                    SizedBox(height: contactDetails.website != ""? 4.h : 0,),
                     customWrap(
                         title: AppStrings.address.tr,
                         value: contactDetails.address),
@@ -315,7 +373,7 @@ class ContactDetailsScreen extends StatelessWidget {
                                   child: CustomText(
                                     textAlign: TextAlign.left,
                                     maxLines: 50,
-                                    text: contactDetails.note!,
+                                    text: contactDetails.note,
                                     fontSize: 16,
                                     color: AppColors.green_900,
                                   ),
@@ -344,7 +402,7 @@ class ContactDetailsScreen extends StatelessWidget {
     );
   }
 
-  Row customWrap({required String title, required String value}) {
+  Row customWrap({required String title, required String value, IconData? icon, bool isIcon = false, VoidCallback? onTap }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -366,7 +424,13 @@ class ContactDetailsScreen extends StatelessWidget {
             fontSize: 16,
             color: AppColors.green_900,
           ),
-        )
+        ),
+
+        isIcon
+            ? InkWell(
+            onTap: onTap,
+            child: Icon(icon, size: 24, color: AppColors.green_900,))
+            : SizedBox(),
       ],
     );
   }

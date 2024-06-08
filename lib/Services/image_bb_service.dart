@@ -49,19 +49,32 @@ class ImageBBService extends GetxController{
   Future<String> downloadImage({required String imageUrl}) async{
     isDownloading = true;
     update();
-    var response = await http.get(Uri.parse(imageUrl));
-    isDownloading = false;
-    update();
+    try{
+      var response = await http.get(Uri.parse(imageUrl));
+      isDownloading = false;
+      update();
 
-    if(response.statusCode == 200){
-      final Uint8List bytes = response.bodyBytes;
-      final Directory tempDir = await path_provider.getTemporaryDirectory();
-      File imageFile = File('${tempDir.path}/card_image.jpg');
-      await imageFile.writeAsBytes(bytes);
+      if(response.statusCode == 200){
+        final Uint8List bytes = response.bodyBytes;
+        final Directory tempDir = await path_provider.getTemporaryDirectory();
+        File imageFile = File('${tempDir.path}/card_image.jpg');
+        await imageFile.writeAsBytes(bytes);
 
-      return imageFile.path;
-    } else{
-      throw Exception('Failed to download image: ${response.statusCode}');
+        return imageFile.path;
+      } else{
+        throw Exception('Failed to download image: ${response.statusCode}');
+      }
+    }catch(e){
+      if (kDebugMode) {
+        print(e);
+      }
+      Get.snackbar("Please create your own e-card before sending email,", "No Image url found!");
+      isDownloading = false;
+      update();
+      return "$e";
+    }finally{
+      isDownloading = false;
+      update();
     }
   }
 

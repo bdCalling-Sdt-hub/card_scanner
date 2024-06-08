@@ -710,6 +710,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     StorageController.addressController.text =
                                         "";
                                     StorageController.capturedImageList = [];
+                                    StorageController.noteController.text = "";
                                     OCRCreateCardController.capturedImageList = [];
                                     Get.toNamed(AppRoutes.allCardsScreen);
                                   }

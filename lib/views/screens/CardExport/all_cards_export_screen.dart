@@ -10,6 +10,7 @@ import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/no_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -114,6 +115,7 @@ class AllCardsExportScreen extends StatelessWidget {
                                     children: [
                                       SizedBox(height: 8.h,),
                                       CustomText(
+                                        textAlign: TextAlign.left,
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.name,
                                         fontSize: 20,
@@ -121,11 +123,13 @@ class AllCardsExportScreen extends StatelessWidget {
                                       ),
                                       SizedBox(height: 4.h,),
                                       CustomText(
+                                        textAlign: TextAlign.left,
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.designation,
                                         fontSize: 14,
                                       ),
                                       CustomText(
+                                        textAlign: TextAlign.left,
                                         text: contacts.companyName,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
