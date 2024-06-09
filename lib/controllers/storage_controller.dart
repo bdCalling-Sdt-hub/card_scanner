@@ -74,6 +74,24 @@ class StorageController extends GetxController {
     "Website".tr,
   ];
 
+  ///<<<============ Clear all controller ======================>>>>
+
+  void clearControllers(){
+    imagePath = "";
+    id = "";
+    nameController.text = "";
+    designationController.text = "";
+    companyController.text = "";
+    emailController.text = "";
+    mobilePhoneController.text = "";
+    landPhoneController.text = "";
+    faxController.text = "";
+    websiteController.text = "";
+    addressController.text = "";
+    capturedImageList = [];
+    noteController.text = "";
+    capturedImageList = [];
+  }
 
   ///<<<=============== Sorting Repo ==================================>>>
   RxBool isTapped = false.obs;

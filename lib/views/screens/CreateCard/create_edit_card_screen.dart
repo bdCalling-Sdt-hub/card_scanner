@@ -73,23 +73,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       Get.toNamed(AppRoutes.homeScreen);
                                     } else {
                                       Get.toNamed(AppRoutes.allCardsScreen);
-                                      StorageController.imagePath = "";
-                                      StorageController.nameController.text =
-                                          "";
-                                      StorageController
-                                          .designationController.text = "";
-                                      StorageController.companyController.text =
-                                          "";
-                                      StorageController.emailController.text =
-                                          "";
-                                      StorageController
-                                          .mobilePhoneController.text = "";
-                                      StorageController.addressController.text =
-                                          "";
-                                      storageController.id = "";
-                                      OCRCreateCardController
-                                          .capturedImageList = [];
-                                      StorageController.capturedImageList = [];
+                                     storageController.clearControllers();
                                     }
                                   },
                                   icon: Icons.arrow_back,
@@ -692,26 +676,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     } else {
                                       storageController.addContact();
                                     }
-                                    StorageController.imagePath = "";
-                                    storageController.id = "";
-                                    StorageController.nameController.text = "";
-                                    StorageController
-                                        .designationController.text = "";
-                                    StorageController.companyController.text =
-                                        "";
-                                    StorageController.emailController.text = "";
-                                    StorageController
-                                        .mobilePhoneController.text = "";
-                                    StorageController.landPhoneController.text =
-                                        "";
-                                    StorageController.faxController.text = "";
-                                    StorageController.websiteController.text =
-                                        "";
-                                    StorageController.addressController.text =
-                                        "";
-                                    StorageController.capturedImageList = [];
-                                    StorageController.noteController.text = "";
-                                    OCRCreateCardController.capturedImageList = [];
+                                    storageController.clearControllers();
                                     Get.toNamed(AppRoutes.allCardsScreen);
                                   }
                                   // Get.to(AllCardsScreen());

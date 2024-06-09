@@ -262,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                                                 InkWell(
                                                                   onTap: () {
+                                                                    storageController.clearControllers();
                                                                     Get.to(CreateOrEditCardScreen(
                                                                         screenTitle:
                                                                             AppStrings.createCardTitle));
