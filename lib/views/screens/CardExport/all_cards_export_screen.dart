@@ -38,6 +38,9 @@ class AllCardsExportScreen extends StatelessWidget {
                   children: [
                     CustomBackButton(onTap: () {
                       Get.back();
+                      storageController.count = 0;
+                      storageController.selectedContacts.clear();
+
                     },),
                     CustomText(
                       text: "${AppStrings.selectedItems.tr}: ${storageController.count}",

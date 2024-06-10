@@ -24,6 +24,7 @@ class ManageModalSheet extends StatelessWidget {
 
   QrScannerController qrScannerController = Get.put(QrScannerController());
   OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
+  StorageController storageController = Get.put(StorageController());
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,7 @@ class ManageModalSheet extends StatelessWidget {
 
                     InkWell(
                       onTap: () {
+                        storageController.clearControllers();
                         Get.to(CreateOrEditCardScreen(
                             screenTitle: AppStrings.createCardTitle.tr));
                         StorageController.appTitle = AppStrings.createCardTitle.tr;

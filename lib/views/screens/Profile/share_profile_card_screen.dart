@@ -114,7 +114,8 @@ class ShareProfileCardScreen extends StatelessWidget {
                                     .getImagePath(imageBytes: value)
                                     .then((value) => imageBBService.uploadImage(
                                         imageFile: value!)));
-                            Share.share(imagePath);
+                            String myInfo = "$imagePath \n\n${profileController.nameController.text} \n${profileController.designationController.text} \n${profileController.companyController.text} \n${profileController.emailController.text} \n${profileController.phoneController.text} \n${profileController.addressController.text}";
+                            Share.share(myInfo);
                             // XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
                             // if(imagePath != null){
                             //   Share.shareXFiles([image]);

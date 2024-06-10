@@ -51,7 +51,7 @@ class OCRCreateCardController extends GetxController{
       "contents": [
         {
           "parts": [
-            {"text": "$extractedText, 'Extract data from the above text and give the response as like this format: ${'{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, if you get any data of the mentioned fields then please put it on the specific field and if get Chinese or Japanese  language then give response values in that language please'.tr}"}
+            {"text": "$extractedText, '\n Extract data from the above text and give the response as like this format: ${'{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, if you get any data of the mentioned fields then please put it on the specific field and if get Chinese or Japanese  language then give response values in that language please'.tr}"}
           ]
         }
       ]

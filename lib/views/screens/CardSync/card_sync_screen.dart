@@ -183,7 +183,7 @@ class CardSyncScreen extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               content: SizedBox(
-                                height: 120.h,
+                                height: 135.h,
                                 child: Column(
                                   children: [
                                     Align(

@@ -140,7 +140,7 @@ class EditProfileScreen extends StatelessWidget {
                                     ? DecorationImage(image: AssetImage(AppImages.blankProfileImage),fit: BoxFit.fill)
                                     : DecorationImage(image: NetworkImage(PrefsHelper.profileImagePath), fit: BoxFit.fill),
                                 borderRadius: BorderRadius.circular(100),
-                                color: AppColors.green_100
+                                color: AppColors.green_600
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,

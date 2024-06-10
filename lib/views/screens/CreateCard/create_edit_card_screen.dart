@@ -670,7 +670,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: CustomElevatedButton(
                                 onTap: () {
-                                  if (formKey.currentState!.validate()) {
+                                  // if (formKey.currentState!.validate()) {
                                     if (screenTitle == AppStrings.editCard) {
                                       storageController.updateContact();
                                     } else {
@@ -678,7 +678,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     }
                                     storageController.clearControllers();
                                     Get.toNamed(AppRoutes.allCardsScreen);
-                                  }
+                                  // }
                                   // Get.to(AllCardsScreen());
                                 },
                                 text: AppStrings.done.tr,

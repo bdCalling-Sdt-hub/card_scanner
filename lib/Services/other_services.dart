@@ -25,13 +25,10 @@ class OtherService {
     } else {
       if (isFirst) {
         if (connectivityResult.contains(ConnectivityResult.none)) {
-          Utils.toastMessage(
-              message: "You are currently offline. Check your internet connection please".tr, icon: Icons.wifi_off);
+          Utils.toastMessage(message: "You are currently offline. Check your internet connection please".tr, icon: Icons.wifi_off);
         }
       } else {
-        Utils.toastMessage(
-            message: "Internet connection has been restored".tr,
-            icon: Icons.wifi);
+        Utils.toastMessage(message: "Internet connection has been restored".tr, icon: Icons.wifi);
       }
     }
     isFirst = false ;

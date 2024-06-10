@@ -55,15 +55,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) {
         return GetMaterialApp(
-          builder: (context, child) {
-            return Overlay(
-              initialEntries: [
-                OverlayEntry(
-                  builder: (context) => child ?? Container(),
-                ),
-              ],
-            );
-          },
           translations: Locales(),
           // locale: const Locale("en", "US"),
           defaultTransition: Transition.noTransition,

@@ -119,14 +119,15 @@ class GroupScreen extends StatelessWidget {
                       ? Center(child: CustomText(text: "No Groups Created".tr,))
                       : Expanded(
                     child: GetBuilder<StorageController>(builder: (storageController) {
+                      storageController.groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                       return storageController.isLoading? Center(child: CircularProgressIndicator()) : ListView.builder(
                         itemCount: storageController.groupedContactsList.length,
                         itemBuilder: (context, index) {
-                          // storageController.groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                           return GestureDetector(
                             onTap: () {
                               PrefsHelper.getGroupedList().then((value) {
                                 storageController.groupedContactsList = value;
+                                storageController.reloadGroupContacts(index: index, groupContactList: storageController.groupedContactsList[index].contactsList);
                                 Get.toNamed(AppRoutes.selectedGroupCards, arguments: {'index' : index});
                               }, );
                             },

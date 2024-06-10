@@ -141,6 +141,29 @@ class StorageController extends GetxController {
     );
   }
 
+  ///<<<===================== Reload Group Contacts =========================>>>
+  void reloadGroupContacts({required List<ContactsModel> groupContactList, required int index}) {
+    // Iterate through the groupContactList to find matches in contacts
+    for (var groupContact in groupContactList) {
+      // Find the index of the contact in the contacts list
+      int contactIndex = contacts.indexWhere((contact) => contact.id == groupContact.id);
+      if (contactIndex != -1) {
+        // Update the contact in groupedContactsList if a match is found
+        int listIndex = groupedContactsList[index].contactsList.indexWhere((contact) => contact.id == groupContact.id);
+        if (listIndex != -1) {
+          groupedContactsList[index].contactsList[listIndex] = contacts[contactIndex];
+          if (kDebugMode) {
+            print("=============> Updated contact:");
+            print("Name: ${groupedContactsList[index].contactsList[listIndex].name}");
+            print("ID: ${groupedContactsList[index].contactsList[listIndex].id}");
+          }
+        }
+      }
+    }
+    groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+  }
+
+
   ///<<<===================== Create group repo ==============================>>>
   List<ContactsModel> groupListAdded({required int index}) {
     ContactsModel contactsModel = ContactsModel(
@@ -260,7 +283,7 @@ class StorageController extends GetxController {
 
     // Add data rows
     for (var contact in contactList) {
-      String capturedImages = contact.capturedImageList?.join(', ') ?? '';
+      String capturedImages = contact.capturedImageList.join(', ') ?? '';
 
       List<TextCellValue> data = [
         TextCellValue(contact.id),
@@ -404,8 +427,7 @@ class StorageController extends GetxController {
       print("-=-=-=-=-=-=-=--=-=-${noteController.text}");
     }
     if (imagePath != null && imagePath!.isNotEmpty) {
-      final existingContactIndex =
-          contacts.indexWhere((contact) => contact.id == id);
+      final existingContactIndex = contacts.indexWhere((contact) => contact.id == id);
 
       if (existingContactIndex != -1) {
         // Update contact details
@@ -570,8 +592,7 @@ class StorageController extends GetxController {
   Future<void> saveContactsInGoogle({String? accessToken}) async {
     try {
       // Encode contacts list to JSON
-      final contactsJson =
-          json.encode(contacts.map((c) => c.toJson()).toList());
+      final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
 
       // Write contacts JSON to a temporary file
       final directory = await getTemporaryDirectory();
@@ -791,4 +812,13 @@ class StorageController extends GetxController {
       }
     }
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
+  }
 }
+
+

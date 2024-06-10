@@ -529,6 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                           InkWell(
                                                             onTap: () async {
+                                                              storageController.selectedContacts.clear();
                                                               Get.toNamed(AppRoutes
                                                                   .allCardsExportScreen);
                                                             },

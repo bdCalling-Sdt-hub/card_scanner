@@ -18,42 +18,7 @@ class Utils {
   }
 
   static toastMessage({required String message, IconData icon = Icons.check}) {
-    FToast fToast = FToast();
 
-    if (Get.context != null) {
-      fToast.init(Get.context!);
-      Widget toast = Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.r),
-          color: AppColors.green_600,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon),
-            SizedBox(
-              width: 12.w,
-            ),
-            Flexible(
-              child: CustomText(
-                text: message,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                color: AppColors.blackColor,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      );
-
-      fToast.showToast(
-        child: toast,
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: const Duration(seconds: 2),
-      );
-    } else {
       Fluttertoast.showToast(
         msg: message,
         backgroundColor: Colors.greenAccent,
@@ -61,7 +26,6 @@ class Utils {
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_LONG,
       );
-    }
   }
 
   static snackBarMessage(String title, String message) {

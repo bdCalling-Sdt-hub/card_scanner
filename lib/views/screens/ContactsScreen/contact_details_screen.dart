@@ -25,8 +25,8 @@ class ContactDetailsScreen extends StatelessWidget {
 
   int index = Get.arguments["index"];
   RxBool isTapped = false.obs;
-  RxBool isNoteTapped = false.obs;
   RxBool hasNoteData = false.obs;
+  RxBool isNoteTapped = false.obs;
 
 
   void makePhoneCall(String phoneNumber) async {
@@ -373,7 +373,7 @@ class ContactDetailsScreen extends StatelessWidget {
                                   child: CustomText(
                                     textAlign: TextAlign.left,
                                     maxLines: 50,
-                                    text: contactDetails.note,
+                                    text: StorageController.noteController.text,
                                     fontSize: 16,
                                     color: AppColors.green_900,
                                   ),
