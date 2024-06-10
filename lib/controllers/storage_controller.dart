@@ -593,11 +593,14 @@ class StorageController extends GetxController {
     try {
       // Encode contacts list to JSON
       final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
+      final groupContactsJson = json.encode(groupedContactsList.map((e) => e.toJson().toString()));
 
       // Write contacts JSON to a temporary file
       final directory = await getTemporaryDirectory();
       final file = File('${directory.path}/contacts.json');
+      final groupContactFile = File('${directory.path}/groupContacts.json');
       await file.writeAsString(contactsJson);
+      await file.writeAsString(groupContactsJson);  ///Tomorrow will start from this line.
       await downloadFileId();
 
       // Upload the contacts JSON file to Google Drive
