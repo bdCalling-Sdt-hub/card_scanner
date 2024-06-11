@@ -32,12 +32,11 @@ class CreateOrEditCardScreen extends StatelessWidget {
 
   ScrollController scrollController = ScrollController();
 
-
   final String screenTitle;
   RxBool isTapped = false.obs;
   final formKey = GlobalKey<FormState>();
 
-  void addItem(){
+  void addItem() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
@@ -55,7 +54,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
           builder: (storageController) {
             return storageController.isLoading
                 ? Center(child: CircularProgressIndicator())
-                : SingleChildScrollView(controller: scrollController,
+                : SingleChildScrollView(
+                    controller: scrollController,
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                     child: Form(
@@ -68,13 +68,12 @@ class CreateOrEditCardScreen extends StatelessWidget {
                               children: [
                                 CustomBackButton(
                                   onTap: () {
-                                    if (screenTitle ==
-                                        AppStrings.createCardTitle) {
+                                    if (screenTitle == AppStrings.createCardTitle) {
                                       Get.toNamed(AppRoutes.homeScreen);
                                     } else {
                                       Get.toNamed(AppRoutes.allCardsScreen);
-                                     storageController.clearControllers();
                                     }
+                                    storageController.clearControllers();
                                   },
                                   icon: Icons.arrow_back,
                                 ),
@@ -97,66 +96,43 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       isTapped.value = !isTapped.value;
                                     },
                                     child: isTapped.value
-                                        ?CachedNetworkImage(
-                                      imageUrl: "${StorageController.imagePath}",
-                                      imageBuilder: (context, imageProvider) => Container(
-                                        height: 250.h,
-                                        width: Get.width,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.green_600,
-                                          borderRadius:
-                                          BorderRadius.circular(8.r),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: imageProvider),
-                                        ),
-                                      ),
-                                      placeholder: (context, url) => CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) {
-                                        if (kDebugMode) {
-                                          print("Error url : $url");
-                                        }
-                                        return Container(
-                                          height: 250.h,
-                                          width: Get.width,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.green_600,
-                                            borderRadius:
-                                            BorderRadius.circular(8.r),
-                                          ),
-                                          child: Icon(Icons.error),
-                                        );
-                                      },
-                                    )
+                                        ? CustomCachedNetworkImage()
                                         : CachedNetworkImage(
-                                      imageUrl: "${StorageController.imagePath}",
-                                      imageBuilder: (context, imageProvider) => Container(
-                                        height: 150.h,
-                                        width: 150.w,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.green_600,
-                                          borderRadius:
-                                          BorderRadius.circular(8.r),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: imageProvider),
-                                        ),
-                                      ),
-                                      placeholder: (context, url) => SizedBox(
-                                        height: 150.h,
-                                          width: 150.w,
-                                          child: Center(child: CircularProgressIndicator())),
-                                      errorWidget: (context, url, error) => Container(
-                                        height: 150.h,
-                                        width: 150.w,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.green_600,
-                                          borderRadius:
-                                          BorderRadius.circular(8.r),
-                                        ),
-                                        child: Icon(Icons.error),
-                                      ),
-                                    ),
+                                            imageUrl:
+                                                "${StorageController.imagePath}",
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              height: 150.h,
+                                              width: 150.w,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.green_600,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                                image: DecorationImage(
+                                                    fit: BoxFit.fill,
+                                                    image: imageProvider),
+                                              ),
+                                            ),
+                                            placeholder: (context, url) => SizedBox(
+                                                height: 150.h,
+                                                width: 150.w,
+                                                child: Center(
+                                                    child:
+                                                        CircularProgressIndicator())),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Container(
+                                              height: 150.h,
+                                              width: 150.w,
+                                              decoration: BoxDecoration(
+                                                color: AppColors.green_600,
+                                                borderRadius:
+                                                    BorderRadius.circular(8.r),
+                                              ),
+                                              child: Icon(Icons.error),
+                                            ),
+                                          ),
                                   ),
                                 ),
 
@@ -183,7 +159,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                   children: [
                                                     InkWell(
                                                       onTap: () {
-                                                        storageController.getGalleryImage();
+                                                        storageController
+                                                            .getGalleryImage();
                                                         Get.back();
                                                       },
                                                       child: Container(
@@ -442,7 +419,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
                               height: 4.h,
                             ),
                             TextFormField(
-                              controller: StorageController.designationController,
+                              controller:
+                                  StorageController.designationController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Designation is required".tr;
@@ -512,44 +490,58 @@ class CreateOrEditCardScreen extends StatelessWidget {
                             Obx(() {
                               return Column(
                                 children: [
-                                  storageController.isLandPhone.value || StorageController.landPhoneController.text.isNotEmpty
+                                  storageController.isLandPhone.value ||
+                                          StorageController.landPhoneController
+                                              .text.isNotEmpty
                                       ? SizedBox(
-                                    height: 4.h,
-                                  )
+                                          height: 4.h,
+                                        )
                                       : SizedBox(),
-                                  storageController.isLandPhone.value || StorageController.landPhoneController.text.isNotEmpty
+                                  storageController.isLandPhone.value ||
+                                          StorageController.landPhoneController
+                                              .text.isNotEmpty
                                       ? TextFormField(
-                                    controller:
-                                    StorageController.landPhoneController,
-                                    decoration: InputDecoration(
-                                        labelText: "Land Phone".tr,
-                                        labelStyle: TextStyle(
-                                            color: AppColors.black_300)),
-                                  )
+                                          controller: StorageController
+                                              .landPhoneController,
+                                          decoration: InputDecoration(
+                                              labelText: "Land Phone".tr,
+                                              labelStyle: TextStyle(
+                                                  color: AppColors.black_300)),
+                                        )
                                       : SizedBox(),
-                                  storageController.isFax.value || StorageController.faxController.text.isNotEmpty
+                                  storageController.isFax.value ||
+                                          StorageController
+                                              .faxController.text.isNotEmpty
                                       ? SizedBox(height: 4.h)
                                       : SizedBox(),
-                                  storageController.isFax.value || StorageController.faxController.text.isNotEmpty
+                                  storageController.isFax.value ||
+                                          StorageController
+                                              .faxController.text.isNotEmpty
                                       ? TextFormField(
-                                    controller: StorageController.faxController,
-                                    decoration: InputDecoration(
-                                        labelText: "Fax".tr,
-                                        labelStyle:
-                                        TextStyle(color: AppColors.black_300)),
-                                  )
-                                      : SizedBox() ,
-                                  storageController.isWebsite.value || StorageController.websiteController.text.isNotEmpty
+                                          controller:
+                                              StorageController.faxController,
+                                          decoration: InputDecoration(
+                                              labelText: "Fax".tr,
+                                              labelStyle: TextStyle(
+                                                  color: AppColors.black_300)),
+                                        )
+                                      : SizedBox(),
+                                  storageController.isWebsite.value ||
+                                          StorageController
+                                              .websiteController.text.isNotEmpty
                                       ? SizedBox(height: 4.h)
                                       : SizedBox(),
-                                  storageController.isWebsite.value || StorageController.websiteController.text.isNotEmpty
+                                  storageController.isWebsite.value ||
+                                          StorageController
+                                              .websiteController.text.isNotEmpty
                                       ? TextFormField(
-                                    controller: StorageController.websiteController,
-                                    decoration: InputDecoration(
-                                        labelText: "Website".tr,
-                                        labelStyle:
-                                        TextStyle(color: AppColors.black_300)),
-                                  )
+                                          controller: StorageController
+                                              .websiteController,
+                                          decoration: InputDecoration(
+                                              labelText: "Website".tr,
+                                              labelStyle: TextStyle(
+                                                  color: AppColors.black_300)),
+                                        )
                                       : SizedBox(),
                                 ],
                               );
@@ -573,82 +565,102 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                       TextStyle(color: AppColors.black_200)),
                             ),
                             SizedBox(height: 16.h),
-                            Obx(() => storageController.isTapped.value? Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                                height: 120.h,
-                                decoration: BoxDecoration(
-                                    color: AppColors.green_600,
-                                    borderRadius: BorderRadius.circular(4.r)
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    InkWell(
-                                      onTap: (){
-                                        storageController.isLandPhone.value = !storageController.isLandPhone.value;
-                                      },
-                                      child: CustomText(
-                                        text: storageController.formFieldsList[0],
-                                        color: AppColors.green_900,
-                                        fontWeight: FontWeight.w500,
-                                        bottom: 10,
+                            Obx(() => storageController.isTapped.value
+                                ? Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w, vertical: 4.h),
+                                      height: 120.h,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.green_600,
+                                          borderRadius:
+                                              BorderRadius.circular(4.r)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              storageController
+                                                      .isLandPhone.value =
+                                                  !storageController
+                                                      .isLandPhone.value;
+                                            },
+                                            child: CustomText(
+                                              text: storageController
+                                                  .formFieldsList[0],
+                                              color: AppColors.green_900,
+                                              fontWeight: FontWeight.w500,
+                                              bottom: 10,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 100.w,
+                                            height: 1.h,
+                                            color: AppColors.green_900,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              storageController.isFax.value =
+                                                  !storageController
+                                                      .isFax.value;
+                                            },
+                                            child: CustomText(
+                                              top: 5,
+                                              text: storageController
+                                                  .formFieldsList[1],
+                                              color: AppColors.green_900,
+                                              fontWeight: FontWeight.w500,
+                                              bottom: 10,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 100.w,
+                                            height: 1.h,
+                                            color: AppColors.green_900,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              storageController
+                                                      .isWebsite.value =
+                                                  !storageController
+                                                      .isWebsite.value;
+                                            },
+                                            child: CustomText(
+                                              top: 5,
+                                              text: storageController
+                                                  .formFieldsList[2],
+                                              color: AppColors.green_900,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Container(
-                                      width: 100.w,
-                                      height: 1.h,
-                                      color: AppColors.green_900,),
-                                    InkWell(
-                                      onTap: () {
-                                        storageController.isFax.value = !storageController.isFax.value;
-                                      },
-                                      child: CustomText(
-                                        top: 5,
-                                        text: storageController.formFieldsList[1],
-                                        color: AppColors.green_900,
-                                        fontWeight: FontWeight.w500,
-                                        bottom: 10,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 100.w,
-                                      height: 1.h,
-                                      color: AppColors.green_900,),
-                                    InkWell(
-                                      onTap: () {
-                                        storageController.isWebsite.value = !storageController.isWebsite.value;
-                                      },
-                                      child: CustomText(
-                                        top: 5,
-                                        text: storageController.formFieldsList[2],
-                                        color: AppColors.green_900,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
-                              ),
-                            ) : SizedBox()),
+                                  )
+                                : SizedBox()),
                             GestureDetector(
                               onTap: () {
-                                storageController.isTapped.value = !storageController.isTapped.value;
+                                storageController.isTapped.value =
+                                    !storageController.isTapped.value;
                                 addItem();
                               },
                               child: Container(
                                 height: 30.h,
                                 width: 80.w,
                                 decoration: BoxDecoration(
-                                  color: AppColors.green_700,
-                                  borderRadius: BorderRadius.circular(4)
-                                ),
+                                    color: AppColors.green_700,
+                                    borderRadius: BorderRadius.circular(4)),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.add, color: AppColors.green_500,),
+                                    Icon(
+                                      Icons.add,
+                                      color: AppColors.green_500,
+                                    ),
                                     SizedBox(width: 4.w),
                                     CustomText(
                                       text: "Add".tr,
@@ -669,15 +681,16 @@ class CreateOrEditCardScreen extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerRight,
                               child: CustomElevatedButton(
-                                onTap: () {
+                                onTap: () async {
                                   // if (formKey.currentState!.validate()) {
-                                    if (screenTitle == AppStrings.editCard) {
-                                      storageController.updateContact();
-                                    } else {
-                                      storageController.addContact();
-                                    }
-                                    storageController.clearControllers();
-                                    Get.toNamed(AppRoutes.allCardsScreen);
+
+                                  if (screenTitle == AppStrings.editCard) {
+                                    await storageController.updateContact();
+                                  } else {
+                                    await storageController.addContact();
+                                  }
+                                  storageController.clearControllers();
+                                  Get.toNamed(AppRoutes.allCardsScreen);
                                   // }
                                   // Get.to(AllCardsScreen());
                                 },
@@ -693,6 +706,36 @@ class CreateOrEditCardScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  CachedNetworkImage CustomCachedNetworkImage() {
+    return CachedNetworkImage(
+      imageUrl: "${StorageController.imagePath}",
+      imageBuilder: (context, imageProvider) => Container(
+        height: 250.h,
+        width: Get.width,
+        decoration: BoxDecoration(
+          color: AppColors.green_600,
+          borderRadius: BorderRadius.circular(8.r),
+          image: DecorationImage(fit: BoxFit.fill, image: imageProvider),
+        ),
+      ),
+      placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) {
+        if (kDebugMode) {
+          print("Error url : $url");
+        }
+        return Container(
+          height: 250.h,
+          width: Get.width,
+          decoration: BoxDecoration(
+            color: AppColors.green_600,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Icon(Icons.error),
+        );
+      },
     );
   }
 }

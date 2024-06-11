@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   get: ^4.6.6
-  intl: ^0.18.1
+  intl: any
   google_fonts: any
   flutter_screenutil: ^5.9.0
   flutter_svg: any
@@ -57,7 +57,7 @@ dependencies:
   qr_flutter: ^4.1.0
   flutter_barcode_scanner: ^2.0.0
   webview_flutter: ^4.7.0
-  screenshot: ^2.3.0
+  screenshot: ^3.0.0
   permission_handler: ^11.3.1
   device_info_plus: ^10.1.0
   image_gallery_saver: ^2.0.3

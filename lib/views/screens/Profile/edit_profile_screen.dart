@@ -138,13 +138,13 @@ class EditProfileScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 image: PrefsHelper.profileImagePath.isEmpty
                                     ? DecorationImage(image: AssetImage(AppImages.blankProfileImage),fit: BoxFit.fill)
-                                    : DecorationImage(image: NetworkImage(PrefsHelper.profileImagePath), fit: BoxFit.fill),
+                                    : DecorationImage(image: NetworkImage(PrefsHelper.profileImagePath), fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(100),
                                 color: AppColors.green_600
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,
-                              child: controller.isLoading? Center(child: CircularProgressIndicator(color: AppColors.green_600,)) : InkWell(
+                              child: controller.isLoading? Center(child: CircularProgressIndicator(color: AppColors.green_700,)) : InkWell(
                                 onTap: (){
                                   showDialog(context: context,
                                     builder: (context) {

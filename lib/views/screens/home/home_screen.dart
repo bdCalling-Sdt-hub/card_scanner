@@ -699,7 +699,9 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 4.h,
             ),
-            CustomText(text: title)
+            CustomText(
+              overflow: TextOverflow.ellipsis,
+                text: title)
           ],
         ),
       ),

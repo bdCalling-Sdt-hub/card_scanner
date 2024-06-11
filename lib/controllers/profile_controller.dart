@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/Services/image_bb_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../utils/app_colors.dart';
@@ -64,8 +66,7 @@ class ProfileController extends GetxController{
     if (getImages != null) {
       isLoading = true;
       update();
-      image = await imageBBService.uploadImage(imageFile: File(getImages.path));
-      PrefsHelper.profileImagePath = image!;
+      await cropImage(imgPath: getImages.path);
       isLoading = false;
       update();
       PrefsHelper.setString("profileImagePath", image);
@@ -80,11 +81,46 @@ class ProfileController extends GetxController{
     if (getImages != null) {
       isLoading = true;
       update();
-      image = await imageBBService.uploadImage(imageFile: File(getImages.path));
-      PrefsHelper.profileImagePath = image!;
+      await cropImage(imgPath: getImages.path);
       isLoading = false;
       update();
       PrefsHelper.setString("profileImagePath", image);
+      update();
+    }
+  }
+
+  ///<<<------------------------- Crop Image --------------------------------->>>
+
+  Future<void> cropImage({required String imgPath}) async {
+    if (kDebugMode) {
+      print("Image Path: $imgPath");
+    }
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: imgPath,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      image = await imageBBService.uploadImage(imageFile: File(croppedFile.path));
+      PrefsHelper.profileImagePath = image!;
+      // imagePath = croppedFile.path;
       update();
     }
   }

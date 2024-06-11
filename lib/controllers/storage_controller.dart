@@ -387,7 +387,9 @@ class StorageController extends GetxController {
   ///<<<---------------------- Add contacts method -------------------------->>>
 
   Future<void> addContact() async {
-    if (imagePath != null && imagePath!.isNotEmpty) {
+    print("Imagepath:=========>> $imagePath");
+    imagePath ?? "https://shorturl.at/sPWcH";
+    if (imagePath != null) {
       id = generateId();
       contacts.add(ContactsModel(
         id: id.toString(),
@@ -426,7 +428,7 @@ class StorageController extends GetxController {
     if (kDebugMode) {
       print("-=-=-=-=-=-=-=--=-=-${noteController.text}");
     }
-    if (imagePath != null && imagePath!.isNotEmpty) {
+    if (imagePath != null) {
       final existingContactIndex = contacts.indexWhere((contact) => contact.id == id);
 
       if (existingContactIndex != -1) {
@@ -593,14 +595,27 @@ class StorageController extends GetxController {
     try {
       // Encode contacts list to JSON
       final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
-      final groupContactsJson = json.encode(groupedContactsList.map((e) => e.toJson().toString()));
+      final groupContactsJson = json.encode(groupedContactsList.map((e) => e.toJson()).toList());
+
+      // Decode the JSON strings to maps
+      final contactsMap = json.decode(contactsJson);
+      final groupContactsMap = json.decode(groupContactsJson);
+
+      // Merge the two maps
+      final combinedContacts = {
+        'contacts': contactsMap,
+        'groupedContacts': groupContactsMap
+      };
+
+      // Encode the combined map back to a JSON string
+      final combinedJson = json.encode(combinedContacts);
 
       // Write contacts JSON to a temporary file
       final directory = await getTemporaryDirectory();
-      final file = File('${directory.path}/contacts.json');
-      final groupContactFile = File('${directory.path}/groupContacts.json');
-      await file.writeAsString(contactsJson);
-      await file.writeAsString(groupContactsJson);  ///Tomorrow will start from this line.
+      final file = File('${directory.path}/combinedContacts.json');
+
+      await file.writeAsString(combinedJson);
+
       await downloadFileId();
 
       // Upload the contacts JSON file to Google Drive
@@ -739,31 +754,48 @@ class StorageController extends GetxController {
       if (downloadResponse.statusCode == 200) {
         // Process downloaded content
         final List<int> fileBytes = downloadResponse.bodyBytes;
-        final List<ContactsModel> fileContent =
-            (jsonDecode(utf8.decode(fileBytes)) as List)
-                .map((item) => ContactsModel.fromJson(item))
-                .toList();
+        final Map<String, dynamic> fileContent = jsonDecode(utf8.decode(fileBytes));
 
-        for (var content in fileContent) {
+        final List<ContactsModel> downloadedContacts = (fileContent['contacts'] as List)
+            .map((item) => ContactsModel.fromJson(item))
+            .toList();
+        final List<ContactGroup> downloadedGroupedContacts = (fileContent['groupedContacts'] as List)
+            .map((item) => ContactGroup.fromJson(item))
+            .toList();
+
+        for (var content in downloadedContacts) {
           if (!contacts.any((contact) => contact.id == content.id)) {
             contacts.add(content);
-            saveContacts();
-            update();
           }
         }
+
+        for (var group in downloadedGroupedContacts) {
+          if (kDebugMode) {
+            print("group.name::::: ${group.name}");
+          }
+          if(!groupedContactsList.any((element) => element.name == group.name)){
+            groupedContactsList.add(group);
+          }
+        }
+        PrefsHelper.groupedContactsList = groupedContactsList;
+        PrefsHelper.saveGroupedList(groupedContactsList);
+        saveContacts();
+        update();
+
         Get.snackbar("Contact successfully downloaded".tr, "");
         if (kDebugMode) {
-          print(fileContent);
+          print(downloadedContacts);
+          print(downloadedGroupedContacts);
         }
       } else {
-        Get.snackbar("Upload failed".tr, "");
+        Get.snackbar("Download failed".tr, "");
         if (kDebugMode) {
           print(
               'File download failed with status code ${downloadResponse.statusCode}');
         }
       }
     } catch (e) {
-      Get.snackbar("Upload failed".tr, "$e");
+      Get.snackbar("Download failed".tr, "$e");
       if (kDebugMode) {
         print(e);
       }

@@ -55,7 +55,7 @@ class CardExportScreen extends StatelessWidget {
                             ///<<<============== Qr code generation ===============>>>
 
                             QrImageView(
-                              data: "${selectedContact.imageUrl}/ /${selectedContact.name} /${selectedContact.designation} /${selectedContact.companyName} /${selectedContact.email} /${selectedContact.mobilePhone} /${selectedContact.landPhone ?? ""} /${selectedContact.fax ?? ""}/${selectedContact.website ?? ""}/${selectedContact.address}}",
+                              data: "Image url: ${selectedContact.imageUrl}, \nName:${selectedContact.name}, \nDesignation: ${selectedContact.designation}, \nCompany Name: ${selectedContact.companyName}, \nEmail: ${selectedContact.email}, \nMobile: ${selectedContact.mobilePhone}, \nTelephone: ${selectedContact.landPhone ?? ""}, \nFax: ${selectedContact.fax ?? ""}, \nWebsite: ${selectedContact.website ?? ""}, \nAddress: ${selectedContact.address}}",
                               version: QrVersions.auto,
                               size: 200,
                               gapless: false,

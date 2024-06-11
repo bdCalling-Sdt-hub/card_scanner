@@ -58,6 +58,7 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
               ///<<<================== Digital Card List ===================>>>
 
               GetBuilder<StorageController>(builder: (storageController) {
+                storageController.allContactsForGroup.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
                 return storageController.isLoading
                     ? Center(child: CircularProgressIndicator())
                     : storageController.allContactsForGroup.isEmpty
@@ -67,13 +68,21 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
                           itemCount:
                               storageController.allContactsForGroup.length,
                           itemBuilder: (context, index) {
-                            storageController.allContactsForGroup.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-                            List<bool> isSelect = List.generate(
-                                storageController.allContactsForGroup.length,
-                                (index) => false);
+                            List<bool> isSelect = List.generate(storageController.allContactsForGroup.length, (index){
+                              if(storageController.selectedGroupContacts.contains(storageController.allContactsForGroup[index])){
+                                return true;
+                              }
+                              return false;
+                            });
+
                             return Obx(() => GestureDetector(
                                   onTap: () {
+
                                     isSelect[index] = !isSelect[index];
+                                    if (kDebugMode) {
+                                      print("isSelect[index] : ${isSelect[index]}");
+                                    }
+
                                     if (isSelect[index]) {
                                       storageController.selectedGroupContacts.add(storageController.allContactsForGroup[index]);
                                       if (kDebugMode) {
@@ -82,6 +91,9 @@ class _CardSelectionScreenState extends State<CardSelectionScreen> {
 
                                     } else {
                                       storageController.selectedGroupContacts.remove(storageController.allContactsForGroup[index]);
+                                      if (kDebugMode) {
+                                        print("storageController.selectedGroupContacts: ${storageController.selectedGroupContacts}");
+                                      }
                                     }
                                   },
                                   child: Container(
