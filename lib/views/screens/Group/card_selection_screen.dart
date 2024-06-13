@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
@@ -12,7 +11,6 @@ import 'package:get/get.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 import '../../widgets/no_data.dart';
-import 'create_group_screen.dart';
 
 class CardSelectionScreen extends StatefulWidget {
   const CardSelectionScreen({super.key});

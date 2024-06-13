@@ -297,6 +297,7 @@ class Locales extends Translations {
               "You are currently offline. Check your internet connection please",
           "Internet connection has been restored":
               "Internet connection has been restored",
+          "Scan QR Code": "Scan QR Code",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -575,6 +576,7 @@ class Locales extends Translations {
           "You are currently offline. Check your internet connection please":
               "您当前处于离线状态。请检查您的互联网连接。",
           "Internet connection has been restored": "互联网连接已恢复",
+          "Scan QR Code": "扫描二维码",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -866,7 +868,8 @@ class Locales extends Translations {
           "Continue": "継続する",
           "You are currently offline. Check your internet connection please":
               "現在オフラインです。インターネット接続を確認してください。",
-          "Internet connection has been restored": "インターネット接続が復旧しました。"
+          "Internet connection has been restored": "インターネット接続が復旧しました。",
+          "Scan QR Code" : "QRコードをスキャン"
         }
       };
 }

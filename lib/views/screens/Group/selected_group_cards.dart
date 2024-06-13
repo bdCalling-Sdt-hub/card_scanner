@@ -1,5 +1,4 @@
 
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Models/contacts_model.dart';
@@ -19,6 +18,7 @@ import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class SelectedGroupCards extends StatelessWidget {
   SelectedGroupCards({super.key});
 

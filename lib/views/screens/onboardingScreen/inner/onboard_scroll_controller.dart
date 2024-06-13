@@ -1,7 +1,6 @@
 
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class OnBoardScrollController extends GetxController{

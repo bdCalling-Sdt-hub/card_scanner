@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
@@ -14,10 +13,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../core/routes/app_routes.dart';
 import '../../../utils/app_icons.dart';
 import 'IneerWidget/edit_card_style.dart';
 
+// ignore: must_be_immutable
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({super.key});
 

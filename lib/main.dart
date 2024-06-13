@@ -1,8 +1,6 @@
-import 'package:card_scanner/Helpers/permission_handler.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/global/dependency.dart';
 import 'package:card_scanner/utils/app_colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +9,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'Services/other_services.dart';
 import 'firebase_options.dart';
 import 'Helpers/prefs_helper.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'language/locales.dart';
 
@@ -22,7 +19,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   OtherService.checkConnection();
-  PhonePermissionHandler permissionHandler = PhonePermissionHandler();
   // await permissionHandler.storageRequest(Permission.storage);
   // await permissionHandler.storagePermission();
 

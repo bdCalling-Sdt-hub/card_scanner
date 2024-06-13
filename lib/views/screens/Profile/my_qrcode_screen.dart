@@ -1,12 +1,10 @@
 
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/screen_shot_helper.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_icons.dart';
-import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +20,7 @@ import '../../../utils/app_colors.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class MyQrCodeScreen extends StatelessWidget {
   MyQrCodeScreen({super.key});
 

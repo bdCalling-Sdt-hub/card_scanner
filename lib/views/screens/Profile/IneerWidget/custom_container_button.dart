@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class CustomContainerButton extends StatelessWidget {
   CustomContainerButton({
     super.key,

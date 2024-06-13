@@ -6,6 +6,7 @@ enum ImageType{
   svg,
 }
 
+// ignore: must_be_immutable
 class CustomImage extends StatelessWidget {
 
   final String imageSrc;

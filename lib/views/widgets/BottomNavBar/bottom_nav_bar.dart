@@ -3,12 +3,10 @@
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
-import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/views/screens/ContactsScreen/all_cards_screen.dart';
 import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
-import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
 import 'package:card_scanner/views/screens/Enterprise/enterprise_screen.dart';
 import 'package:card_scanner/views/screens/Profile/profile_screen.dart';
 import 'package:card_scanner/views/screens/home/InnerWidgets/ocrimage_dialog.dart';
@@ -20,7 +18,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 
 import '../../../utils/app_strings.dart';

@@ -20,11 +20,9 @@ import 'package:share_plus/share_plus.dart';
 
 import '../Helpers/prefs_helper.dart';
 import '../Models/contacts_model.dart';
-import '../core/routes/app_routes.dart';
 import '../utils/app_strings.dart';
 import 'package:path/path.dart' as p;
 
-import '../views/screens/ContactsScreen/contact_details_screen.dart';
 
 class StorageController extends GetxController {
   @override
@@ -255,12 +253,6 @@ class StorageController extends GetxController {
   Future<void> exportToExcel({required List<ContactsModel> contactList}) async {
     var excel = Excel.createExcel();
     Sheet sheetObject = excel['Contacts'];
-    CellStyle cellStyle = CellStyle(
-      // backgroundColorHex: "#1AFF1A",
-      fontFamily: getFontFamily(FontFamily.Calibri),
-      horizontalAlign: HorizontalAlign.Center,
-      verticalAlign: VerticalAlign.Center,
-    );
 
     // Add header row
     List<TextCellValue> headers = [
@@ -283,7 +275,7 @@ class StorageController extends GetxController {
 
     // Add data rows
     for (var contact in contactList) {
-      String capturedImages = contact.capturedImageList.join(', ') ?? '';
+      String capturedImages = contact.capturedImageList.join(', ');
 
       List<TextCellValue> data = [
         TextCellValue(contact.id),
@@ -293,11 +285,11 @@ class StorageController extends GetxController {
         TextCellValue(contact.companyName),
         TextCellValue(contact.email),
         TextCellValue(contact.mobilePhone),
-        TextCellValue(contact.landPhone ?? ""),
-        TextCellValue(contact.fax ?? ""),
-        TextCellValue(contact.website ?? ""),
+        TextCellValue(contact.landPhone),
+        TextCellValue(contact.fax),
+        TextCellValue(contact.website),
         TextCellValue(contact.address),
-        TextCellValue(contact.note ?? ""),
+        TextCellValue(contact.note),
         TextCellValue(capturedImages),
       ];
       sheetObject.appendRow(data);
@@ -727,8 +719,8 @@ class StorageController extends GetxController {
         }
       }
     } catch (e) {
+      Get.snackbar("Operation failed".tr, "");
       if (kDebugMode) {
-        Get.snackbar("Operation failed".tr, "");
         print('Operation failed: $e');
       }
     }

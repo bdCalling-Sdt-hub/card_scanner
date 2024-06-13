@@ -1,5 +1,4 @@
 
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Models/contacts_model.dart';
@@ -21,6 +20,7 @@ import '../../../controllers/ocr_create_card_controller.dart';
 import '../../../utils/app_colors.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class AllCardsScreen extends StatelessWidget {
   AllCardsScreen({super.key});
 
@@ -210,12 +210,12 @@ class AllCardsScreen extends StatelessWidget {
                                   StorageController.companyController.text = contacts.companyName;
                                   StorageController.emailController.text = contacts.email;
                                   StorageController.mobilePhoneController.text = contacts.mobilePhone;
-                                  StorageController.landPhoneController.text = contacts.landPhone ?? "";
-                                  StorageController.faxController.text = contacts.fax ?? "";
-                                  StorageController.websiteController.text = contacts.website ?? "";
+                                  StorageController.landPhoneController.text = contacts.landPhone;
+                                  StorageController.faxController.text = contacts.fax;
+                                  StorageController.websiteController.text = contacts.website;
                                   StorageController.addressController.text = contacts.address;
                                   storageController.id = contacts.id;
-                                  StorageController.capturedImageList = contacts.capturedImageList ?? [];
+                                  StorageController.capturedImageList = contacts.capturedImageList;
 
 
                                   Get.to(CreateOrEditCardScreen(screenTitle: AppStrings.editCard));

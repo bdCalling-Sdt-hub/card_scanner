@@ -1,4 +1,3 @@
-import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
@@ -19,10 +18,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/qr_scanner_controller.dart';
 import '../../../controllers/storage_controller.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
-import '../Profile/share_profile_card_screen.dart';
 import 'InnerWidgets/card_holder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,9 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
   String link = "https://cf88BYf=name-card-scanner";
 
   PaymentController paymentController = Get.put(PaymentController());
+  QrScannerController qrScannerController = Get.put(QrScannerController());
 
-  OCRCreateCardController ocrCreateCardController =
-      Get.put(OCRCreateCardController());
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
   StorageController storageController = Get.put(StorageController());
   OcrImageDialog ocrImageDialog = OcrImageDialog();
 
@@ -83,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 20.h,
+                height: 12.h,
                 width: Get.width,
               ),
 
@@ -92,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 30.w),
+                  SizedBox(width: 8.w),
                   Expanded(
                       child: SizedBox(
                     height: 40,
@@ -181,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //   ],
                       // ),
                     ),
-                  )
+                  ),
                 ],
               ),
 
@@ -205,19 +204,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           ///<<<================= Home Image ===========================>>>
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 32.w, vertical: 20.h),
-                              child: Image.asset(AppImages.homePageLogo),
-                            ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 12.h),
+                            height: 160.h,
+                            width: 230.w,
+                            child: Image.asset(AppImages.homePageLogo, fit: BoxFit.fill,),
                           ),
 
                           CustomText(
                             text: AppStrings.shareWithAnyone.tr,
                             maxLines: 2,
                             color: AppColors.black_500,
-                            fontSize: 24,
+                            fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
 
@@ -232,212 +230,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: CircularProgressIndicator()))
                                   : Padding(
                                       padding:
-                                          EdgeInsets.symmetric(vertical: 12.h),
+                                          EdgeInsets.symmetric(vertical: 8.h),
                                       child: CustomElevatedButton(
                                         onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                backgroundColor:
-                                                    AppColors.green_700,
-                                                content: Container(
-                                                  padding: EdgeInsets.only(
-                                                      top: 12.h, left: 4.w),
-                                                  height: 180.h,
-                                                  child: GetBuilder<
-                                                      OCRCreateCardController>(
-                                                    builder: (controller) {
-                                                      return controller
-                                                              .isLoading
-                                                          ? Center(
-                                                              child:
-                                                                  CircularProgressIndicator())
-                                                          : Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                /// <<<========== Create Card Manually =================>>>
-
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    storageController.clearControllers();
-                                                                    Get.to(CreateOrEditCardScreen(
-                                                                        screenTitle:
-                                                                            AppStrings.createCardTitle));
-                                                                    StorageController
-                                                                            .appTitle =
-                                                                        AppStrings
-                                                                            .createCardTitle;
-                                                                  },
-                                                                  child:
-                                                                      Container(
-                                                                    padding: EdgeInsets
-                                                                        .all(8
-                                                                            .w),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.r),
-                                                                      color: AppColors
-                                                                          .green_600,
-                                                                    ),
-                                                                    child: Row(
-                                                                      children: [
-                                                                        SvgPicture
-                                                                            .asset(
-                                                                          AppIcons
-                                                                              .editNote,
-                                                                          height:
-                                                                              26.h,
-                                                                          width:
-                                                                              20.w,
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              8.w,
-                                                                        ),
-                                                                        CustomText(
-                                                                          text:
-                                                                              "Create cards manually".tr,
-                                                                          fontSize:
-                                                                              16,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-
-                                                                /// <<<========== Create Card Using OCR Camera =================>>>
-
-                                                                InkWell(
-                                                                  onTap:
-                                                                      () async {
-                                                                    String
-                                                                        responseText =
-                                                                        await ocrCreateCardController.selectImageCamera()
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
-                                                                            )
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.processImage(value!),
-                                                                            );
-                                                                    ocrImageDialog.ocrCameraImageDialog(
-                                                                        context,
-                                                                        responseText);
-                                                                  },
-                                                                  child:
-                                                                      Container(
-                                                                    padding: EdgeInsets
-                                                                        .all(8
-                                                                            .w),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.r),
-                                                                      color: AppColors
-                                                                          .green_600,
-                                                                    ),
-                                                                    child: Row(
-                                                                      children: [
-                                                                        SvgPicture
-                                                                            .asset(
-                                                                          AppIcons
-                                                                              .ocrCameraIcon,
-                                                                          height:
-                                                                              20.h,
-                                                                          width:
-                                                                              20.w,
-                                                                        ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              8.w,
-                                                                        ),
-                                                                        CustomText(
-                                                                          text:
-                                                                              "OCR with camera image".tr,
-                                                                          fontSize:
-                                                                              16,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-
-                                                                /// <<<========== Create Card Using OCR Gallery =================>>>
-
-                                                                InkWell(
-                                                                  onTap:
-                                                                      () async {
-                                                                    String
-                                                                        responseText =
-                                                                        await ocrCreateCardController
-                                                                            .selectImageGallery()
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
-                                                                            )
-                                                                            .then(
-                                                                              (value) => ocrCreateCardController.processImage(value!),
-                                                                            );
-                                                                    ocrImageDialog.ocrGalleryImageDialog(
-                                                                        context,
-                                                                        responseText);
-                                                                  },
-                                                                  child:
-                                                                      Container(
-                                                                    padding: EdgeInsets
-                                                                        .all(8
-                                                                            .w),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              8.r),
-                                                                      color: AppColors
-                                                                          .green_600,
-                                                                    ),
-                                                                    child: Row(
-                                                                      children: [
-                                                                        Icon(Icons
-                                                                            .image_outlined),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              8.w,
-                                                                        ),
-                                                                        CustomText(
-                                                                          text:
-                                                                              "OCR with gallery image".tr,
-                                                                          fontSize:
-                                                                              16,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            );
-                                                    },
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
+                                          digitalCardShowDialog(context);
                                         },
                                         text: AppStrings.createDigitalCards.tr,
                                         textColor: AppColors.black_500,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w400,
-                                        borderRadius: 41,
+                                        borderRadius: 16,
                                         borderColor: AppColors.green_900,
                                         isFillColor: false,
+                                        height: 48,
                                       ),
                                     );
                             },
                           ),
-
+                          SizedBox(height: 4.h,),
                           Expanded(
                             child: SingleChildScrollView(
                               child: Column(
@@ -446,14 +256,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                   Container(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 8.w),
+                                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: AppColors.black_500),
                                         borderRadius:
                                             BorderRadius.circular(8.r)),
                                     width: Get.width,
-                                    height: 76.h,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -593,9 +402,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
 
                                   SizedBox(
-                                    height: 8.h,
-                                  ),
-                                  SizedBox(
                                     height: 16.h,
                                   ),
 
@@ -613,6 +419,218 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Future<dynamic> digitalCardShowDialog(BuildContext context) {
+    return showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              backgroundColor:
+                                                  AppColors.green_700,
+                                              content: Container(
+                                                padding: EdgeInsets.only(
+                                                    top: 12.h, left: 4.w),
+
+                                                child: GetBuilder<
+                                                    OCRCreateCardController>(
+                                                  builder: (controller) {
+                                                    return controller
+                                                            .isLoading
+                                                        ? SizedBox(
+                                                      height: 170.h,
+                                                          child: Center(
+                                                              child:
+                                                                  CircularProgressIndicator()),
+                                                        )
+                                                        : Column(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              /// <<<========== Create Card Manually =================>>>
+
+                                                              InkWell(
+                                                                onTap: () {
+                                                                  storageController.clearControllers();
+                                                                  Get.to(CreateOrEditCardScreen(
+                                                                      screenTitle:
+                                                                          AppStrings.createCardTitle));
+                                                                  StorageController
+                                                                          .appTitle =
+                                                                      AppStrings
+                                                                          .createCardTitle;
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  padding: EdgeInsets
+                                                                      .all(8
+                                                                          .w),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.r),
+                                                                    color: AppColors
+                                                                        .green_600,
+                                                                  ),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                        AppIcons
+                                                                            .editNote,
+                                                                        height:
+                                                                            26.h,
+                                                                        width:
+                                                                            20.w,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8.w,
+                                                                      ),
+                                                                      CustomText(
+                                                                        text:
+                                                                            "Create cards manually".tr,
+                                                                        fontSize:
+                                                                            16,
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(height: 8.h,),
+
+                                                              ///<<<=========== Create card qr scan ====================>>>
+
+                                                              InkWell(
+                                                                onTap: () async {
+                                                                  await qrScannerController.qrScanner().then((value) {
+                                                                    if (kDebugMode) {
+                                                                      print("Qr code data =====>>>>>>>>: $value");
+                                                                    }
+                                                                    ocrCreateCardController.textFormatRepo(extractedText: value);
+                                                                  });
+                                                                },
+                                                                child: manageCards(Icons.qr_code_scanner, "Scan QR Code".tr),
+                                                              ),
+                                                              SizedBox(height: 8.h,),
+                                                              /// <<<========== Create Card Using OCR Camera =================>>>
+
+                                                              InkWell(
+                                                                onTap:
+                                                                    () async {
+                                                                  String
+                                                                      responseText =
+                                                                      await ocrCreateCardController.selectImageCamera()
+                                                                          .then(
+                                                                            (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
+                                                                          )
+                                                                          .then(
+                                                                            (value) => ocrCreateCardController.processImage(value!),
+                                                                          );
+                                                                  ocrImageDialog.ocrCameraImageDialog(
+                                                                      context,
+                                                                      responseText);
+                                                                },
+                                                                child: Container(
+                                                                  padding: EdgeInsets
+                                                                      .all(8
+                                                                          .w),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.r),
+                                                                    color: AppColors
+                                                                        .green_600,
+                                                                  ),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SvgPicture
+                                                                          .asset(
+                                                                        AppIcons
+                                                                            .ocrCameraIcon,
+                                                                        height:
+                                                                            20.h,
+                                                                        width:
+                                                                            20.w,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8.w,
+                                                                      ),
+                                                                      CustomText(
+                                                                        text:
+                                                                            "OCR with camera image".tr,
+                                                                        fontSize:
+                                                                            16,
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(height: 8.h,),
+
+                                                              /// <<<========== Create Card Using OCR Gallery =================>>>
+
+                                                              InkWell(
+                                                                onTap:
+                                                                    () async {
+                                                                  String
+                                                                      responseText =
+                                                                      await ocrCreateCardController
+                                                                          .selectImageGallery()
+                                                                          .then(
+                                                                            (value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),
+                                                                          )
+                                                                          .then(
+                                                                            (value) => ocrCreateCardController.processImage(value!),
+                                                                          );
+                                                                  ocrImageDialog.ocrGalleryImageDialog(
+                                                                      context,
+                                                                      responseText);
+                                                                },
+                                                                child: Container(
+                                                                  padding: EdgeInsets
+                                                                      .all(8
+                                                                          .w),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8.r),
+                                                                    color: AppColors
+                                                                        .green_600,
+                                                                  ),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Icon(Icons
+                                                                          .image_outlined),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            8.w,
+                                                                      ),
+                                                                      CustomText(
+                                                                        text:
+                                                                            "OCR with gallery image".tr,
+                                                                        fontSize:
+                                                                            16,
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(height: 6.h,),
+                                                            ],
+                                                          );
+                                                  },
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
   }
 
   AlertDialog paymentAlertDialog(BuildContext context) {
@@ -704,6 +722,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: title)
           ],
         ),
+      ),
+    );
+  }
+
+  Container manageCards(IconData icon, String text) {
+    return Container(
+      padding: EdgeInsets
+          .all(8
+          .w),
+      decoration:
+      BoxDecoration(
+        borderRadius:
+        BorderRadius.circular(
+            8.r),
+        color: AppColors
+            .green_600,
+      ),
+      child: Row(
+        children: [
+          Icon(icon),
+          SizedBox(
+            width:
+            8.w,
+          ),
+          CustomText(
+            text: text.tr,
+            fontSize:
+            16,
+          )
+        ],
       ),
     );
   }

@@ -16,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/custom_text_field/custom_text_field.dart';
 
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 

@@ -11,6 +11,7 @@ import '../../../../utils/app_icons.dart';
 import '../../../../utils/app_strings.dart';
 import '../../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class OpenModalSheet extends StatelessWidget {
   OpenModalSheet({
     super.key,

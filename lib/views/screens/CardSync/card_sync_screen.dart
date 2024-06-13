@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class CardSyncScreen extends StatelessWidget {
   CardSyncScreen({super.key});
 

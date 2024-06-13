@@ -9,6 +9,7 @@ import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class ChangeLanguageScreen extends StatelessWidget {
   ChangeLanguageScreen({super.key});
 

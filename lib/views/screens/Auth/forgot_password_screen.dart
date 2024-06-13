@@ -11,6 +11,7 @@ import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 

@@ -18,10 +18,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
+// ignore: must_be_immutable
 class ViewECardScreen extends StatelessWidget {
   ViewECardScreen({super.key});
 

@@ -1,5 +1,5 @@
 
-import 'package:card_scanner/utils/app_images.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,6 +13,7 @@ import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 import '../Profile/IneerWidget/custom_container_button.dart';
 
+// ignore: must_be_immutable
 class RecommendNameCardScreen extends StatelessWidget {
   RecommendNameCardScreen({super.key});
 

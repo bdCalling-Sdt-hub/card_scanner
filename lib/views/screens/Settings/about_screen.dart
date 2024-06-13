@@ -1,5 +1,4 @@
 
-import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

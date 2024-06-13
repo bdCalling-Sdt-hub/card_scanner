@@ -44,7 +44,6 @@ dependencies:
   flutter_advanced_switch: ^3.1.0
   image_picker: ^1.0.7
   share_plus: ^8.0.2
-  qr_code_scanner: ^1.0.1
   firebase_core: ^2.30.0
   firebase_auth: ^4.19.2
   google_sign_in: ^6.2.1
@@ -62,7 +61,7 @@ dependencies:
   device_info_plus: ^10.1.0
   image_gallery_saver: ^2.0.3
   flutter_cache_manager: any
-  image_cropper: any
+  image_cropper: ^5.0.1
   fluttertoast: ^8.2.5
   googleapis: ^13.1.0
   googleapis_auth: ^1.6.0
@@ -78,6 +77,7 @@ dependencies:
   connectivity_plus: ^6.0.3
   flutter_email_sender: ^5.0.2
   file_picker: ^5.2.0
+  smooth_page_indicator: ^1.1.0
 
 icons_launcher:
   image_path: 'assets/images/app_icon.png'

@@ -74,6 +74,7 @@ class OCRCreateCardController extends GetxController{
           RegExp pattern = RegExp(r'[\n*-]');
           final cleanText = cleanJsonString(text);
           Map<String, dynamic> responseText = jsonDecode(cleanText.replaceAll(pattern, ""));
+
           if (kDebugMode) {
             print("responseText:::: $responseText");
           }

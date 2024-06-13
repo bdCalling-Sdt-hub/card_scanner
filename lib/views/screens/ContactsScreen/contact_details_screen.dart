@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,6 +16,7 @@ import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class ContactDetailsScreen extends StatelessWidget {
   ContactDetailsScreen({super.key});
 
@@ -89,11 +89,11 @@ class ContactDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var contactDetails = phoneStorageController.contacts[index];
-    StorageController.noteController.text = contactDetails.note ?? "";
+    StorageController.noteController.text = contactDetails.note;
     if (kDebugMode) {
       print("-----------------${contactDetails.note}");
     }
-    checkNoteData(noteData: contactDetails.note ?? "");
+    checkNoteData(noteData: contactDetails.note);
 
     return Scaffold(
       body: SafeArea(
@@ -338,11 +338,11 @@ class ContactDetailsScreen extends StatelessWidget {
                                 StorageController.companyController.text = contactDetails.companyName;
                                 StorageController.emailController.text = contactDetails.email;
                                 StorageController.mobilePhoneController.text = contactDetails.mobilePhone;
-                                StorageController.landPhoneController.text = contactDetails.landPhone ?? "";
-                                StorageController.faxController.text = contactDetails.fax ?? "";
-                                StorageController.websiteController.text = contactDetails.website ?? "";
+                                StorageController.landPhoneController.text = contactDetails.landPhone;
+                                StorageController.faxController.text = contactDetails.fax;
+                                StorageController.websiteController.text = contactDetails.website;
                                 StorageController.addressController.text = contactDetails.address;
-                                StorageController.capturedImageList = contactDetails.capturedImageList ?? [];
+                                StorageController.capturedImageList = contactDetails.capturedImageList;
                                 phoneStorageController.id = contactDetails.id;
                                 isNoteTapped.value = false;
                                 phoneStorageController.updateContact();

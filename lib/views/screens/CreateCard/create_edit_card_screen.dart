@@ -1,18 +1,14 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
-import 'package:card_scanner/controllers/profile_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_strings.dart';
-import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,8 +17,8 @@ import 'package:get/get.dart';
 
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
-import '../ContactsScreen/all_cards_screen.dart';
 
+// ignore: must_be_immutable
 class CreateOrEditCardScreen extends StatelessWidget {
   CreateOrEditCardScreen({super.key, required this.screenTitle});
 

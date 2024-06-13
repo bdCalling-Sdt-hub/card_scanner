@@ -12,6 +12,7 @@ import '../../../utils/app_icons.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class SettingsScreenMain extends StatelessWidget {
   SettingsScreenMain({super.key});
 

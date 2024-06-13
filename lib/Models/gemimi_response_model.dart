@@ -8,7 +8,7 @@ class GeminiResponseModel {
     if (json['candidates'] != null) {
       candidates = <Candidates>[];
       json['candidates'].forEach((v) {
-        candidates!.add(new Candidates.fromJson(v));
+        candidates!.add(Candidates.fromJson(v));
       });
     }
   }
@@ -44,7 +44,7 @@ class Candidates {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.content != null) {
       data['content'] = this.content!.toJson();
     }

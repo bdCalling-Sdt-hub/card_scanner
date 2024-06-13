@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../Models/contacts_model.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class GroupScreen extends StatelessWidget {
   GroupScreen({super.key});
 

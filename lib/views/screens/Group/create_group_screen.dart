@@ -1,5 +1,4 @@
 
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
@@ -7,17 +6,16 @@ import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/Group/card_selection_screen.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../Models/contacts_model.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/CustomBackButton/custom_back_button.dart';
 import '../../widgets/customText/custom_text.dart';
 
+// ignore: must_be_immutable
 class CreateGroupScreen extends StatelessWidget {
   CreateGroupScreen({super.key});
 

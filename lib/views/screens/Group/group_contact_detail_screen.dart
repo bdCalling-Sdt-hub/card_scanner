@@ -1,4 +1,3 @@
-import 'dart:io';
 
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,6 +18,7 @@ import '../../widgets/customButton/custom_elevated_button.dart';
 import '../../widgets/customText/custom_text.dart';
 import '../../widgets/custom_text_field/custom_text_field.dart';
 
+// ignore: must_be_immutable
 class GroupContactDetailScreen extends StatelessWidget {
   GroupContactDetailScreen({super.key});
 
@@ -95,11 +95,11 @@ class GroupContactDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var contactDetails = phoneStorageController.groupedContactsList[groupIndex].contactsList[contactIndex];
-    StorageController.noteController.text = contactDetails.note ?? "";
+    StorageController.noteController.text = contactDetails.note;
     if (kDebugMode) {
       print("-----------------${contactDetails.note}");
     }
-    checkNoteData(noteData: contactDetails.note ?? "");
+    checkNoteData(noteData: contactDetails.note);
 
     return Scaffold(
       body: SafeArea(
@@ -344,11 +344,11 @@ class GroupContactDetailScreen extends StatelessWidget {
                                 StorageController.companyController.text = contactDetails.companyName;
                                 StorageController.emailController.text = contactDetails.email;
                                 StorageController.mobilePhoneController.text = contactDetails.mobilePhone;
-                                StorageController.landPhoneController.text = contactDetails.landPhone ?? "";
-                                StorageController.faxController.text = contactDetails.fax ?? "";
-                                StorageController.websiteController.text = contactDetails.website ?? "";
+                                StorageController.landPhoneController.text = contactDetails.landPhone;
+                                StorageController.faxController.text = contactDetails.fax;
+                                StorageController.websiteController.text = contactDetails.website;
                                 StorageController.addressController.text = contactDetails.address;
-                                StorageController.capturedImageList = contactDetails.capturedImageList ?? [];
+                                StorageController.capturedImageList = contactDetails.capturedImageList;
                                 phoneStorageController.id = contactDetails.id;
                                 isNoteTapped.value = false;
                                 phoneStorageController.updateContact();

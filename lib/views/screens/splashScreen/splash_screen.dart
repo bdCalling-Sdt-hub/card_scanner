@@ -2,7 +2,6 @@
 import 'dart:async';
 
 import 'package:card_scanner/Helpers/prefs_helper.dart';
-import 'package:card_scanner/Models/contacts_model.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/views/screens/onboardingScreen/onboarding_screen.dart';

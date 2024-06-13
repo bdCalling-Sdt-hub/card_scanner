@@ -2,21 +2,18 @@ import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/qr_scanner_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
-import 'package:card_scanner/views/screens/DuplicateCards/duplicate_cards_screen.dart';
-import 'package:card_scanner/views/screens/QrCodeScanner/scan_qr_code_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../../../controllers/storage_controller.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/CustomBackButton/custom_back_button.dart';
 
+// ignore: must_be_immutable
 class ManageModalSheet extends StatelessWidget {
   ManageModalSheet({super.key});
 

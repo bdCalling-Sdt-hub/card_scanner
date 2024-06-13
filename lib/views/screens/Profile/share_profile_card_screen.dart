@@ -5,13 +5,11 @@ import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/CustomBackButton/custom_back_button.dart';
 import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -20,6 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../Helpers/prefs_helper.dart';
 import '../../../Services/image_bb_service.dart';
 
+// ignore: must_be_immutable
 class ShareProfileCardScreen extends StatelessWidget {
   ShareProfileCardScreen({super.key});
 

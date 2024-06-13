@@ -18,6 +18,7 @@ import '../../widgets/customText/custom_text.dart';
 import '../../widgets/custom_text_field/custom_text_field.dart';
 import 'forgot_password_screen.dart';
 
+// ignore: must_be_immutable
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
