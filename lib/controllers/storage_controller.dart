@@ -23,7 +23,6 @@ import '../Models/contacts_model.dart';
 import '../utils/app_strings.dart';
 import 'package:path/path.dart' as p;
 
-
 class StorageController extends GetxController {
   @override
   void onInit() {
@@ -33,7 +32,6 @@ class StorageController extends GetxController {
     groupedContactsList = PrefsHelper.groupedContactsList;
     super.onInit();
   }
-
 
   ImageBBService imageBBService = ImageBBService();
 
@@ -74,7 +72,7 @@ class StorageController extends GetxController {
 
   ///<<<============ Clear all controller ======================>>>>
 
-  void clearControllers(){
+  void clearControllers() {
     imagePath = "";
     id = "";
     nameController.text = "";
@@ -140,27 +138,34 @@ class StorageController extends GetxController {
   }
 
   ///<<<===================== Reload Group Contacts =========================>>>
-  void reloadGroupContacts({required List<ContactsModel> groupContactList, required int index}) {
+  void reloadGroupContacts(
+      {required List<ContactsModel> groupContactList, required int index}) {
     // Iterate through the groupContactList to find matches in contacts
     for (var groupContact in groupContactList) {
       // Find the index of the contact in the contacts list
-      int contactIndex = contacts.indexWhere((contact) => contact.id == groupContact.id);
+      int contactIndex =
+          contacts.indexWhere((contact) => contact.id == groupContact.id);
       if (contactIndex != -1) {
         // Update the contact in groupedContactsList if a match is found
-        int listIndex = groupedContactsList[index].contactsList.indexWhere((contact) => contact.id == groupContact.id);
+        int listIndex = groupedContactsList[index]
+            .contactsList
+            .indexWhere((contact) => contact.id == groupContact.id);
         if (listIndex != -1) {
-          groupedContactsList[index].contactsList[listIndex] = contacts[contactIndex];
+          groupedContactsList[index].contactsList[listIndex] =
+              contacts[contactIndex];
           if (kDebugMode) {
             print("=============> Updated contact:");
-            print("Name: ${groupedContactsList[index].contactsList[listIndex].name}");
-            print("ID: ${groupedContactsList[index].contactsList[listIndex].id}");
+            print(
+                "Name: ${groupedContactsList[index].contactsList[listIndex].name}");
+            print(
+                "ID: ${groupedContactsList[index].contactsList[listIndex].id}");
           }
         }
       }
     }
-    groupedContactsList.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+    groupedContactsList
+        .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
   }
-
 
   ///<<<===================== Create group repo ==============================>>>
   List<ContactsModel> groupListAdded({required int index}) {
@@ -421,7 +426,8 @@ class StorageController extends GetxController {
       print("-=-=-=-=-=-=-=--=-=-${noteController.text}");
     }
     if (imagePath != null) {
-      final existingContactIndex = contacts.indexWhere((contact) => contact.id == id);
+      final existingContactIndex =
+          contacts.indexWhere((contact) => contact.id == id);
 
       if (existingContactIndex != -1) {
         // Update contact details
@@ -450,7 +456,8 @@ class StorageController extends GetxController {
   Future<void> deleteContact(String id) async {
     contacts.removeWhere((contact) => contact.id == id);
     update();
-    Get.snackbar("The contact is deleted".tr, "", duration: Duration(milliseconds: 800));
+    Get.snackbar("The contact is deleted".tr, "",
+        duration: Duration(milliseconds: 800));
     saveContacts();
     // Get.offAllNamed(AppRoutes.homeScreen);
   }
@@ -483,6 +490,7 @@ class StorageController extends GetxController {
       imagePath = pickedFile.path;
       cropImage(imgPath: imagePath!);
     }
+    update();
   }
 
   ///<<<---------------------- LinkedIn Image -------------------------------->>>
@@ -533,13 +541,17 @@ class StorageController extends GetxController {
     );
 
     if (croppedFile != null) {
-      await imageBBService.imageCompressor(imagePath: croppedFile.path).then((value) => imageBBService.uploadImage(imageFile: File(value))).then((value){
+      await imageBBService
+          .imageCompressor(imagePath: croppedFile.path)
+          .then((value) => imageBBService.uploadImage(imageFile: File(value)))
+          .then((value) {
         // capturedImageList.add(value);
         imagePath = value;
+        debugPrint(imagePath);
       });
       // imagePath = croppedFile.path;
       update();
-      Get.offAll(CreateOrEditCardScreen(screenTitle: appTitle));
+      Get.to(() => CreateOrEditCardScreen(screenTitle: appTitle));
     }
   }
 
@@ -586,8 +598,10 @@ class StorageController extends GetxController {
   Future<void> saveContactsInGoogle({String? accessToken}) async {
     try {
       // Encode contacts list to JSON
-      final contactsJson = json.encode(contacts.map((c) => c.toJson()).toList());
-      final groupContactsJson = json.encode(groupedContactsList.map((e) => e.toJson()).toList());
+      final contactsJson =
+          json.encode(contacts.map((c) => c.toJson()).toList());
+      final groupContactsJson =
+          json.encode(groupedContactsList.map((e) => e.toJson()).toList());
 
       // Decode the JSON strings to maps
       final contactsMap = json.decode(contactsJson);
@@ -746,14 +760,17 @@ class StorageController extends GetxController {
       if (downloadResponse.statusCode == 200) {
         // Process downloaded content
         final List<int> fileBytes = downloadResponse.bodyBytes;
-        final Map<String, dynamic> fileContent = jsonDecode(utf8.decode(fileBytes));
+        final Map<String, dynamic> fileContent =
+            jsonDecode(utf8.decode(fileBytes));
 
-        final List<ContactsModel> downloadedContacts = (fileContent['contacts'] as List)
-            .map((item) => ContactsModel.fromJson(item))
-            .toList();
-        final List<ContactGroup> downloadedGroupedContacts = (fileContent['groupedContacts'] as List)
-            .map((item) => ContactGroup.fromJson(item))
-            .toList();
+        final List<ContactsModel> downloadedContacts =
+            (fileContent['contacts'] as List)
+                .map((item) => ContactsModel.fromJson(item))
+                .toList();
+        final List<ContactGroup> downloadedGroupedContacts =
+            (fileContent['groupedContacts'] as List)
+                .map((item) => ContactGroup.fromJson(item))
+                .toList();
 
         for (var content in downloadedContacts) {
           if (!contacts.any((contact) => contact.id == content.id)) {
@@ -765,7 +782,8 @@ class StorageController extends GetxController {
           if (kDebugMode) {
             print("group.name::::: ${group.name}");
           }
-          if(!groupedContactsList.any((element) => element.name == group.name)){
+          if (!groupedContactsList
+              .any((element) => element.name == group.name)) {
             groupedContactsList.add(group);
           }
         }
@@ -847,5 +865,3 @@ class StorageController extends GetxController {
     super.dispose();
   }
 }
-
-
