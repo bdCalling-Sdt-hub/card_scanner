@@ -567,7 +567,6 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 8.w, vertical: 4.h),
-                                      height: 120.h,
                                       decoration: BoxDecoration(
                                           color: AppColors.green_600,
                                           borderRadius:
@@ -589,8 +588,9 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                               text: storageController
                                                   .formFieldsList[0],
                                               color: AppColors.green_900,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w500,
-                                              bottom: 10,
+                                              bottom: 16,
                                             ),
                                           ),
                                           Container(
@@ -610,7 +610,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                   .formFieldsList[1],
                                               color: AppColors.green_900,
                                               fontWeight: FontWeight.w500,
-                                              bottom: 10,
+                                              fontSize: 16,
+                                              bottom: 16,
                                             ),
                                           ),
                                           Container(
@@ -631,6 +632,8 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                   .formFieldsList[2],
                                               color: AppColors.green_900,
                                               fontWeight: FontWeight.w500,
+                                              fontSize: 16,
+                                              bottom: 16,
                                             ),
                                           ),
                                         ],

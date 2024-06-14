@@ -88,7 +88,7 @@ class StorageController extends GetxController {
     addressController.text = "";
     capturedImageList = [];
     noteController.text = "";
-    capturedImageList = [];
+    OCRCreateCardController.capturedImageList = [];
   }
 
   ///<<<=============== Sorting Repo ==================================>>>
