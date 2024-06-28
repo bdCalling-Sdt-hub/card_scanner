@@ -62,7 +62,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       AppStrings.cards.tr,
       AppStrings.contacts.tr,
       "",
-      AppStrings.enterprise.tr,
+      "Premium".tr,
       profileText
     ];
     return Container(

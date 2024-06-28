@@ -16,13 +16,15 @@ class ChangeLanguageScreen extends StatelessWidget {
   final List locale = [
     {"name": "en", "countryCode": "US", "locale": const Locale("en", "US")},
     {"name": "zh", "countryCode": "CN", "locale": const Locale("zh", "CN")},
-    {"name": "ja", "countryCode": "JP", "locale": const Locale("ja", "JP")}
+    {"name": "ja", "countryCode": "JP", "locale": const Locale("ja", "JP")},
+    {"name": "ko", "countryCode": "KR", "locale": const Locale("ko", "KR")},
   ];
 
   List languageList = [
     "English",
     "Chinese",
-    "Japanese"
+    "Japanese",
+    "Korean"
   ];
   RxInt selectedItem = 0.obs;
   updateLanguage(Locale locale) {
@@ -32,7 +34,10 @@ class ChangeLanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    selectedItem.value =  PrefsHelper.localizationCountryCode == "US" ? 0 :  PrefsHelper.localizationCountryCode == "CN"? 1 : 2 ;
+    selectedItem.value = PrefsHelper.localizationCountryCode == "US" ? 0 :
+    PrefsHelper.localizationCountryCode == "CN" ? 1 :
+    PrefsHelper.localizationCountryCode == "JP" ? 2 :
+    PrefsHelper.localizationCountryCode == "KR" ? 3 : -1;
     // selectedItem.value = languageList.indexOf(PrefsHelper.localizationCountryCode);
     // print("selectedItem.value ${selectedItem.value}");
     return Scaffold(
