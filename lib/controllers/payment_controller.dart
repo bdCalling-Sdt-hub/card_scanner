@@ -46,6 +46,7 @@ class PaymentController extends GetxController{
         if (kDebugMode) {
           print("onSuccess: ${params["message"]}");
         }
+        Navigator.pop(context);
       },
       onError: (error) {
         Get.snackbar("Something went wrong,".tr, "Try again!".tr);
