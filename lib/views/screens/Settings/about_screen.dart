@@ -20,7 +20,7 @@ class AboutScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,9 +45,9 @@ class AboutScreen extends StatelessWidget {
               Divider(),
 
               CustomText(
-                maxLines: 10,
-                text: "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner now for seamless connectivity.",),
-
+                maxLines: 20,
+                text: "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.".tr,
+              ),
               SizedBox(height: 20.h),
 
             ],

@@ -92,9 +92,9 @@ class AppStrings{
   static String export = "Export";
 
   ///<<<==================== Enterprise Screen Texts ========================>>>
-  static String nameCardScanner = "Name Card Scanner";
+  static String nameCardScanner = "NAME CARD SCANNER PREMIUM";
   static String saveTime = "Save Time";
-  static String saveAndSecurity = "Save And Security";
+  static String saveDataBackup = "Save Data Backup";
   static String valueForMoney = "Value For Money";
   static String alwaysAvailable = "Always Available";
   static String fastNAccurateDataEntry = "Fast & Accurate Data Entry";
@@ -107,12 +107,12 @@ class AppStrings{
   static String dataIntegration = "Data Integration With Other CRMS";
   static String integrateYourCustomerDataWithOtherCRM = "Integrate your customer data with other CRM applications you might be using: Salesforce, Sugar CRM, Google Contacts, Outlook Contacts or Excel.";
   static String allFeatures = "ALL FEATURES";
-  static String fastInputBusinessCards = "Fast input business cards, precise data for sales.";
-  static String exchangeEcardsSeamlessly = "Exchange e-cards seamlessly at meetings, seminars, trade shows.";
-  static String centralizeAllEmployeesBusinessCards = "Centralize all employees' business cards and customer data.";
+  static String fastInputBusinessCards = "Fast & accurate business card entry";
+  static String exchangeEcardsSeamlessly = "Exchange e-cards seamlessly at meetings, seminars, trade shows";
+  static String centralizeAllEmployeesBusinessCards = "Centralize all employees' business cards and customer data";
   static String setRoleForEachUser = "Set role for each user to access to the master database securely";
-  static String exportCustomerData = "Export customer data to Salesforce, SugarCRM, Outlook and Excel.";
-  static String dataIsAlwaysSafeAndSecure = "Data is always safe and secure behind our military-grade encryption.";
+  static String exportCustomerData = "Export customer data to Salesforce, SugarCRM, Outlook and Excel";
+  static String synchroniseData = "Synchronise data across devices";
   static String overTheBusinessesAreLove = "OVER 3000+ BUSINESSES ARE LOVING NAME CARD SCANNED BUSINESS";
 
   ///<<<=================== Card Sync =======================================>>>

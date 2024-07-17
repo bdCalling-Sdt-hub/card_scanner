@@ -299,6 +299,9 @@ class Locales extends Translations {
               "Internet connection has been restored",
           "Scan QR Code": "Scan QR Code",
           "Premium": "Premium",
+          "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.":
+              "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.",
+          "Download Name Card Scanner Now": "Download Name Card Scanner Now",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -309,8 +312,28 @@ class Locales extends Translations {
           "Card": "Card",
           "Contacts": "Contacts",
           "Enterprise": "Enterprise",
-        },
 
+          "NAME CARD SCANNER PREMIUM": "NAME CARD SCANNER PREMIUM",
+          "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.":
+              "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.",
+          "Current version is free to use.": "Current version is free to use.",
+          "Please complete survey below if there is demand for PREMIUM features:":
+              "Please complete survey below if there is demand for PREMIUM features:",
+          "Save Time": "Save Time",
+          "Save Data Backup": "Save Data Backup",
+          "Value For Money": "Value For Money",
+          "Always Available": "Always Available",
+          "Fast & accurate business card entry":
+              "Fast & accurate business card entry",
+          "Exchange e-cards seamlessly at meetings, seminars, trade shows":
+              "Exchange e-cards seamlessly at meetings, seminars, trade shows",
+          "Export customer data to Salesforce, SugarCRM, Outlook and Excel":
+              "Export customer data to Salesforce, SugarCRM, Outlook and Excel",
+          "Synchronise data across devices": "Synchronise data across devices",
+          "ALL FEATURES": "ALL FEATURES",
+          "Please tap on the given below link to get the FAQs:" : "Please tap on the given below link to get the FAQs:",
+
+        },
         'zh_CN': {
           "Scanning Solutions for Shopping Success": "购物成功的扫描解决方案",
           "Pioneering success through seamless scanning solutions for shoppers.":
@@ -580,6 +603,26 @@ class Locales extends Translations {
           "Internet connection has been restored": "互联网连接已恢复",
           "Scan QR Code": "扫描二维码",
           "Premium": "高级版",
+          "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.":
+              "在名片扫描仪，我们简化了商务网络。我们的应用程序利用先进的OCR技术轻松数字化联系人，确保准确性。与Google Drive无缝集成，实现安全存储和随时随地访问。自定义标签进行智能组织，轻松分享详细信息。即使离线，也能保持连接。您的隐私是我们的首要任务；我们采用强大的加密技术。拥抱无杂乱的数字化网络方式。立即下载名片扫描仪。",
+          "Download Name Card Scanner Now": "立即下载名片扫描仪",
+          "NAME CARD SCANNER PREMIUM": "名片扫描仪高级版",
+          "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.":
+              "名片扫描仪高效地数字化名片，简化了联系人管理和网络流程。",
+          "Current version is free to use.": "当前版本免费使用。",
+          "Please complete survey below if there is demand for PREMIUM features:":
+              "如果需要高级功能，请完成以下调查：",
+          "Save Time": "节省时间",
+          "Save Data Backup": "保存数据备份",
+          "Value For Money": "物有所值",
+          "Always Available": "随时可用",
+          "Fast & accurate business card entry": "快速且准确的名片录入",
+          "Exchange e-cards seamlessly at meetings, seminars, trade shows":
+              "在会议、研讨会、贸易展览会上无缝交换电子名片",
+          "Export customer data to Salesforce, SugarCRM, Outlook and Excel":
+              "将客户数据导出到Salesforce、SugarCRM、Outlook和Excel",
+          "Synchronise data across devices": "跨设备同步数据",
+          "ALL FEATURES": "所有功能",
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -590,8 +633,8 @@ class Locales extends Translations {
           "Card": "卡片",
           "Contacts": "联系人",
           "Enterprise": "企业",
+          "Please tap on the given below link to get the FAQs:": "请点击下面的链接获取常见问题："
         },
-
         'ja_JP': {
           "Scanning Solutions for Shopping Success":
               "ショッピング成功のためのスキャニングソリューション",
@@ -874,9 +917,25 @@ class Locales extends Translations {
               "現在オフラインです。インターネット接続を確認してください。",
           "Internet connection has been restored": "インターネット接続が復旧しました。",
           "Scan QR Code": "QRコードをスキャン",
-          "Premium": "プレミアム"
+          "Premium": "プレミアム",
+          "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.":
+              "名刺スキャナーでは、ビジネスネットワーキングを簡素化します。当社のアプリは高度なOCR技術を用いて連絡先を簡単にデジタル化し、正確性を確保します。Googleドライブとシームレスに統合し、どこでも安全に保管およびアクセスできます。タグをカスタマイズしてスマートに整理し、詳細を簡単に共有できます。オフラインでも接続を維持します。お客様のプライバシーは当社の最優先事項であり、強力な暗号化を採用しています。煩わしい紙の名刺をデジタルに切り替え、ネットワーキングを効率化しましょう。今すぐ名刺スキャナーをダウンロード。",
+          "Download Name Card Scanner Now": "今すぐ名刺スキャナーをダウンロード",
+          "NAME CARD SCANNER PREMIUM": "名刺スキャナープレミアム",
+          "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.": "名刺スキャナーは名刺を効率的にデジタル化し、連絡先管理とネットワーキングプロセスを合理化します。",
+          "Current version is free to use.": "現在のバージョンは無料で使用できます。",
+          "Please complete survey below if there is demand for PREMIUM features:": "プレミアム機能の需要がある場合は、以下のアンケートにご記入ください:",
+          "Save Time": "時間を節約",
+          "Save Data Backup": "データバックアップを保存",
+          "Value For Money": "コストパフォーマンス",
+          "Always Available": "常に利用可能",
+          "Fast & accurate business card entry": "迅速かつ正確な名刺入力",
+          "Exchange e-cards seamlessly at meetings, seminars, trade shows": "会議、セミナー、展示会でシームレスにeカードを交換",
+          "Export customer data to Salesforce, SugarCRM, Outlook and Excel": "顧客データをSalesforce、SugarCRM、Outlook、Excelにエクスポート",
+          "Synchronise data across devices": "デバイス間でデータを同期",
+          "ALL FEATURES": "すべての機能",
+          "Please tap on the given below link to get the FAQs:": "以下のリンクをタップしてFAQをご覧ください:"
         },
-
         'ko_KR': {
           "Scanning Solutions for Shopping Success": "쇼핑 성공을 위한 스캐닝 솔루션",
           "Pioneering success through seamless scanning solutions for shoppers.":
@@ -1158,7 +1217,24 @@ class Locales extends Translations {
           "Profile": "프로필",
           "Card": "카드",
           "Contacts": "연락처",
-          "Enterprise": "기업"
+          "Enterprise": "기업",
+          "At Name Card Scanner, we simplify business networking. Our app digitizes contacts effortlessly with advanced OCR tech, ensuring accuracy. Seamlessly integrate with Google Drive for secure storage and access anywhere. Customize tags for smart organization and share details with ease. Even offline, stay connected. Your privacy is our priority; we employ robust encryption. Embrace a clutter-free, digital approach to networking. Download Name Card Scanner Now.":
+              "명함 스캐너에서는 비즈니스 네트워킹을 단순화합니다. 우리의 앱은 고급 OCR 기술로 연락처를 쉽게 디지털화하여 정확성을 보장합니다. Google Drive와 원활하게 통합되어 안전한 저장 및 어디서나 접근이 가능합니다. 스마트한 조직을 위한 태그를 사용자 정의하고 세부 정보를 쉽게 공유할 수 있습니다. 오프라인에서도 연결 상태를 유지하세요. 귀하의 개인 정보는 우리의 최우선 과제입니다; 우리는 강력한 암호화를 사용합니다. 깔끔하고 디지털한 접근 방식으로 네트워킹을 받아들이세요. 지금 명함 스캐너를 다운로드하세요.",
+          "Download Name Card Scanner Now": "지금 명함 스캐너를 다운로드하세요",
+          "NAME CARD SCANNER PREMIUM": "NAME CARD SCANNER PREMIUM",
+          "The name card scanner efficiently digitizes business cards, streamlining contact management and networking processes.": "명함 스캐너는 명함을 효율적으로 디지털화하여 연락처 관리 및 네트워킹 프로세스를 간소화합니다.",
+          "Current version is free to use.": "현재 버전은 무료로 사용할 수 있습니다.",
+          "Please complete survey below if there is demand for PREMIUM features:": "프리미엄 기능에 대한 수요가 있다면 아래 설문조사를 완료해 주세요:",
+          "Save Time": "시간 절약",
+          "Save Data Backup": "데이터 백업 저장",
+          "Value For Money": "가성비",
+          "Always Available": "항상 사용 가능",
+          "Fast & accurate business card entry": "빠르고 정확한 명함 입력",
+          "Exchange e-cards seamlessly at meetings, seminars, trade shows": "회의, 세미나, 무역 박람회에서 e-카드를 원활하게 교환하세요",
+          "Export customer data to Salesforce, SugarCRM, Outlook and Excel": "고객 데이터를 Salesforce, SugarCRM, Outlook 및 Excel로 내보내기",
+          "Synchronise data across devices": "장치 간 데이터 동기화",
+          "ALL FEATURES": "모든 기능",
+          "Please tap on the given below link to get the FAQs:": "아래 링크를 눌러 FAQ를 확인하세요:"
         }
       };
 }

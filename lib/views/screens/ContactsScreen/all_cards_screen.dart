@@ -42,7 +42,7 @@ class AllCardsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 20,),
+                    SizedBox(width: 60,),
                     CustomText(
                       text: AppStrings.contacts.tr,
                       fontWeight: FontWeight.w500,
@@ -53,7 +53,7 @@ class AllCardsScreen extends StatelessWidget {
                         storageController.isTapped.value = !storageController.isTapped.value;
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                         decoration: BoxDecoration(
                           color: AppColors.black_500,
                           borderRadius: BorderRadius.circular(4),
@@ -61,6 +61,7 @@ class AllCardsScreen extends StatelessWidget {
                         child: Obx(() => Row(
                           children: [
                             CustomText(
+                              fontSize: 16,
                               text: "Sorts by".tr,
                               color: AppColors.green_500,
                             ),

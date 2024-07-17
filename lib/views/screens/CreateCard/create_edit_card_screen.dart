@@ -294,7 +294,7 @@ class CreateOrEditCardScreen extends StatelessWidget {
                                                             horizontal: 8.w,
                                                             vertical: 8.h),
                                                     height: 70,
-                                                    width: 70,
+                                                    width: 75,
                                                     decoration:
                                                         BoxDecoration(
                                                       borderRadius:

@@ -10,7 +10,7 @@ class CustomText extends StatelessWidget {
 
   const CustomText(
       {super.key,
-        this.maxLines = 1,
+        this.maxLines = 5,
         this.textAlign = TextAlign.center,
         this.left = 0,
         this.right = 0,
@@ -21,6 +21,7 @@ class CustomText extends StatelessWidget {
         this.color = AppColors.black_500,
         this.text = "",
         this.overflow,
+        this.textDecoration = TextDecoration.none
       });
 
   final double left;
@@ -34,6 +35,7 @@ class CustomText extends StatelessWidget {
   final TextAlign textAlign;
   final int  maxLines;
   final TextOverflow ?overflow;
+  final TextDecoration textDecoration;
 
 
   @override
@@ -50,6 +52,8 @@ class CustomText extends StatelessWidget {
           fontSize: fontSize.sp,
           fontWeight: fontWeight,
           color: color,
+          decoration: textDecoration,
+          decorationColor: Colors.blue
         ),
       ),
     );

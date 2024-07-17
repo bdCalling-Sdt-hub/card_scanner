@@ -13,9 +13,9 @@ class PaymentController extends GetxController{
   PaypalCheckoutView buildPaypalCheckout({required BuildContext context, required String amount, required String subscriptionName, required String currency}) {
     amountController.text = "";
     return PaypalCheckoutView(
-      sandboxMode: true,
-      clientId: "AX7OSyIbLHC48oMBuFctYsIwoFEK9XUeuSQqgE3Tk38QDf3X0JFgMXbLvofhf1TyYNoXNO_pwe25wVY0",
-      secretKey: "EMd9zW3gl-pV6Eit9b7NhkcK2c5roTQnzAeofpjpQte1Srj9SlttJvPqCsQjOlRbgt9rDgpcvcbBvTrK",
+      sandboxMode: false,
+      clientId: "AfbfMD1avsmsvyF5HxVgPZ2NdMIP7Wr4iuQjnALjXoRRXjapraHJrScKwQ3SG_IrGfCZyCvgMZdhHnyR",
+      secretKey: "EIkPn15bzfQDYJGEmDwSBD-rLuQ--E-iOaOy0m8QQ2VHaS-NJDmYTPwrcrrK9l-nRNF1hfLFCHACOxSH",
       transactions: [
         {
           "amount": {
