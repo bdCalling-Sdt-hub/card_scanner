@@ -91,7 +91,7 @@ class StorageController extends GetxController {
 
   ///<<<=============== Sorting Repo ==================================>>>
   RxBool isTapped = false.obs;
-  List sortsList = ["Sorts by person name".tr, "Sorts by company name".tr];
+  List sortsList = ["Sort by person name".tr, "Sort by company name".tr];
 
   sortBy({required int index}) {
     if (index == 0) {

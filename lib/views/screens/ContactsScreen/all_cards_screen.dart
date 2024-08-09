@@ -53,7 +53,7 @@ class AllCardsScreen extends StatelessWidget {
                         storageController.isTapped.value = !storageController.isTapped.value;
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
                         decoration: BoxDecoration(
                           color: AppColors.black_500,
                           borderRadius: BorderRadius.circular(4),
@@ -62,7 +62,7 @@ class AllCardsScreen extends StatelessWidget {
                           children: [
                             CustomText(
                               fontSize: 16,
-                              text: "Sorts by".tr,
+                              text: "Sort by".tr,
                               color: AppColors.green_500,
                             ),
                             storageController.isTapped.value? Icon(Icons.keyboard_arrow_down, color: AppColors.green_500,) : Icon(Icons.arrow_forward_ios, color: AppColors.green_500, size: 14,)

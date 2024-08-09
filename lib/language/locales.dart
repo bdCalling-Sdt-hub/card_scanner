@@ -270,9 +270,9 @@ class Locales extends Translations {
           "Save Group": "Save Group",
           "Scanned Images": "Scanned Images",
           "No image found": "No image found",
-          "Sorts by": "Sorts by",
-          "Sorts by person name": "Sorts by person name",
-          "Sorts by company name": "Sorts by company name",
+          "Sort by": "Sort by",
+          "Sort by person name": "Sort by person name",
+          "Sort by company name": "Sort by company name",
           "Check your internet connection & Try again!":
               "Check your internet connection & Try again!",
           'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format':
@@ -576,9 +576,9 @@ class Locales extends Translations {
           "Save Group": "保存组",
           "Scanned Images": "扫描的图像",
           "No image found": "未找到图像",
-          "Sorts by": "排序方式",
-          "Sorts by person name": "按人名排序",
-          "Sorts by company name": "按公司名排序",
+          "Sort by": "排序方式",
+          "Sort by person name": "按人名排序",
+          "Sort by company name": "按公司名排序",
           "Check your internet connection & Try again!": "检查你的互联网连接并重试！",
           'I want the above texts like this structure, {"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format':
               '我希望以上文本像这种结构一样，{"imageUrl": "图片网址", "name": "姓名", "designation": "职称", "company_name": "公司名称", "email": "电子邮件地址", "mobile_phone": "手机号码", "land_phone": "座机号码", "fax": "传真号码", "website": "网站地址", "address": "地址"}，并且总是以相同的格式回复',
@@ -883,9 +883,9 @@ class Locales extends Translations {
           "Save Group": "グループを保存",
           "Scanned Images": "スキャンされた画像",
           "No image found": "画像が見つかりません",
-          "Sorts by": "並び替え",
-          "Sorts by person name": "名前で並び替え",
-          "Sorts by company name": "会社名で並び替え",
+          "Sort by": "並び替え",
+          "Sort by person name": "名前で並び替え",
+          "Sort by company name": "会社名で並び替え",
           "Check your internet connection & Try again!":
               "インターネット接続を確認して、もう一度お試しください！",
           "I want the above texts like this structure,{'imageUrl': 'imageUrl', 'name': 'name', 'designation': 'designation', 'company_name': 'company name', 'email': 'email address', 'mobile_phone': 'mobile phone number', 'land_phone': 'land phone number', 'fax': 'fax number', 'website': 'web address', 'address': 'location address'}, always give response as like this same format":
@@ -1183,9 +1183,9 @@ class Locales extends Translations {
           "Save Group": "그룹 저장",
           "Scanned Images": "스캔된 이미지",
           "No image found": "이미지를 찾을 수 없음",
-          "Sorts by": "정렬 기준",
-          "Sorts by person name": "이름으로 정렬",
-          "Sorts by company name": "회사 이름으로 정렬",
+          "Sort by": "정렬 기준",
+          "Sort by person name": "이름으로 정렬",
+          "Sort by company name": "회사 이름으로 정렬",
           "Check your internet connection & Try again!":
               "인터넷 연결을 확인하고 다시 시도하세요!",
           'I want the above texts like this structure,{"imageUrl": "imageUrl", "name": "name", "designation": "designation", "company_name": "company name", "email": "email address", "mobile_phone": "mobile phone number", "land_phone": "land phone number", "fax": "fax number", "website": "web address", "address": "location address"}, always give response as like this same format':

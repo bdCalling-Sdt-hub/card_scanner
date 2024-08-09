@@ -146,7 +146,8 @@ class SelectedGroupCards extends StatelessWidget {
                                       SizedBox(height: 8.h,),
                                       CustomText(
                                         textAlign: TextAlign.left,
-                                        maxLines: 2,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         text: contactsList[index].name,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,
@@ -154,13 +155,15 @@ class SelectedGroupCards extends StatelessWidget {
                                       SizedBox(height: 4.h,),
                                       CustomText(
                                         textAlign: TextAlign.left,
-                                        maxLines: 3,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         text: contactsList[index].designation,
                                         fontSize: 12,
                                       ),
                                       CustomText(
                                         textAlign: TextAlign.left,
-                                        maxLines: 3,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         text: contactsList[index].companyName,
                                         fontSize: 12,
                                       ),
