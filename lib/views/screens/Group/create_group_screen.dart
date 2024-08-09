@@ -173,6 +173,7 @@ class CreateGroupScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: CustomText(
+                                          maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           text: storageController
                                               .selectedGroupContacts[
@@ -185,6 +186,7 @@ class CreateGroupScreen extends StatelessWidget {
                                       SizedBox(height: 4,),
                                       Expanded(
                                         child: CustomText(
+                                          maxLines: 1,
                                           textAlign: TextAlign.left,
                                           overflow: TextOverflow.ellipsis,
                                           text: storageController
@@ -196,6 +198,7 @@ class CreateGroupScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: CustomText(
+                                          maxLines: 1,
                                           textAlign: TextAlign.left,
                                           overflow: TextOverflow.ellipsis,
                                           text: storageController

@@ -3,17 +3,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_currency_picker/flutter_currency_picker.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController{
   TextEditingController amountController = TextEditingController();
+  Currency? currency;
+  setCurrency({required value}){
+    currency = value;
+    update();
+  }
 
 
   PaypalCheckoutView buildPaypalCheckout({required BuildContext context, required String amount, required String subscriptionName, required String currency}) {
+    if (kDebugMode) {
+      print("Currency =============>>>: $currency");
+    }
     amountController.text = "";
     return PaypalCheckoutView(
-      sandboxMode: false,
+      sandboxMode: true,
       clientId: "AfbfMD1avsmsvyF5HxVgPZ2NdMIP7Wr4iuQjnALjXoRRXjapraHJrScKwQ3SG_IrGfCZyCvgMZdhHnyR",
       secretKey: "EIkPn15bzfQDYJGEmDwSBD-rLuQ--E-iOaOy0m8QQ2VHaS-NJDmYTPwrcrrK9l-nRNF1hfLFCHACOxSH",
       transactions: [
@@ -44,14 +53,14 @@ class PaymentController extends GetxController{
       onSuccess: (Map params) async {
         Get.snackbar("Payment successful".tr, "");
         if (kDebugMode) {
-          print("onSuccess: ${params["message"]}");
+          print("onSuccess =============>>>: ${params["message"]}");
         }
         Navigator.pop(context);
       },
       onError: (error) {
-        Get.snackbar("Something went wrong,".tr, "Try again!".tr);
+        Get.snackbar("$error. Something went wrong,".tr, "Try again!".tr);
         if (kDebugMode) {
-          print("onError: $error");
+          print("onError =============>>>: $error");
         }
         Navigator.pop(context);
       },

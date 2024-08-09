@@ -177,6 +177,7 @@ class AllCardsScreen extends StatelessWidget {
                                     children: [
                                       SizedBox(height: 8.h,),
                                       CustomText(
+                                        maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.name,
                                         textAlign: TextAlign.start,
@@ -185,12 +186,15 @@ class AllCardsScreen extends StatelessWidget {
                                       ),
                                       SizedBox(height: 4.h,),
                                       CustomText(
+                                        maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.start,
                                         text: contacts.designation,
                                         fontSize: 14,
                                       ),
                                       CustomText(
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         text: contacts.companyName,
                                         fontSize: 14,
                                         textAlign: TextAlign.start,

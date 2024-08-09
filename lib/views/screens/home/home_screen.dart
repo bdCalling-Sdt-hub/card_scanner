@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {"icon": AppIcons.excelIcon, "service": AppStrings.cardExport},
     {"icon": AppIcons.shareCard, "service": AppStrings.shareCard},
   ];
-  Currency? currency;
+
 
   String link = "https://cf88BYf=name-card-scanner";
 
@@ -651,28 +651,30 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 12.h,
             ),
-            CurrencySelector(
-              indent: EdgeInsets.only(left: 8.w),
-              value: currency?.code,
-              hintText: 'Currency Type (Code)'.tr,
-              fieldBackground:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
-              update: (value) => setState(() => currency = value),
-            ),
+            GetBuilder<PaymentController>(builder: (controller) {
+              return CurrencySelector(
+                indent: EdgeInsets.only(left: 8.w),
+                value: controller.currency?.code,
+                hintText: 'Currency Type (Code)'.tr,
+                fieldBackground:
+                Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                update: (value) => controller.setCurrency(value: value),
+              );
+            },),
             SizedBox(
               height: 24.h,
             ),
             CustomElevatedButton(
               onTap: () {
-                if (currency?.code != null && currency!.code.isNotEmpty) {
+                if (paymentController.currency?.code != null && paymentController.currency!.code.isNotEmpty) {
                   if (kDebugMode) {
-                    print("Currency Code ${currency!.code}");
+                    print("Currency Code ${paymentController.currency!.code}");
                   }
                   Get.to(paymentController.buildPaypalCheckout(
                       subscriptionName: "Donation".tr,
                       context: context,
                       amount: paymentController.amountController.text,
-                      currency: currency!.code));
+                      currency: paymentController.currency!.code));
                 } else {
                   Get.snackbar("Please, must select a currency".tr, "");
                 }

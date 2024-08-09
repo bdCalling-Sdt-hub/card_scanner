@@ -118,6 +118,7 @@ class AllCardsExportScreen extends StatelessWidget {
                                     children: [
                                       SizedBox(height: 8.h,),
                                       CustomText(
+                                        maxLines: 1,
                                         textAlign: TextAlign.left,
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.name,
@@ -126,12 +127,14 @@ class AllCardsExportScreen extends StatelessWidget {
                                       ),
                                       SizedBox(height: 4.h,),
                                       CustomText(
+                                        maxLines: 1,
                                         textAlign: TextAlign.left,
                                         overflow: TextOverflow.ellipsis,
                                         text: contacts.designation,
                                         fontSize: 14,
                                       ),
                                       CustomText(
+                                        maxLines: 1,
                                         textAlign: TextAlign.left,
                                         text: contacts.companyName,
                                         fontSize: 14,
