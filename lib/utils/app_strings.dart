@@ -201,6 +201,10 @@ class AppStrings{
   static String signedIn = "signedIn";
   static String getService = "You will get service after developing phase";
 
+  static String deleteAccount = "Delete Account";
+  static String areYouSureToDeleteAccount = "Are you sure to delete account?";
+  static String ifYouDeleteAccount = "If you delete the account, you will no longer be able to see your profile.";
+
   ///<<<===================== Profile Details Texts =========================>>>
   static String eCard = "E-Card";
   static String shareSaveCard = "Share & Save Card";

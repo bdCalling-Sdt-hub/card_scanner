@@ -22,9 +22,10 @@ class PaymentController extends GetxController{
     }
     amountController.text = "";
     return PaypalCheckoutView(
-      sandboxMode: true,
-      clientId: "AfbfMD1avsmsvyF5HxVgPZ2NdMIP7Wr4iuQjnALjXoRRXjapraHJrScKwQ3SG_IrGfCZyCvgMZdhHnyR",
-      secretKey: "EIkPn15bzfQDYJGEmDwSBD-rLuQ--E-iOaOy0m8QQ2VHaS-NJDmYTPwrcrrK9l-nRNF1hfLFCHACOxSH",
+      sandboxMode: false,
+      clientId: "AcEibMKTu6hnXcLKndc3EfmJk6z-WG9jLSabAsHyCmvKd_Q70XPSGkfVhM5Fhlu0rBkhBEzqOPAJO6VX",
+      secretKey: "ECgmzJKxWfBNQeVf8MKWmacOkXWxdau8YN2o9fVzKHt8HCe_OtBOBev7v3It6Sy6rgD97y70gYKiJz8Y",
+
       transactions: [
         {
           "amount": {

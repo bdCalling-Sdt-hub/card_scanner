@@ -333,7 +333,22 @@ class Locales extends Translations {
           "ALL FEATURES": "ALL FEATURES",
           "Please tap on the given below link to get the FAQs:" : "Please tap on the given below link to get the FAQs:",
 
+          "Delete Account" : "Delete Account",
+          "Are you sure to delete account?" : "Are you sure to delete account?",
+          "If you delete the account, you will no longer be able to see your profile." : "If you delete the account, you will no longer be able to see your profile.",
+
+          "Account Deleted" : "Account Deleted",
+          "Your account has been successfully deleted." : "Your account has been successfully deleted.",
+          "No user is currently signed in." : "No user is currently signed in.",
+          "Re authentication required" : "Re authentication required",
+          "Please sign in again and try deleting the account." : "Please sign in again and try deleting the account.",
+          "Something went wrong, Try again!" : "Something went wrong, Try again!",
+          "Error" : "Error",
+          "Press 'Continue' button first to save the information" : "Press 'Continue' button first to save the information",
+          "Alert" : "Alert"
+
         },
+
         'zh_CN': {
           "Scanning Solutions for Shopping Success": "购物成功的扫描解决方案",
           "Pioneering success through seamless scanning solutions for shoppers.":
@@ -623,6 +638,20 @@ class Locales extends Translations {
               "将客户数据导出到Salesforce、SugarCRM、Outlook和Excel",
           "Synchronise data across devices": "跨设备同步数据",
           "ALL FEATURES": "所有功能",
+          "Delete Account": "删除账户",
+          "Are you sure to delete account?": "您确定要删除账户吗？",
+          "If you delete the account, you will no longer be able to see your profile.": "如果您删除账户，您将无法再查看您的个人资料。",
+
+          "Account Deleted": "账户已删除",
+          "Your account has been successfully deleted.": "您的账户已成功删除。",
+          "No user is currently signed in.": "当前没有用户登录。",
+          "Re authentication required": "需要重新认证",
+          "Please sign in again and try deleting the account.": "请重新登录并尝试删除账户。",
+          "Something went wrong, Try again!": "出了些问题，请再试一次！",
+          "Error": "错误",
+          "Press 'Continue' button first to save the information": "请先按“继续”按钮保存信息",
+          "Alert": "警告",
+
 
           ///<<<=================== Bottom Nav Bar Texts ========================>>>
 
@@ -635,6 +664,7 @@ class Locales extends Translations {
           "Enterprise": "企业",
           "Please tap on the given below link to get the FAQs:": "请点击下面的链接获取常见问题："
         },
+
         'ja_JP': {
           "Scanning Solutions for Shopping Success":
               "ショッピング成功のためのスキャニングソリューション",
@@ -934,8 +964,25 @@ class Locales extends Translations {
           "Export customer data to Salesforce, SugarCRM, Outlook and Excel": "顧客データをSalesforce、SugarCRM、Outlook、Excelにエクスポート",
           "Synchronise data across devices": "デバイス間でデータを同期",
           "ALL FEATURES": "すべての機能",
-          "Please tap on the given below link to get the FAQs:": "以下のリンクをタップしてFAQをご覧ください:"
+          "Please tap on the given below link to get the FAQs:": "以下のリンクをタップしてFAQをご覧ください:",
+
+          "Delete Account": "アカウントを削除",
+          "Are you sure to delete account?": "アカウントを削除してもよろしいですか？",
+          "If you delete the account, you will no longer be able to see your profile.": "アカウントを削除すると、プロフィールが見られなくなります。",
+
+          "Account Deleted": "アカウントが削除されました",
+          "Your account has been successfully deleted.": "アカウントが正常に削除されました。",
+          "No user is currently signed in.": "現在、サインインしているユーザーはいません。",
+          "Re authentication required": "再認証が必要です",
+          "Please sign in again and try deleting the account.":
+              "もう一度サインインしてからアカウント削除をお試しください。",
+          "Something went wrong, Try again!": "問題が発生しました。もう一度お試しください！",
+          "Error": "エラー",
+          "Press 'Continue' button first to save the information": "情報を保存するには、まず「続ける」ボタンを押してください",
+          "Alert": "警告"
+
         },
+
         'ko_KR': {
           "Scanning Solutions for Shopping Success": "쇼핑 성공을 위한 스캐닝 솔루션",
           "Pioneering success through seamless scanning solutions for shoppers.":
@@ -1234,7 +1281,22 @@ class Locales extends Translations {
           "Export customer data to Salesforce, SugarCRM, Outlook and Excel": "고객 데이터를 Salesforce, SugarCRM, Outlook 및 Excel로 내보내기",
           "Synchronise data across devices": "장치 간 데이터 동기화",
           "ALL FEATURES": "모든 기능",
-          "Please tap on the given below link to get the FAQs:": "아래 링크를 눌러 FAQ를 확인하세요:"
+          "Please tap on the given below link to get the FAQs:": "아래 링크를 눌러 FAQ를 확인하세요:",
+
+          "Delete Account": "계정 삭제",
+          "Are you sure to delete account?": "계정을 삭제하시겠습니까?",
+          "If you delete the account, you will no longer be able to see your profile.": "계정을 삭제하면 더 이상 프로필을 볼 수 없습니다.",
+
+          "Account Deleted": "계정이 삭제되었습니다",
+          "Your account has been successfully deleted.": "계정이 성공적으로 삭제되었습니다.",
+          "No user is currently signed in.": "현재 로그인한 사용자가 없습니다.",
+          "Re authentication required": "재인증이 필요합니다",
+          "Please sign in again and try deleting the account.":
+              "다시 로그인한 후 계정을 삭제해 주세요.",
+          "Something went wrong, Try again!": "문제가 발생했습니다. 다시 시도해 주세요!",
+          "Error": "오류",
+          "Press 'Continue' button first to save the information": "정보를 저장하려면 먼저 '계속' 버튼을 누르세요",
+          "Alert": "경고"
         }
       };
 }

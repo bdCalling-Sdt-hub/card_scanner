@@ -177,6 +177,7 @@ class CardHolder extends StatelessWidget {
                                                   ),
                                                   Expanded(
                                                     child: CustomText(
+                                                      textAlign: TextAlign.left,
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       text: storageController

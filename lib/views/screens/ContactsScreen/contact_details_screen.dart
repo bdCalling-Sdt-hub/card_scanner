@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/controllers/storage_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
@@ -28,6 +30,8 @@ class ContactDetailsScreen extends StatelessWidget {
   RxBool hasNoteData = false.obs;
   RxBool isNoteTapped = false.obs;
 
+  static List filteredContacts = [];
+
 
   void makePhoneCall(String phoneNumber) async {
     final Uri launchUri = Uri(
@@ -46,10 +50,6 @@ class ContactDetailsScreen extends StatelessWidget {
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: emailTo,
-      // query: encodeQueryParameters(<String, String>{
-      //   'subject': 'Example Subject & Symbols are allowed!',
-      //   'body': 'Hello, this is a test email.'
-      // }),
     );
     if (await canLaunchUrl(emailUri)) {
       await launchUrl(emailUri);
@@ -88,11 +88,13 @@ class ContactDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var contactDetails = phoneStorageController.contacts[index];
+    var contactDetails = filteredContacts.isNotEmpty? filteredContacts[index] : phoneStorageController.contacts[index];
     StorageController.noteController.text = contactDetails.note;
-    if (kDebugMode) {
-      print("-----------------${contactDetails.note}");
-    }
+
+    log("-----------------$index");
+    log("-----------------${contactDetails.note}");
+    log("-----------------${contactDetails.name}");
+
     checkNoteData(noteData: contactDetails.note);
 
     return Scaffold(
@@ -109,6 +111,7 @@ class ContactDetailsScreen extends StatelessWidget {
                     CustomBackButton(
                         icon: Icons.arrow_back,
                         onTap: () {
+                          filteredContacts.clear();
                           Get.back();
                         }),
                     Align(

@@ -197,27 +197,6 @@ class EditProfileScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              // SizedBox(width: 8,),
-                                              // InkWell(
-                                              //   onTap: () {
-                                              //
-                                              //   },
-                                              //   child: Container(
-                                              //     height: 70,
-                                              //     width: 75,
-                                              //     decoration: BoxDecoration(
-                                              //       borderRadius: BorderRadius.circular(8),
-                                              //       color: AppColors.green_600,
-                                              //     ),
-                                              //     child: Column(
-                                              //       mainAxisAlignment: MainAxisAlignment.center,
-                                              //       children: [
-                                              //         SvgPicture.asset(AppIcons.linkedinIcon, height: 20, width: 20, color: AppColors.black_500, ),
-                                              //         CustomText(text: "LinkedIn", fontSize: 16,)
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
                                             ],
                                           ),
                                         ),
@@ -487,6 +466,7 @@ class EditProfileScreen extends StatelessWidget {
                                 // Get.offAllNamed(AppRoutes.profileScreen);
                                 profileController.isStyle.value = true;
                                 profileController.isInformation.value = false;
+                                EditCardStyle.isInformationFilled = true;
                               },
                               width: Get.width,
                               height: 42.h,
@@ -502,7 +482,6 @@ class EditProfileScreen extends StatelessWidget {
                 ///<<<=================== Card Style =========================>>>
                 if(profileController.isStyle.value)
                   EditCardStyle(),
-
               ],
             ),
           ),

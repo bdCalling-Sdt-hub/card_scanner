@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/controllers/payment_controller.dart';
 import 'package:card_scanner/core/routes/app_routes.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/contact_details_screen.dart';
 import 'package:card_scanner/views/screens/CreateCard/create_edit_card_screen.dart';
 import 'package:card_scanner/views/screens/home/InnerWidgets/ocrimage_dialog.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
@@ -51,13 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
   StorageController storageController = Get.put(StorageController());
   OcrImageDialog ocrImageDialog = OcrImageDialog();
 
-  List filteredContacts = [];
+
 
   TextEditingController searchController = TextEditingController();
 
   void filterContacts(String query) {
     setState(() {
-      filteredContacts = storageController.contacts
+      ContactDetailsScreen.filteredContacts = storageController.contacts
           .where((contact) =>
               contact.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
@@ -176,29 +179,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      // child: Column(
-                      //   children: [
-                      //     Center(
-                      //         child: SvgPicture.asset(AppIcons.donateIcon, height: 30, width: 30,)),
-                      //     // CustomText(text: "Donate", fontSize: 12, color: AppColors.green_500,),
-                      //   ],
-                      // ),
                     ),
                   ),
                 ],
               ),
 
-              searchController.text.isNotEmpty && filteredContacts.isNotEmpty
+              searchController.text.isNotEmpty && ContactDetailsScreen.filteredContacts.isNotEmpty
                   ? Expanded(
                       child: ListView.builder(
-                        itemCount: filteredContacts.length,
+                        itemCount: ContactDetailsScreen.filteredContacts.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
                             contentPadding: EdgeInsets.only(left: 42.w),
-                            title: Text(filteredContacts[index].name),
+                            title: Text(ContactDetailsScreen.filteredContacts[index].name),
                             onTap: () {
-                              Get.toNamed(AppRoutes.contactDetailsScreen,
-                                  arguments: {"index": index});
+                              log("Index: $index");
+                              Get.toNamed(AppRoutes.contactDetailsScreen, arguments: {"index": index});
                             },
                           );
                         },
@@ -643,6 +639,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             TextFormField(
               controller: paymentController.amountController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 8.w),
                   labelText: AppStrings.amount.tr,
@@ -736,430 +733,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// class CardHolder extends StatelessWidget {
-//   const CardHolder({
-//     super.key,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetBuilder<StorageController>(
-//       builder:(storageController) {
-//         return Container(
-//           width: Get.width,
-//           decoration: BoxDecoration(
-//             color: AppColors.green_50,
-//             borderRadius: BorderRadius.circular(8),
-//           ),
-//           child: storageController.contacts.isNotEmpty
-//               ? Column(
-//             children: [
-//               Padding(
-//                 padding: EdgeInsets.symmetric(
-//                     horizontal: 12.w, vertical: 16.h),
-//                 child: Row(
-//                   mainAxisAlignment:
-//                   MainAxisAlignment.start,
-//                   children: [
-//                     CustomText(
-//                       text: AppStrings.cards,
-//                       fontWeight: FontWeight.w500,
-//                       color: AppColors.black_500,
-//                       fontSize: 16,
-//                     ),
-//                     CustomText(
-//                       text: "(${storageController.contacts.length})",
-//                     ),
-//                     const Spacer(),
-//
-//                     ///<<<==================== Group Text =======================>>>
-//
-//                     InkWell(
-//                       onTap: (){
-//                         Get.toNamed(AppRoutes.groupScreen);
-//                       },
-//                       child: Row(
-//                         children: [
-//                           SvgPicture.asset(
-//                               AppIcons.groupIcon),
-//                           SizedBox(width: 4.w),
-//                           CustomText(
-//                             text: AppStrings.group,
-//                           ),
-//                           SizedBox(width: 8.w),
-//                         ],
-//                       ),
-//                     ),
-//                     SvgPicture.asset(AppIcons.lineIcon),
-//
-//                     ///<<<=============== Manage Text ===========================>>>
-//
-//                     InkWell(
-//                       onTap: () {
-//                         showModalBottomSheet(
-//                           context: context,
-//                           builder: (context) {
-//                             return ManageModalSheet();
-//                           },
-//                         );
-//                       },
-//                       child: Row(
-//                         children: [
-//                           SizedBox(width: 8.w),
-//                           SvgPicture.asset(
-//                               AppIcons.manageIcon),
-//                           SizedBox(width: 4.w),
-//                           CustomText(
-//                             text: AppStrings.manage,
-//                           )
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               Padding(
-//                 padding: EdgeInsets.symmetric(
-//                     horizontal: 16.w, vertical: 8.h),
-//                 child: SizedBox(
-//                   height: (150 * storageController.contacts.length).toDouble(),
-//                   child: ListView.builder(
-//                     physics: const NeverScrollableScrollPhysics(),
-//                     itemCount: storageController.contacts.length,
-//                     itemBuilder: (context, index) {
-//                       return GetBuilder<StorageController>(builder: (controller) {
-//                         return Padding(
-//                           padding: EdgeInsets.symmetric(vertical: 4.w),
-//                           child: Container(
-//                             width: Get.width,
-//                             decoration: BoxDecoration(
-//                               borderRadius:
-//                               BorderRadius.circular(4),
-//                               color: AppColors.green_300,
-//                             ),
-//                             child: Padding(
-//                               padding: EdgeInsets.symmetric(
-//                                 horizontal: 8.w,
-//                               ),
-//                               child: Row(
-//                                 children: [
-//                                   Container(
-//                                       margin: EdgeInsets.symmetric(vertical: 8.h),
-//                                       height: 100.h,
-//                                       width: 120.w,
-//                                       child: Image.file(File(storageController.contacts[index].imageUrl), fit: BoxFit.cover,)),
-//                                   SizedBox(
-//                                     width: 8.w,
-//                                   ),
-//                                   Expanded(
-//                                     child: CustomText(
-//                                       overflow: TextOverflow.ellipsis,
-//                                       text: storageController.contacts[index].name,
-//                                       color: AppColors.black_500,
-//                                       fontSize: 16,
-//                                       fontWeight: FontWeight.w500,
-//                                     ),
-//                                   ),
-//                                   InkWell(
-//                                     onTap: () {
-//
-//                                       ///<<<================== Bottom Modal Sheet =========================>>>
-//
-//                                       showModalBottomSheet(
-//                                         context: context,
-//                                         builder: (context) {
-//                                           return Container(
-//                                             height: 250,
-//                                             width: Get.width,
-//                                             decoration: BoxDecoration(
-//                                                 borderRadius: BorderRadius.only(
-//                                                   topLeft: Radius.circular(8.r),
-//                                                   topRight: Radius.circular(8.r),
-//                                                 ),
-//                                                 color: AppColors.green_50),
-//                                             child: Padding(
-//                                               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-//                                               child: Column(
-//                                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                                 children: [
-//                                                   Align(
-//                                                     alignment: Alignment.centerRight,
-//                                                     child: GestureDetector(
-//                                                       onTap: () {
-//                                                         Get.back();
-//                                                       },
-//                                                       child: CustomBackButton(
-//                                                         onTap: (){
-//                                                           Get.back();
-//                                                         },
-//                                                         radius: 100,
-//                                                       ),
-//                                                     ),
-//                                                   ),
-//                                                   CustomText(
-//                                                     text: AppStrings.moreOptions,
-//                                                     fontWeight: FontWeight.w500,
-//                                                     fontSize: 24,
-//                                                   ),
-//                                                   SizedBox(
-//                                                     height: 20.h,
-//                                                   ),
-//
-//                                                   ///<<<=============== Share Business Card ========================>>>
-//
-//                                                   InkWell(
-//                                                     onTap: () {
-//                                                       showDialog(
-//                                                         context: context,
-//                                                         builder: (context) {
-//                                                           return AlertDialog(
-//                                                             surfaceTintColor:  AppColors.green_900,
-//                                                             contentPadding: EdgeInsets.zero,
-//                                                             shape: RoundedRectangleBorder(
-//                                                                 borderRadius: BorderRadius.circular(8)),
-//                                                             content: Container(
-//                                                               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-//                                                               width: Get.width,
-//                                                               height: 200.h,
-//                                                               child: Column(
-//                                                                 children: [
-//                                                                   Align(
-//                                                                     alignment: Alignment.centerRight,
-//                                                                     child: CustomBackButton(
-//                                                                       onTap: (){
-//                                                                         Get.back();
-//                                                                       },
-//                                                                       radius: 100.r,
-//                                                                     ),
-//                                                                   ),
-//                                                                   CustomText(
-//                                                                     text: AppStrings.shareWith,
-//                                                                     fontSize: 20,
-//                                                                     fontWeight: FontWeight.w500,
-//                                                                   ),
-//                                                                   SizedBox(height: 40.h,),
-//                                                                   Padding(
-//                                                                     padding: EdgeInsets.symmetric(horizontal: 20.w),
-//                                                                     child: Row(
-//                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                                                                       children: [
-//                                                                         Container(
-//                                                                           height: 40.h,
-//                                                                           width: 40.w,
-//                                                                           decoration: BoxDecoration(
-//                                                                               color: AppColors.black_500,
-//                                                                               borderRadius: BorderRadius.circular(12.r)
-//                                                                           ),
-//                                                                           child: Center(child: SvgPicture.asset(AppIcons.linkedinIcon)),
-//                                                                         ),
-//                                                                         Container(
-//                                                                           height: 40.h,
-//                                                                           width: 40.w,
-//                                                                           decoration: BoxDecoration(
-//                                                                               color: AppColors.black_500,
-//                                                                               borderRadius: BorderRadius.circular(12.r)
-//                                                                           ),
-//                                                                           child: Center(child: SvgPicture.asset(AppIcons.fbIcon)),
-//                                                                         ),
-//                                                                         Container(
-//                                                                           height: 40.h,
-//                                                                           width: 40.w,
-//                                                                           decoration: BoxDecoration(
-//                                                                               color: AppColors.black_500,
-//                                                                               borderRadius: BorderRadius.circular(12.r)
-//                                                                           ),
-//                                                                           child: Center(child: SvgPicture.asset(AppIcons.emailIcon, color: AppColors.green_50,)),
-//                                                                         )
-//                                                                       ],
-//                                                                     ),
-//                                                                   )
-//                                                                 ],
-//                                                               ),
-//                                                             ),
-//                                                           );
-//                                                         },
-//                                                       );
-//                                                     },
-//                                                     child: Row(
-//                                                       children: [
-//                                                         Icon(Icons.share),
-//                                                         SizedBox(width: 8.w),
-//                                                         CustomText(
-//                                                           text: AppStrings.shareBusinessCard,
-//                                                           fontSize: 16,
-//                                                         )
-//                                                       ],
-//                                                     ),
-//                                                   ),
-//                                                   Divider(
-//                                                     endIndent: 120,
-//                                                     color: AppColors.black_400,
-//                                                   ),
-//                                                   SizedBox(
-//                                                     height: 8.h,
-//                                                   ),
-//
-//                                                   ///<<<==================== Remove AlertDialog Open ====================>>>
-//                                                   InkWell(
-//                                                     onTap: () {
-//                                                       showDialog(
-//                                                         context: context,
-//                                                         builder: (context) {
-//                                                           return AlertDialog(
-//                                                             surfaceTintColor:  AppColors.green_900,
-//                                                             contentPadding: EdgeInsets.zero,
-//                                                             shape: RoundedRectangleBorder(
-//                                                                 borderRadius: BorderRadius.circular(8)),
-//                                                             content: SizedBox(
-//                                                               width: Get.width,
-//                                                               height: 185.h,
-//                                                               child: Column(
-//                                                                 children: [
-//                                                                   SizedBox(height: 40.h),
-//                                                                   CustomText(
-//                                                                     text: AppStrings.areYouSure,
-//                                                                     fontWeight: FontWeight.w500,
-//                                                                     fontSize: 20,
-//                                                                   ),
-//                                                                   SizedBox(height: 24.h),
-//                                                                   Row(
-//                                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                                                                     children: [
-//                                                                       SizedBox(),
-//
-//                                                                       ///<<<=============== Yes Button ================>>>
-//
-//                                                                       CustomElevatedButton(
-//                                                                         onTap: () {
-//                                                                           storageController.deleteContact(storageController.contacts[index].id);
-//                                                                           Get.toNamed(AppRoutes.homeScreen);
-//                                                                         },
-//                                                                         text: AppStrings.yes,
-//                                                                         height: 38,
-//                                                                         width: 64,
-//                                                                         isFillColor: true,
-//                                                                         backgroundColor: AppColors.black_500,
-//                                                                         borderRadius: 36,
-//                                                                         fontSize: 20,
-//                                                                         fontWeight: FontWeight.w400,
-//                                                                       ),
-//
-//                                                                       ///<<<=============== No Button ================>>>
-//
-//                                                                       CustomElevatedButton(
-//                                                                         onTap: () {
-//                                                                           Get.back();
-//                                                                         },
-//                                                                         text: AppStrings.no,
-//                                                                         height: 38,
-//                                                                         width: 64,
-//                                                                         borderColor: AppColors.black_500,
-//                                                                         isFillColor: false,
-//                                                                         borderRadius: 36,
-//                                                                         textColor: AppColors.black_500,
-//                                                                         fontSize: 20,
-//                                                                         fontWeight: FontWeight.w400,
-//                                                                       ),
-//                                                                       SizedBox(),
-//                                                                     ],
-//                                                                   )
-//                                                                 ],
-//                                                               ),
-//                                                             ),
-//                                                           );
-//                                                         },
-//                                                       );
-//                                                     },
-//                                                     child: Row(
-//                                                       children: [
-//                                                         Icon(Icons.delete),
-//                                                         SizedBox(width: 8.w),
-//                                                         CustomText(
-//                                                           text: AppStrings.removeCard,
-//                                                           fontSize: 16,
-//                                                         )
-//                                                       ],
-//                                                     ),
-//                                                   ),
-//                                                   Divider(
-//                                                     endIndent: 120,
-//                                                     color: AppColors.black_400,
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           );
-//                                         },
-//                                       );
-//                                     },
-//                                     child: Container(
-//                                       padding: EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
-//                                       child: Center(
-//                                         child: SvgPicture.asset(
-//                                           AppIcons.threeDotIcon, fit: BoxFit.cover, height: 8, ),
-//                                       ),
-//                                     ),
-//                                   )
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-//                         );
-//                       },);
-//                     },
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(
-//                 height: 42.h,
-//               ),
-//             ],
-//           ) : Column(
-//             children: [
-//               Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: Padding(
-//                   padding: EdgeInsets.only(
-//                       top: 16.h, left: 12.w),
-//                   child: CustomText(
-//                     text: AppStrings.cards,
-//                   ),
-//                 ),
-//               ),
-//               Column(
-//                 children: [
-//                   SizedBox(
-//                       height: 74.h,
-//                       width: 74.w,
-//                       child:
-//                       Image.asset(AppImages.cardLogo)),
-//                   SizedBox(
-//                     height: 16.h,
-//                   ),
-//                   CustomText(
-//                     text: AppStrings.noCards,
-//                   ),
-//                   SizedBox(
-//                     height: 4.h,
-//                   ),
-//                   Padding(
-//                     padding: EdgeInsets.symmetric(
-//                         horizontal: 24.w),
-//                     child: CustomText(
-//                       maxLines: 3,
-//                       text: AppStrings
-//                           .useBusinessCardRecognitionFunction,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//               SizedBox(
-//                 height: 42.h,
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
+

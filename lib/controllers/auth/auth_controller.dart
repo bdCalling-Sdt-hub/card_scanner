@@ -117,6 +117,39 @@ class AuthController extends GetxController{
     }
   }
 
+  ///<<<====================== Delete Account Repo ==========================>>>
+  RxBool isDelete = false.obs;
+
+  Future<void> deleteAccountRepo() async {
+    isDelete.value = true;
+    try {
+      // Get the current user
+      User? user = firebaseAuth.currentUser;
+
+      if (user != null) {
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).delete();
+
+        await user.delete();
+
+        PrefsHelper.removeAllPrefData();
+        Get.offAll(SignInScreen());
+        Get.snackbar("Account Deleted".tr, "Your account has been successfully deleted.".tr);
+      } else {
+        Get.snackbar("Error".tr, "No user is currently signed in.".tr);
+      }
+      isDelete.value = false;
+    } catch (e) {
+      if (e is FirebaseAuthException && e.code == 'requires-recent-login') {
+
+        Get.snackbar("Re authentication required".tr, "Please sign in again and try deleting the account.".tr);
+      } else {
+        Get.snackbar("Error".tr, "Something went wrong, Try again!".tr);
+      }
+      isDelete.value = false;
+    }
+  }
+
+
   ///<<<====================== Google SignIn/ SignOut Repo ==================>>>
   drive.DriveApi? driveApi;
   // String? accessToken;

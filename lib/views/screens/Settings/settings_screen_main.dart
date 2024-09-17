@@ -1,6 +1,8 @@
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/screens/Settings/about_screen.dart';
 import 'package:card_scanner/views/screens/Settings/change_language_screen.dart';
+import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,15 +19,12 @@ class SettingsScreenMain extends StatelessWidget {
   SettingsScreenMain({super.key});
 
   final notificationController = ValueNotifier<bool>(false);
+  AuthController authController = Get.put(AuthController());
 
   List servicesList = [
-    // {"icon": Icon(Icons.pageview), "text": AppStrings.general},
-    // {"icon": Icon(Icons.notifications), "text": AppStrings.notifications},
     {"icon": Icon(Icons.language), "text": AppStrings.language.tr},
-    {
-      "icon": SvgPicture.asset(AppIcons.aboutIcon, height: 18),
-      "text": AppStrings.aboutUs
-    },
+    {"icon": SvgPicture.asset(AppIcons.aboutIcon, height: 18), "text": AppStrings.aboutUs.tr},
+    {"icon": Icon(Icons.delete_forever_rounded, color: Colors.red,), "text": AppStrings.deleteAccount.tr},
   ];
   
   RxBool isDefault = false.obs;
@@ -65,27 +64,62 @@ class SettingsScreenMain extends StatelessWidget {
                   servicesList.length,
                   (index) => InkWell(
                     onTap: () {
-                      // if (index == 0) {
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (context) {
-                      //       return openAlertDialog(0);
-                      //     },
-                      //   );
-                      // }
-                      // else if (index == 1) {
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (context) {
-                      //       return openAlertDialog(1);
-                      //     },
-                      //   );
-                      // }
                       if(index == 0){
                         Get.to(ChangeLanguageScreen());
                       }
                       else if(index == 1){
                         Get.to(AboutScreen());
+                      } else if(index == 2){
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+
+                            ///<<<==================== Sign out pop up =========================>>>
+
+                            return AlertDialog(
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CustomText(text: AppStrings.areYouSureToDeleteAccount.tr, fontSize: 20, color: AppColors.black_500,),
+                                  CustomText(maxLines: 5, text: AppStrings.ifYouDeleteAccount.tr)
+                                ],
+                              ),
+                              actions: [
+                                Obx(() {
+                                  return authController.isDelete.value? Center(child: CircularProgressIndicator()) : Row(
+                                    children: [
+                                      Expanded(
+                                        child: CustomElevatedButton(
+                                          onTap: (){
+                                            Get.back();
+                                          },
+                                          text: "No".tr,
+                                          height: 48.h,
+                                          textColor: AppColors.black_500,
+                                          isFillColor: false,
+                                          borderColor: AppColors.green_900,
+                                        ),
+                                      ),
+                                      SizedBox(width: 12,),
+                                      Expanded(
+                                        child: CustomElevatedButton(
+                                          onTap: (){
+                                            // SystemNavigator.pop();
+                                            authController.deleteAccountRepo();
+                                          },
+                                          text: "Yes".tr,
+                                          height: 48.h,
+                                          backgroundColor: AppColors.green_900,
+                                        ),
+                                      ),
+
+                                    ],
+                                  );
+                                },),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                     child: Column(

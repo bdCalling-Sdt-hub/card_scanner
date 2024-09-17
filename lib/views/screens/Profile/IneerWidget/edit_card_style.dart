@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_scanner/Helpers/prefs_helper.dart';
 import 'package:card_scanner/controllers/profile_controller.dart';
@@ -30,6 +29,7 @@ class EditCardStyle extends StatelessWidget {
   ScreenshotController profileShotController = ScreenshotController();
   final imageBBService = Get.put(ImageBBService());
   ScreenShotHelper screenShotHelper = ScreenShotHelper();
+  static bool isInformationFilled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,8 @@ class EditCardStyle extends StatelessWidget {
                 child: Container(
                   width: 300,
                   decoration: BoxDecoration(
-                      color:
-                          profileController.cardColorList[PrefsHelper.colorIndex],
+                      color: profileController
+                          .cardColorList[PrefsHelper.colorIndex],
                       borderRadius: BorderRadius.circular(8)),
                   child: Stack(
                     alignment: Alignment.center,
@@ -65,7 +65,8 @@ class EditCardStyle extends StatelessWidget {
                                     colorFilter: PrefsHelper.colorIndex == 3 ||
                                             PrefsHelper.colorIndex == 4
                                         ? ColorFilter.mode(
-                                            AppColors.green_500.withOpacity(0.65),
+                                            AppColors.green_500
+                                                .withOpacity(0.65),
                                             // Adjust the color and opacity
                                             BlendMode.srcATop,
                                           )
@@ -124,14 +125,15 @@ class EditCardStyle extends StatelessWidget {
                                 SizedBox(
                                   width: 200,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       CustomText(
                                         textAlign: TextAlign.left,
                                         maxLines: 2,
-                                        text:
-                                            profileController.nameController.text,
+                                        text: profileController
+                                            .nameController.text,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
                                         color: PrefsHelper.colorIndex == 2 ||
@@ -174,13 +176,20 @@ class EditCardStyle extends StatelessWidget {
                                     infoText:
                                         profileController.phoneController.text),
                                 SizedBox(
-                                  height: profileController.telephoneController.text.isEmpty? 0 : 4.h,
+                                  height: profileController
+                                          .telephoneController.text.isEmpty
+                                      ? 0
+                                      : 4.h,
                                 ),
                                 customInfoRow(
                                     infoIcon: Icons.call,
-                                    infoText: profileController.telephoneController.text),
+                                    infoText: profileController
+                                        .telephoneController.text),
                                 SizedBox(
-                                  height: profileController.faxController.text.isEmpty? 0 : 4.h,
+                                  height: profileController
+                                          .faxController.text.isEmpty
+                                      ? 0
+                                      : 4.h,
                                 ),
                                 customInfoRow(
                                     infoIcon: Icons.fax,
@@ -194,19 +203,22 @@ class EditCardStyle extends StatelessWidget {
                                     infoText:
                                         profileController.emailController.text),
                                 SizedBox(
-                                  height: profileController.websiteController.text.isEmpty? 0 :4.h,
+                                  height: profileController
+                                          .websiteController.text.isEmpty
+                                      ? 0
+                                      : 4.h,
                                 ),
                                 customInfoRow(
                                     infoIcon: Icons.language_outlined,
-                                    infoText:
-                                        profileController.websiteController.text),
+                                    infoText: profileController
+                                        .websiteController.text),
                                 SizedBox(
                                   height: 4.h,
                                 ),
                                 customInfoRow(
                                     infoIcon: Icons.location_on_outlined,
-                                    infoText:
-                                        profileController.addressController.text)
+                                    infoText: profileController
+                                        .addressController.text)
                               ],
                             ),
                           ),
@@ -380,64 +392,42 @@ class EditCardStyle extends StatelessWidget {
 
             ///<<<================= Save and Preview Button =================>>>
 
+
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 42.w),
-              child: GetBuilder<ImageBBService>(builder: (controller) {
-                return controller.isLoading? Center(child: CircularProgressIndicator()) : CustomElevatedButton(
-                  onTap: () async {
-                    PrefsHelper.userName = profileController.nameController.text;
-                    PrefsHelper.userMail = profileController.emailController.text;
-                    PrefsHelper.userPhone =
-                        profileController.phoneController.text;
-                    PrefsHelper.userDesignation =
-                        profileController.designationController.text;
-                    PrefsHelper.userCompany =
-                        profileController.companyController.text;
-                    PrefsHelper.userAddress =
-                        profileController.addressController.text;
-                    PrefsHelper.setString(
-                        "userName", profileController.nameController.text);
-                    PrefsHelper.setString(
-                        "userMail", profileController.emailController.text);
-                    PrefsHelper.setString(
-                        "userPhone", profileController.phoneController.text);
-                    PrefsHelper.setString("userDesignation",
-                        profileController.designationController.text);
-                    PrefsHelper.setString(
-                        "userCompany", profileController.companyController.text);
-                    PrefsHelper.setString(
-                        "userAddress", profileController.addressController.text);
-
-                    String myCardImage = await screenShotHelper.captureAndSaveImage(screenshotController: profileShotController, isShare: true)
-                        .then((value) => screenShotHelper.getImagePath(imageBytes: value).then((value) => imageBBService.uploadImage(imageFile: value!)));
-                    PrefsHelper.myCardImage = myCardImage;
-                    PrefsHelper.setString("myCardImage", myCardImage);
-
-                    Get.offAllNamed(AppRoutes.profileScreen);
+                padding: EdgeInsets.symmetric(horizontal: 42.w),
+                child: GetBuilder<ImageBBService>(
+                  builder: (controller) {
+                    return controller.isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : CustomElevatedButton(
+                            onTap: () async {
+                              if (isInformationFilled == true){
+                                String myCardImage = await screenShotHelper
+                                    .captureAndSaveImage(
+                                    screenshotController:
+                                    profileShotController,
+                                    isShare: true)
+                                    .then((value) => screenShotHelper
+                                    .getImagePath(imageBytes: value)
+                                    .then((value) => imageBBService
+                                    .uploadImage(imageFile: value!)));
+                                setPrefsData(myCardImage: myCardImage);
+                                Get.offAllNamed(AppRoutes.profileScreen);
+                              }else{
+                                Get.snackbar("${"Alert".tr}, ${"Press 'Continue' button first to save the information".tr}", "");
+                              }
+                            },
+                            width: Get.width,
+                            height: 42.h,
+                            text: AppStrings.saveAndPreview.tr,
+                            backgroundColor: AppColors.black_500,
+                          );
                   },
-                  width: Get.width,
-                  height: 42.h,
-                  text: AppStrings.saveAndPreview.tr,
-                  backgroundColor: AppColors.black_500,
-                );
-              },),
-            ),
+                ),
+              ),
             SizedBox(
               height: 40.h,
             ),
-
-            // Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 42.w),
-            //   child: CustomElevatedButton(
-            //     onTap: () {
-            //       Get.back();
-            //     },
-            //     width: Get.width,
-            //     height: 42.h,
-            //     text: AppStrings.preview,
-            //     backgroundColor: AppColors.black_500,
-            //   ),
-            // )
           ],
         );
       },
@@ -445,29 +435,65 @@ class EditCardStyle extends StatelessWidget {
   }
 
   Row customInfoRow({required IconData infoIcon, required String infoText}) {
-    return infoText.isEmpty? Row() : Row(
-      children: [
-        CustomBackButton(
-          onTap: () {},
-          icon: infoIcon,
-          radius: 100,
-          color: AppColors.black_500,
-          height: 25,
-          width: 25,
-        ),
-        SizedBox(
-          width: 8.w,
-        ),
-        CustomText(
-          textAlign: TextAlign.left,
-          text: infoText,
-          color: PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5
-              ? AppColors.blackColor
-              : AppColors.green_50,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        )
-      ],
-    );
+    return infoText.isEmpty
+        ? Row()
+        : Row(
+            children: [
+              CustomBackButton(
+                onTap: () {},
+                icon: infoIcon,
+                radius: 100,
+                color: AppColors.black_500,
+                height: 25,
+                width: 25,
+              ),
+              SizedBox(
+                width: 8.w,
+              ),
+              Expanded(
+                child: CustomText(
+                  textAlign: TextAlign.left,
+                  text: infoText,
+                  color:
+                      PrefsHelper.colorIndex == 2 || PrefsHelper.colorIndex == 5
+                          ? AppColors.blackColor
+                          : AppColors.green_50,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            ],
+          );
+  }
+
+  setPrefsData({required String myCardImage}){
+    PrefsHelper.userName =
+        profileController.nameController.text;
+    PrefsHelper.userMail =
+        profileController.emailController.text;
+    PrefsHelper.userPhone =
+        profileController.phoneController.text;
+    PrefsHelper.userDesignation =
+        profileController.designationController.text;
+    PrefsHelper.userCompany =
+        profileController.companyController.text;
+    PrefsHelper.userAddress =
+        profileController.addressController.text;
+    PrefsHelper.setString("userName",
+        profileController.nameController.text);
+    PrefsHelper.setString("userMail",
+        profileController.emailController.text);
+    PrefsHelper.setString("userPhone",
+        profileController.phoneController.text);
+    PrefsHelper.setString("userDesignation",
+        profileController.designationController.text);
+    PrefsHelper.setString("userCompany",
+        profileController.companyController.text);
+    PrefsHelper.setString("userAddress",
+        profileController.addressController.text);
+    PrefsHelper.myCardImage = myCardImage;
+    PrefsHelper.setString("myCardImage", myCardImage);
   }
 }
+
+

@@ -323,14 +323,14 @@ class StorageController extends GetxController {
     }
 
     // Provide the option to share the file
-    Share.shareFiles([filePath], text: 'Here is your contacts Excel file.');
-    // var xFile = XFile(filePath);
-    //
-    // if (kDebugMode) {
-    //   print('Excel file created at $filePath');
-    // }
-    //
-    //   Share.shareXFiles([xFile], text: 'Here is your contacts Excel file.');
+    // Share.shareFiles([filePath], text: 'Here is your contacts Excel file.');
+    var xFile = XFile(filePath);
+
+    if (kDebugMode) {
+      print('Excel file created at $filePath');
+    }
+
+      Share.shareXFiles([xFile], text: 'Here is your contacts Excel file.');
 
     // Provide the option to share the file
   }
@@ -520,22 +520,24 @@ class StorageController extends GetxController {
     }
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: imgPath,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-      ],
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: Colors.deepOrange,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+          ],
+        ),
         IOSUiSettings(
           title: 'Cropper',
+          aspectRatioLockEnabled: false,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+          ],
         ),
       ],
     );

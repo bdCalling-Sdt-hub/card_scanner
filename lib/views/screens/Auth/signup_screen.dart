@@ -175,69 +175,6 @@ class SignUpScreen extends StatelessWidget {
                 // ),
               ),
 
-              ///<<<====================Phone Number Field=================================>>>
-
-              // IntlPhoneField(
-              //   controller: authController.phoneNumberController,
-              //   initialCountryCode: 'BD',
-              //   decoration: InputDecoration(
-              //     contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 14.w),
-              //     hintText: AppStrings.phoneNumber,
-              //     hintStyle: GoogleFonts.kumbhSans(
-              //         fontSize: 16.h,
-              //         fontWeight: FontWeight.w400,
-              //         color: AppColors.black_300),
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(8),
-              //     ),
-              //     focusedBorder: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(8),
-              //         borderSide: BorderSide(color: AppColors.black_500, width: 1),
-              //         gapPadding: 0),
-              //     enabledBorder: OutlineInputBorder(
-              //         borderRadius: BorderRadius.circular(8),
-              //         borderSide: BorderSide(color: AppColors.black_500, width: 1),
-              //         gapPadding: 0),
-              //   ),
-              //   languageCode: "en",
-              //   onChanged: (phone) {
-              //     print(phone.completeNumber);
-              //   },
-              //   onCountryChanged: (country) {
-              //     print('Country changed to: ' + country.name);
-              //   },
-              // ),
-
-              // CustomTextField(
-              //   textEditingController: authController.phoneNumberController,
-              //   validator: (value) {
-              //     if (value!.isEmpty) {
-              //       return AppStrings.enterPhone.tr;
-              //     } else if (!AppStrings.phoneRegexp.hasMatch("")) {
-              //       return AppStrings.enterValidPhoneNumber;
-              //     } else {
-              //       return null;
-              //     }
-              //   },
-              //   keyboardType: TextInputType.emailAddress,
-              //   textAlign: TextAlign.start,
-              //   hintText: AppStrings.phoneNumber,
-              //   hintStyle: GoogleFonts.kumbhSans(
-              //       fontSize: 16.h,
-              //       fontWeight: FontWeight.w400,
-              //       color: AppColors.black_300),
-              //   inputTextStyle: GoogleFonts.prompt(
-              //       fontWeight: FontWeight.w400,
-              //       fontSize: 16.h,
-              //       color: AppColors.black_500),
-              //   fieldBorderRadius: 8,
-              //   isPrefixIcon: false,
-              //   // prefixIcon: Icon(
-              //   //   Icons.mail_outline,
-              //   //   size: 24.h,
-              //   //   color: AppColors.black_400,
-              //   // ),
-              // ),
               SizedBox(
                 height: 8.h,
               ),

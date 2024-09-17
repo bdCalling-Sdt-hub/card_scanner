@@ -97,22 +97,24 @@ class ProfileController extends GetxController{
     }
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: imgPath,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.square,
-        CropAspectRatioPreset.ratio3x2,
-        CropAspectRatioPreset.original,
-        CropAspectRatioPreset.ratio4x3,
-        CropAspectRatioPreset.ratio16x9
-      ],
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: Colors.deepOrange,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+          ],
+        ),
         IOSUiSettings(
           title: 'Cropper',
+          aspectRatioLockEnabled: false,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+          ],
         ),
       ],
     );
