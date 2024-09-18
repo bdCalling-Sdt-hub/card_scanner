@@ -1,8 +1,7 @@
 
-import 'dart:math';
 
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 
 
@@ -11,12 +10,10 @@ class QrScannerController extends GetxController{
   String qrText = "";
 
   Future<String> qrScanner()async {
-    await FlutterBarcodeScanner.scanBarcode(
-        "#ff6666", "Cancel", true, ScanMode.QR)
-        .then(
+    await BarcodeScanner.scan().then(
           (value) {
         try {
-          String result = value.toString();
+          String result = value.rawContent.toString();
           if (result.isNotEmpty) {
             if (kDebugMode) {
               print('Scanned data:===========================================>>> \n$result');

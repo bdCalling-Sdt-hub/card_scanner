@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
@@ -30,7 +30,7 @@ class ScreenShotHelper{
       if (androidVersion >= 13) {
         final request = await Permission.photos.request(); //import 'package:permission_handler/permission_handler.dart';
         debugPrint('IsPermission Granted? : ${request.isGranted}');
-        final result = await ImageGallerySaver.saveImage(uint8List,name: "screen_shot_mage",);
+        final result = await ImageGallerySaverPlus.saveImage(uint8List,name: "screen_shot_mage",);
 
         if(isShare){
           if (kDebugMode) {
@@ -54,7 +54,7 @@ class ScreenShotHelper{
       if(androidVersion < 13){
         final PermissionStatus status = await Permission.storage.request();
         if(status.isGranted){
-          final result = await ImageGallerySaver.saveImage(uint8List,name: "screen_shot_mage",);
+          final result = await ImageGallerySaverPlus.saveImage(uint8List,name: "screen_shot_mage",);
           if(isShare){
             return uint8List;
           } else{
@@ -87,7 +87,7 @@ class ScreenShotHelper{
     if(uint8List != null){
       final PermissionStatus status = await Permission.storage.request();
       if(status.isGranted){
-        final result = await ImageGallerySaver.saveImage(uint8List,name: "QrCodeImage");
+        final result = await ImageGallerySaverPlus.saveImage(uint8List,name: "QrCodeImage");
         if(result['isSuccess']){
           Get.snackbar("Image downloaded to your phone gallery".tr, "");
           if (kDebugMode) {

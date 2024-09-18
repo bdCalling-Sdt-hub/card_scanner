@@ -47,6 +47,9 @@ class AuthController extends GetxController{
       Get.snackbar("New Account Created".tr, "");
     }catch(e){
       Get.snackbar("Something went wrong,".tr, "Check your internet connection & Try again!".tr );
+      if (kDebugMode) {
+        print(e);
+      }
     }
     isLoading = false;
     update();
