@@ -4,8 +4,6 @@ import 'package:card_scanner/utils/app_icons.dart';
 import 'package:card_scanner/utils/app_images.dart';
 import 'package:card_scanner/utils/app_strings.dart';
 import 'package:card_scanner/views/widgets/BottomNavBar/bottom_nav_bar.dart';
-import 'package:card_scanner/views/widgets/CustomCrossButton/custom_cross_button.dart';
-import 'package:card_scanner/views/widgets/customButton/custom_elevated_button.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,32 +11,35 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+
+// ignore: must_be_immutable
 class EnterpriseScreen extends StatelessWidget {
   EnterpriseScreen({super.key});
 
   List enterpriseFirstList = [
-    {"icon" : AppIcons.saveTime, "name" : AppStrings.saveTime},
-    {"icon" : AppIcons.saveNSecurity, "name" : AppStrings.saveAndSecurity},
-    {"icon" : AppIcons.dollarIcon, "name" : AppStrings.valueForMoney},
-    {"icon" : AppIcons.availableIcon, "name" : AppStrings.alwaysAvailable},
-  ];
-
-  List enterpriseSecondList = [
-    {"titleText" : AppStrings.fastNAccurateDataEntry, "subTitleText" : AppStrings.quicklyEnterBusinessCardsToSales, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.roleBasedAccessControl, "subTitleText" : AppStrings.secureCompanyDataWithAppropriateRole, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.smartCollaboration, "subTitleText" : AppStrings.facilitateTeamCollaboration, "image" : AppImages.enterpriseImg2},
-    {"titleText" : AppStrings.dataIntegration, "subTitleText" : AppStrings.integrateYourCustomerDataWithOtherCRM, "image" : AppImages.enterprise3},
+    {"icon" : AppIcons.saveTime, "name" : AppStrings.saveTime.tr},
+    {"icon" : AppIcons.saveNSecurity, "name" : AppStrings.saveDataBackup.tr},
+    {"icon" : AppIcons.dollarIcon, "name" : AppStrings.valueForMoney.tr},
+    {"icon" : AppIcons.availableIcon, "name" : AppStrings.alwaysAvailable.tr},
   ];
 
   List enterpriseThirdList = [
-    {"icon" : AppIcons.saveTime, "name" : AppStrings.fastInputBusinessCards},
-    {"icon" : AppIcons.importExportIcon, "name" : AppStrings.exchangeEcardsSeamlessly},
-    {"icon" : AppIcons.networkIcon, "name" : AppStrings.centralizeAllEmployeesBusinessCards},
-    {"icon" : AppIcons.setRole, "name" : AppStrings.setRoleForEachUser},
-    {"icon" : AppIcons.dataLists, "name" : AppStrings.exportCustomerData},
-    {"icon" : AppIcons.safeData, "name" : AppStrings.dataIsAlwaysSafeAndSecure},
+    {"icon" : AppIcons.saveTime, "name" : AppStrings.fastInputBusinessCards.tr},
+    {"icon" : AppIcons.importExportIcon, "name" : AppStrings.exchangeEcardsSeamlessly.tr},
+    {"icon" : AppIcons.dataLists, "name" : AppStrings.exportCustomerData.tr},
+    {"icon" : AppIcons.safeData, "name" : AppStrings.synchroniseData.tr},
   ];
+
+  void launchURL() async {
+    final Uri url = Uri.parse('https://forms.gle/7m8JXK97mcyyHFJfA');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +58,11 @@ class EnterpriseScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                 child: Column(
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomCrossButton(),
-
-                        ///<<<--------------- Language Change Icon ------------------->>>
-
-                        Icon(Icons.language, color: AppColors.green_500,),
-                      ],
-                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 24.h),
                         child: Image.asset(AppImages.enterpriseImage)),
                     CustomText(
-                      text: AppStrings.nameCardScanner.toUpperCase(),
+                      text: AppStrings.nameCardScanner.tr,
                       color: AppColors.green_500,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -80,22 +71,35 @@ class EnterpriseScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
                       child: CustomText(
                         maxLines: 4,
-                        text: AppStrings.nameCardScannerEfficientlyDigitizes,
+                        text: AppStrings.nameCardScannerEfficientlyDigitizes.tr,
                         color: AppColors.green_500,
                         fontWeight: FontWeight.w400,
                         fontSize: 16,
                       ),
                     ),
-                    CustomElevatedButton(
-                      width: 165.w,
-                      height: 42.h,
-                      onTap: (){},
-                      text: AppStrings.tryItFree,
-                      backgroundColor: AppColors.black_500,
-                      textColor: AppColors.green_400,
+                    CustomText(
+                      text: "Current version is free to use.".tr,
+                      color: AppColors.green_500,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    CustomText(
+                      text: "Please complete survey below if there is demand for PREMIUM features:".tr,
+                      color: AppColors.green_500,
+                      fontWeight: FontWeight.w400,
+                      bottom: 8,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          launchURL();
+                        },
+                        child: CustomText(
+                            text: "https://forms.gle/7m8JXK97mcyyHFJfA",
+                            color: Colors.lightBlue,
+                          fontWeight: FontWeight.w400,
+                        ),
                     ),
                     SizedBox(
-                      height: 42.h,
+                      height: 24.h,
                     ),
                   ],
                 ),
@@ -142,44 +146,16 @@ class EnterpriseScreen extends StatelessWidget {
                             },
                         ),
                       ),
-                      const Divider(color: AppColors.black_400,),
-                      SizedBox(height: 16.h,),
 
-                      Column(
-                        children: List.generate(
-                            enterpriseSecondList.length,
-                                (index) => Column(
-                                  children: [
-                                    CustomText(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.black_500,
-                                      text: enterpriseSecondList[index]["titleText"],
-                                    ),
-                                    SizedBox(height: 12.h,),
-                                    CustomText(
-                                      maxLines: 5,
-                                      color: AppColors.black_400,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      text: enterpriseSecondList[index]["subTitleText"],
-                                    ),
-                                    SizedBox(height: 12.h,),
-                                    Image.asset(enterpriseSecondList[index]["image"]),
-                                    SizedBox(height: 20.h,),
-                                  ],
-                                ),
-                        ),
-                      ),
-                      SizedBox(height: 12.h,),
                       const Divider(color: AppColors.black_400,),
+                      SizedBox(height: 12.h,),
                       CustomText(
                         text: AppStrings.allFeatures,
                         color: AppColors.black_500,
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(height: 48.h,),
+                      SizedBox(height: 36.h,),
                       SizedBox(
                         height: (100 * enterpriseThirdList.length).toDouble(),
                         width: Get.width,
@@ -187,7 +163,7 @@ class EnterpriseScreen extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: enterpriseThirdList.length,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                               mainAxisExtent: 200,
                               crossAxisSpacing: 16,
                                 crossAxisCount: 2),
@@ -195,8 +171,8 @@ class EnterpriseScreen extends StatelessWidget {
                               return Column(
                                 children: [
                                   Container(
-                                    height: 68.h,
-                                    width: 68.h,
+                                    height: 60.h,
+                                    width: 60.h,
                                     decoration: BoxDecoration(
                                       border: Border.all(color: AppColors.black_500),
                                       borderRadius: BorderRadius.circular(100),
@@ -205,6 +181,7 @@ class EnterpriseScreen extends StatelessWidget {
                                   ),
                                   SizedBox(height: 10.h,),
                                   CustomText(
+                                    // textAlign: TextAlign.left,
                                     maxLines: 5,
                                     text: enterpriseThirdList[index]["name"],
                                     color: AppColors.black_400,
@@ -216,29 +193,6 @@ class EnterpriseScreen extends StatelessWidget {
                             },
                         ),
                       ),
-                      const Divider(color: AppColors.black_400,),
-                      SizedBox(height: 8.h,),
-                      CustomText(
-                        left: 10,
-                        maxLines: 3,
-                        text: AppStrings.overTheBusinessesAreLove,
-                        color: AppColors.black_500,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
-                      SizedBox(height: 24.h,),
-                      Wrap(
-                        runSpacing: 24.h,
-                        spacing: 16.w,
-                        children: [
-                          Image.asset(AppImages.fastCompany, height: 74.h, width: 74.w,),
-                          Image.asset(AppImages.meetUp, height: 74.h, width: 74.w,),
-                          Image.asset(AppImages.total, height: 74.h, width: 74.w,),
-                          Image.asset(AppImages.xing, height: 74.h, width: 74.w,),
-                          Image.asset(AppImages.heritage, height: 74.h, width: 74.w,),
-                          Image.asset(AppImages.recurly, height: 74.h, width: 74.w,),
-                        ],
-                      )
                     ],
                   ),
                 ),

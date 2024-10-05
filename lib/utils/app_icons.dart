@@ -27,6 +27,13 @@ class AppIcons{
   static String shareCardIcon = "$iconsBasePath/shareCardIcon.svg";
   static String removeCardIcon = "$iconsBasePath/removeCardIcon.svg";
   static String crossIcon = "$iconsBasePath/crossIcon.svg";
+  static String sendIcon = "$iconsBasePath/send.svg";
+  static String donateIcon = "$iconsBasePath/donation.svg";
+  static String googleColorfulIcon = "$iconsBasePath/google.svg";
+  static String barCodeScanIcon = "$iconsBasePath/barCodeScanIcon.svg";
+  static String aboutIcon = "$iconsBasePath/aboutIcon.svg";
+  static String editNote = "$iconsBasePath/editNote.svg";
+  static String shareCard = "$iconsBasePath/shareCard.svg";
 
   ///<<<======================= Enterprise Icons ===========================>>>
 

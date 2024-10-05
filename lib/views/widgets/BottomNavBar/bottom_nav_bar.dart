@@ -1,9 +1,15 @@
 
 
+import 'package:card_scanner/Helpers/prefs_helper.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
+import 'package:card_scanner/controllers/ocr_create_card_controller.dart';
 import 'package:card_scanner/utils/app_colors.dart';
 import 'package:card_scanner/utils/app_icons.dart';
-import 'package:card_scanner/views/screens/ContactsScreen/contacts_screen.dart';
+import 'package:card_scanner/views/screens/ContactsScreen/all_cards_screen.dart';
+import 'package:card_scanner/views/screens/Auth/signin_screen.dart';
 import 'package:card_scanner/views/screens/Enterprise/enterprise_screen.dart';
+import 'package:card_scanner/views/screens/Profile/profile_screen.dart';
+import 'package:card_scanner/views/screens/home/InnerWidgets/ocrimage_dialog.dart';
 import 'package:card_scanner/views/screens/home/home_screen.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,11 +22,20 @@ import 'package:get/get.dart';
 
 import '../../../utils/app_strings.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
 
   final int currentIndex;
 
   BottomNavBar({required this.currentIndex, super.key});
+
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  OCRCreateCardController ocrCreateCardController = Get.put(OCRCreateCardController());
+  AuthController authController = Get.put(AuthController());
+  OcrImageDialog ocrImageDialog = OcrImageDialog();
 
 
   List<String> navBarIcons =[
@@ -31,21 +46,29 @@ class BottomNavBar extends StatelessWidget {
     AppIcons.personIcon
   ];
 
-  List<String> navBarTexts = [
-    AppStrings.cards,
-    AppStrings.contacts,
-    "",
-    AppStrings.enterprise,
-    AppStrings.signIn
-  ];
+  bool ifContacts = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    PrefsHelper.getBool(AppStrings.signedIn);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
+    String profileText = PrefsHelper.signedIn? AppStrings.me.tr : AppStrings.signIn.tr;
+    List<String> navBarTexts = [
+      AppStrings.cards.tr,
+      AppStrings.contacts.tr,
+      "",
+      "Premium".tr,
+      profileText
+    ];
     return Container(
       height: 90.h,
       width: Get.height,
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 20.h),
+      padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w, top: 20.h),
       alignment: Alignment.center,
       color: AppColors.primaryColor,
       child: Row(
@@ -63,7 +86,7 @@ class BottomNavBar extends StatelessWidget {
                         Center(
                           child: SvgPicture.asset(
                             navBarIcons[index],
-                            color: index == currentIndex? AppColors.black_500 : AppColors.black_300,
+                            color: index == widget.currentIndex? AppColors.black_500 : AppColors.black_300,
                             height: 24.h,
                             width: 24.w,
                           ),
@@ -73,7 +96,7 @@ class BottomNavBar extends StatelessWidget {
                           text: navBarTexts[index],
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
-                          color: index == currentIndex? AppColors.black_500 : AppColors.black_300,
+                          color: index == widget.currentIndex? AppColors.black_500 : AppColors.black_300,
                         ),
                       ],
                     ),
@@ -83,24 +106,39 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  void onTap(int index) {
+  Future<void> onTap(int index) async {
     if(index == 0){
-      if(!(currentIndex == 0)){
+      if(!(widget.currentIndex == 0)){
         Get.offAll(()=> HomeScreen(),
           transition: Transition.noTransition
         );
       }
     }else if(index == 1){
-      if(!(currentIndex == 1)){
-        Get.offAll(()=> ContactsScreen(),
+      if(!(widget.currentIndex == 1)){
+          Get.to(()=> AllCardsScreen(), transition: Transition.noTransition);
+      }
+    }else if(index == 2){
+      if(!(widget.currentIndex == 2)){
+        String? responseText = await ocrCreateCardController.selectImageCamera().then((value) => ocrCreateCardController.cropImage(imgPath: value!, isOcr: true),).then((value) => ocrCreateCardController.processImage(value!),);
+        ocrImageDialog.ocrCameraImageDialog(context, responseText!);
+      }
+    }else if(index == 3){
+      if(!(widget.currentIndex == 3)){
+        Get.to(()=> EnterpriseScreen(),
             transition: Transition.noTransition
         );
       }
-    }else if(index == 3){
-      if(!(currentIndex == 3)){
-        Get.offAll(()=> EnterpriseScreen(),
-            transition: Transition.noTransition
-        );
+    }else if(index == 4){
+      if(!(widget.currentIndex == 4)){
+        if(PrefsHelper.signedIn){
+          Get.to(()=> ProfileScreen(),
+              transition: Transition.noTransition
+          );
+        } else{
+          Get.to(()=> SignInScreen(),
+              transition: Transition.noTransition
+          );
+        }
       }
     }
   }

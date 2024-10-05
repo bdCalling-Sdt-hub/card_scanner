@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/app_colors.dart';
 
@@ -8,7 +10,7 @@ class CustomText extends StatelessWidget {
 
   const CustomText(
       {super.key,
-        this.maxLines = 1,
+        this.maxLines = 5,
         this.textAlign = TextAlign.center,
         this.left = 0,
         this.right = 0,
@@ -19,6 +21,7 @@ class CustomText extends StatelessWidget {
         this.color = AppColors.black_500,
         this.text = "",
         this.overflow,
+        this.textDecoration = TextDecoration.none
       });
 
   final double left;
@@ -32,6 +35,7 @@ class CustomText extends StatelessWidget {
   final TextAlign textAlign;
   final int  maxLines;
   final TextOverflow ?overflow;
+  final TextDecoration textDecoration;
 
 
   @override
@@ -42,12 +46,14 @@ class CustomText extends StatelessWidget {
       child: Text(
         overflow: overflow,
         textAlign: textAlign,
-        text,
+        text.tr,
         maxLines: maxLines,
         style: GoogleFonts.kumbhSans(
-          fontSize: fontSize,
+          fontSize: fontSize.sp,
           fontWeight: fontWeight,
           color: color,
+          decoration: textDecoration,
+          decorationColor: Colors.blue
         ),
       ),
     );

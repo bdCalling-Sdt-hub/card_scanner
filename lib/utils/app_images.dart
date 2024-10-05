@@ -22,4 +22,9 @@ class AppImages{
   static String total = "$imagesBasePath/total.png";
   static String xing = "$imagesBasePath/xing.png";
   static String heritage = "$imagesBasePath/heritage.png";
+  static String mobileSmartSync = "$imagesBasePath/mobileSmartSync.png";
+  static String noData = "$imagesBasePath/noData.png";
+  static String nameCardLogo = "$imagesBasePath/nameCardLogo.png";
+  static String emailBackUpImg = "$imagesBasePath/emailBackUPImg.png";
+  static String blankProfileImage = "$imagesBasePath/blankProfileImage.png";
 }

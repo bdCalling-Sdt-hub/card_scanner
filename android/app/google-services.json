@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "214289762879",
+    "project_id": "name-card-1db6d",
+    "storage_bucket": "name-card-1db6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214289762879:android:ec0c4cd79776e61b2c468a",
+        "android_client_info": {
+          "package_name": "com.efficiolu.namecardscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214289762879-lm97n5m59dm5vupo235mls19f1be4cll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.efficiolu.namecardscanner",
+            "certificate_hash": "794cee29627e34f9f6f2c8efef23fb65dba68784"
+          }
+        },
+        {
+          "client_id": "214289762879-dhcolif62c83gdfcs9laifhlbdsaeo3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUybJx8aj_lhlzmT5J8J3ghsI1T-FoWPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214289762879-dhcolif62c83gdfcs9laifhlbdsaeo3v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "214289762879-8ltskjcf7s3411qlpkv5cu4hvl9olaq4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cardScanner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,10 +2,19 @@
 
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors{
   static const  Color primaryColor = Color(0xFFB9F0DF);
+  static const  Color transparentColor = Colors.transparent;
   static const Color baseColor = Color(0xFF111111);
   static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color ashColor = Color(0xFF66847B);
+  static const Color deepAshColor = Color(0xFF606060);
+  static const Color greenColor = Color(0xFF3EC64C);
+  static const Color deepRedColor = Color(0xFF480C01);
+  static const Color blackColor = Color(0xff111111);
+  static const Color whitishColor = Color(0xFFF8FEFC);
 
 
   ///<<<============== Green Colors ====================>>>

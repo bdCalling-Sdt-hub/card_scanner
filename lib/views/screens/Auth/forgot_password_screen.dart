@@ -1,25 +1,22 @@
 
-import 'package:card_scanner/controllers/auth/forgotPasswordController.dart';
-import 'package:card_scanner/views/screens/Auth/otp_screen.dart';
+import 'package:card_scanner/controllers/auth/auth_controller.dart';
 import 'package:card_scanner/views/widgets/customText/custom_text.dart';
 import 'package:card_scanner/views/widgets/custom_text_field/custom_text_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/app_colors.dart';
-import '../../../utils/app_icons.dart';
 import '../../../utils/app_strings.dart';
 import '../../widgets/customButton/custom_elevated_button.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
 
-  ForgotPasswordController forgotPasswordController = Get.put(ForgotPasswordController());
+
+  AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +47,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 54.h, width: Get.width),
                 CustomText(
-                  text: AppStrings.forgotPassword,
+                  text: AppStrings.forgotPassword.tr,
                   fontWeight: FontWeight.w600,
                   fontSize: 28,
                   color: AppColors.black_500,
@@ -62,7 +59,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 24.h),
                   child: CustomText(
                     maxLines: 2,
-                    text: AppStrings.enterYourEmail,
+                    text: AppStrings.enterYourEmail.tr,
                     fontWeight: FontWeight.w400,
                     fontSize: 16,
                     color: AppColors.black_400,
@@ -72,7 +69,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: CustomText(
-                    text: AppStrings.email,
+                    text: AppStrings.email.tr,
                     color: AppColors.black_500,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -83,19 +80,19 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ///<<<====================Email Field=================================>>>
 
                 CustomTextField(
-                  // textEditingController: signUpController.emailController,
+                  textEditingController: authController.emailController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return AppStrings.enterEmail.tr;
                     } else if (!AppStrings.emailRegexp.hasMatch("")) {
-                      return AppStrings.enterValidEmail;
+                      return AppStrings.enterValidEmail.tr;
                     } else {
                       return null;
                     }
                   },
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.start,
-                  hintText: AppStrings.email,
+                  hintText: AppStrings.email.tr,
                   hintStyle: GoogleFonts.kumbhSans(
                       fontSize: 16.h,
                       fontWeight: FontWeight.w400,
@@ -115,96 +112,98 @@ class ForgotPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 24.h,
                 ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: AppColors.black_900,
-                      width: 135.w,
-                      height: 1.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: CustomText(
-                        text: AppStrings.or,
-                        color: AppColors.black_500,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Container(
-                      color: AppColors.black_900,
-                      width: 135.w,
-                      height: 1.h,
-                    )
-                  ],
-                ),
-
-                ///<<<================= Contact Number field==============================>>>
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: CustomText(
-                    text: AppStrings.contactNumber,
-                    color: AppColors.black_500,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 8.h,),
-
-                CustomTextField(
-                  // textEditingController: forgotPasswordController.passwordController,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return AppStrings.fieldCantBeEmpty.tr;
-                    } else {
-                      return null;
-                    }
-                  },
-                  keyboardType: TextInputType.text,
-                  textAlign: TextAlign.start,
-                  hintText: AppStrings.enterMobileNumber.tr,
-                  hintStyle: GoogleFonts.prompt(
-                      fontSize: 16.h,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.black_300),
-                  inputTextStyle: GoogleFonts.prompt(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.h,
-                      color: AppColors.black_500),
-                  fieldBorderRadius: 8,
-                  // prefixIcon: Icon(
-                  //   Icons.lock_outlined,
-                  //   size: 24.h,
-                  //   color: AppColors.black_400,
-                  // ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-
-                SizedBox(height: 8.h),
-                SizedBox(height: 54.h,),
+                //
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       color: AppColors.black_900,
+                //       width: 135.w,
+                //       height: 1.h,
+                //     ),
+                //     Padding(
+                //       padding: EdgeInsets.symmetric(horizontal: 12.w),
+                //       child: CustomText(
+                //         text: AppStrings.or.tr,
+                //         color: AppColors.black_500,
+                //         fontWeight: FontWeight.w500,
+                //         fontSize: 20,
+                //       ),
+                //     ),
+                //     Container(
+                //       color: AppColors.black_900,
+                //       width: 135.w,
+                //       height: 1.h,
+                //     )
+                //   ],
+                // ),
+                //
+                // ///<<<================= Contact Number field==============================>>>
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: CustomText(
+                //     text: AppStrings.contactNumber.tr,
+                //     color: AppColors.black_500,
+                //     fontSize: 16,
+                //     fontWeight: FontWeight.w500,
+                //   ),
+                // ),
+                // SizedBox(height: 8.h,),
+                //
+                // CustomTextField(
+                //   // textEditingController: forgotPasswordController.passwordController,
+                //   validator: (value) {
+                //     if (value.isEmpty) {
+                //       return AppStrings.fieldCantBeEmpty.tr;
+                //     } else {
+                //       return null;
+                //     }
+                //   },
+                //   keyboardType: TextInputType.phone,
+                //   textAlign: TextAlign.start,
+                //   hintText: AppStrings.enterMobileNumber.tr,
+                //   hintStyle: GoogleFonts.prompt(
+                //       fontSize: 16.h,
+                //       fontWeight: FontWeight.w400,
+                //       color: AppColors.black_300),
+                //   inputTextStyle: GoogleFonts.prompt(
+                //       fontWeight: FontWeight.w400,
+                //       fontSize: 16.h,
+                //       color: AppColors.black_500),
+                //   fieldBorderRadius: 8,
+                //   // prefixIcon: Icon(
+                //   //   Icons.lock_outlined,
+                //   //   size: 24.h,
+                //   //   color: AppColors.black_400,
+                //   // ),
+                // ),
+                // SizedBox(
+                //   height: 24.h,
+                // ),
+                //
+                // SizedBox(height: 8.h),
+                // SizedBox(height: 54.h,),
               ],
             ),
           ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-        child: CustomElevatedButton(
+        child: GetBuilder<AuthController>(builder: (authController) {
+        return authController.isReset? Center(child: CircularProgressIndicator()): CustomElevatedButton(
           height: 50.h,
           width: Get.width,
           isFillColor: true,
           onTap: () {
-            Get.to(OtpScreen());
+            authController.resetPassRepo();
           },
           borderRadius: 12,
           backgroundColor: AppColors.black_500,
-          text: AppStrings.getOtp,
+          text: "Send Link".tr,
           textColor: AppColors.whiteColor,
           fontSize: 16,
           fontWeight: FontWeight.w400,
-        ),
+        );
+        },),
       ),
     );
   }
