@@ -11,14 +11,14 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+// import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import '../Models/gemimi_response_model.dart';
 
 class OCRCreateCardController extends GetxController{
 
   final _apiKey = "AIzaSyCq6XUjfldc78sJ88tRjYZrA-BH3SvDfC8";
   GeminiResponseModel? geminiResponseModel;
-  TextRecognizer textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
+  // TextRecognizer textRecognizer = TextRecognizer(script: TextRecognitionScript.chinese);
   ImageBBService imageBBService = ImageBBService();
 
   String? imagePath;
@@ -233,21 +233,21 @@ class OCRCreateCardController extends GetxController{
       print("============>>>> $imgPath");
     }
     // TODO: implement processImage
-    final image = InputImage.fromFile(File(imgPath));
-
-    final recognized = await textRecognizer.processImage(image);
-    String text = '';
-    for (TextBlock block in recognized.blocks) {
-      for (TextLine line in block.lines) {
-        text += '${line.text}\n';
-      }
-    }
-    if (kDebugMode) {
-      print("||||||$text");
-    }
-    // StorageController.imagePath = imgPath;
-    update();
-    return text;
+    // final image = InputImage.fromFile(File(imgPath));
+    //
+    // final recognized = await textRecognizer.processImage(image);
+    // String text = '';
+    // for (TextBlock block in recognized.blocks) {
+    //   for (TextLine line in block.lines) {
+    //     text += '${line.text}\n';
+    //   }
+    // }
+    // if (kDebugMode) {
+    //   print("||||||$text");
+    // }
+    // // StorageController.imagePath = imgPath;
+    // update();
+    return "text";
     // textFormatRepo(extractedText: recognized.text);
   }
 
